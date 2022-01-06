@@ -1,0 +1,26 @@
+.form{
+    display: flex;
+    flex-direction: column;
+}
+input{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    border: solid 2px #7c7b7b;
+    height: 20px;
+}
+.addBtn{
+    font-family: 'HSGaeulSenggak2';
+  width: 127px;
+  height: 30px;
+  flex-grow: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px 4px 0 8px;
+  border-radius: 10px;
+  border-color: white;
+  color: #433;
+  outline: 0;
+  border:0;
+  background-color: #efb33f;
+}
