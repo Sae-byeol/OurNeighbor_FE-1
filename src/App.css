@@ -111,43 +111,4 @@
  display: flex;
  justify-content: center;
 }
-.today{
-  margin-top: 74px;
- 
-}
-
-.todaytitle{
-  width: 111px;
-  height: 32px;
-  margin-left: 13px;
-  font-family: 'HSGaeulSenggak2';
-  vertical-align: 0.8em;
-  font-size: 24px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: right;
-  color: #433;
-}
-.today-content{
-  height: 150px;
-  margin: 14px 0 0px 1px;
-  padding: 24px 1072px 82px 20px;
-  border-radius: 20px;
-  border: solid 3px #bdbdbd;
-  background-color: #fff;
-  font-family: 'HSGaeulSenggak2';
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #433;
-}
-.today-content .today-content-day{
-  font-size: 24px;
-}
 

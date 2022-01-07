@@ -11,7 +11,7 @@ export const StyleWrapper = styled.div`
     background-image: none;
 }`
 
-function Calender ({setTodayTitle, events}) {
+function Calender ({ events}) {
     
     /*const [title, setTitle]=useState('');
     const [date, setDate]=useState('');
@@ -28,19 +28,17 @@ function Calender ({setTodayTitle, events}) {
     }*/
    
   
-    const clickDate=(e)=>{
+    /*const clickDate=(e)=>{
         //e.preventDefault();
         setTodayTitle(e.event.title);
-    }
-
-    
-    return (
+    }*/
+    return (  
         <div className='calender'>
             <StyleWrapper>
             <FullCalendar 
             defaultView="dayGridMonth" 
             plugins={[ dayGridPlugin ]}
-            eventClick={clickDate}
+            //eventClick={clickDate}
             events={events}
             eventColor='#efb33f'></FullCalendar>
             </StyleWrapper>

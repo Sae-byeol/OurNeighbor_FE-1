@@ -7,8 +7,8 @@ import Header from './components/Header';
 import Navbar from './components/Navbar';
 
 function App() {
-  const [todayTitle, setTodayTitle]=useState('일정1');
-  const [date, setDate]=useState('날짜');
+  /*const [todayTitle, setTodayTitle]=useState('일정1');
+  const [date, setDate]=useState('날짜');*/
   const [visible, setVisible]= useState(false);
   const [events, setEvents]=useState([
     { title: 'event1', date: '2022-01-01' },
@@ -51,26 +51,14 @@ function App() {
             : <button className='calender-edit-btn' onClick={addVisible}>일정 추가</button>
             }
             
-            
           </div>
           <div className='calenderCase'>
-            
-          {visible ?<Add addEvent={addEvent} addVisible={addVisible}></Add> : <Calender setTodayTitle={setTodayTitle} events={events}></Calender>}
-          
-           
-          </div>
-          <div className='today'>
-            <img className='todayimg' src="../img/check.png"></img>
-            <span className='todaytitle'>오늘의 일정</span>
-          </div>
-          <div className='today-content'>
-            <div className='today-content-day'>{date}</div>
-            <div className='today-content-list'>{todayTitle}</div>
+          {visible ?<Add addEvent={addEvent} addVisible={addVisible}></Add> : <Calender  events={events}></Calender>}
           </div>
         </div>
       </div>
     </div>
   );
-}
+}  
 
 export default App;
