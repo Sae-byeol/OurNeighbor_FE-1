@@ -1,10 +1,14 @@
 import './App.css';
 import Calender from './components/Calender';
+import CalenderHome from './components/CalenderHome';
 import React,{useState} from 'react';
 import { render } from 'react-dom';
 import Add from './components/AddEvent';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
+import Market from './components/Market';
+import {BrowserRouter, Route, Routes,Link} from 'react-router-dom';
+
 
 function App() {
   /*const [todayTitle, setTodayTitle]=useState('일정1');
@@ -36,28 +40,14 @@ function App() {
 }
   return (
     <div className="App">
-      <div className="content">
-        <Header></Header>
-        <Navbar></Navbar>
-        <div className='section1'>
-          <span className='sub-title1'>캘린더</span>
-          <span className='sub-title2'>공지사항</span>
-        </div>
-        <div className='line'></div>
-        <div className="section2">
-          <div className='calender-edit'>
-            {visible
-            ? <div></div>
-            : <button className='calender-edit-btn' onClick={addVisible}>일정 추가</button>
-            }
-            
-          </div>
-          <div className='calenderCase'>
-          {visible ?<Add addEvent={addEvent} addVisible={addVisible}></Add> : <Calender  events={events}></Calender>}
-          </div>
-        </div>
-      </div>
+      <Routes>
+        <Route path="/" element={<Navbar></Navbar>}></Route>
+        <Route path="/market" element={<Market></Market>} />
+        <Route path="/calender" element={<CalenderHome></CalenderHome>}></Route>
+      </Routes>
+    
     </div>
+    
   );
 }  
 

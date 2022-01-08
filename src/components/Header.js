@@ -11,9 +11,9 @@ const Header = () => {
           <div className='header-right'>
             <span>오새별님</span>
             <img className="profile" src='../img/profile.png'></img>
-          </div>
+          </div>   
         </div>
-    )
+    )  
 }
 
 export default Header
