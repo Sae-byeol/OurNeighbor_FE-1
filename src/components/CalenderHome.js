@@ -1,5 +1,5 @@
 
-import '../App.css';
+import '../CalenderHome.css';
 import Calender from './Calender';
 import React,{useState} from 'react';
 import { render } from 'react-dom';
