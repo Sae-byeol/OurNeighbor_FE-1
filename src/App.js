@@ -7,6 +7,7 @@ import Add from './components/AddEvent';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Market from './components/Market';
+import MarketAdd from './components/MarketAdd';
 import MarketPostView from './components/MarketPostView';
 import {BrowserRouter, Route, Routes,Link} from 'react-router-dom';
 
@@ -45,7 +46,8 @@ function App() {
         <Route path="/" element={<Navbar></Navbar>}></Route>
         <Route path="/market" element={<Market></Market>} />
         <Route path="/calender" element={<CalenderHome></CalenderHome>}></Route>
-        <Route path="/postView/:no" element={<MarketPostView></MarketPostView>}></Route>
+        <Route path="/postView" element={<MarketPostView></MarketPostView>}></Route>
+        <Route path="/marketAdd" element={<MarketAdd></MarketAdd>}></Route>
       </Routes>
     
     </div>

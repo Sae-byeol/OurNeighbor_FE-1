@@ -3,7 +3,10 @@ import Navbar from './Navbar';
 import Header from './Header';
 import "../MarketPostView.css";
 
-const MarketPostView = (props) => {
+
+
+const MarketPostView = ({location}) => {
+    console.log(location);
     return (
         <div className="App">
             <div className='content'>

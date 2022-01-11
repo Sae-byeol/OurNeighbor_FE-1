@@ -1,0 +1,63 @@
+.marketAdd-section2{
+    margin-top: 35px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 150px;
+}
+.marketAddTitle{
+    width: 60px;
+    height: 27px;
+    margin-right: 79px;
+    margin-bottom: 35px;
+    font-family: HSGaeulSenggak2;
+    font-size: 25px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #433;
+}
+.marketAddTitleInput{
+    width: 856px;
+  height: 27px;
+  margin: 33.9px 31px 35px 0;
+  border-radius: 0px;
+  border: solid 1.5px #c4c4c4;
+}
+.marketAddContent{
+    width: 118px;
+  height: 30px;
+  font-family: HSGaeulSenggak2;
+  font-size: 25px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #433;
+}
+.marketAddTextarea{
+    padding: 20px 18px 20px 18px;
+    height: 380px;
+    width: 1000px;
+    margin-top: 5px;
+    border: solid 1.5px #c4c4c4;
+}
+.imgInput{
+   border-radius: 0; 
+   border: solid 1.5px #c4c4c4;
+}
+.marketAddCompleteBtn{
+    font-family: 'HSGaeulSenggak2';
+    float: right;
+    width: 108px;
+  height: 40px;
+  margin: 17px 11px 0 1008px;
+  padding: 9px 15px 9px 14px;
+  border-radius: 10px;
+  border: solid 1.5px #efb33f;
+  background-color: #fee89a;
+}
