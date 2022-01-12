@@ -1,20 +1,22 @@
 import React from "react";
 import "../Navbar.css";
 import { Link } from "react-router-dom";
+import Paging from "./Paging";
+
 const Navbar = () => {
   return (
     <div className="navdiv">
       <ul className="nav">
-        <Link to="/best">
+        <Link to="/best" style={{ textDecoration: "none" }}>
           <li className="nav-list">추천 게시판</li>
         </Link>
-        <Link to="/market">
+        <Link to="/market" style={{ textDecoration: "none" }}>
           <li className="nav-list">중고거래</li>
         </Link>
-        <Link to="/gathering">
+        <Link to="/gathering" style={{ textDecoration: "none" }}>
           <li className="nav-list">모임 모집 게시판</li>
         </Link>
-        <Link to="/calender">
+        <Link to="/calender" style={{ textDecoration: "none" }}>
           <li className="nav-list">캘린더/공지사항</li>
         </Link>
       </ul>

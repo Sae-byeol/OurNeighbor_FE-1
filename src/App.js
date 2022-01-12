@@ -1,8 +1,10 @@
 import "./App.css";
+import { render } from "react-dom";
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import Gathering from "./components/Gathering";
 import Best from "./components/Best";
+import Paging from "./components/Paging";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 
 function App() {
@@ -32,7 +34,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Navbar></Navbar>} exact={true}></Route>
+        <Route path="/" element={<Navbar></Navbar>}></Route>
         <Route path="/best" element={<Best></Best>}></Route>
         <Route path="/gathering" element={<Gathering></Gathering>}></Route>
       </Routes>

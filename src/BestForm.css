@@ -1,0 +1,19 @@
+.bestForm {
+  width: 300px;
+  height: 350px;
+  margin: 0 28px 100px 0;
+  padding: 15px 39px 22px 34px;
+  border-radius: 20px;
+  border: solid 3px #bdbdbd;
+  font-family: HSGaeulSenggak2;
+  color: #443333;
+  font-size: 20px;
+}
+
+.bestForm .bestFrom-title {
+  height: 41px;
+  margin-top: 15px;
+  font-size: 50px;
+  text-align: center;
+  font-size: 30px;
+}

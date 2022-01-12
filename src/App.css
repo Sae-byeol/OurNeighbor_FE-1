@@ -1,1 +1,6 @@
 @import url("https://webfontworld.github.io/HSGaeulSenggak/HSGaeulSenggak2.css");
+
+.App {
+  width: 1500px;
+  margin: 0 auto;
+}
