@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import Gathering from "./components/Gathering";
 import Best from "./components/Best";
-import Paging from "./components/Paging";
+import BestPostView from "./components/BestPostView";
+import BestAdd from "./components/BestAdd";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 
 function App() {
@@ -31,11 +32,17 @@ function App() {
   const addEvent = (event) => {
     setEvents([...events, event]);
   };
+
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Navbar></Navbar>}></Route>
         <Route path="/best" element={<Best></Best>}></Route>
+        <Route path="/bestAdd" element={<BestAdd></BestAdd>}></Route>
+        <Route
+          path="/bestPostView"
+          element={<BestPostView></BestPostView>}
+        ></Route>
         <Route path="/gathering" element={<Gathering></Gathering>}></Route>
       </Routes>
     </div>

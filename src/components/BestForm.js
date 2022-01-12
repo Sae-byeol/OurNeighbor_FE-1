@@ -6,7 +6,7 @@ const BestForm = (props) => {
   return (
     <Link
       to={{
-        pathname: "/postView",
+        pathname: "/bestPostView",
         state: {
           title: "테스트",
           img: "테스트",
@@ -20,6 +20,7 @@ const BestForm = (props) => {
         </div>
         <img className="bestForm-img" src={props.best.img}></img>
         <div className="bestForm-cont">{props.best.cont}</div>
+        <div className="bestForm-date">{props.best.date}</div>
       </div>
     </Link>
   );
