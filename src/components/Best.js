@@ -5,6 +5,8 @@ import Header from "./Header";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import "../Best.css";
 import Paging from "./Paging";
+import "../Paging.css";
+import Pagination from "react-js-pagination";
 
 const Best = () => {
   const [bests, setBests] = useState([
@@ -70,7 +72,14 @@ const Best = () => {
     },
   ]);
 
-  const renderBests = bests.map((best) => {
+  const [page, setPage] = useState(1);
+
+  const onClicksetPage = bests.filter((best) => {
+    return best.no <= 4;
+  });
+
+  const renderBests = onClicksetPage.map((best) => {
+    console.log(onClicksetPage);
     return (
       <div className="best-flex">
         <BestForm best={best} key={best.no}></BestForm>
@@ -78,7 +87,11 @@ const Best = () => {
     );
   });
 
-  const [page, setPage] = useState(1);
+  const handlePageChange = (page) => {
+    setPage(page);
+    onClicksetPage();
+    renderBests();
+  };
 
   return (
     <div className="App">
@@ -110,11 +123,15 @@ const Best = () => {
         <div className="best-section2">{renderBests}</div>
       </div>
       <div>
-        <Paging
-          page={page}
-          count={parseInt(bests.length / 9 + 1)}
-          setPage={setPage}
-        ></Paging>
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={5}
+          totalItemsCount={parseInt(bests.length / 9 + 1) * 5}
+          pageRangeDisplayed={5}
+          prevPageText={"<"}
+          nextPageText={">"}
+          onChange={handlePageChange}
+        />
       </div>
     </div>
   );
