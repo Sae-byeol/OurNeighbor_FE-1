@@ -18,6 +18,12 @@
   font-size: 30px;
 }
 
+.bestForm-img {
+  width: 300px;
+  height: 200px;
+  border-radius: 20px;
+}
+
 .bestForm .bestForm-date {
   width: 96px;
   height: 18px;

@@ -23,7 +23,7 @@ const BestPostView = () => {
           </div>
           <img
             className="bestPostView-img"
-            src="../img/best-test-img.png"
+            src="../img/best-test-img-food.png"
           ></img>
           <div className="bestPostView-content">
             오늘은 친구들과 함께<br></br>

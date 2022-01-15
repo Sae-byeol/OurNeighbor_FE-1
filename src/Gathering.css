@@ -53,7 +53,7 @@
   background-color: #ffefb6;
 }
 
-.best-search-btn {
+.gathering-search-btn {
   position: absolute;
   height: 40px;
   bottom: 0px;
@@ -66,7 +66,7 @@
   bottom: 0px;
 }
 
-.best-input {
+.gathering-input {
   width: 300px;
   height: 40px;
   border: 2px solid #c4c4c4;
@@ -74,7 +74,7 @@
   border-radius: 10px;
 }
 
-.best-add-btn {
+.gathering-add-btn {
   font-family: "HSGaeulSenggak2";
   font-size: 20px;
   width: 127px;
@@ -89,10 +89,6 @@
   border: 0;
   background-color: #efb33f;
 }
-.best-section2 {
-  padding-left: 28px;
-  padding-top: 60px;
-  text-align: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+.gathering-section2 {
+  width: 1260px;
 }
