@@ -30,7 +30,7 @@ const Market = (props) => {
       const handlePageChange = (page) => {
         
         setPage(page);
-        onClicksetPage();
+        //onClicksetPage();
         renderMarkets();
         
       };
