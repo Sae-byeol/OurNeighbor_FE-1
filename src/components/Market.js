@@ -28,7 +28,8 @@ const Market = () => {
       });
 
     const renderMarkets = onClicksetPage.map((market) => {
-        return (
+      window.scrollTo(0, 0);  
+      return (
           <div className='market-flex'>
             <MarketForm
               market={market}
@@ -40,9 +41,11 @@ const Market = () => {
         );
       });
       const handlePageChange = (page) => {
+        
         setPage(page);
         onClicksetPage();
         renderMarkets();
+        
       };
     
     return (
