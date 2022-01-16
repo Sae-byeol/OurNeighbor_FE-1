@@ -11,7 +11,7 @@ const Market = (props) => {
     const markets=props.component;
     const [page, setPage] = useState(1);
     const onClicksetPage = markets.filter((market) => {
-        return (page - 1) * 9 + 1 <= market.no && market.no <= (page - 1) * 9 + 9;
+        return (page - 1) * 9 + 1 <= market.usedGoods_id && market.usedGoods_id <= (page - 1) * 9 + 9;
       });
 
     const renderMarkets = onClicksetPage.map((market) => {
@@ -20,9 +20,9 @@ const Market = (props) => {
           <div className='market-flex'>
             <MarketForm
               market={market}
-              key={market.no}
+              key={market.usedGoods_id}
               title={market.title}
-              id={market.id}
+              id={market.usedGoods_id}
             ></MarketForm>
           </div>
         );

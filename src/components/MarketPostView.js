@@ -7,10 +7,10 @@ import markets from "./Market";
 
 
 const MarketPostView = (props) => {
-    const {no}=useParams();
+    const {usedGoods_id}=useParams();
     
     const matchItem=props.component.find(function(element){
-       if (element.no===Number(no))
+       if (element.usedGoods_id===Number(usedGoods_id))
        return true;
     })
     
@@ -31,7 +31,7 @@ const MarketPostView = (props) => {
                     </span>
                     <div className='marketPostView-subtitle'>
                         <span>{matchItem.date}</span>
-                        <span>작성자:{matchItem.user}</span>
+                        <span>작성자:{matchItem.member_id}</span>
                     </div>
                     <img className='marketPostView-img' src='../img/test.png'></img>
                     <div className='marketPostView-content'>

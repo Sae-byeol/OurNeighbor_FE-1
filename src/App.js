@@ -17,24 +17,20 @@ function App() {
   /*const [todayTitle, setTodayTitle]=useState('일정1');
   const [date, setDate]=useState('날짜');*/
   const [visible, setVisible]= useState(false);
-  const [events, setEvents]=useState([
-    { title: 'event1', date: '2022-01-01' },
-    { title:'event1-1', date:'2022-01-01' },
-    { title: 'event2', date: '2022-01-12' }]);
+  const [events, setEvents]=useState([]);
+  useEffect(() => {
+    axios.get('dummy/calendar_list.json')
+    .then(res=>setEvents(res.data.calendarList))
+   .catch(err=>console.log(err));
+   }, []);
   
-  /*const renderTitles=todayTitle.map((val)=>{
-    return(
-      <div>{val.todayTitle}</div>
-    );
-  })*/
-  //console.log(todayTitle);
   const [markets, setMarkets]=useState([]);
   useEffect(() => {
    axios.get('dummy/market_list.json')
    .then(res=>setMarkets(res.data.marketList))
    .catch(err=>console.log(err));
   }, []);
-
+//console.log(markets);
   const addVisible=()=>{
       setVisible(!visible);
       console.log(events);
@@ -54,7 +50,7 @@ function App() {
         <Route path="/" element={<Navbar></Navbar>}></Route>
         <Route path="/market" element={<Market component={markets}></Market>} />
         <Route path="/calender" element={<CalenderHome></CalenderHome>}></Route>
-        <Route path="/postView/:no" element={<MarketPostView component={markets}></MarketPostView>}></Route>
+        <Route path="/postView/:usedGoods_id" element={<MarketPostView component={markets}></MarketPostView>}></Route>
         <Route path="/marketAdd" element={<MarketAdd></MarketAdd>}></Route>
       </Routes>
     </div>
