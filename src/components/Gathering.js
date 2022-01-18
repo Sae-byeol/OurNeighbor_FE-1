@@ -3,152 +3,38 @@ import GatheringForm from "./GatheringForm";
 import GatheringFormComplete from "./GatheringFormComplete";
 import Navbar from "./Navbar";
 import Header from "./Header";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link, Outlet } from "react-router-dom";
 import "../Gathering.css";
 import "../Paging.css";
 import Pagination from "react-js-pagination";
 
-const Gathering = () => {
-  const [gatherings, setGatherings] = useState([
-    {
-      title: "운동1",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "exercise",
-      complete: "true",
-      no: 1,
-    },
-    {
-      title: "학부모1",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "parents",
-      complete: "false",
-      no: 2,
-    },
-    {
-      title: "취미1",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "hobby",
-      complete: "true",
-      no: 3,
-    },
-    {
-      title: "맛집탐방1",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "foodplace",
-      complete: "true",
-      no: 4,
-    },
-    {
-      title: "반려동물1",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "animal",
-      complete: "true",
-      no: 5,
-    },
-    {
-      title: "운동2",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "exercise",
-      complete: "true",
-      no: 6,
-    },
-    {
-      title: "학부모2",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "parents",
-      complete: "false",
-      no: 7,
-    },
-    {
-      title: "취미2",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "hobby",
-      complete: "true",
-      no: 8,
-    },
-    {
-      title: "맛집탐방2",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "foodplace",
-      complete: "true",
-      no: 9,
-    },
-    {
-      title: "반려동물2",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "animal",
-      complete: "true",
-      no: 10,
-    },
-    {
-      title: "운동3",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "exercise",
-      complete: "true",
-      no: 11,
-    },
-    {
-      title: "운동4",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "exercise",
-      complete: "true",
-      no: 12,
-    },
-    {
-      title: "운동5",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "exercise",
-      complete: "false",
-      no: 13,
-    },
-    {
-      title: "운동6",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "exercise",
-      complete: "true",
-      no: 14,
-    },
-    {
-      title: "운동7",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "exercise",
-      complete: "true",
-      no: 15,
-    },
-    {
-      title: "운동8",
-      cont: "매일 한강 도로변 같이 뛰실 분들 구합니다!",
-      date: "2021.10.31 19:11",
-      category: "exercise",
-      complete: "true",
-      no: 16,
-    },
-  ]);
-
+const Gathering = (props) => {
+  const gatherings = props.component;
   const [page, setPage] = useState(1);
   const [renderPage, setRenderPage] = useState("unfocused");
   const [getName, setGetName] = useState("");
+  const [search, setSearch] = useState(null);
+  const [searchingText, setSearchingText] = useState(null);
+
+  const searchSpace = (e) => {
+    setSearch(e);
+  };
+
+  const searchedGatherings = gatherings.filter((best) => {
+    if (search == null) return best;
+    else if (
+      best.title.toLowerCase().includes(search.toLowerCase()) ||
+      best.cont.toLowerCase().includes(search.toLowerCase())
+    ) {
+      return best;
+    }
+  });
 
   // 초기에는 unfocused 상태
-  // focused 상태였다가 unfocused 상태가 다시 될 때 no 값 다시 지정
+  // focused 상태였다가 unfocused 상태가 다시 될 때 gatheringNo 값 다시 지정
   let a = 1;
-  const BeforeonClicksetPage = gatherings.map((best) => {
-    best.no = a;
+  const BeforeonClicksetPage = searchedGatherings.map((best) => {
+    best.gatheringNo = a;
     a++;
     return best;
   });
@@ -156,7 +42,8 @@ const Gathering = () => {
   // unfocused 상태일 때 각 페이지에 보여줄 객체들 필터
   const onClicksetPage = BeforeonClicksetPage.filter((gathering) => {
     return (
-      (page - 1) * 7 + 1 <= gathering.no && gathering.no <= (page - 1) * 7 + 7
+      (page - 1) * 7 + 1 <= gathering.gatheringNo &&
+      gathering.gatheringNo <= (page - 1) * 7 + 7
     );
   });
 
@@ -166,7 +53,7 @@ const Gathering = () => {
       <div className="gathering-flex">
         <GatheringForm
           gathering={gathering}
-          key={gathering.no}
+          key={gathering.gatheringNo}
           title={gathering.title}
           id={gathering.id}
         ></GatheringForm>
@@ -174,7 +61,7 @@ const Gathering = () => {
     ) : (
       <GatheringFormComplete
         gathering={gathering}
-        key={gathering.no}
+        key={gathering.gatheringNo}
         title={gathering.title}
         id={gathering.id}
       ></GatheringFormComplete>
@@ -205,21 +92,24 @@ const Gathering = () => {
   };
 
   // name과 케테고리가 일치하는 것만 필터링
-  const onClickButtonClassify = gatherings.filter((best) => {
+  const onClickButtonClassify = searchedGatherings.filter((best) => {
     return best.category === getName;
   });
 
-  // no 값 재지정
+  // gatheringNo 값 재지정
   let i = 1;
   const onClickButtonSetForm = onClickButtonClassify.map((best) => {
-    best.no = i;
+    best.gatheringNo = i;
     i++;
     return best;
   });
 
-  // no 값에 따라 페이지별로 보여줄 객체들 필터링
+  // gatheringNo 값에 따라 페이지별로 보여줄 객체들 필터링
   const onClickButtonsetPage = onClickButtonSetForm.filter((best) => {
-    return (page - 1) * 7 + 1 <= best.no && best.no <= (page - 1) * 7 + 7;
+    return (
+      (page - 1) * 7 + 1 <= best.gatheringNo &&
+      best.gatheringNo <= (page - 1) * 7 + 7
+    );
   });
 
   // focused 상태일 때 보여줄 객체들 BestForm 형태로 나타내기
@@ -228,7 +118,7 @@ const Gathering = () => {
       <div className="gathering-flex">
         <GatheringForm
           gathering={gathering}
-          key={gathering.no}
+          key={gathering.gatheringNo}
           title={gathering.title}
           id={gathering.id}
         ></GatheringForm>
@@ -236,7 +126,7 @@ const Gathering = () => {
     ) : (
       <GatheringFormComplete
         gathering={gathering}
-        key={gathering.no}
+        key={gathering.gatheringNo}
         title={gathering.title}
         id={gathering.id}
       ></GatheringFormComplete>
@@ -336,7 +226,19 @@ const Gathering = () => {
                 className="gathering-search-btn"
                 src="../img/search.png"
               ></img>
-              <input className="gathering-input"></input>
+              <input
+                className="gathering-input"
+                placeholder="제목 / 내용 검색"
+                value={searchingText}
+                onChange={(e) => {
+                  setSearchingText(e.target.value);
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    searchSpace(e.target.value);
+                  }
+                }}
+              ></input>
             </span>
           </div>
         </div>

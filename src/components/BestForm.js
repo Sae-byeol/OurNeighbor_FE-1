@@ -5,13 +5,7 @@ import "../BestForm.css";
 const BestForm = (props) => {
   return (
     <Link
-      to={{
-        pathname: "/bestPostView",
-        state: {
-          title: "테스트",
-          img: "테스트",
-        },
-      }}
+      to={`/bestPostView/${props.best.bestNo}`}
       style={{ textDecoration: "none" }}
     >
       <div className="bestForm">
@@ -19,7 +13,11 @@ const BestForm = (props) => {
           {props.best.title}
         </div>
         <img className="bestForm-img" src={props.best.img}></img>
-        <div className="bestForm-cont">{props.best.cont}</div>
+        <div className="bestForm-cont">
+          {props.best.cont.length >= 71
+            ? props.best.cont.substring(0, 71) + "..."
+            : props.best.cont}
+        </div>
         <div className="bestForm-date">{props.best.date}</div>
       </div>
     </Link>

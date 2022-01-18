@@ -1,12 +1,15 @@
 import "./App.css";
 import { render } from "react-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Gathering from "./components/Gathering";
+import GatheringPostView from "./components/GatheringPostView";
+import GatheringAdd from "./components/GatheringAdd";
 import Best from "./components/Best";
 import BestPostView from "./components/BestPostView";
 import BestAdd from "./components/BestAdd";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import axios from "axios";
 
 function App() {
   /*const [todayTitle, setTodayTitle]=useState('일정1');
@@ -24,6 +27,22 @@ function App() {
   })*/
   //console.log(todayTitle);
 
+  const [bests, setBests] = useState([]);
+  useEffect(() => {
+    axios
+      .get("dummy/best_list.json")
+      .then((res) => setBests(res.data.bestList))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const [gatherings, setGatherings] = useState([]);
+  useEffect(() => {
+    axios
+      .get("dummy/gathering_list.json")
+      .then((res) => setGatherings(res.data.gatheringList))
+      .catch((err) => console.log(err));
+  }, []);
+
   const addVisible = () => {
     setVisible(!visible);
     console.log(events);
@@ -37,13 +56,26 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Navbar></Navbar>}></Route>
-        <Route path="/best" element={<Best></Best>}></Route>
+        <Route path="/best" element={<Best component={bests}></Best>}></Route>
         <Route path="/bestAdd" element={<BestAdd></BestAdd>}></Route>
         <Route
-          path="/bestPostView"
-          element={<BestPostView></BestPostView>}
+          path="/bestPostView/:bestNo"
+          element={<BestPostView component={bests}></BestPostView>}
         ></Route>
-        <Route path="/gathering" element={<Gathering></Gathering>}></Route>
+        <Route
+          path="/gathering"
+          element={<Gathering component={gatherings}></Gathering>}
+        ></Route>
+        <Route
+          path="/gatheringAdd"
+          element={<GatheringAdd></GatheringAdd>}
+        ></Route>
+        <Route
+          path="/gatheringPostView/:gatheringNo"
+          element={
+            <GatheringPostView component={gatherings}></GatheringPostView>
+          }
+        ></Route>
       </Routes>
     </div>
   );

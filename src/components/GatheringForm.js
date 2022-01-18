@@ -5,14 +5,8 @@ import "../GatheringForm.css";
 const GatheringForm = (props) => {
   return (
     <Link
-      to={{
-        pathname: "/gatheringPostView",
-        state: {
-          title: "테스트",
-          img: "테스트",
-        },
-      }}
-      style={{ textDecoration: "none", color: "#433" }}
+      to={`/gatheringpostView/${props.gathering.gatheringNo}`}
+      style={{ textDecoration: "none", color: "#000" }}
     >
       <div className="gatheringForm">
         <div className="gatheringForm-title" style={{ fontSize: "25px" }}>

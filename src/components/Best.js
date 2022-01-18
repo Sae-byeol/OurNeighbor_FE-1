@@ -1,226 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import BestForm from "./BestForm";
 import Navbar from "./Navbar";
 import Header from "./Header";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link, Outlet } from "react-router-dom";
 import "../Best.css";
 import "../Paging.css";
 import Pagination from "react-js-pagination";
 //* https://cotak.tistory.com/112 */
 //  npm i react-js-pagination
 
-const Best = () => {
-  const [bests, setBests] = useState([
-    {
-      title: "음식 제목 1",
-      img: "../img/best-test-img-food.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "food",
-      no: 1,
-    },
-    {
-      title: "음식 제목 2",
-      img: "../img/best-test-img-food.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      category: "food",
-      date: "2021.10.31 19:11",
-      no: 2,
-    },
-    {
-      title: "학원 제목 1",
-      img: "../img/best-test-img-academy.PNG",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "academy",
-      no: 3,
-    },
-    {
-      title: "학원 제목 2",
-      img: "../img/best-test-img-academy.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "academy",
-      no: 4,
-    },
-    {
-      title: "카페 제목 1",
-      img: "../img/best-test-img-cafe.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "cafe",
-      no: 5,
-    },
-    {
-      title: "운동 제목 1",
-      img: "../img/best-test-img-sports.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "sports",
-      no: 6,
-    },
-    {
-      title: "카페 제목 2",
-      img: "../img/best-test-img-cafe.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "cafe",
-      no: 7,
-    },
-    {
-      title: "학원 제목 3",
-      img: "../img/best-test-img-academy.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "academy",
-      no: 8,
-    },
-    {
-      title: "음식 제목 3",
-      img: "../img/best-test-img-food.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "food",
-      no: 9,
-    },
-    {
-      title: "카페 제목 3",
-      img: "../img/best-test-img-cafe.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "cafe",
-      no: 10,
-    },
-    {
-      title: "음식 제목 4",
-      img: "../img/best-test-img-food.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "food",
-      no: 11,
-    },
-    {
-      title: "음식 제목 5",
-      img: "../img/best-test-img-food.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      category: "food",
-      date: "2021.10.31 19:11",
-      no: 12,
-    },
-    {
-      title: "학원 제목 4",
-      img: "../img/best-test-img-academy.PNG",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "academy",
-      no: 13,
-    },
-    {
-      title: "학원 제목 5",
-      img: "../img/best-test-img-academy.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "academy",
-      no: 14,
-    },
-    {
-      title: "카페 제목 4",
-      img: "../img/best-test-img-cafe.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "cafe",
-      no: 15,
-    },
-    {
-      title: "운동 제목 2",
-      img: "../img/best-test-img-sports.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "sports",
-      no: 16,
-    },
-    {
-      title: "카페 제목 5",
-      img: "../img/best-test-img-cafe.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "cafe",
-      no: 17,
-    },
-    {
-      title: "학원 제목 6",
-      img: "../img/best-test-img-academy.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "academy",
-      no: 18,
-    },
-    {
-      title: "음식 제목 6",
-      img: "../img/best-test-img-food.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "food",
-      no: 19,
-    },
-    {
-      title: "카페 제목 6",
-      img: "../img/best-test-img-cafe.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "cafe",
-      no: 20,
-    },
-    {
-      title: "카페 제목 7",
-      img: "../img/best-test-img-cafe.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "cafe",
-      no: 21,
-    },
-    {
-      title: "학원 제목 7",
-      img: "../img/best-test-img-academy.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "academy",
-      no: 22,
-    },
-    {
-      title: "음식 제목 7",
-      img: "../img/best-test-img-food.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "food",
-      no: 23,
-    },
-    {
-      title: "카페 제목 8",
-      img: "../img/best-test-img-cafe.png",
-      cont: "오늘은 친구들과 함께 당고집을 갔어요! ><가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!! 한 입 먹었는데 맛도 너무 좋아서...",
-      date: "2021.10.31 19:11",
-      category: "cafe",
-      no: 24,
-    },
-  ]);
-
+const Best = (props) => {
+  const bests = props.component;
   const [page, setPage] = useState(1);
   const [renderPage, setRenderPage] = useState("unfocused");
   const [getName, setGetName] = useState("");
+  const [search, setSearch] = useState(null);
+  const [searchingText, setSearchingText] = useState(null);
+
+  const searchSpace = (e) => {
+    setSearch(e);
+  };
+
+  const searchedBests = bests.filter((best) => {
+    if (search == "") return best;
+    if (search == null) return best;
+    else if (
+      best.title.toLowerCase().includes(search.toLowerCase()) ||
+      best.cont.toLowerCase().includes(search.toLowerCase())
+    ) {
+      return best;
+    }
+  });
 
   // 초기에는 unfocused 상태
-  // focused 상태였다가 unfocused 상태가 다시 될 때 no 값 다시 지정
+  // focused 상태였다가 unfocused 상태가 다시 될 때 bestNo 값 다시 지정
   let a = 1;
-  const BeforeonClicksetPage = bests.map((best) => {
-    best.no = a;
+  const BeforeonClicksetPage = searchedBests.map((best) => {
+    best.bestNo = a;
     a++;
     return best;
   });
 
   // unfocused 상태일 때 각 페이지에 보여줄 객체들 필터
   const onClicksetPage = BeforeonClicksetPage.filter((best) => {
-    return (page - 1) * 9 + 1 <= best.no && best.no <= (page - 1) * 9 + 9;
+    return (
+      (page - 1) * 9 + 1 <= best.bestNo && best.bestNo <= (page - 1) * 9 + 9
+    );
   });
 
   // unfocused 상태일 때 보여줄 객체들 BestForm 형태로 나타내기
@@ -229,7 +54,7 @@ const Best = () => {
       <div className="best-flex">
         <BestForm
           best={best}
-          key={best.no}
+          key={best.bestNo}
           title={best.title}
           id={best.id}
         ></BestForm>
@@ -242,7 +67,6 @@ const Best = () => {
   // focused -> unfocused 되기
   // 위의 함수들 실행
   const onBlurButton = () => {
-    console.log("onBlurButton");
     setPage(1);
     setRenderPage("unfocused");
     BeforeonClicksetPage();
@@ -261,21 +85,23 @@ const Best = () => {
   };
 
   // name과 케테고리가 일치하는 것만 필터링
-  const onClickButtonClassify = bests.filter((best) => {
+  const onClickButtonClassify = searchedBests.filter((best) => {
     return best.category === getName;
   });
 
-  // no 값 재지정
+  // bestNo 값 재지정
   let i = 1;
   const onClickButtonSetForm = onClickButtonClassify.map((best) => {
-    best.no = i;
+    best.bestNo = i;
     i++;
     return best;
   });
 
-  // no 값에 따라 페이지별로 보여줄 객체들 필터링
+  // bestNo 값에 따라 페이지별로 보여줄 객체들 필터링
   const onClickButtonsetPage = onClickButtonSetForm.filter((best) => {
-    return (page - 1) * 9 + 1 <= best.no && best.no <= (page - 1) * 9 + 9;
+    return (
+      (page - 1) * 9 + 1 <= best.bestNo && best.bestNo <= (page - 1) * 9 + 9
+    );
   });
 
   // focused 상태일 때 보여줄 객체들 BestForm 형태로 나타내기
@@ -284,7 +110,7 @@ const Best = () => {
       <div className="best-flex">
         <BestForm
           best={best}
-          key={best.no}
+          key={best.bestNo}
           title={best.title}
           id={best.id}
         ></BestForm>
@@ -373,7 +199,19 @@ const Best = () => {
             </span>
             <span className="search">
               <img className="best-search-btn" src="../img/search.png"></img>
-              <input className="best-input"></input>
+              <input
+                className="best-input"
+                placeholder="제목 / 내용 검색"
+                value={searchingText}
+                onChange={(e) => {
+                  setSearchingText(e.target.value);
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    searchSpace(e.target.value);
+                  }
+                }}
+              ></input>
             </span>
           </div>
         </div>

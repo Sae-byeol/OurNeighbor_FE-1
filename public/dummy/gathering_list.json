@@ -1,0 +1,148 @@
+{
+  "gatheringList": [
+    {
+      "title": "운동1",
+      "member_id": "김민경1",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "exercise",
+      "complete": "true",
+      "gatheringNo": 1
+    },
+    {
+      "title": "학부모1",
+      "member_id": "김민경2",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "parents",
+      "complete": "false",
+      "gatheringNo": 2
+    },
+    {
+      "title": "취미1",
+      "member_id": "김민경3",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "hobby",
+      "complete": "true",
+      "gatheringNo": 3
+    },
+    {
+      "title": "맛집탐방",
+      "member_id": "김민경4",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "foodplace",
+      "complete": "true",
+      "gatheringNo": 4
+    },
+    {
+      "title": "반려동물",
+      "member_id": "김민경5",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "animal",
+      "complete": "true",
+      "gatheringNo": 5
+    },
+    {
+      "title": "운동2",
+      "member_id": "김민경6",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "exercise",
+      "complete": "true",
+      "gatheringNo": 6
+    },
+    {
+      "title": "학부모2",
+      "member_id": "김민경7",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "parents",
+      "complete": "false",
+      "gatheringNo": 7
+    },
+    {
+      "title": "취미2",
+      "member_id": "김민경8",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "hobby",
+      "complete": "true",
+      "gatheringNo": 8
+    },
+    {
+      "title": "맛집탐방2",
+      "member_id": "김민경9",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "foodplace",
+      "complete": "true",
+      "gatheringNo": 9
+    },
+    {
+      "title": "반려동물2",
+      "member_id": "김민경10",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "animal",
+      "complete": "true",
+      "gatheringNo": 10
+    },
+    {
+      "title": "운동3",
+      "member_id": "김민경11",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "exercise",
+      "complete": "true",
+      "gatheringNo": 11
+    },
+    {
+      "title": "운동4",
+      "member_id": "김민경12",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "exercise",
+      "complete": "true",
+      "gatheringNo": 12
+    },
+    {
+      "title": "운동5",
+      "member_id": "김민경13",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "exercise",
+      "complete": "false",
+      "gatheringNo": 13
+    },
+    {
+      "title": "운동6",
+      "member_id": "김민경14",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "exercise",
+      "complete": "true",
+      "gatheringNo": 14
+    },
+    {
+      "title": "운동7",
+      "member_id": "김민경15",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "exercise",
+      "complete": "true",
+      "gatheringNo": 15
+    },
+    {
+      "title": "운동8",
+      "member_id": "김민경16",
+      "cont": "매일 한강 도로변 같이 뛰실 분들 구합니다!",
+      "date": "2021.10.31 19:11",
+      "category": "exercise",
+      "complete": "true",
+      "gatheringNo": 16
+    }
+  ]
+}
