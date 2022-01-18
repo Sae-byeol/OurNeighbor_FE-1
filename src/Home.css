@@ -1,0 +1,43 @@
+.home-section1{
+    text-align: center;
+    margin-top:50px;
+}
+.welcomeImgBox{
+    position: relative;
+}
+.home-welcomeText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate( -50%, -50% );
+    font-family: HSGaeulSenggak2;
+    font-size: 36px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #433;
+}
+.home-section2-1{
+    padding: 159px 0 79px;
+}
+.home-calendarText{
+    display: inline-block;
+    width: 479px;
+  margin: 0 14px 21px 0;
+  font-family: HSGaeulSenggak2;
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #433;
+}
+.home-calendar{
+    width: 300px;
+    height: 300px;
+}

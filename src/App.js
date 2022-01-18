@@ -6,6 +6,7 @@ import { render } from 'react-dom';
 import Add from './components/AddEvent';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
+import Home from './components/Home';
 import Market from './components/Market';
 import MarketAdd from './components/MarketAdd';
 import MarketPostView from './components/MarketPostView';
@@ -47,7 +48,8 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Navbar></Navbar>}></Route>
+        {/*<Route path="/" element={<Navbar></Navbar>}></Route>*/}
+        <Route path="/" element={<Home></Home>}></Route>
         <Route path="/market" element={<Market component={markets}></Market>} />
         <Route path="/calender" element={<CalenderHome></CalenderHome>}></Route>
         <Route path="/postView/:usedGoods_id" element={<MarketPostView component={markets}></MarketPostView>}></Route>

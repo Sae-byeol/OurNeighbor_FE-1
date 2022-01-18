@@ -33,7 +33,7 @@ function Calender ({ events}) {
         setTodayTitle(e.event.title);
     }*/
     return (  
-        <div className='calender'>
+        <div className='calender calendarHome'>
             <StyleWrapper>
             <FullCalendar 
             defaultView="dayGridMonth" 
