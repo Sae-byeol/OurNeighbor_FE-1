@@ -17,6 +17,13 @@
   font-size: 25px;
 }
 
+.postlist-complete {
+  position: absolute;
+  left: 580px;
+  font-size: 25px;
+  color: #ffa800;
+}
+
 .postlist-date {
   position: absolute;
   right: 10px;

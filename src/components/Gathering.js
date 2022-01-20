@@ -12,6 +12,7 @@ const Gathering = (props) => {
   const gatherings = props.component;
   const [page, setPage] = useState(1);
   const [renderPage, setRenderPage] = useState("unfocused");
+  const [buttonColor, setButtonColor] = useState("all");
   const [getName, setGetName] = useState("");
   const [search, setSearch] = useState(null);
   const [searchingText, setSearchingText] = useState(null);
@@ -74,7 +75,6 @@ const Gathering = (props) => {
   // focused -> unfocused 되기
   // 위의 함수들 실행
   const onBlurButton = () => {
-    console.log("onBlurButton");
     setPage(1);
     setRenderPage("unfocused");
     BeforeonClicksetPage();
@@ -158,13 +158,36 @@ const Gathering = (props) => {
     window.scrollTo(0, 0);
   };
 
+  const colorAll = buttonColor === "all" ? "#ffefb6" : "white";
+  const colorExercise = buttonColor === "exercise" ? "#ffefb6" : "white";
+  const colorParents = buttonColor === "parents" ? "#ffefb6" : "white";
+  const colorHobby = buttonColor === "hobby" ? "#ffefb6" : "white";
+  const colorFoodPlace = buttonColor === "foodplace" ? "#ffefb6" : "white";
+  const colorAnimal = buttonColor === "animal" ? "#ffefb6" : "white";
+
+  const defineColor = (e) => {
+    e === "all"
+      ? setButtonColor("all")
+      : e === "exercise"
+      ? setButtonColor("exercise")
+      : e === "parents"
+      ? setButtonColor("parents")
+      : e === "hobby"
+      ? setButtonColor("hobby")
+      : e === "foodplace"
+      ? setButtonColor("foodplace")
+      : e === "animal"
+      ? setButtonColor("animal")
+      : setButtonColor("all");
+  };
+
   return (
     <div className="App">
       <div className="content">
         <Header></Header>
         <Navbar></Navbar>
         <div className="section1">
-          <span className="sub-title1">추천게시판</span>
+          <span className="sub-title1">모임 모집 게시판</span>
           <span className="section1-right">
             <Link to="/gatheringAdd">
               <button className="gathering-add-btn">글 쓰기</button>
@@ -173,51 +196,79 @@ const Gathering = (props) => {
           <div className="section1-bottom">
             <div>HOT 카테고리</div>
             <span className="keywords">
-              <button className="keyword" onFocus={onBlurButton}>
+              <button
+                name="all"
+                className="gathering-keyword"
+                onFocus={(e) => {
+                  defineColor(e.target.name);
+                }}
+                onClick={onBlurButton}
+                style={{ backgroundColor: colorAll }}
+              >
                 전체
               </button>
               <button
                 name="exercise"
-                className="keyword"
+                className="gathering-keyword"
                 onFocus={(e) => {
+                  defineColor(e.target.name);
+                }}
+                onClick={(e) => {
                   onClickButton(e.target.name);
                 }}
+                style={{ backgroundColor: colorExercise }}
               >
                 운동
               </button>
               <button
                 name="parents"
-                className="keyword"
+                className="gathering-keyword"
                 onFocus={(e) => {
+                  defineColor(e.target.name);
+                }}
+                onClick={(e) => {
                   onClickButton(e.target.name);
                 }}
+                style={{ backgroundColor: colorParents }}
               >
                 학부모
               </button>
               <button
                 name="hobby"
-                className="keyword"
+                className="gathering-keyword"
                 onFocus={(e) => {
+                  defineColor(e.target.name);
+                }}
+                onClick={(e) => {
                   onClickButton(e.target.name);
                 }}
+                style={{ backgroundColor: colorHobby }}
               >
                 취미
               </button>
               <button
                 name="foodplace"
-                className="keyword"
+                className="gathering-keyword"
                 onFocus={(e) => {
+                  defineColor(e.target.name);
+                }}
+                onClick={(e) => {
                   onClickButton(e.target.name);
                 }}
+                style={{ backgroundColor: colorFoodPlace }}
               >
                 맛집탐방
               </button>
               <button
                 name="animal"
-                className="keyword"
+                className="gathering-keyword"
                 onFocus={(e) => {
+                  defineColor(e.target.name);
+                }}
+                onClick={(e) => {
                   onClickButton(e.target.name);
                 }}
+                style={{ backgroundColor: colorAnimal }}
               >
                 반려동물
               </button>

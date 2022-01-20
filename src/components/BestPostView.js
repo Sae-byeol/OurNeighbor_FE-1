@@ -7,6 +7,7 @@ import { useHistory, useParams, Outlet } from "react-router-dom";
 import bests from "./Best";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import "../PostList.css";
+import polygon from "./polygon.png";
 
 const BestPostView = (props) => {
   const bests = props.component;
@@ -26,6 +27,19 @@ const BestPostView = (props) => {
     if (matchItem.category === "cafe") return "카페";
 
     if (matchItem.category === "sports") return "운동시설";
+  };
+
+  const [value, setValue] = useState("");
+  const [commentList, setCommentList] = useState([]);
+
+  const getValue = (e) => {
+    setValue(e);
+  };
+
+  const addComment = () => {
+    console.log("AddComment");
+    setCommentList(commentList.concat([value]));
+    setValue("");
   };
 
   const postList =
@@ -76,8 +90,42 @@ const BestPostView = (props) => {
         <div className="bestPostView-section2">
           <div className="reply-title">댓글</div>
           <div className="reply-id">오새별</div>
-          <textarea className="reply-input"></textarea>
-          <button className="replybtn">댓글 달기</button>
+          <textarea
+            className="reply-input"
+            onChange={(e) => getValue(e.target.value)}
+            type="text"
+            value={value}
+          ></textarea>
+          <div className="outreplybtn">
+            <button className="replybtn" onClick={addComment}>
+              댓글 달기
+            </button>
+          </div>
+          <div>
+            {commentList.map((comment) =>
+              comment.length > 65 ? (
+                <div className="reply-comment">
+                  <div className="reply-polygon">
+                    <img src={polygon} alt="polygon"></img>
+                  </div>
+                  <div className="reply-eachcomment">
+                    <span>{comment}</span>
+                  </div>
+                  <span>&nbsp;&nbsp;reply-id</span>
+                </div>
+              ) : (
+                <div className="reply-comment">
+                  <div className="reply-polygon">
+                    <img src={polygon} alt="polygon"></img>
+                  </div>
+                  <span className="reply-eachcomment">
+                    <span>{comment}</span>
+                  </span>
+                  <span>&nbsp;&nbsp;reply-id</span>
+                </div>
+              )
+            )}
+          </div>
         </div>
         <div className="pagination-line"></div>
         <div className="pagination">

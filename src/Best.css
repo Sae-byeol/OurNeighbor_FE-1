@@ -37,7 +37,7 @@
   bottom: 0px;
 }
 
-.keyword {
+.best-keyword {
   width: 92px;
   height: 25px;
   font-family: HSGaeulSenggak2;
@@ -50,7 +50,6 @@
   padding: 8px 4px;
   border-radius: 10px;
   border: solid 4px #f0ca44;
-  background-color: #ffefb6;
 }
 
 .best-search-btn {

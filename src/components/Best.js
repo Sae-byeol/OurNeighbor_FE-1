@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes, Link, Outlet } from "react-router-dom";
 import "../Best.css";
 import "../Paging.css";
 import Pagination from "react-js-pagination";
+import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
 //* https://cotak.tistory.com/112 */
 //  npm i react-js-pagination
 
@@ -13,6 +14,7 @@ const Best = (props) => {
   const bests = props.component;
   const [page, setPage] = useState(1);
   const [renderPage, setRenderPage] = useState("unfocused");
+  const [buttonColor, setButtonColor] = useState("all");
   const [getName, setGetName] = useState("");
   const [search, setSearch] = useState(null);
   const [searchingText, setSearchingText] = useState(null);
@@ -142,6 +144,26 @@ const Best = (props) => {
     window.scrollTo(0, 0);
   };
 
+  const colorAll = buttonColor === "all" ? "#ffefb6" : "white";
+  const colorFood = buttonColor === "food" ? "#ffefb6" : "white";
+  const colorAcademy = buttonColor === "academy" ? "#ffefb6" : "white";
+  const colorCafe = buttonColor === "cafe" ? "#ffefb6" : "white";
+  const colorSports = buttonColor === "sports" ? "#ffefb6" : "white";
+
+  const defineColor = (e) => {
+    e === "all"
+      ? setButtonColor("all")
+      : e === "food"
+      ? setButtonColor("food")
+      : e === "academy"
+      ? setButtonColor("academy")
+      : e === "cafe"
+      ? setButtonColor("cafe")
+      : e === "sports"
+      ? setButtonColor("sports")
+      : setButtonColor("all");
+  };
+
   return (
     <div className="App">
       <div className="content">
@@ -157,42 +179,66 @@ const Best = (props) => {
           <div className="section1-bottom">
             <div>HOT 카테고리</div>
             <span className="keywords">
-              <button name="food" className="keyword" onFocus={onBlurButton}>
+              <button
+                name="all"
+                className="best-keyword"
+                onFocus={(e) => {
+                  defineColor(e.target.name);
+                }}
+                onClick={onBlurButton}
+                style={{ backgroundColor: colorAll }}
+              >
                 전체
               </button>
               <button
                 name="food"
-                className="keyword"
+                className="best-keyword"
                 onFocus={(e) => {
+                  defineColor(e.target.name);
+                }}
+                onClick={(e) => {
                   onClickButton(e.target.name);
                 }}
+                style={{ backgroundColor: colorFood }}
               >
                 맛집
               </button>
               <button
                 name="academy"
-                className="keyword"
+                className="best-keyword"
                 onFocus={(e) => {
+                  defineColor(e.target.name);
+                }}
+                onClick={(e) => {
                   onClickButton(e.target.name);
                 }}
+                style={{ backgroundColor: colorAcademy }}
               >
                 학원
               </button>
               <button
                 name="cafe"
-                className="keyword"
+                className="best-keyword"
                 onFocus={(e) => {
+                  defineColor(e.target.name);
+                }}
+                onClick={(e) => {
                   onClickButton(e.target.name);
                 }}
+                style={{ backgroundColor: colorCafe }}
               >
                 카페
               </button>
               <button
                 name="sports"
-                className="keyword"
+                className="best-keyword"
                 onFocus={(e) => {
+                  defineColor(e.target.name);
+                }}
+                onClick={(e) => {
                   onClickButton(e.target.name);
                 }}
+                style={{ backgroundColor: colorSports }}
               >
                 운동시설
               </button>

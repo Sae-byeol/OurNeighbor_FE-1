@@ -8,7 +8,7 @@ import gatherings from "./Gathering";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import "../PostList.css";
 
-const BestPostView = (props) => {
+const GatheringPostView = (props, { history }) => {
   const gatherings = props.component;
   const num = gatherings.length;
   const { gatheringNo, category } = useParams();
@@ -50,17 +50,17 @@ const BestPostView = (props) => {
         <Header></Header>
         <Navbar></Navbar>
         <div className="section1">
-          <span className="sub-title1">추천게시판</span>
+          <span className="sub-title1">모임 모집 게시판</span>
         </div>
         <div className="line"></div>
-        <div className="bestPostView-section1">
-          <span className="bestPostView-title">{matchItem.title}</span>
-          <div className="bestPostView-subtitle">
+        <div className="gatheringPostView-section1">
+          <span className="gatheringPostView-title">{matchItem.title}</span>
+          <div className="gatheringPostView-subtitle">
             <span>{matchItem.title}</span>
             <span>/</span>
             <span>작성자: {matchItem.member_id}</span>
           </div>
-          <div className="bestPostView-content">
+          <div className="gatheringPostView-content">
             {matchItem.cont.split("\n").map((line) => {
               return (
                 <span>
@@ -77,7 +77,7 @@ const BestPostView = (props) => {
           <span className="category-type">{categoryName()}</span>
         </div>
         <div className="relpy-line"></div>
-        <div className="bestPostView-section2">
+        <div className="gatheringPostView-section2">
           <div className="reply-title">댓글</div>
           <div className="reply-id">오새별</div>
           <textarea className="reply-input"></textarea>
@@ -89,7 +89,17 @@ const BestPostView = (props) => {
           <div className="pagination-pages">
             {postList
               ? postList.map((item, index) => {
-                  return parseInt(item.gatheringNo) ===
+                  return item.complete === "false" ? (
+                    <div
+                      className="postlist"
+                      key={index}
+                      style={{ backgroundColor: "rgba(215, 215, 215, 0.7)" }}
+                    >
+                      <div className="postlist-title">{item.title}</div>
+                      <div className="postlist-complete">모집완료</div>
+                      <div className="postlist-date">{item.date}</div>
+                    </div>
+                  ) : parseInt(item.gatheringNo) ===
                     parseInt(matchItem.gatheringNo) ? (
                     <Link
                       to={`/gatheringpostView/${item.category}/${item.gatheringNo}`}
@@ -122,4 +132,4 @@ const BestPostView = (props) => {
   );
 };
 
-export default BestPostView;
+export default GatheringPostView;
