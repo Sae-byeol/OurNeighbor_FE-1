@@ -109,7 +109,7 @@ const MarketPostView = (props) => {
                 <div className="pagination-title">이전 글 / 다음 글</div>
                 
                 <div className="pagination-pages">
-                <div className='pagination-title-line'></div>
+                
                     {postList
                         ? postList.map((item, index) => {
                             return parseInt(item.usedGoods_id) ===parseInt(matchItem.usedGoods_id) 
@@ -121,8 +121,7 @@ const MarketPostView = (props) => {
                                 <div className="postlist" key={index}>
                                 <div className="postlist-title">{item.title}</div>
                                 <div className="postlist-date">{item.date}</div>
-                                </div>
-                                <div className='pagination-title-line'></div>
+                                </div>                                
                             </Link>) 
                             : ( <Link
                                     to={`/PostView/${item.usedGoods_id}`}
@@ -132,8 +131,7 @@ const MarketPostView = (props) => {
                                 <div className="postlist" key={index}>
                                 <div className="postlist-title">{item.title}</div>
                                 <div className="postlist-date">{item.date}</div>
-                                </div>
-                                <div className='pagination-title-line'></div>
+                                </div>                       
                                 </Link>);
                             })
                         : ""}

@@ -238,8 +238,3 @@
   border-top: rgb(138, 132, 132);
   border-bottom: rgb(138, 132, 132);
 }
-.pagination-title-line{
-  height: 1px;
-  transform: rotate(-359.85deg);
-  background-color: #cfcfcf;
-}
