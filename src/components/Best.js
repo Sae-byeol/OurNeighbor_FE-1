@@ -22,8 +22,8 @@ const Best = (props) => {
   };
 
   const searchedBests = bests.filter((best) => {
-    if (search == "") return best;
-    if (search == null) return best;
+    if (search === "") return best;
+    if (search === null) return best;
     else if (
       best.title.toLowerCase().includes(search.toLowerCase()) ||
       best.cont.toLowerCase().includes(search.toLowerCase())

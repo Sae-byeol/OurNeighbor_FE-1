@@ -59,7 +59,7 @@ function App() {
         <Route path="/best" element={<Best component={bests}></Best>}></Route>
         <Route path="/bestAdd" element={<BestAdd></BestAdd>}></Route>
         <Route
-          path="/bestPostView/:bestNo"
+          path="/bestPostView/:category/:bestNo"
           element={<BestPostView component={bests}></BestPostView>}
         ></Route>
         <Route

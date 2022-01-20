@@ -5,7 +5,7 @@ import "../BestForm.css";
 const BestForm = (props) => {
   return (
     <Link
-      to={`/bestPostView/${props.best.bestNo}`}
+      to={`/bestPostView/${props.best.category}/${props.best.bestNo}`}
       style={{ textDecoration: "none" }}
     >
       <div className="bestForm">

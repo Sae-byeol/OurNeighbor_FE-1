@@ -21,7 +21,8 @@ const Gathering = (props) => {
   };
 
   const searchedGatherings = gatherings.filter((best) => {
-    if (search == null) return best;
+    if (search === "") return best;
+    if (search === null) return best;
     else if (
       best.title.toLowerCase().includes(search.toLowerCase()) ||
       best.cont.toLowerCase().includes(search.toLowerCase())
