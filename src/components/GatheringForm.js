@@ -5,7 +5,7 @@ import "../GatheringForm.css";
 const GatheringForm = (props) => {
   return (
     <Link
-      to={`/gatheringpostView/${props.gathering.gatheringNo}`}
+      to={`/gatheringpostView/${props.gathering.category}/${props.gathering.gatheringNo}`}
       style={{ textDecoration: "none", color: "#000" }}
     >
       <div className="gatheringForm">

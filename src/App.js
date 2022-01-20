@@ -71,7 +71,7 @@ function App() {
           element={<GatheringAdd></GatheringAdd>}
         ></Route>
         <Route
-          path="/gatheringPostView/:gatheringNo"
+          path="/gatheringPostView/:category/:gatheringNo"
           element={
             <GatheringPostView component={gatherings}></GatheringPostView>
           }
