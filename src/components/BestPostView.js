@@ -7,16 +7,14 @@ import { useHistory, useParams, Outlet } from "react-router-dom";
 import bests from "./Best";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import "../PostList.css";
-import polygon from "./polygon.png";
 
 const BestPostView = (props) => {
   const bests = props.component;
   const num = bests.length;
-  const { bestNo, category } = useParams();
+  const { bestNoCategory } = useParams();
 
-  const matchItem = props.component.find(function (element) {
-    if (element.bestNo === Number(bestNo) && element.category === category)
-      return true;
+  const matchItem = bests.find(function (element) {
+    if (element.bestNoCategory === bestNoCategory) return true;
   });
 
   const categoryName = () => {
@@ -43,15 +41,30 @@ const BestPostView = (props) => {
   };
 
   const postList =
-    parseInt(bestNo) === 1
-      ? bests.slice(parseInt(bestNo) - 1, parseInt(bestNo) + 4)
-      : parseInt(bestNo) === 2
-      ? bests.slice(parseInt(bestNo) - 2, parseInt(bestNo) + 3)
-      : parseInt(bestNo) === parseInt(num) - 1
-      ? bests.slice(parseInt(bestNo) - 4, parseInt(bestNo) + 1)
-      : parseInt(bestNo) === parseInt(num)
-      ? bests.slice(parseInt(bestNo) - 5, parseInt(bestNo) + 0)
-      : bests.slice(parseInt(bestNo) - 3, parseInt(bestNo) + 2);
+    parseInt(matchItem.constBestNo) === 1
+      ? bests.slice(
+          parseInt(matchItem.constBestNo) - 1,
+          parseInt(matchItem.constBestNo) + 4
+        )
+      : parseInt(matchItem.constBestNo) === 2
+      ? bests.slice(
+          parseInt(matchItem.constBestNo) - 2,
+          parseInt(matchItem.constBestNo) + 3
+        )
+      : parseInt(matchItem.constBestNo) === parseInt(num) - 1
+      ? bests.slice(
+          parseInt(matchItem.constBestNo) - 4,
+          parseInt(matchItem.constBestNo) + 1
+        )
+      : parseInt(matchItem.constBestNo) === parseInt(num)
+      ? bests.slice(
+          parseInt(matchItem.constBestNo) - 5,
+          parseInt(matchItem.constBestNo) + 0
+        )
+      : bests.slice(
+          parseInt(matchItem.constBestNo) - 3,
+          parseInt(matchItem.constBestNo) + 2
+        );
 
   return (
     <div className="App">
@@ -103,25 +116,27 @@ const BestPostView = (props) => {
           </div>
           <div>
             {commentList.map((comment) =>
-              comment.length > 65 ? (
-                <div className="reply-comment">
-                  <div className="reply-polygon">
-                    <img src={polygon} alt="polygon"></img>
+              comment.length > 50 ? (
+                <div>
+                  <div className="reply-comment">
+                    <div className="reply-polygon">
+                      <img src={"../img/polygon.png"} alt="polygon"></img>
+                    </div>
+                    <div className="reply-eachcomment">
+                      <span>{comment}</span>
+                    </div>
                   </div>
-                  <div className="reply-eachcomment">
-                    <span>{comment}</span>
-                  </div>
-                  <span>&nbsp;&nbsp;reply-id</span>
+                  <span className="reply-id">&nbsp;&nbsp;reply-id</span>
                 </div>
               ) : (
                 <div className="reply-comment">
                   <div className="reply-polygon">
-                    <img src={polygon} alt="polygon"></img>
+                    <img src={"../img/polygon.png"} alt="polygon"></img>
                   </div>
                   <span className="reply-eachcomment">
                     <span>{comment}</span>
                   </span>
-                  <span>&nbsp;&nbsp;reply-id</span>
+                  <span className="reply-id">&nbsp;&nbsp;reply-id</span>
                 </div>
               )
             )}
@@ -133,10 +148,10 @@ const BestPostView = (props) => {
           <div className="pagination-pages">
             {postList
               ? postList.map((item, index) => {
-                  return parseInt(item.bestNo) ===
-                    parseInt(matchItem.bestNo) ? (
+                  return parseInt(item.bestNoCategory) ===
+                    parseInt(matchItem.bestNoCategory) ? (
                     <Link
-                      to={`/bestPostView/${item.category}/${item.bestNo}`}
+                      to={`/bestPostView/${item.bestNoCategory}`}
                       style={{ textDecoration: "none", color: "#ffa800" }}
                       onClick={window.scrollTo(0, 0)}
                     >
@@ -147,7 +162,7 @@ const BestPostView = (props) => {
                     </Link>
                   ) : (
                     <Link
-                      to={`/bestPostView/${item.category}/${item.bestNo}`}
+                      to={`/bestPostView/${item.bestNoCategory}`}
                       style={{ textDecoration: "none", color: "#443333" }}
                       onClick={window.scrollTo(0, 0)}
                     >

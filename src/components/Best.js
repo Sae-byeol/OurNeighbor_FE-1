@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes, Link, Outlet } from "react-router-dom";
 import "../Best.css";
 import "../Paging.css";
 import Pagination from "react-js-pagination";
-import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
+import BestPostView from "./BestPostView";
 //* https://cotak.tistory.com/112 */
 //  npm i react-js-pagination
 

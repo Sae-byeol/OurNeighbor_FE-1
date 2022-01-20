@@ -2,8 +2,8 @@
   position: relative;
   width: 1250px;
   height: 25px;
-  padding: 10px 0px 10px 0px;
-  margin: 10px 0px 10px 0px;
+  padding: 7px 0px 7px 0px;
+  margin: 5px 0px 5px 0px;
   border-radius: 10px;
 }
 
@@ -14,7 +14,7 @@
 .postlist-title {
   position: absolute;
   left: 10px;
-  font-size: 25px;
+  font-size: 18px;
 }
 
 .postlist-complete {
@@ -27,5 +27,5 @@
 .postlist-date {
   position: absolute;
   right: 10px;
-  font-size: 20px;
+  font-size: 18px;
 }

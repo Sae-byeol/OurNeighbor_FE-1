@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import "../BestForm.css";
+import BestPostView from "./BestPostView";
 
 const BestForm = (props) => {
   return (
     <Link
-      to={`/bestPostView/${props.best.category}/${props.best.bestNo}`}
+      to={`/bestPostView/${props.best.bestNoCategory}`}
       style={{ textDecoration: "none" }}
     >
       <div className="bestForm">

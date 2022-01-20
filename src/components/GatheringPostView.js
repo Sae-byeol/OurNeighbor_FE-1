@@ -11,14 +11,10 @@ import "../PostList.css";
 const GatheringPostView = (props, { history }) => {
   const gatherings = props.component;
   const num = gatherings.length;
-  const { gatheringNo, category } = useParams();
+  const { gatheringNoCategory } = useParams();
 
   const matchItem = props.component.find(function (element) {
-    if (
-      element.gatheringNo === Number(gatheringNo) &&
-      element.category === category
-    )
-      return true;
+    if (element.gatheringNoCategory === gatheringNoCategory) return true;
   });
 
   const categoryName = () => {
@@ -34,15 +30,43 @@ const GatheringPostView = (props, { history }) => {
   };
 
   const postList =
-    parseInt(gatheringNo) === 1
-      ? gatherings.slice(parseInt(gatheringNo) - 1, parseInt(gatheringNo) + 4)
-      : parseInt(gatheringNo) === 2
-      ? gatherings.slice(parseInt(gatheringNo) - 2, parseInt(gatheringNo) + 3)
-      : parseInt(gatheringNo) === parseInt(num) - 1
-      ? gatherings.slice(parseInt(gatheringNo) - 4, parseInt(gatheringNo) + 1)
-      : parseInt(gatheringNo) === parseInt(num)
-      ? gatherings.slice(parseInt(gatheringNo) - 5, parseInt(gatheringNo) + 0)
-      : gatherings.slice(parseInt(gatheringNo) - 3, parseInt(gatheringNo) + 2);
+    parseInt(matchItem.constGatheringNo) === 1
+      ? gatherings.slice(
+          parseInt(matchItem.constGatheringNo) - 1,
+          parseInt(matchItem.constGatheringNo) + 4
+        )
+      : parseInt(matchItem.constGatheringNo) === 2
+      ? gatherings.slice(
+          parseInt(matchItem.constGatheringNo) - 2,
+          parseInt(matchItem.constGatheringNo) + 3
+        )
+      : parseInt(matchItem.constGatheringNo) === parseInt(num) - 1
+      ? gatherings.slice(
+          parseInt(matchItem.constGatheringNo) - 4,
+          parseInt(matchItem.constGatheringNo) + 1
+        )
+      : parseInt(matchItem.constGatheringNo) === parseInt(num)
+      ? gatherings.slice(
+          parseInt(matchItem.constGatheringNo) - 5,
+          parseInt(matchItem.constGatheringNo) + 0
+        )
+      : gatherings.slice(
+          parseInt(matchItem.constGatheringNo) - 3,
+          parseInt(matchItem.constGatheringNo) + 2
+        );
+
+  const [value, setValue] = useState("");
+  const [commentList, setCommentList] = useState([]);
+
+  const getValue = (e) => {
+    setValue(e);
+  };
+
+  const addComment = () => {
+    console.log("AddComment");
+    setCommentList(commentList.concat([value]));
+    setValue("");
+  };
 
   return (
     <div className="App">
@@ -80,8 +104,44 @@ const GatheringPostView = (props, { history }) => {
         <div className="gatheringPostView-section2">
           <div className="reply-title">댓글</div>
           <div className="reply-id">오새별</div>
-          <textarea className="reply-input"></textarea>
-          <button className="replybtn">댓글 달기</button>
+          <textarea
+            className="reply-input"
+            onChange={(e) => getValue(e.target.value)}
+            type="text"
+            value={value}
+          ></textarea>
+          <div className="outreplybtn">
+            <button className="replybtn" onClick={addComment}>
+              댓글 달기
+            </button>
+          </div>
+          <div>
+            {commentList.map((comment) =>
+              comment.length > 50 ? (
+                <div>
+                  <div className="reply-comment">
+                    <div className="reply-polygon">
+                      <img src={"../img/polygon.png"} alt="polygon"></img>
+                    </div>
+                    <div className="reply-eachcomment">
+                      <span>{comment}</span>
+                    </div>
+                  </div>
+                  <span className="reply-id">&nbsp;&nbsp;reply-id</span>
+                </div>
+              ) : (
+                <div className="reply-comment">
+                  <div className="reply-polygon">
+                    <img src={"../img/polygon.png"} alt="polygon"></img>
+                  </div>
+                  <span className="reply-eachcomment">
+                    <span>{comment}</span>
+                  </span>
+                  <span className="reply-id">&nbsp;&nbsp;reply-id</span>
+                </div>
+              )
+            )}
+          </div>
         </div>
         <div className="pagination-line"></div>
         <div className="pagination">
@@ -99,10 +159,10 @@ const GatheringPostView = (props, { history }) => {
                       <div className="postlist-complete">모집완료</div>
                       <div className="postlist-date">{item.date}</div>
                     </div>
-                  ) : parseInt(item.gatheringNo) ===
-                    parseInt(matchItem.gatheringNo) ? (
+                  ) : parseInt(item.gatheringNoCategory) ===
+                    parseInt(matchItem.gatheringNoCategory) ? (
                     <Link
-                      to={`/gatheringpostView/${item.category}/${item.gatheringNo}`}
+                      to={`/gatheringPostView/${item.gatheringNoCategory}`}
                       style={{ textDecoration: "none", color: "#ffa800" }}
                       onClick={window.scrollTo(0, 0)}
                     >
@@ -113,7 +173,7 @@ const GatheringPostView = (props, { history }) => {
                     </Link>
                   ) : (
                     <Link
-                      to={`/gatheringpostView/${item.category}/${item.gatheringNo}`}
+                      to={`/gatheringPostView/${item.gatheringNoCategory}`}
                       style={{ textDecoration: "none", color: "#443333" }}
                       onClick={window.scrollTo(0, 0)}
                     >

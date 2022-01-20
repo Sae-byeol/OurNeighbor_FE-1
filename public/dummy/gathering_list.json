@@ -7,7 +7,9 @@
       "date": "2021.10.31 19:11",
       "category": "exercise",
       "complete": "true",
-      "gatheringNo": 1
+      "gatheringNo": 1,
+      "constGatheringNo": 1,
+      "gatheringNoCategory": "1exercise"
     },
     {
       "title": "학부모1",
@@ -16,7 +18,9 @@
       "date": "2021.10.31 19:11",
       "category": "parents",
       "complete": "false",
-      "gatheringNo": 2
+      "gatheringNo": 2,
+      "constGatheringNo": 2,
+      "gatheringNoCategory": "2parents"
     },
     {
       "title": "취미1",
@@ -25,7 +29,9 @@
       "date": "2021.10.31 19:11",
       "category": "hobby",
       "complete": "true",
-      "gatheringNo": 3
+      "gatheringNo": 3,
+      "constGatheringNo": 3,
+      "gatheringNoCategory": "3hobby"
     },
     {
       "title": "맛집탐방",
@@ -34,7 +40,9 @@
       "date": "2021.10.31 19:11",
       "category": "foodplace",
       "complete": "true",
-      "gatheringNo": 4
+      "gatheringNo": 4,
+      "constGatheringNo": 4,
+      "gatheringNoCategory": "4foodplace"
     },
     {
       "title": "반려동물",
@@ -43,7 +51,9 @@
       "date": "2021.10.31 19:11",
       "category": "animal",
       "complete": "true",
-      "gatheringNo": 5
+      "gatheringNo": 5,
+      "constGatheringNo": 5,
+      "gatheringNoCategory": "5animal"
     },
     {
       "title": "운동2",
@@ -52,7 +62,9 @@
       "date": "2021.10.31 19:11",
       "category": "exercise",
       "complete": "true",
-      "gatheringNo": 6
+      "gatheringNo": 6,
+      "constGatheringNo": 6,
+      "gatheringNoCategory": "6exercise"
     },
     {
       "title": "학부모2",
@@ -61,7 +73,9 @@
       "date": "2021.10.31 19:11",
       "category": "parents",
       "complete": "false",
-      "gatheringNo": 7
+      "gatheringNo": 7,
+      "constGatheringNo": 7,
+      "gatheringNoCategory": "7parents"
     },
     {
       "title": "취미2",
@@ -70,7 +84,9 @@
       "date": "2021.10.31 19:11",
       "category": "hobby",
       "complete": "true",
-      "gatheringNo": 8
+      "gatheringNo": 8,
+      "constGatheringNo": 8,
+      "gatheringNoCategory": "8hobby"
     },
     {
       "title": "맛집탐방2",
@@ -79,7 +95,9 @@
       "date": "2021.10.31 19:11",
       "category": "foodplace",
       "complete": "true",
-      "gatheringNo": 9
+      "gatheringNo": 9,
+      "constGatheringNo": 9,
+      "gatheringNoCategory": "9foodplace"
     },
     {
       "title": "반려동물2",
@@ -88,7 +106,9 @@
       "date": "2021.10.31 19:11",
       "category": "animal",
       "complete": "true",
-      "gatheringNo": 10
+      "gatheringNo": 10,
+      "constGatheringNo": 10,
+      "gatheringNoCategory": "10animal"
     },
     {
       "title": "운동3",
@@ -97,7 +117,9 @@
       "date": "2021.10.31 19:11",
       "category": "exercise",
       "complete": "true",
-      "gatheringNo": 11
+      "gatheringNo": 11,
+      "constGatheringNo": 11,
+      "gatheringNoCategory": "11exercise"
     },
     {
       "title": "운동4",
@@ -106,7 +128,9 @@
       "date": "2021.10.31 19:11",
       "category": "exercise",
       "complete": "true",
-      "gatheringNo": 12
+      "gatheringNo": 12,
+      "constGatheringNo": 12,
+      "gatheringNoCategory": "12exercise"
     },
     {
       "title": "운동5",
@@ -115,7 +139,9 @@
       "date": "2021.10.31 19:11",
       "category": "exercise",
       "complete": "false",
-      "gatheringNo": 13
+      "gatheringNo": 13,
+      "constGatheringNo": 13,
+      "gatheringNoCategory": "13exercise"
     },
     {
       "title": "운동6",
@@ -124,7 +150,9 @@
       "date": "2021.10.31 19:11",
       "category": "exercise",
       "complete": "true",
-      "gatheringNo": 14
+      "gatheringNo": 14,
+      "constGatheringNo": 14,
+      "gatheringNoCategory": "14exercise"
     },
     {
       "title": "운동7",
@@ -133,7 +161,9 @@
       "date": "2021.10.31 19:11",
       "category": "exercise",
       "complete": "true",
-      "gatheringNo": 15
+      "gatheringNo": 15,
+      "constGatheringNo": 15,
+      "gatheringNoCategory": "15exercise"
     },
     {
       "title": "운동8",
@@ -142,7 +172,9 @@
       "date": "2021.10.31 19:11",
       "category": "exercise",
       "complete": "true",
-      "gatheringNo": 16
+      "gatheringNo": 16,
+      "constGatheringNo": 16,
+      "gatheringNoCategory": "16exercise"
     }
   ]
 }

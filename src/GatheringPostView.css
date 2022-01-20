@@ -139,6 +139,12 @@
   font-weight: lighter;
   color: #433;
 }
+.outreplybtn {
+  width: 1300px;
+  height: 40px;
+  position: relative;
+}
+
 .replybtn {
   font-family: "HSGaeulSenggak2";
   font-size: 20px;
@@ -150,10 +156,39 @@
   border-radius: 10px;
   border: solid 1.5px #efb33f;
   background-color: #fee89a;
+  position: absolute;
+  right: 0px;
 }
 
 .replybtn:hover {
   background-color: #efb33f;
+}
+
+.reply-comment {
+  width: 1200px;
+  margin: 40px 20px 40px 20px;
+  font-size: 20px;
+  position: relative;
+}
+
+.reply-polygon {
+  position: absolute;
+  bottom: -30px;
+  left: -10px;
+}
+
+.reply-eachcomment {
+  max-width: 700px;
+  padding: 10px 20px 10px 20px;
+  border-radius: 8px;
+  background-color: #fff0bd;
+  font-family: HSGaeulSenggak2;
+  color: #433;
+}
+
+.reply-id {
+  font-size: 20px;
+  color: #433;
 }
 
 .pagination-line {
