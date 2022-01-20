@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from './Navbar';
 import Header from './Header';
 import '../Home.css';
-import Calender from './Calender';
+import HomeCalendar from './HomeCalendar'
 import '../HomeCalendar.css';
 
 const Home = () => {
@@ -24,7 +24,7 @@ const Home = () => {
                 <span className='home-calendarText'>이번 달에는 아파트에 무슨 일정이 잡혀 있을까요?<br/>이번 달의 일정을 확인하세요!</span>
                 <img src='../img/check.png'></img>
                 <div className='home-calendar'>
-                    <Calender></Calender>
+                    <HomeCalendar></HomeCalendar>
                 </div>
             </div>
             <div className='home-section2-2'>

@@ -18,12 +18,7 @@ function App() {
   /*const [todayTitle, setTodayTitle]=useState('일정1');
   const [date, setDate]=useState('날짜');*/
   const [visible, setVisible]= useState(false);
-  const [events, setEvents]=useState([]);
-  useEffect(() => {
-    axios.get('dummy/calendar_list.json')
-    .then(res=>setEvents(res.data.calendarList))
-   .catch(err=>console.log(err));
-   }, []);
+  
   
   const [markets, setMarkets]=useState([]);
   useEffect(() => {
@@ -32,19 +27,7 @@ function App() {
    .catch(err=>console.log(err));
   }, []);
 //console.log(markets);
-  const addVisible=()=>{
-      setVisible(!visible);
-      console.log(events);
-  }
 
-  const addEvent=(event)=>{
-    setEvents(
-        [
-            ...events,
-            event
-        ]
-    )
-}
   return (
     <div className="App">
       <Routes>

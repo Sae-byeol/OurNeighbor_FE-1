@@ -1,28 +1,24 @@
 
 import '../CalenderHome.css';
 import Calender from './Calender';
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { render } from 'react-dom';
 import Add from './AddEvent';
 import Header from './Header';
 import Navbar from './Navbar';
-
+import axios from 'axios';
 
 const CalenderHome = () => {
         /*const [todayTitle, setTodayTitle]=useState('일정1');
   const [date, setDate]=useState('날짜');*/
   const [visible, setVisible]= useState(false);
-  const [events, setEvents]=useState([
-    { title: 'event1', date: '2022-01-01' },
-    { title:'event1-1', date:'2022-01-01' },
-    { title: 'event2', date: '2022-01-12' }]);
-  /*const renderTitles=todayTitle.map((val)=>{
-    return(
-      <div>{val.todayTitle}</div>
-    );
-  })*/
-  //console.log(todayTitle);
-  
+  const [events, setEvents]=useState([]);
+  useEffect(() => {
+    axios.get('dummy/calendar_list.json')
+    .then(res=>setEvents(res.data.calendarList))
+   .catch(err=>console.log(err));
+   }, []);
+
   const addVisible=()=>{
       setVisible(!visible);
       console.log(events);
@@ -55,7 +51,7 @@ const CalenderHome = () => {
             
           </div>
           <div className='calenderCase'>
-          {visible ?<Add addEvent={addEvent} addVisible={addVisible}></Add> : <Calender  events={events}></Calender>}
+          {visible ?<Add addEvent={addEvent} addVisible={addVisible}></Add> : <Calender events={events}></Calender>}
           </div>
         </div>
       </div>
