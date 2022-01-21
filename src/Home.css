@@ -66,3 +66,102 @@
 .home-notice{
     height: 600px;
 }
+.home-notice-map{
+    width: 300px;
+    height: 50px;
+    margin: 21px 0 10px;
+    padding: 15px 357px 31px 25px;
+    border-radius: 30px;
+    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border: solid 1.5px #bdbdbd;
+    background-color: #fffefe;
+}
+.home-notice-map:hover{
+    background-color: #f2f2f2;
+}
+.home-notice-map-title{
+    font-family: HSGaeulSenggak2;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #433;
+    margin-bottom: 20px;
+}
+.home-notice-map-date{
+    font-family: HSGaeulSenggak2;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #433;
+}
+.home-section3{
+    padding: 0 100px 45px;
+}
+.home-best-title{
+  margin: 0 837px 20px 0;
+  font-family: HSGaeulSenggak2;
+  font-size: 36px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #433;
+}
+.home-best-map{
+    width: 400px;
+  height: 100px;
+  margin: 25px 0;
+  padding: 20px 718px 16px 20px;
+  border-radius: 22px;
+  box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  border: solid 3px #ffc961;
+  background-color: #fff;
+}
+.home-best-map:hover{
+    background-color:#fff2d8;
+}
+.home-best-map-from{
+    margin: 0 79px 11px 0;
+    font-family: HSGaeulSenggak2;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #433;
+}
+.home-best-map-title{
+    margin: 11px 0 4px;
+    font-family: HSGaeulSenggak2;
+    font-size: 30px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #433;
+}
+.home-best-map-date{
+    margin: 4px 59px 0 0;
+    font-family: HSGaeulSenggak2;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #433;
+  
+}
