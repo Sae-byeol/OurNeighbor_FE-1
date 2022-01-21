@@ -1,6 +1,5 @@
 .section1-right{
-    float: right;
-    display: inline-block;
+   float: right;
 }
 .sub-title1{
     font-family: 'HSGaeulSenggak2';
@@ -39,4 +38,10 @@
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+}
+.market-input{
+    width: 440px;
+  height: 40px;
+  border-radius: 10px;
+  border: solid 2px #c4c4c4;
 }

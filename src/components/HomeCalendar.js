@@ -11,14 +11,14 @@ export const StyleWrapper = styled.div`
     background-image: none;
 }`
 
-function HomeCalender () {
-    const [events, setEvents]=useState([]);
+function HomeCalender ({events}) {
+    /*const [events, setEvents]=useState([]);
 
     useEffect(() => {
         axios.get('dummy/calendar_list.json')
         .then(res=>setEvents(res.data.calendarList))
        .catch(err=>console.log(err));
-       }, []);
+       }, []);*/
    
     return (  
         <div className='calendarHome'>

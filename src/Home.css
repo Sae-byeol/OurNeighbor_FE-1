@@ -20,8 +20,10 @@
     text-align: center;
     color: #433;
 }
+
 .home-section2-1{
     padding: 159px 0 79px;
+    float: left;
 }
 .home-calendarText{
     display: inline-block;
@@ -37,7 +39,30 @@
   text-align: left;
   color: #433;
 }
-.home-calendar{
-    width: 300px;
-    height: 300px;
+
+.home-section2-2{
+    width: 600px;
+    float: right;
+    padding: 120px 0 79px;
+}
+
+.home-NoticeText{
+    display: inline-block;
+  margin: 0 0 21px 0;
+  font-family: HSGaeulSenggak2;
+  font-size: 24px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: right;
+  color: #433;
+}
+.home-NoticeImg{
+    margin-right: 100px;
+    vertical-align: bottom;
+}
+.home-notice{
+    height: 600px;
 }
