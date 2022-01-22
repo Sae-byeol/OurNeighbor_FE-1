@@ -25,9 +25,15 @@ const Home = () => {
         setNotice(res.data.noticeList)
         })
          .catch(err=>console.log(err));
-
-       axios.get("dummy/market_list.json")
-       .then(res=>setNewPost(res.data.marketList))
+         
+       axios.get('dummy/market_list.json')
+       .then(res=>{
+           setNewPost(res.data.marketList)
+            const sorted=[...newPost]
+            sorted.sort((a,b)=>
+            parseInt(a.usedGoods_id)-parseInt(b.usedGoods_id));
+            setNewPost(sorted);
+       })
         .catch(err=>console.log(err));
 
         /*axios.get("dummy/best_list.json")
@@ -37,16 +43,9 @@ const Home = () => {
         })
          .catch(err=>console.log(err));
  */
-    },[]);
+    },[]);    
     
-    const sortNewPost=()=>{
-        const _post=[...newPost]
-        _post.sort((a,b)=>{
-            return new Date(b.date).getTime()-new Date(a.date).getTime();
-        })
-        setNewPost(_post);
-    
-    }
+   
     
    
     return (

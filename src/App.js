@@ -12,6 +12,7 @@ import MarketAdd from './components/MarketAdd';
 import MarketPostView from './components/MarketPostView';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
+import MyPage from './components/MyPage';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
       <Routes>
         {/*<Route path="/" element={<Navbar></Navbar>}></Route>*/}
         <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/mypage" element={<MyPage></MyPage>}></Route>
         <Route path="/market" element={<Market component={markets}></Market>} />
         <Route path="/calender" element={<CalenderHome></CalenderHome>}></Route>
         <Route path="/postView/:usedGoods_id" element={<MarketPostView component={markets}></MarketPostView>}></Route>

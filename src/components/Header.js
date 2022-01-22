@@ -12,7 +12,9 @@ const Header = () => {
           </Link>
           <div className='header-right'>
             <span>오새별님</span>
+            <Link to="/mypage">
             <img className="profile" src='../img/profile.png'></img>
+            </Link>
           </div>   
         </div>
     )  
