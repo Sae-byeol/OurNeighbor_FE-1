@@ -9,10 +9,6 @@ import { asRoughMinutes } from '@fullcalendar/react';
 
 const Home = () => {
     const [notice, setNotice]=useState([
-        {title:"notice1", date: "2022-01-03"},
-        {title:"notice2", date: "2022-01-03"},
-        {title:"notice3", date: "2022-01-03"},
-        {title:"notice4", date: "2022-01-03"},
     ]);
     const [newPost, setNewPost]=useState([
         {from:"추천게시판", title:"newPost1", date:"2021.10.31 19:11"},
@@ -27,9 +23,11 @@ const Home = () => {
         axios.get('dummy/calendar_list.json')
         .then(res=>setEvents(res.data.calendarList))
        .catch(err=>console.log(err));
-       }, []);
 
-
+       axios.get('dummy/notice_list.json')
+       .then(res=>setNotice(res.data.noticeList))
+       .catch(err=>console.log(err));
+    }, []);
        
    
     return (
@@ -57,17 +55,24 @@ const Home = () => {
                     <img className='home-NoticeImg' src="../img/home3.png"></img>
                     <span className='home-NoticeText'>관리사무소에서 알립니다!<br/>이번 달의 공지사항을 확인하세요!</span>
                     <div className='home-notice'>
-                        {notice.map((val)=>{
-                            return (
-                                <div key={val.index} className='box'>
-                                    <div className='home-notice-map'>
-                                        <div className='home-notice-map-title'>{val.title}</div>
-
-                                        <div className='home-notice-map-date'>{new Date(val.date).toLocaleDateString()}</div>
-                                    </div>
-                                </div>
-                            )
-                        })}
+                       
+                        <div className='home-notice-map'>
+                            <div className='home-notice-map-title'>{notice[0].title}</div>
+                            <div className='home-notice-map-date'>{new Date(notice[0].date).toLocaleDateString()}</div>
+                        </div>
+                        <div className='home-notice-map'>
+                            <div className='home-notice-map-title'>{notice[1].title}</div>
+                            <div className='home-notice-map-date'>{new Date(notice[1].date).toLocaleDateString()}</div>
+                        </div>
+                        <div className='home-notice-map'>
+                            <div className='home-notice-map-title'>{notice[2].title}</div>
+                            <div className='home-notice-map-date'>{new Date(notice[2].date).toLocaleDateString()}</div>
+                        </div>
+                        <div className='home-notice-map'>
+                            <div className='home-notice-map-title'>{notice[3].title}</div>
+                            <div className='home-notice-map-date'>{new Date(notice[3].date).toLocaleDateString()}</div>
+                        </div>
+                    
                     </div>
             </div>
             <div className='home-section3'>
