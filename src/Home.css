@@ -42,6 +42,7 @@
 
 .home-section2-2{
     width: 600px;
+    height: 500px;
     float: right;
     padding: 120px 0 79px;
 }
@@ -64,10 +65,13 @@
     vertical-align: bottom;
 }
 .home-notice{
-    height: 600px;
+    width: 800px;
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 .home-notice-map{
-    width: 300px;
+    width: 200px;
     height: 50px;
     margin: 21px 0 10px;
     padding: 15px 357px 31px 25px;

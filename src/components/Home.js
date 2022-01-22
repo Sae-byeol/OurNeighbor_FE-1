@@ -5,30 +5,49 @@ import HomeCalendar from './HomeCalendar'
 import '../HomeCalendar.css';
 import React , {useState, useEffect} from 'react';
 import axios from 'axios';
-import { asRoughMinutes } from '@fullcalendar/react';
+import { asRoughMinutes, sliceEvents } from '@fullcalendar/react';
+
+//useEffect 실행 순서 때문에 App.js에서 notice배열 먼저 get 다 끝내고 props로 여기로 넘겨줘서 사용하는 방식으로 구현함
 
 const Home = () => {
     const [notice, setNotice]=useState([
-    ]);
+    ]); 
     const [newPost, setNewPost]=useState([
-        {from:"추천게시판", title:"newPost1", date:"2021.10.31 19:11"},
-        {from:"추천게시판", title:"newPost1", date:"2021.10.31 19:11"},
-        {from:"추천게시판", title:"newPost1", date:"2021.10.31 19:11"},
-        {from:"추천게시판", title:"newPost1", date:"2021.10.31 19:11"},
-        {from:"추천게시판", title:"newPost1", date:"2021.10.31 19:11"},
     ])
     const [events, setEvents]=useState([]);
-    
     useEffect(() => {
         axios.get('dummy/calendar_list.json')
         .then(res=>setEvents(res.data.calendarList))
        .catch(err=>console.log(err));
 
        axios.get('dummy/notice_list.json')
-       .then(res=>setNotice(res.data.noticeList))
-       .catch(err=>console.log(err));
-    }, []);
-       
+        .then(res=>{
+        setNotice(res.data.noticeList)
+        })
+         .catch(err=>console.log(err));
+
+       axios.get("dummy/market_list.json")
+       .then(res=>setNewPost(res.data.marketList))
+        .catch(err=>console.log(err));
+
+        /*axios.get("dummy/best_list.json")
+        .then(res=>{
+            setNewPost(res.data.bestList)
+            //sortNewPost(newPost)
+        })
+         .catch(err=>console.log(err));
+ */
+    },[]);
+    
+    const sortNewPost=()=>{
+        const _post=[...newPost]
+        _post.sort((a,b)=>{
+            return new Date(b.date).getTime()-new Date(a.date).getTime();
+        })
+        setNewPost(_post);
+    
+    }
+    
    
     return (
         <div className='App'>
@@ -55,24 +74,19 @@ const Home = () => {
                     <img className='home-NoticeImg' src="../img/home3.png"></img>
                     <span className='home-NoticeText'>관리사무소에서 알립니다!<br/>이번 달의 공지사항을 확인하세요!</span>
                     <div className='home-notice'>
+                    {notice.map((val)=>{
+                        return(
+                            <div key={val.index} className='box'>
+                             <div className='home-notice-map'>
+                            <div className='home-notice-map-title'>{val.title}</div>
+                            <div className='home-notice-map-date'>{new Date(val.date).toLocaleDateString()}</div>
+                        </div>
+                        </div>
+                        )
+                    })}
+                           
+                        
                        
-                        <div className='home-notice-map'>
-                            <div className='home-notice-map-title'>{notice[0].title}</div>
-                            <div className='home-notice-map-date'>{new Date(notice[0].date).toLocaleDateString()}</div>
-                        </div>
-                        <div className='home-notice-map'>
-                            <div className='home-notice-map-title'>{notice[1].title}</div>
-                            <div className='home-notice-map-date'>{new Date(notice[1].date).toLocaleDateString()}</div>
-                        </div>
-                        <div className='home-notice-map'>
-                            <div className='home-notice-map-title'>{notice[2].title}</div>
-                            <div className='home-notice-map-date'>{new Date(notice[2].date).toLocaleDateString()}</div>
-                        </div>
-                        <div className='home-notice-map'>
-                            <div className='home-notice-map-title'>{notice[3].title}</div>
-                            <div className='home-notice-map-date'>{new Date(notice[3].date).toLocaleDateString()}</div>
-                        </div>
-                    
                     </div>
             </div>
             <div className='home-section3'>

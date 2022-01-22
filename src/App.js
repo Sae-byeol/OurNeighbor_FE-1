@@ -19,12 +19,15 @@ function App() {
   const [date, setDate]=useState('날짜');*/
   const [visible, setVisible]= useState(false);
   
-  
+  const [notice, setNotice]=useState([
+  ]);  
   const [markets, setMarkets]=useState([]);
   useEffect(() => {
    axios.get('dummy/market_list.json')
    .then(res=>setMarkets(res.data.marketList))
    .catch(err=>console.log(err));
+
+
   }, []);
 //console.log(markets);
 
