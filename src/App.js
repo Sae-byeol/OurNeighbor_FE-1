@@ -13,6 +13,7 @@ import MarketPostView from './components/MarketPostView';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import MyPage from './components/MyPage';
+import EditUser from './components/EditUser';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
    .catch(err=>console.log(err));
 
 
+
   }, []);
 //console.log(markets);
 
@@ -38,6 +40,7 @@ function App() {
         {/*<Route path="/" element={<Navbar></Navbar>}></Route>*/}
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/mypage" element={<MyPage></MyPage>}></Route>
+        <Route path="/editMypage" element={<EditUser></EditUser>}></Route>
         <Route path="/market" element={<Market component={markets}></Market>} />
         <Route path="/calender" element={<CalenderHome></CalenderHome>}></Route>
         <Route path="/postView/:usedGoods_id" element={<MarketPostView component={markets}></MarketPostView>}></Route>
