@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch,Link } from "react-router-dom";
 const MarketForm = (props) => {
     
     return (
-        <Link to={`/postView/${props.market.usedGoods_id}`}>
+        <Link to={`/postView/${props.market.usedGoods_id}`} style={{ textDecoration: 'none' }}>
         <div className='marketForm'>
             <div className='marketForm-title'>{props.market.title}</div>
             <img className="marketForm-img" src={props.market.picture}></img>
