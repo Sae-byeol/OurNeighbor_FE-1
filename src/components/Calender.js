@@ -11,14 +11,39 @@ export const StyleWrapper = styled.div`
     background-image: none;
 }`
 
-function Calender ({events}) {
+function Calender (props) {
+    //console.log(events);
+    const [events, setEvents]=useState([]);
+  useEffect(() => {
+    axios.get('dummy/calendar_list.json')
+    .then(res=>setEvents(res.data.calendarList))
+   .catch(err=>console.log(err));
+   }, []);
 
+    const removeEvent=(e)=>{
+        if (window.confirm(e.event.title+" 이벤트를 삭제하시겠습니까?")){
+            alert("삭제되었습니다.");
+            //삭제 url로 post 보내고 res.data로 setEvents(CalendatHome의 메소드 사용)
+            //setEvents=>useEffect 실행되며 재렌더링 ok
+            /*setEvents([
+                    { title: "event1", 
+                        date: "2022-01-01",
+                        id:1
+                    }
+                ]
+            )*/
+        }
+        else{
+            alert("취소합니다.");
+        }
+    }
     return (  
         <div className='calender'>
             <StyleWrapper>
             <FullCalendar 
             defaultView="dayGridMonth" 
             plugins={[ dayGridPlugin ]}
+            eventClick={removeEvent}
             //eventClick={clickDate}
             events={events}
             eventColor='#efb33f'></FullCalendar>

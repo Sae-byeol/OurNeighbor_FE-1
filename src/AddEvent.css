@@ -1,19 +1,42 @@
-.form{
-    display: flex;
-    flex-direction: column;
+.addEvent-form{
+    width: 500px;
+    height: 400px;
+    display: inline-block;
+    width: 50%;
+    padding: 22px 23px 23px 22px;
+    border-radius: 20px;
+    border: solid 1px #b2b2b2;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+h3{
+    font-family: 'HSGaeulSenggak2';
+    height: 49px;
+    margin-bottom: 80px;
+    font-size: 36px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #433; 
 }
 input{
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     border-radius: 10px;
     border: solid 2px #7c7b7b;
-    height: 20px;
+    height: 50px;
+    width: 300px;
+    font-size: 18px;
 }
 .addBtn{
     font-family: 'HSGaeulSenggak2';
   width: 127px;
   height: 30px;
   flex-grow: 0;
+  margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
   padding: 5px 4px 0 8px;

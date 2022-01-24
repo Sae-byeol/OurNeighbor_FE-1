@@ -11,10 +11,12 @@ const Add = (props) => {
         props.addVisible();
     }
     return (
-        <form onSubmit={onSubmit} className='form'>
-            <h3>관리자만 추가가 가능합니다.</h3>
+        <form onSubmit={onSubmit} className='addEvent-form'>
+            <h3>새로운 일정을 추가하세요</h3>
             <input placeholder='YYYY-MM-DD' value={date} onChange={(e)=>setDate(e.target.value)}></input>
-            <input placeholder='일정' value={title} onChange={(e)=>setTitle(e.target.value)}></input>
+            <br/>
+            <input placeholder='일정 이름' value={title} onChange={(e)=>setTitle(e.target.value)}></input>
+            <br/>
             <button className="addBtn"type="submit">추가하기</button>
         </form>
     )

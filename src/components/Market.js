@@ -96,9 +96,18 @@ const Market = (props) => {
                     </span>
                 </div>
                 <div className='line'></div>
-                <div className='market-section2'>
-                {renderMarkets}
+                <div className='market-mid'>
+                <div className='market-middle'>
+                  <div className='market-section2'>
+                    {renderMarkets}
+                  </div>
+                  </div>
                 </div>
+                 
+                
+               
+                
+                
                 <div>
                     <Pagination
                     activePage={page}
@@ -115,7 +124,7 @@ const Market = (props) => {
                     />
                 </div>
             </div>
-            <Outlet></Outlet>
+            
         </div>
     )
 }
