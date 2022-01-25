@@ -67,7 +67,7 @@ const EditUser = () => {
             </div>
             <div className='line'></div>
             <div className='mypage-section2'>
-                <div className='mypageForm'>
+                <div className='editForm'>
                     <img className="mypage-img" src='../img/profile.png'></img>
                     <div className='mypage-content'>
                         <span className='mypage-content-title'>이름</span>

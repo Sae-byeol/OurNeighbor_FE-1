@@ -11,6 +11,7 @@ const MarketPostView = (props) => {
     const {usedGoods_id}=useParams();
     const [value, setValue] = useState("");
     const [commentList, setCommentList] = useState([]);
+    const [user, setUser]=useState([]);
 
     const markets=props.component;
     const num=markets.length;
@@ -54,6 +55,7 @@ const MarketPostView = (props) => {
                     </span>
                     <div className='marketPostView-subtitle'>
                         <span>{matchItem.date}</span>
+                        {/* 글 작성자의 아이디*/ }
                         <span>작성자:{matchItem.member_id}</span>
                     </div>
                     <img className='marketPostView-img' src='../img/test.png'></img>
@@ -71,7 +73,7 @@ const MarketPostView = (props) => {
                 <div className='relpy-line'></div>
                 <div className='marketPostView-section2'>
                     <div className='reply-title'>댓글</div>
-                    <div className='reply-id'>오새별</div>
+                    <div className='reply-id'>{matchItem.member_id}</div>
                     <textarea className="reply-input" 
                     onChange={(e) => setValue(e.target.value)}
                     type="text"
