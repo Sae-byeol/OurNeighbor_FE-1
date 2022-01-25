@@ -1,16 +1,16 @@
-.header{
-    height: 100px;
-    margin-top: 10px;
-  }
-  .header-left{
-    float: left;
-  }
-  .header-right{
-    float: right;
-    padding-top: 25px;
-  }
-  .imagelogo{
-  }
-  .logo{
-    margin-bottom: 15px;
-  }
+.header {
+  height: 100px;
+  margin-top: 10px;
+}
+.header-left {
+  float: left;
+}
+.header-right {
+  float: right;
+  padding-top: 25px;
+}
+.imagelogo {
+}
+.logo {
+  margin-bottom: 15px;
+}

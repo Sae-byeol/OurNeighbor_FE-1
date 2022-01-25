@@ -8,6 +8,8 @@ import GatheringAdd from "./components/GatheringAdd";
 import Best from "./components/Best";
 import BestPostView from "./components/BestPostView";
 import BestAdd from "./components/BestAdd";
+import LoginPage from "./components/LoginPage";
+import RegisterPage from "./components/RegisterPage";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import axios from "axios";
 
@@ -15,11 +17,6 @@ function App() {
   /*const [todayTitle, setTodayTitle]=useState('일정1');
   const [date, setDate]=useState('날짜');*/
   const [visible, setVisible] = useState(false);
-  const [events, setEvents] = useState([
-    { title: "event1", date: "2022-01-01" },
-    { title: "event1-1", date: "2022-01-01" },
-    { title: "event2", date: "2022-01-12" },
-  ]);
   /*const renderTitles=todayTitle.map((val)=>{
     return(
       <div>{val.todayTitle}</div>
@@ -43,19 +40,12 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  const addVisible = () => {
-    setVisible(!visible);
-    console.log(events);
-  };
-
-  const addEvent = (event) => {
-    setEvents([...events, event]);
-  };
-
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Navbar></Navbar>}></Route>
+        <Route path="/signin" element={<LoginPage></LoginPage>}></Route>
+        <Route path="/signup" element={<RegisterPage></RegisterPage>}></Route>
         <Route path="/best" element={<Best component={bests}></Best>}></Route>
         <Route path="/bestAdd" element={<BestAdd></BestAdd>}></Route>
         <Route
