@@ -1,0 +1,225 @@
+.registerPage {
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .loginpage-form {
+    width: 424px;
+    height: 617px;
+    padding: 11px 60px 24px;
+    border-radius: 20px;
+    border: solid 1px #b2b2b2;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: relative;
+  }
+  
+  .register-image {
+    position: absolute;
+    top: 10px;
+    left: 250px;
+  }
+  
+  .register-image-text {
+    position: absolute;
+    top: 100px;
+    left: 25%;
+  }
+  
+  .span {
+    position: absolute;
+    left: -110px;
+    top: 20px;
+    font-family: "HSGaeulSenggak2";
+    height: 49px;
+    color: #433;
+  }
+  
+  .registerpage-names {
+    position: absolute;
+    top: 130px;
+    right: 18%;
+  }
+  
+  .registerpage-name {
+    right: 10%;
+    width: 300px;
+    height: 15px;
+    margin: 10px 0 10px;
+    padding: 10px 0px 10px 10px;
+    border-radius: 7px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    border: solid 2px #b7b7b7;
+    background-color: #fff;
+  }
+  
+  .registerpage-nicknames {
+    position: absolute;
+    top: 190px;
+    right: 18%;
+  }
+  
+  .registerpage-nickname {
+    width: 300px;
+    height: 15px;
+    margin: 10px 0 10px;
+    padding: 10px 0px 10px 10px;
+    border-radius: 7px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    border: solid 2px #b7b7b7;
+    background-color: #fff;
+  }
+  
+  .registerpage-ids {
+    position: absolute;
+    top: 250px;
+    right: 18%;
+  }
+  
+  .registerpage-id {
+    width: 300px;
+    height: 15px;
+    margin: 10px 0 10px;
+    padding: 10px 0px 10px 10px;
+    border-radius: 7px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    border: solid 2px #b7b7b7;
+    background-color: #fff;
+  }
+  
+  .registerpage-button-id {
+    position: absolute;
+    top: 12px;
+    right: -80px;
+    height: 35px;
+    border-radius: 7px;
+    border: solid 3px #ffc961;
+    background-color: #fff2d8;
+    font-family: "HSGaeulSenggak2";
+    padding: 10px 5px 10px 5px;
+  }
+  
+  .registerpage-pws {
+    position: absolute;
+    top: 310px;
+    right: 18%;
+  }
+  
+  .registerpage-pw {
+    width: 300px;
+    height: 15px;
+    margin: 10px 0 10px;
+    padding: 10px 0px 10px 10px;
+    border-radius: 7px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    border: solid 2px #b7b7b7;
+    background-color: #fff;
+  }
+  
+  .registerpage-confirmPws {
+    position: absolute;
+    top: 370px;
+    right: 18%;
+  }
+  
+  .registerpage-confirmPw {
+    width: 300px;
+    height: 15px;
+    margin: 10px 0 10px;
+    padding: 10px 0px 10px 10px;
+    border-radius: 7px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    border: solid 2px #b7b7b7;
+    background-color: #fff;
+  }
+  
+  .registerpage-emails {
+    position: absolute;
+    top: 430px;
+    right: 18%;
+  }
+  
+  .registerpage-email {
+    width: 300px;
+    height: 15px;
+    margin: 10px 0 10px;
+    padding: 10px 0px 10px 10px;
+    border-radius: 7px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    border: solid 2px #b7b7b7;
+    background-color: #fff;
+  }
+  
+  .registerpage-apartments {
+    position: absolute;
+    top: 490px;
+    right: 76%;
+  }
+  
+  .registerpage-button-apartment {
+    position: absolute;
+    top: 12px;
+    right: -80px;
+    height: 35px;
+    border-radius: 7px;
+    border: solid 3px #ffc961;
+    background-color: #fff2d8;
+    font-family: "HSGaeulSenggak2";
+    padding: 8px 5px 8px 5px;
+  }
+  
+  #popupDom {
+    position: absolute;
+    top: -350px;
+  }
+  
+  .postCode_btn {
+    border-radius: 7px;
+    border: solid 3px #ffc961;
+    background-color: #fff2d8;
+    font-family: "HSGaeulSenggak2";
+    padding: 2px 5px 2px 5px;
+  }
+  
+  .registerpage-button-radio {
+    position: absolute;
+    top: 550px;
+    left: 127px;
+  }
+  
+  .registerpage-radios {
+    font-family: "HSGaeulSenggak2";
+    width: 300px;
+    position: absolute;
+    top: 18px;
+    display: flex;
+  }
+  
+  .registerpage-radio {
+    width: 150px;
+    height: 20px;
+    margin: 5px 20px 0px 20px;
+  }
+  
+  .registerpage-signupbuttons {
+    position: absolute;
+    top: 620px;
+    left: 0px;
+    background-color: aqua;
+    width: 545px;
+  }
+  
+  .registerpage-signupbutton {
+    position: absolute;
+    left: 210px;
+    font-family: HSGaeulSenggak2;
+    font-size: 18px;
+    text-align: left;
+    color: #433;
+    background-color: transparent;
+    border: none;
+  }

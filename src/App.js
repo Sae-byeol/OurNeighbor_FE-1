@@ -10,6 +10,8 @@ import Home from './components/Home';
 import Market from './components/Market';
 import MarketAdd from './components/MarketAdd';
 import MarketPostView from './components/MarketPostView';
+import LoginPage from "./components/LoginPage";
+import RegisterPage from "./components/RegisterPage";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import MyPage from './components/MyPage';
@@ -45,6 +47,8 @@ function App() {
         <Route path="/calender" element={<CalenderHome></CalenderHome>}></Route>
         <Route path="/postView/:usedGoods_id" element={<MarketPostView component={markets}></MarketPostView>}></Route>
         <Route path="/marketAdd" element={<MarketAdd></MarketAdd>}></Route>
+        <Route path="/signin" element={<LoginPage></LoginPage>}></Route>
+        <Route path="/signup" element={<RegisterPage></RegisterPage>}></Route>
       </Routes>
     </div>
     
