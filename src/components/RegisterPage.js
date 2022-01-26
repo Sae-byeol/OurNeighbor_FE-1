@@ -53,6 +53,7 @@ function RegisterPage(props) {
     setIsPopupOpen(false);
   };
 
+  const [isAddress, setIsAddress] = useState("");
   return (
     <div
       class="registerPage"
@@ -103,6 +104,13 @@ function RegisterPage(props) {
             required
             className="registerpage-id"
           />
+          <button
+            className="registerpage-button-id"
+            type="button"
+            onClick={null}
+          >
+            중복 확인
+          </button>
         </div>
         <div className="registerpage-pws">
           <span className="span">비밀번호&nbsp;&nbsp;&nbsp;</span>
@@ -137,8 +145,8 @@ function RegisterPage(props) {
             className="registerpage-email"
           />
         </div>
-        <div>
-          <span>아파트 찾기&nbsp;</span>
+        <div className="registerpage-apartments">
+          <span className="span">아파트&nbsp;</span>
           <button
             className="registerpage-button-apartment"
             type="button"
@@ -153,21 +161,34 @@ function RegisterPage(props) {
               </PopupDom>
             )}
           </div>
+          <span>{isAddress}</span>
         </div>
         <div className="registerpage-button-radio">
-          <span>회원 유형&nbsp;&nbsp;</span>
-          <input
-            required
-            id="citizen"
-            value="citizen"
-            name="member"
-            type="radio"
-          />
-          주민
-          <input required id="admin" value="admin" name="member" type="radio" />
-          관리사무소
+          <span className="span">회원 유형&nbsp;&nbsp;</span>
+          <div className="registerpage-radios">
+            <div className="registerpage-radio">
+              <input
+                required
+                id="citizen"
+                value="citizen"
+                name="member"
+                type="radio"
+              />
+              주민
+            </div>
+            <div className="registerpage-radio">
+              <input
+                required
+                id="admin"
+                value="admin"
+                name="member"
+                type="radio"
+              />
+              관리사무소
+            </div>
+          </div>
         </div>
-        <div>
+        <div className="registerpage-signupbuttons">
           <button
             type="submit"
             onClick={() =>
@@ -176,7 +197,7 @@ function RegisterPage(props) {
                 : null
             }
             onSubmit={onSubmit}
-            class="loginregister__button"
+            className="registerpage-signupbutton"
           >
             | 회원가입 하기 |
           </button>

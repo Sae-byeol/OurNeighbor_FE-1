@@ -32,7 +32,7 @@ const PopupPostCode = (props) => {
     left: "20%",
     width: "300px",
     height: "420px",
-    padding: "7px",
+    padding: "5px 5px 13px 5px",
     borderRadius: "5px",
     borderColor: "#FFC961",
     borderWidth: "2px",

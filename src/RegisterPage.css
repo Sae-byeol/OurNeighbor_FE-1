@@ -91,6 +91,18 @@
   background-color: #fff;
 }
 
+.registerpage-button-id {
+  position: absolute;
+  top: 12px;
+  right: -80px;
+  height: 35px;
+  border-radius: 7px;
+  border: solid 3px #ffc961;
+  background-color: #fff2d8;
+  font-family: "HSGaeulSenggak2";
+  padding: 10px 5px 10px 5px;
+}
+
 .registerpage-pws {
   position: absolute;
   top: 310px;
@@ -140,4 +152,74 @@
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
   border: solid 2px #b7b7b7;
   background-color: #fff;
+}
+
+.registerpage-apartments {
+  position: absolute;
+  top: 490px;
+  right: 76%;
+}
+
+.registerpage-button-apartment {
+  position: absolute;
+  top: 12px;
+  right: -80px;
+  height: 35px;
+  border-radius: 7px;
+  border: solid 3px #ffc961;
+  background-color: #fff2d8;
+  font-family: "HSGaeulSenggak2";
+  padding: 8px 5px 8px 5px;
+}
+
+#popupDom {
+  position: absolute;
+  top: -350px;
+}
+
+.postCode_btn {
+  border-radius: 7px;
+  border: solid 3px #ffc961;
+  background-color: #fff2d8;
+  font-family: "HSGaeulSenggak2";
+  padding: 2px 5px 2px 5px;
+}
+
+.registerpage-button-radio {
+  position: absolute;
+  top: 550px;
+  left: 127px;
+}
+
+.registerpage-radios {
+  font-family: "HSGaeulSenggak2";
+  width: 300px;
+  position: absolute;
+  top: 18px;
+  display: flex;
+}
+
+.registerpage-radio {
+  width: 150px;
+  height: 20px;
+  margin: 5px 20px 0px 20px;
+}
+
+.registerpage-signupbuttons {
+  position: absolute;
+  top: 620px;
+  left: 0px;
+  background-color: aqua;
+  width: 545px;
+}
+
+.registerpage-signupbutton {
+  position: absolute;
+  left: 210px;
+  font-family: HSGaeulSenggak2;
+  font-size: 18px;
+  text-align: left;
+  color: #433;
+  background-color: transparent;
+  border: none;
 }
