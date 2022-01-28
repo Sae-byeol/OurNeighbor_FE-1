@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import RegisterPage from "./RegisterPage";
 
 const PopupPostCode = (props) => {
   // 우편번호 검색 후 주소 클릭 시 실행될 함수, data callback 용
+
+  const [loading, setLoading] = useState(false);
 
   const handlePostCode = (data) => {
     let fullAddress = data.address;
@@ -23,6 +25,7 @@ const PopupPostCode = (props) => {
     console.log(fullAddress);
     console.log(data.zonecode);
     props.onClose();
+    props.setAddress(fullAddress);
   };
 
   const postCodeStyle = {
@@ -37,6 +40,7 @@ const PopupPostCode = (props) => {
     borderColor: "#FFC961",
     borderWidth: "2px",
     backgroundColor: "#FFC961",
+    zIndex: "1",
   };
 
   return (

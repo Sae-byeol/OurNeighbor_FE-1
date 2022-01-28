@@ -157,19 +157,29 @@
 .registerpage-apartments {
   position: absolute;
   top: 490px;
-  right: 76%;
+  left: 133px;
 }
 
 .registerpage-button-apartment {
   position: absolute;
   top: 12px;
-  right: -80px;
+  left: -2px;
+  width: 100px;
   height: 35px;
   border-radius: 7px;
   border: solid 3px #ffc961;
   background-color: #fff2d8;
   font-family: "HSGaeulSenggak2";
   padding: 8px 5px 8px 5px;
+}
+
+.registerpage-addressname {
+  font-family: "HSGaeulSenggak2";
+  font-size: 12px;
+  position: absolute;
+  width: 300px;
+  left: 110px;
+  top: 25px;
 }
 
 #popupDom {
