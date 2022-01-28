@@ -1,0 +1,31 @@
+.gatheringForm {
+    width: 1200px;
+    height: 150px;
+    margin: 30px;
+    border-radius: 20px;
+    border: solid 3px #bdbdbd;
+    font-family: HSGaeulSenggak2;
+  }
+  
+  .gatheringForm-title {
+    height: 41px;
+    margin-top: 15px;
+    font-size: 50px;
+    text-align: left;
+    font-size: 30px;
+    margin-left: 20px;
+  }
+  .gatheringForm-cont {
+    margin-left: 20px;
+    font-size: 25px;
+  }
+  .gatheringForm .gatheringForm-date {
+    width: 96px;
+    height: 18px;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-family: HSGaeulSenggak2;
+    font-size: 13px;
+    text-align: left;
+    color: #000;
+  }

@@ -6,6 +6,7 @@ import '../HomeCalendar.css';
 import React , {useState, useEffect} from 'react';
 import axios from 'axios';
 import { asRoughMinutes, sliceEvents } from '@fullcalendar/react';
+import {BrowserRouter, Route, Routes,Link,Outlet} from 'react-router-dom';
 
 //useEffect 실행 순서 때문에 App.js에서 notice배열 먼저 get 다 끝내고 props로 여기로 넘겨줘서 사용하는 방식으로 구현함
 
@@ -61,9 +62,15 @@ const Home = () => {
                     ? <div className="home-welcomeText">
                         미림아파트<br/>김민경님<br/>우리 이웃들을 만나보세요!
                       </div>
-                    : <div className="home-welcomeText">
+                    : 
+                   
+                    <div className="home-welcomeText">
                     로그인 후 <br/> 우리 이웃을 만나보세요!
-                        </div>
+                    <Link to="/signin" style={{ textDecoration: 'none' }}>
+                    <div className='home-welcomeLogin'>ㅣ로그인ㅣ</div> 
+                    </Link>
+                    </div>
+
                     }
                 </div>
                 <img src="../img/home2.png"></img>

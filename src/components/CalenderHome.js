@@ -3,6 +3,7 @@ import '../CalenderHome.css';
 import Calender from './Calender';
 import React,{useState,useEffect} from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import AddEvent from './AddEvent';
 import Header from './Header';
 import Navbar from './Navbar';
@@ -55,8 +56,12 @@ const CalenderHome = () => {
         <Header></Header>
         <Navbar></Navbar>
         <div className='section1'>
-          <span className='sub-title1'>캘린더</span>
-          <span className='sub-title2'>공지사항</span>
+        <Link to="/calender" style={{ textDecoration: 'none' }}>
+            <span className='sub-title1'>캘린더</span>
+            </Link>
+            <Link to="/notice" style={{ textDecoration: 'none' }}>
+            <span className='sub-title2'>공지사항</span>
+          </Link>
         </div>
         <div className='line'></div>
         <div className="section2">

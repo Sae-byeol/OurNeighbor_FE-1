@@ -1,0 +1,93 @@
+.App {
+    flex-grow: 0;
+    background-color: #fff;
+  }
+  .content {
+    margin: 0 120px;
+  }
+  
+  .section1-right {
+    float: right;
+    display: inline-block;
+  }
+  .sub-title1 {
+    font-family: "HSGaeulSenggak2";
+    height: 49px;
+    margin: 0 54px 13px 0;
+    font-size: 36px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #433;
+  }
+  .section1-bottom {
+    font-family: "HSGaeulSenggak2";
+    height: 100px;
+    margin: 30px 54px 13px 0;
+    font-size: 25px;
+    color: #433;
+    position: relative;
+  }
+  
+  .keywords {
+    position: absolute;
+    bottom: 0px;
+  }
+  
+  .gathering-keyword {
+    width: 92px;
+    height: 25px;
+    font-family: "HSGaeulSenggak2";
+    font-size: 22px;
+    text-align: center;
+    color: #433;
+    width: 100px;
+    height: 45px;
+    margin: 0px 22px 0px 22px;
+    padding: 8px 4px;
+    border-radius: 10px;
+    border: solid 4px #f0ca44;
+  }
+  
+  .gathering-search-btn {
+    position: absolute;
+    height: 40px;
+    bottom: 0px;
+    left: -50px;
+  }
+  
+  .search {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+  }
+  
+  .gathering-input {
+    width: 300px;
+    height: 40px;
+    border: 2px solid #c4c4c4;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+  
+  .gathering-add-btn {
+    font-family: "HSGaeulSenggak2";
+    font-size: 20px;
+    width: 127px;
+    height: 30px;
+    flex-grow: 0;
+    margin: 0 35px 0px 15px;
+    padding: 5px 4px 0 8px;
+    border-radius: 10px;
+    border-color: white;
+    color: #433;
+    outline: 0;
+    border: 0;
+    background-color: #efb33f;
+  }
+  .gathering-section2 {
+    width: 1260px;
+  }
