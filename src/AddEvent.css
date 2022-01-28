@@ -22,7 +22,7 @@ h3{
     text-align: center;
     color: #433; 
 }
-input{
+.addEvent-input{
     margin-top: 5px;
     margin-bottom: 15px;
     border-radius: 10px;

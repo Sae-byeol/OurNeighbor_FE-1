@@ -163,7 +163,7 @@ function RegisterPage(props) {
               </PopupDom>
             )}
           </div>
-          <span className="addressName">{isAddress}</span>
+          <span className="registerpage-addressname">{isAddress}</span>
         </div>
         <div className="registerpage-button-radio">
           <span className="span">회원 유형&nbsp;&nbsp;</span>
