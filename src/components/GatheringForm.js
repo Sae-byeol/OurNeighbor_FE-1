@@ -12,7 +12,9 @@ const GatheringForm = (props) => {
         <div className="gatheringForm-title" style={{ fontSize: "25px" }}>
           {props.gathering.title}
         </div>
-        <div className="gatheringForm-cont">{props.gathering.cont}</div>
+        <div className="gatheringForm-cont" style={{ fontSize: "20px" }}>
+          {props.gathering.cont}
+        </div>
         <div className="gatheringForm-date">{props.gathering.date}</div>
       </div>
     </Link>

@@ -1,21 +1,21 @@
-.notice-add-btn{
-    font-family: 'HSGaeulSenggak2';
-    width: 127px;
-    height: 30px;
-    flex-grow: 0;
-    margin-top: 20px;
-   margin-right: 15px;
-    padding: 5px 4px 0 8px;
-    border-radius: 10px;
-    border-color: white;
-    color: #433;
-    outline: 0;
-    border:0; 
-    background-color: #efb33f;
-    float: right;
+.notice-add-btn {
+  font-family: "HSGaeulSenggak2";
+  font-size: 20px;
+  width: 127px;
+  height: 30px;
+  flex-grow: 0;
+  margin: 0 35px 0px 15px;
+  padding: 5px 4px 0 8px;
+  border-radius: 10px;
+  border-color: white;
+  color: #433;
+  outline: 0;
+  border: 0;
+  background-color: #efb33f;
+  float: right;
 }
-.notice-add-btn-div{
-    height: 50px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+.notice-add-btn-div {
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

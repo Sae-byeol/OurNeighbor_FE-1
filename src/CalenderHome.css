@@ -1,73 +1,75 @@
-.App{
-    flex-grow: 0;
-    background-color: #fff;
-  }
-  .content{
-    margin: 0 120px;
-  }
-  
-  .section1{
-    margin-top: 37px;
-    height: 57px;
-  }
-  .sub-title1{
-    font-family: 'HSGaeulSenggak2';
-    height: 49px;
-    margin: 0 54px 13px 0;
-    font-size: 36px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #433;
-  }
-  .sub-title2{
-    font-family: 'HSGaeulSenggak2';
-    height: 49px;
-    /*margin: 0 920px 13px 54px;*/
-    font-family: HSGaeulSenggak2.0;
-    font-size: 36px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #433;
-  }
-  .line{
-    /*width: 1200px;*/
-    height: 2px;
-    margin: 13px 0 0;
-    transform: rotate(-359.85deg);
-    background-color: #433;
-  }
-  .section2{
-    margin: 50px 0 0;
-    padding: 0px 10px 39px 9px;
-  }
-  .calender-edit{
-    display: flex;
-    justify-content: end;
-    
-  }
-  .calender-edit-btn{
-    font-family: 'HSGaeulSenggak2';
-    width: 127px;
-    height: 30px;
-    flex-grow: 0;
-    margin: 0 35px 35px 15px;
-    padding: 5px 4px 0 8px;
-    border-radius: 10px;
-    border-color: white;
-    color: #433;
-    outline: 0;
-    border:0; 
-    background-color: #efb33f;
-  }
-  .calenderCase{
-   display: flex;
-   justify-content: center;
-  }
+.App {
+  flex-grow: 0;
+  background-color: #fff;
+}
+.content {
+  margin: 0 120px;
+}
+
+.section1 {
+  margin-top: 37px;
+  height: 57px;
+}
+.sub-title1 {
+  font-family: "HSGaeulSenggak2";
+  height: 49px;
+  margin: 0 54px 13px 0;
+  font-size: 36px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #433;
+}
+.sub-title2 {
+  font-family: "HSGaeulSenggak2";
+  height: 49px;
+  /*margin: 0 920px 13px 54px;*/
+  font-family: HSGaeulSenggak2.0;
+  font-size: 36px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #433;
+}
+.line {
+  /*width: 1200px;*/
+  height: 2px;
+  margin: 13px 0 0;
+  transform: rotate(-359.85deg);
+  background-color: #433;
+}
+.section2 {
+  margin: 50px 0 0;
+  padding: 0px 10px 39px 9px;
+}
+.calender-edit {
+  display: flex;
+  justify-content: end;
+}
+.calender-edit-btn {
+  font-family: "HSGaeulSenggak2";
+  font-size: 20px;
+  width: 127px;
+  height: 30px;
+  flex-grow: 0;
+  margin: 0 35px 0px 15px;
+  padding: 5px 4px 0 8px;
+  border-radius: 10px;
+  border-color: white;
+  color: #433;
+  outline: 0;
+  border: 0;
+  background-color: #efb33f;
+  position: relative;
+  top: -20px;
+}
+.calenderCase {
+  display: flex;
+  justify-content: center;
+}
