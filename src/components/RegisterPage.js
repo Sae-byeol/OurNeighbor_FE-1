@@ -223,9 +223,9 @@ function RegisterPage(props) {
           >
             | 회원가입 하기 |
           </button>
-        </div>
+          </div>
       </form>
     </div>
   );
-}
+} 
 export default RegisterPage;
