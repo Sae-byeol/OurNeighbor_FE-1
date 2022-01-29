@@ -17,10 +17,20 @@ export const StyleWrapper = styled.div`
 function Calender(props) {
   //console.log(events);
   const [events, setEvents] = useState([]);
+
   useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
     axios
-      .get("dummy/calendar_list.json")
-      .then((res) => setEvents(res.data.calendarList))
+      .get("/apartment/schedules", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        //console.log("success");
+        setEvents(res.data);
+        //console.log(res.data);
+      })
       .catch((err) => console.log(err));
   }, []);
 
