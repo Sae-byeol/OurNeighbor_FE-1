@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
 import '../AddEvent.css'
+import axios from 'axios'
+
 const Add = (props) => {
     const [date, setDate] = useState('');
     const [title, setTitle]=useState('');
@@ -7,7 +9,17 @@ const Add = (props) => {
     const onSubmit=(e)=>{
         e.preventDefault();
         //add함수 props로 받아오기
-        props.addEvent({title:title, date:date});
+        axios.post("/schedules",
+        {
+            date:"2022-01-25",
+            content:"test1"
+        },
+        {
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+            }
+        })
+
         props.addVisible();
     }
     return (

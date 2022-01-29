@@ -23,6 +23,11 @@ function LoginPage() {
       })
       .then(res=>{
         console.log(res.data);
+        localStorage.setItem("accessToken",res.data.accessToken);
+        window.location.href="/";
+        console.log(res.data.accessToken);
+      
+
       })
   };
 

@@ -24,23 +24,33 @@ const CalenderHome = () => {
     })
 },[])
 
-  useEffect(() => {
-    axios.get('dummy/calendar_list.json')
-    .then(res=>setEvents(res.data.calendarList))
-   .catch(err=>console.log(err));
-   }, []);
+useEffect(() => {
+  //console.log(localStorage.getItem("accessToken"));
+axios.get('/apartment/schedules',{
+    headers:{Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+}
+})
+.then(res=>{
+    console.log("success");
+    setEvents(res.data);
+    console.log(res.data);
+})
+.catch(err=>console.log(err));
+}, []);
 
-  const addVisible=()=>{
-    if(user.role==="관리자"){
-      setVisible(!visible);
-      console.log(events);
-      
-    }
-    else{
-      alert("관리자만 일정 추가가 가능합니다.");
-    }
-     
+
+
+const addVisible=()=>{
+  if(user.role==="admin"){//admin이면 visible=true;
+    setVisible(!visible);
+    console.log(events);
+    
   }
+  else{//user인 경우
+    alert("관리자만 일정 추가가 가능합니다.");
+  }
+   
+}
 
   const addEvent=(event)=>{
     setEvents(

@@ -17,12 +17,21 @@ export const StyleWrapper = styled.div`
 function Calender(props) {
   //console.log(events);
   const [events, setEvents] = useState([]);
+  const [events, setEvents]=useState([]);
   useEffect(() => {
-    axios
-      .get("dummy/calendar_list.json")
-      .then((res) => setEvents(res.data.calendarList))
-      .catch((err) => console.log(err));
-  }, []);
+      //console.log(localStorage.getItem("accessToken"));
+    axios.get('/apartment/schedules',{
+        headers:{Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+    }
+    })
+    .then(res=>{
+        //console.log("success");
+        setEvents(res.data);
+        //console.log(res.data);
+    })
+   .catch(err=>console.log(err));
+   }, []);
+
 
   const removeEvent = (e) => {
     if (window.confirm(e.event.title + " 이벤트를 삭제하시겠습니까?")) {
