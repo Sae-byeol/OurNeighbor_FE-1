@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../RegisterPage.css";
 import PopupDom from "./PopupDom";
 import PopupPostCode from "./PopupPostCode";
+import axios from 'axios'
 // 주소창 api
 // https://www.npmjs.com/package/react-daum-postcode
 
@@ -12,6 +13,7 @@ function RegisterPage(props) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole]=useState("");
 
   const onNameHandler = (event) => {
     setName(event.currentTarget.value);
@@ -39,6 +41,19 @@ function RegisterPage(props) {
 
   const onSubmit = (event) => {
     event.preventDefault();
+      axios.post('/signup',{
+
+        name:name,
+        email: email,
+        password: password,
+        loginId: id,
+        nickName: nickname,
+        apartName: isAddress,
+        roles: role
+
+    }).then(res=>{
+      console.log(res.data);
+    })
   };
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -174,9 +189,12 @@ function RegisterPage(props) {
               <input
                 required
                 id="citizen"
-                value="citizen"
+                value="user"
                 name="member"
                 type="radio"
+                onClick={()=>{
+                  setRole("user")
+                }}
               />
               주민
             </div>
@@ -187,6 +205,11 @@ function RegisterPage(props) {
                 value="admin"
                 name="member"
                 type="radio"
+                onClick={()=>{
+                  setRole("admin")
+                }
+
+                }
               />
               관리사무소
             </div>
@@ -195,12 +218,7 @@ function RegisterPage(props) {
         <div className="registerpage-signupbuttons">
           <button
             type="submit"
-            onClick={() =>
-              password !== confirmPassword
-                ? alert("비밀번호와 비밀번호확인은 같아야 합니다.")
-                : null
-            }
-            onSubmit={onSubmit}
+            onClick={onSubmit}
             className="registerpage-signupbutton"
           >
             | 회원가입 하기 |
