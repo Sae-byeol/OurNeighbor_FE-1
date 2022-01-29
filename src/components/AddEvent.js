@@ -12,7 +12,7 @@ const Add = (props) => {
     e.preventDefault();
     //add함수 props로 받아오기
     axios.post(
-      "/schedules",
+      "/schedules", 
       {
         date: "2022-01-25",
         content: "test1",
