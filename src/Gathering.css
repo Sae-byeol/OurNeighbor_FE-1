@@ -6,11 +6,11 @@
   margin: 0 120px;
 }
 
-.section1-right {
+.gathering-section1-right {
   float: right;
   display: inline-block;
 }
-.sub-title1 {
+.gathering-sub-title1 {
   font-family: "HSGaeulSenggak2";
   height: 49px;
   margin: 0 54px 13px 0;
@@ -23,7 +23,7 @@
   text-align: center;
   color: #433;
 }
-.section1-bottom {
+.gathering-section1-bottom {
   font-family: "HSGaeulSenggak2";
   height: 100px;
   margin: 30px 54px 13px 0;

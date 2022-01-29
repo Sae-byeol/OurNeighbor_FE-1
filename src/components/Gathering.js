@@ -186,14 +186,14 @@ const Gathering = (props) => {
       <div className="content">
         <Header></Header>
         <Navbar></Navbar>
-        <div className="section1">
-          <span className="sub-title1">모임 모집 게시판</span>
-          <span className="section1-right">
+        <div className="gathering-section1">
+          <span className="gathering-sub-title1">모임 모집 게시판</span>
+          <span className="gathering-section1-right">
             <Link to="/gatheringAdd">
               <button className="gathering-add-btn">글 쓰기</button>
             </Link>
           </span>
-          <div className="section1-bottom">
+          <div className="gathering-section1-bottom">
             <div>HOT 카테고리</div>
             <span className="keywords">
               <button
