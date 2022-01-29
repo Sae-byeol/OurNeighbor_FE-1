@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "../LoginPage.css";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
-import axios from 'axios'
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [access, setAccess] = useState("noAccess");
+  const navigate = useNavigate();
 
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value);
@@ -17,19 +20,23 @@ function LoginPage() {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    axios.post("/login",{
-      loginId : email,
-      password : password
+    axios
+      .post("/login", {
+        loginId: email,
+        password: password,
       })
-      .then(res=>{
+      .then((res) => {
         console.log(res.data);
-        localStorage.setItem("accessToken",res.data.accessToken);
-        window.location.href="/";
+        localStorage.setItem("accessToken", res.data.accessToken);
+        //axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`
         console.log(res.data.accessToken);
-      
-
-      })
+        if (res.data) {
+          setAccess("access");
+        }
+      });
   };
+
+  console.log(access);
 
   return (
     <div
@@ -66,11 +73,7 @@ function LoginPage() {
           />
         </div>
         <div>
-          <button
-            type="submit"
-            onClick={onSubmit}
-            className="loginpage-button"
-          >
+          <button type="submit" onClick={onSubmit} className="loginpage-button">
             | 로그인 |
           </button>
           <span class="loginpage-q">아직 회원가입을 안 하셨나요?</span>
@@ -86,5 +89,5 @@ function LoginPage() {
     </div>
   );
 }
- 
+
 export default LoginPage;
