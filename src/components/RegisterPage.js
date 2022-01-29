@@ -146,7 +146,6 @@ function RegisterPage(props) {
           />
         </div>
         <div className="registerpage-apartments">
-        
           <span className="span">아파트&nbsp;</span>
           <button
             className="registerpage-button-apartment"
@@ -155,15 +154,18 @@ function RegisterPage(props) {
           >
             아파트 찾기
           </button>
-          
+
           <div id="popupDom">
             {isPopupOpen && (
               <PopupDom>
-                <PopupPostCode onClose={closePostCode} setAddress={setIsAddress}/>
+                <PopupPostCode
+                  onClose={closePostCode}
+                  setAddress={setIsAddress}
+                />
               </PopupDom>
             )}
           </div>
-          <span className="registerpage-addressname">{isAddress}</span>
+          <div className="registerpage-addressname">{isAddress}</div>
         </div>
         <div className="registerpage-button-radio">
           <span className="span">회원 유형&nbsp;&nbsp;</span>

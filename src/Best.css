@@ -37,10 +37,10 @@
   bottom: 0px;
 }
 
-.gathering-keyword {
+.best-keyword {
   width: 92px;
   height: 25px;
-  font-family: "HSGaeulSenggak2";
+  font-family: HSGaeulSenggak2;
   font-size: 22px;
   text-align: center;
   color: #433;
@@ -52,7 +52,7 @@
   border: solid 4px #f0ca44;
 }
 
-.gathering-search-btn {
+.best-search-btn {
   position: absolute;
   height: 40px;
   bottom: 0px;
@@ -65,7 +65,7 @@
   bottom: 0px;
 }
 
-.gathering-input {
+.best-input {
   width: 300px;
   height: 40px;
   border: 2px solid #c4c4c4;
@@ -73,7 +73,7 @@
   border-radius: 10px;
 }
 
-.gathering-add-btn {
+.best-add-btn {
   font-family: "HSGaeulSenggak2";
   font-size: 20px;
   width: 127px;
@@ -88,6 +88,10 @@
   border: 0;
   background-color: #efb33f;
 }
-.gathering-section2 {
-  width: 1260px;
+.best-section2 {
+  padding-left: 28px;
+  padding-top: 60px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }

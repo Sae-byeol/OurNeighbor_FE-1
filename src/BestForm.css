@@ -1,0 +1,35 @@
+.bestForm {
+  width: 300px;
+  height: 350px;
+  margin: 0 28px 100px 0;
+  padding: 15px 39px 22px 34px;
+  border-radius: 20px;
+  border: solid 3px #bdbdbd;
+  font-family: HSGaeulSenggak2;
+  color: #443333;
+  font-size: 17px;
+}
+
+.bestFrom-title {
+  height: 41px;
+  margin-top: 15px;
+  font-size: 50px;
+  text-align: center;
+  font-size: 30px;
+}
+
+.bestForm-img {
+  width: 300px;
+  height: 200px;
+  border-radius: 20px;
+}
+
+.bestForm .bestForm-date {
+  width: 96px;
+  height: 18px;
+  margin: 20px 5px 20px 196px;
+  font-family: HSGaeulSenggak2;
+  font-size: 13px;
+  text-align: left;
+  color: #000;
+}

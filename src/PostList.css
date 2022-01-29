@@ -1,31 +1,31 @@
 .postlist {
-    position: relative;
-    width: 1250px;
-    height: 25px;
-    padding: 7px 0px 7px 0px;
-    margin: 5px 0px 5px 0px;
-    border-radius: 10px;
-  }
-  
-  .postlist:hover {
-    background-color: #fee89a;
-  }
-  
-  .postlist-title {
-    position: absolute;
-    left: 10px;
-    font-size: 18px;
-  }
-  
-  .postlist-complete {
-    position: absolute;
-    left: 580px;
-    font-size: 25px;
-    color: #ffa800;
-  }
-  
-  .postlist-date {
-    position: absolute;
-    right: 10px;
-    font-size: 20px;
-  }
+  position: relative;
+  width: 1250px;
+  height: 25px;
+  padding: 7px 0px 7px 0px;
+  margin: 5px 0px 5px 0px;
+  border-radius: 10px;
+}
+
+.postlist:hover {
+  background-color: #fee89a;
+}
+
+.postlist-title {
+  position: absolute;
+  left: 10px;
+  font-size: 18px;
+}
+
+.postlist-complete {
+  position: absolute;
+  left: 580px;
+  font-size: 25px;
+  color: #ffa800;
+}
+
+.postlist-date {
+  position: absolute;
+  right: 10px;
+  font-size: 18px;
+}

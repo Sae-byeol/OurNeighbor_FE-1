@@ -13,10 +13,10 @@
   background-color: #433;
 }
 
-.gatheringPostView-section1 {
+.bestPostView-section1 {
   margin-top: 30px;
 }
-.gatheringPostView-title {
+.bestPostView-title {
   height: 25px;
   margin-left: 5px;
   font-family: HSGaeulSenggak2;
@@ -29,7 +29,7 @@
   color: #433;
 }
 
-.gatheringPostView-subtitle {
+.bestPostView-subtitle {
   height: 18px;
   margin: 19px 0 4px 5px;
   opacity: 0.5;
@@ -43,7 +43,7 @@
   text-align: left;
   color: #000;
 }
-.gatheringPostView-content {
+.bestPostView-content {
   margin: 20px 0 20px 5px;
   font-family: HSGaeulSenggak2;
   font-size: 20px;
@@ -56,7 +56,7 @@
   color: #000;
 }
 
-.gatheringPostView-img {
+.bestPostView-img {
   width: 483px;
   height: 322px;
   margin: 13px 712px 13px 5px;
@@ -139,6 +139,7 @@
   font-weight: lighter;
   color: #433;
 }
+
 .outreplybtn {
   width: 1300px;
   height: 40px;
