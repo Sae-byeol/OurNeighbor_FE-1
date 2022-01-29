@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../LoginPage.css";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import axios from 'axios'
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -16,6 +17,14 @@ function LoginPage() {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    axios.post("/login",{
+      loginId : email,
+      password : password
+      })
+      .then(res=>{
+        console.log(res.data);
+      })
+    
   };
 
   return (
@@ -55,7 +64,7 @@ function LoginPage() {
         <div>
           <button
             type="submit"
-            onSubmit={onSubmit}
+            onClick={onSubmit}
             className="loginpage-button"
           >
             | 로그인 |

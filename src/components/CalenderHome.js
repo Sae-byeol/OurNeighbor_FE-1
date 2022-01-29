@@ -26,7 +26,7 @@ const CalenderHome = () => {
 
   useEffect(() => {
     axios.get('dummy/calendar_list.json')
-    .then(res=>setEvents(res.data.calendarList))
+    .then(res=>setEvents(res.data))
    .catch(err=>console.log(err));
    }, []);
 

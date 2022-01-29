@@ -16,7 +16,11 @@ function Calender (props) {
     const [events, setEvents]=useState([]);
   useEffect(() => {
     axios.get('dummy/calendar_list.json')
-    .then(res=>setEvents(res.data.calendarList))
+    .then(res=>{
+        console.log("success");
+        //setEvents(res.data);
+        //console.log(res.data);
+    })
    .catch(err=>console.log(err));
    }, []);
 
