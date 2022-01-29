@@ -17,7 +17,7 @@ const Add = (props) => {
         date: "2022-01-25",
         content: "test1",
       },
-      {
+      { 
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
