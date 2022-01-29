@@ -1,27 +1,37 @@
-.header{
-    height: 100px;
-    margin-top: 10px;
-  }
-  .header-left{
-    float: left;
-  }
-  .header-right{
-    float: right;
-    padding-top: 25px;
-   
-  }
-  .header-right-right{
-    float: right;
-    
-  }
-  .header-right-left{
-    float: left;
-    margin-top: 20px;
-    margin-right: 15px;
-    text-align: right;
-  }
-  .imagelogo{
-  }
-  .logo{
-    margin-bottom: 15px;
-  }
+.header {
+  height: 100px;
+  margin-top: 10px;
+}
+.header-left {
+  float: left;
+}
+.header-right {
+  float: right;
+  padding-top: 25px;
+}
+.header-right-right {
+  float: right;
+}
+.header-right-left {
+  float: left;
+  margin-top: 20px;
+  margin-right: 15px;
+  text-align: right;
+  font-family: "HSGaeulSenggak2";
+  font-size: 15px;
+}
+
+.header-note {
+  font-family: "HSGaeulSenggak2";
+  background-color: white;
+  border: none;
+  font-size: 15px;
+  position: relative;
+  right: -5px;
+}
+
+.imagelogo {
+}
+.logo {
+  margin-bottom: 15px;
+}
