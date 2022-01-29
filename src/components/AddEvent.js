@@ -6,6 +6,8 @@ const Add = (props) => {
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
 
+  console.log(date);
+
   const onSubmit = (e) => {
     e.preventDefault();
     //add함수 props로 받아오기
