@@ -7,6 +7,7 @@ import { useHistory, useParams, Outlet } from "react-router-dom";
 import gatherings from "./Gathering";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import "../PostList.css";
+import ParentComment from "./ParentComment";
 
 const GatheringPostView = (props, { history }) => {
   const gatherings = props.component;
@@ -28,6 +29,47 @@ const GatheringPostView = (props, { history }) => {
 
     if (matchItem.category === "animal") return "반려동물";
   };
+
+  const [commentContents, setCommentContents] = useState("");
+  const [commentList, setCommentList] = useState([]);
+  const [count, setCount] = useState(0);
+
+  const getValue = (e) => {
+    setCommentContents(e.target.value);
+  };
+
+  let body = {
+    comment: commentContents,
+    index: count,
+    responseTo: null,
+  };
+
+  const addComment = (e) => {
+    if (commentContents === "") {
+      alert("내용을 입력해주세요");
+      return;
+    }
+    e.preventDefault();
+
+    setCount(count + 1);
+    setCommentList(commentList.concat(body));
+    setCommentContents("");
+  };
+
+  const beforeShowComments = commentList.filter((comment) => {
+    return comment.responseTo === null;
+  });
+
+  const showComments = beforeShowComments.map((parentComment, index) => {
+    return (
+      <ParentComment
+        parentComment={parentComment}
+        index={index}
+        commentList={commentList}
+        setCommentList={setCommentList}
+      ></ParentComment>
+    );
+  });
 
   const postList =
     parseInt(matchItem.constGatheringNo) === 1
@@ -54,19 +96,6 @@ const GatheringPostView = (props, { history }) => {
           parseInt(matchItem.constGatheringNo) - 3,
           parseInt(matchItem.constGatheringNo) + 2
         );
-
-  const [value, setValue] = useState("");
-  const [commentList, setCommentList] = useState([]);
-
-  const getValue = (e) => {
-    setValue(e);
-  };
-
-  const addComment = () => {
-    console.log("AddComment");
-    setCommentList(commentList.concat([value]));
-    setValue("");
-  };
 
   return (
     <div className="App">
@@ -106,42 +135,16 @@ const GatheringPostView = (props, { history }) => {
           <div className="reply-id">오새별</div>
           <textarea
             className="reply-input"
-            onChange={(e) => getValue(e.target.value)}
+            onChange={(e) => getValue(e)}
             type="text"
-            value={value}
+            value={commentContents}
           ></textarea>
           <div className="outreplybtn">
-            <button className="replybtn" onClick={addComment}>
+            <button className="replybtn" onClick={(e) => addComment(e)}>
               댓글 달기
             </button>
           </div>
-          <div>
-            {commentList.map((comment) =>
-              comment.length > 50 ? (
-                <div>
-                  <div className="reply-comment">
-                    <div className="reply-polygon">
-                      <img src={"../img/polygon.png"} alt="polygon"></img>
-                    </div>
-                    <div className="reply-eachcomment">
-                      <span>{comment}</span>
-                    </div>
-                  </div>
-                  <span className="reply-id">&nbsp;&nbsp;reply-id</span>
-                </div>
-              ) : (
-                <div className="reply-comment">
-                  <div className="reply-polygon">
-                    <img src={"../img/polygon.png"} alt="polygon"></img>
-                  </div>
-                  <span className="reply-eachcomment">
-                    <span>{comment}</span>
-                  </span>
-                  <span className="reply-id">&nbsp;&nbsp;reply-id</span>
-                </div>
-              )
-            )}
-          </div>
+          <div>{showComments}</div>
         </div>
         <div className="pagination-line"></div>
         <div className="pagination">
