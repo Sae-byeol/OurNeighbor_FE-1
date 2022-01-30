@@ -1,50 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import "../BestAdd.css";
 
 const BestAdd = () => {
-  const [marketTitle, setMarketTitle] = useState("");
-  const [marketContent, setMarketContent] = useState("");
-  const [category, setCategory] = useState("");
+  const [bestTitle, setBestTitle] = useState("");
+  const [bestContent, setBestContent] = useState("");
+  // 카테고리 뜨기
+  const [showCategory, setShowCategory] = useState("none");
 
-  const [buttonColor, setButtonColor] = useState("all");
-
-  const [showFoodCategory, setShowFoodCategory] = useState(false);
-  const [showAcademyCategory, setShowAcademyCategory] = useState(false);
-  const [showCafeCategory, setShowCafeCategory] = useState(false);
-  const [showSportsCategory, setShowSportsCategory] = useState(false);
-
-  const onShowFoodCategory = () => {
-    setShowFoodCategory(true);
+  const onShowCategory = (e) => {
+    if (e.target.name === "food") {
+      e.preventDefault();
+      setShowCategory("food");
+    }
+    if (e.target.name === "academy") {
+      e.preventDefault();
+      setShowCategory("academy");
+    }
+    if (e.target.name === "cafe") {
+      e.preventDefault();
+      setShowCategory("cafe");
+    }
+    if (e.target.name === "sports") {
+      e.preventDefault();
+      setShowCategory("sports");
+    }
   };
-  const onShowAcademyCategory = () => {
-    setShowAcademyCategory(true);
-  };
-  const onShowCafeCategory = () => {
-    setShowCafeCategory(true);
-  };
-  const onShowSportsCategory = () => {
-    setShowSportsCategory(true);
-  };
 
-  const colorFood = buttonColor === "food" ? "#ffefb6" : "white";
-  const colorAcademy = buttonColor === "academy" ? "#ffefb6" : "white";
-  const colorCafe = buttonColor === "cafe" ? "#ffefb6" : "white";
-  const colorSports = buttonColor === "sports" ? "#ffefb6" : "white";
-
-  const defineColor = (e) => {
-    e === "all"
-      ? setButtonColor("all")
-      : e === "food"
-      ? setButtonColor("food")
-      : e === "academy"
-      ? setButtonColor("academy")
-      : e === "cafe"
-      ? setButtonColor("cafe")
-      : e === "sports"
-      ? setButtonColor("sports")
-      : setButtonColor("all");
+  const onClickNone = () => {
+    setShowCategory("none");
   };
 
   return (
@@ -56,88 +41,137 @@ const BestAdd = () => {
           <span className="sub-title1">추천 게시판</span>
         </div>
         <div className="line"></div>
-        <div className="marketAdd-section2">
+        <div className="bestAdd-section2">
           <form>
-            <span className="marketAddTitle">제목</span>
+            <span className="bestAddTitle">제목</span>
             <input
-              className="marketAddTitleInput"
+              className="bestAddTitleInput"
               type="text"
-              value={marketTitle}
-              onChange={(e) => setMarketTitle(e.target.value)}
+              onChange={(e) => setBestTitle(e.target.value)}
+              value={bestTitle}
             />
-            <div className="marketAddContent">내용</div>
+            <div className="bestAddContent">내용</div>
             <textarea
-              className="marketAddTextarea"
+              className="bestAddTextarea"
               type="text"
-              value={marketContent}
+              value={bestContent}
+              onChange={(e) => setBestContent(e.target.value)}
             />
+            <div className="bestAddImg">사진 첨부</div>
             <input
               type="file"
               className="imgInput"
-              id="marketImg"
+              id="bestImg"
               accept="image/*"
               name="file"
             ></input>
-            <div>카테고리</div>
-            <div className="">
-              {showFoodCategory && (
-                <div name="food" className="best-keyword">
-                  맛집
+            <div className="best-categoryText">카테고리</div>
+            <div className="best-selectedCategories">
+              {showCategory === "food" && (
+                <div className="best-selectedCategory">
+                  <div
+                    name="food"
+                    className="bestAdd-keyword"
+                    style={{
+                      width: "85px",
+                      height: "22px",
+                    }}
+                  >
+                    맛집
+                  </div>
+                  <div onClick={onClickNone} className="best-unshown">
+                    -
+                  </div>
                 </div>
               )}
-              {showAcademyCategory && (
-                <div name="academy" className="best-keyword">
-                  학원
+              {showCategory === "academy" && (
+                <div className="best-selectedCategory">
+                  <div
+                    name="academy"
+                    className="bestAdd-keyword"
+                    style={{
+                      width: "85px",
+                      height: "22px",
+                    }}
+                  >
+                    학원
+                  </div>
+                  <div onClick={onClickNone} className="best-unshown">
+                    -
+                  </div>
                 </div>
               )}
-              {showCafeCategory && (
-                <div name="cafe" className="best-keyword">
-                  카페
+              {showCategory === "cafe" && (
+                <div className="best-selectedCategory">
+                  <div
+                    name="cafe"
+                    className="bestAdd-keyword"
+                    style={{
+                      width: "85px",
+                      height: "22px",
+                    }}
+                  >
+                    카페
+                  </div>
+                  <div onClick={onClickNone} className="best-unshown">
+                    -
+                  </div>
                 </div>
               )}
-              {showSportsCategory && (
-                <div name="sports" className="best-keyword">
-                  운동시설
+              {showCategory === "sports" && (
+                <div className="best-selectedCategory">
+                  <div
+                    name="sports"
+                    className="bestAdd-keyword"
+                    style={{
+                      width: "85px",
+                      height: "22px",
+                    }}
+                  >
+                    운동시설
+                  </div>
+                  <div onClick={onClickNone} className="best-unshown">
+                    -
+                  </div>
                 </div>
               )}
             </div>
-            <div>HOT 카테고리</div>
-
-            <div>
+            <div className="best-hotCategoryText">HOT 카테고리</div>
+            <div className="best-hotCategory">
               <button
                 name="food"
-                className="best-keyword"
-                style={{ backgroundColor: colorFood }}
-                onClick={onShowFoodCategory}
+                className="bestAdd-keyword"
+                onClick={(e) => onShowCategory(e)}
+                style={{ backgroundColor: "white" }}
               >
                 맛집
               </button>
               <button
                 name="academy"
-                className="best-keyword"
-                style={{ backgroundColor: colorAcademy }}
-                onClick={onShowAcademyCategory}
+                className="bestAdd-keyword"
+                onClick={(e) => onShowCategory(e)}
+                style={{ backgroundColor: "white" }}
               >
                 학원
               </button>
               <button
                 name="cafe"
-                className="best-keyword"
-                style={{ backgroundColor: colorCafe }}
-                onClick={onShowCafeCategory}
+                className="bestAdd-keyword"
+                onClick={(e) => onShowCategory(e)}
+                style={{ backgroundColor: "white" }}
               >
                 카페
               </button>
               <button
                 name="sports"
-                className="best-keyword"
-                style={{ backgroundColor: colorSports }}
-                onClick={onShowSportsCategory}
+                className="bestAdd-keyword"
+                onClick={(e) => onShowCategory(e)}
+                style={{ backgroundColor: "white" }}
               >
                 운동시설
               </button>
             </div>
-            <button className="marketAddCompleteBtn">작성 완료</button>
+            <button className="bestAddCompleteBtn">작성 완료</button>
           </form>
         </div>
       </div>

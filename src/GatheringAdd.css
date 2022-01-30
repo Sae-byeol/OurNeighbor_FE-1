@@ -1,10 +1,10 @@
-.bestAdd-section2 {
+.gatheringAdd-section2 {
   margin-top: 35px;
   margin-left: 100px;
   margin-right: 100px;
   margin-bottom: 150px;
 }
-.bestAddTitle {
+.gatheringAddTitle {
   width: 60px;
   height: 27px;
   margin-right: 79px;
@@ -14,14 +14,14 @@
   text-align: left;
   color: #433;
 }
-.bestAddTitleInput {
+.gatheringAddTitleInput {
   width: 856px;
   height: 27px;
   margin: 33.9px 31px 35px 0;
   border-radius: 0px;
   border: solid 1.5px #c4c4c4;
 }
-.bestAddContent {
+.gatheringAddContent {
   width: 118px;
   height: 30px;
   font-family: HSGaeulSenggak2;
@@ -29,14 +29,14 @@
   text-align: left;
   color: #433;
 }
-.bestAddTextarea {
+.gatheringAddTextarea {
   padding: 20px 18px 20px 18px;
   height: 380px;
   width: 1000px;
   margin-top: 5px;
   border: solid 1.5px #c4c4c4;
 }
-.bestAddImg {
+.gatheringAddImg {
   font-family: HSGaeulSenggak2;
   font-size: 25px;
   text-align: left;
@@ -51,20 +51,20 @@
   border: none;
 }
 
-.best-categoryText {
+.gathering-categoryText {
   font-family: HSGaeulSenggak2;
   font-size: 25px;
   text-align: left;
   color: #433;
 }
 
-.best-selectedCategories {
+.gathering-selectedCategories {
   width: 100%;
   height: 50px;
   margin: 20px 0px 20px 0px;
 }
 
-.bestAdd-keyword {
+.gatheringAdd-keyword {
   font-family: HSGaeulSenggak2;
   font-size: 22px;
   text-align: center;
@@ -77,7 +77,7 @@
   border: solid 4px #f0ca44;
 }
 
-.best-unshown {
+.gathering-unshown {
   font-family: HSGaeulSenggak2;
   font-size: 22px;
   font-weight: bold;
@@ -94,19 +94,19 @@
   bottom: 35px;
 }
 
-.best-hotCategoryText {
+.gathering-hotCategoryText {
   font-family: HSGaeulSenggak2;
   font-size: 25px;
   text-align: left;
   color: #433;
 }
 
-.best-hotCategory {
+.gathering-hotCategory {
   height: 50px;
   margin: 20px 0px 20px 0px;
 }
 
-.bestAddCompleteBtn {
+.gatheringAddCompleteBtn {
   font-family: HSGaeulSenggak2;
   font-size: 18px;
   float: right;

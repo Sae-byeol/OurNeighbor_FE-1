@@ -1,54 +1,207 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Header from "./Header";
+import "../GatheringAdd.css";
 
 const BestAdd = () => {
-  const [marketTitle, setMarketTitle] = useState("");
-  const [marketContent, setMarketContent] = useState("");
+  const [gatheringTitle, setGathering] = useState("");
+  const [bestContent, setGatheringContent] = useState("");
 
-  const onImgChange = async (event) => {
-    const formData = new FormData();
-    formData.append("file", event.target.files[0]);
-    //서버 통신 필요
+  // 카테고리 뜨기
+  const [showCategory, setShowCategory] = useState("none");
+
+  const onShowCategory = (e) => {
+    if (e.target.name === "exercise") {
+      e.preventDefault();
+      setShowCategory("exercise");
+    }
+    if (e.target.name === "parents") {
+      e.preventDefault();
+      setShowCategory("parents");
+    }
+    if (e.target.name === "hobby") {
+      e.preventDefault();
+      setShowCategory("hobby");
+    }
+    if (e.target.name === "foodplace") {
+      e.preventDefault();
+      setShowCategory("foodplace");
+    }
+    if (e.target.name === "animal") {
+      e.preventDefault();
+      setShowCategory("animal");
+    }
   };
+
+  const onClickNone = () => {
+    setShowCategory("none");
+  };
+
   return (
     <div className="App">
       <div className="content">
         <Header></Header>
         <Navbar></Navbar>
         <div className="section1">
-          <span className="sub-title1">중고거래</span>
+          <span className="sub-title1">추천 게시판</span>
         </div>
         <div className="line"></div>
-        <div className="marketAdd-section2">
+        <div className="gatheringAdd-section2">
           <form>
-            <span className="marketAddTitle">제목</span>
+            <span className="gatheringAddTitle">제목</span>
             <input
-              className="marketAddTitleInput"
+              className="gatheringAddTitleInput"
               type="text"
-              value={marketTitle}
-              onChange={(e) => setMarketTitle(e.target.value)}
+              onChange={(e) => setGathering(e.target.value)}
+              value={gatheringTitle}
             />
-            <div className="marketAddContent">세부사항</div>
+            <div className="gatheringAddContent">내용</div>
             <textarea
-              className="marketAddTextarea"
+              className="gatheringAddTextarea"
               type="text"
-              placeholder=" 판매 용품 명
-                          S / M / L / XL 등
-                          유아용 / 아동용 / 청소년용 / 여성용 / 남성용 등
-                          희망 판매 가격"
-              value={marketContent}
-              onChange={(e) => setMarketContent(e.target.value)}
+              value={bestContent}
+              onChange={(e) => setGatheringContent(e.target.value)}
             />
+            <div className="gatheringAddImg">사진 첨부</div>
             <input
               type="file"
               className="imgInput"
-              id="marketImg"
+              id="gatheringImg"
               accept="image/*"
               name="file"
-              onChangeCapture={onImgChange}
             ></input>
-            <button className="marketAddCompleteBtn">작성 완료</button>
+            <div className="gathering-categoryText">카테고리</div>
+            <div className="gathering-selectedCategories">
+              {showCategory === "exercise" && (
+                <div className="gathering-selectedCategory">
+                  <div
+                    name="exercise"
+                    className="gatheringAdd-keyword"
+                    style={{
+                      width: "85px",
+                      height: "22px",
+                    }}
+                  >
+                    운동
+                  </div>
+                  <div onClick={onClickNone} className="gathering-unshown">
+                    -
+                  </div>
+                </div>
+              )}
+              {showCategory === "parents" && (
+                <div className="gathering-selectedCategory">
+                  <div
+                    name="parents"
+                    className="gatheringAdd-keyword"
+                    style={{
+                      width: "85px",
+                      height: "22px",
+                    }}
+                  >
+                    학부모
+                  </div>
+                  <div onClick={onClickNone} className="gathering-unshown">
+                    -
+                  </div>
+                </div>
+              )}
+              {showCategory === "hobby" && (
+                <div className="best-selectedCategory">
+                  <div
+                    name="hobby"
+                    className="gatheringAdd-keyword"
+                    style={{
+                      width: "85px",
+                      height: "22px",
+                    }}
+                  >
+                    취미
+                  </div>
+                  <div onClick={onClickNone} className="gathering-unshown">
+                    -
+                  </div>
+                </div>
+              )}
+              {showCategory === "foodplace" && (
+                <div className="gathering-selectedCategory">
+                  <div
+                    name="foodplace"
+                    className="gatheringAdd-keyword"
+                    style={{
+                      width: "85px",
+                      height: "22px",
+                    }}
+                  >
+                    맛집탐방
+                  </div>
+                  <div onClick={onClickNone} className="gathering-unshown">
+                    -
+                  </div>
+                </div>
+              )}
+              {showCategory === "animal" && (
+                <div className="gathering-selectedCategory">
+                  <div
+                    name="animal"
+                    className="gatheringAdd-keyword"
+                    style={{
+                      width: "85px",
+                      height: "22px",
+                    }}
+                  >
+                    반려동물
+                  </div>
+                  <div onClick={onClickNone} className="gathering-unshown">
+                    -
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="gathering-hotCategoryText">HOT 카테고리</div>
+            <div className="gathering-hotCategory">
+              <button
+                name="exercise"
+                className="gatheringAdd-keyword"
+                onClick={(e) => onShowCategory(e)}
+                style={{ backgroundColor: "white" }}
+              >
+                운동
+              </button>
+              <button
+                name="parents"
+                className="gatheringAdd-keyword"
+                onClick={(e) => onShowCategory(e)}
+                style={{ backgroundColor: "white" }}
+              >
+                학부모
+              </button>
+              <button
+                name="hobby"
+                className="gatheringAdd-keyword"
+                onClick={(e) => onShowCategory(e)}
+                style={{ backgroundColor: "white" }}
+              >
+                취미
+              </button>
+              <button
+                name="foodplace"
+                className="gatheringAdd-keyword"
+                onClick={(e) => onShowCategory(e)}
+                style={{ backgroundColor: "white" }}
+              >
+                맛집탐방
+              </button>
+              <button
+                name="animal"
+                className="gatheringAdd-keyword"
+                onClick={(e) => onShowCategory(e)}
+                style={{ backgroundColor: "white" }}
+              >
+                반려동물
+              </button>
+            </div>
+            <button className="gatheringAddCompleteBtn">작성 완료</button>
           </form>
         </div>
       </div>
