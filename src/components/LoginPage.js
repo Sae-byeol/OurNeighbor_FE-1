@@ -32,6 +32,7 @@ function LoginPage() {
         console.log(res.data.accessToken);
         if (res.data) {
           setAccess("access");
+          console.log(access);
         }
       });
   };
