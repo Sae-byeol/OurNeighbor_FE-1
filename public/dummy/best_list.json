@@ -2,300 +2,246 @@
   "bestList": [
     {
       "title": "음식 제목 1",
-      "member_id": "김민경1",
-      "img": "../img/best-test-img-food.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경1",
+      "photold": "../img/best-test-img-food.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "food",
-      "bestNo": 1,
-      "constBestNo": 1,
-      "bestNoCategory": "1food"
+      "id": 1
     },
     {
       "title": "음식 제목 2",
-      "member_id": "김민경2",
-      "img": "../img/best-test-img-food.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경2",
+      "photold": "../img/best-test-img-food.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "category": "food",
       "date": "2021.10.31 19:11",
-      "bestNo": 2,
-      "constBestNo": 2,
-      "bestNoCategory": "2food"
+      "id": 2
     },
     {
       "title": "학원 제목 1",
-      "member_id": "김민경3",
-      "img": "../img/best-test-img-academy.PNG",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경3",
+      "photold": "../img/best-test-img-academy.PNG",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "academy",
-      "bestNo": 3,
-      "constBestNo": 3,
-      "bestNoCategory": "3academy"
+      "id": 3
     },
     {
       "title": "학원 제목 2",
-      "member_id": "김민경4",
-      "img": "../img/best-test-img-academy.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경4",
+      "photold": "../img/best-test-img-academy.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "academy",
-      "bestNo": 4,
-      "constBestNo": 4,
-      "bestNoCategory": "4academy"
+      "id": 4
     },
     {
       "title": "카페 제목 1",
-      "member_id": "김민경5",
-      "img": "../img/best-test-img-cafe.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경5",
+      "photold": "../img/best-test-img-cafe.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "cafe",
-      "bestNo": 5,
-      "constBestNo": 5,
-      "bestNoCategory": "5cafe"
+      "id": 5
     },
     {
       "title": "운동 제목 1",
-      "member_id": "김민경6",
-      "img": "../img/best-test-img-sports.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경6",
+      "photold": "../img/best-test-img-sports.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "sports",
-      "bestNo": 6,
-      "constBestNo": 6,
-      "bestNoCategory": "6sports"
+      "id": 6
     },
     {
       "title": "카페 제목 2",
-      "member_id": "김민경7",
-      "img": "../img/best-test-img-cafe.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경7",
+      "photold": "../img/best-test-img-cafe.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "cafe",
-      "bestNo": 7,
-      "constBestNo": 7,
-      "bestNoCategory": "7cafe"
+      "id": 7
     },
     {
       "title": "학원 제목 3",
-      "member_id": "김민경8",
-      "img": "../img/best-test-img-academy.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경8",
+      "photold": "../img/best-test-img-academy.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "academy",
-      "bestNo": 8,
-      "constBestNo": 8,
-      "bestNoCategory": "8academy"
+      "id": 8
     },
     {
       "title": "음식 제목 3",
-      "member_id": "김민경9",
-      "img": "../img/best-test-img-food.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경9",
+      "photold": "../img/best-test-img-food.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "food",
-      "bestNo": 9,
-      "constBestNo": 9,
-      "bestNoCategory": "9food"
+      "id": 9
     },
     {
       "title": "카페 제목 3",
-      "member_id": "김민경10",
-      "img": "../img/best-test-img-cafe.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경10",
+      "photold": "../img/best-test-img-cafe.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "cafe",
-      "bestNo": 10,
-      "constBestNo": 10,
-      "bestNoCategory": "10cafe"
+      "id": 10
     },
     {
       "title": "음식 제목 4",
-      "member_id": "김민경11",
-      "img": "../img/best-test-img-food.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경11",
+      "photold": "../img/best-test-img-food.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "food",
-      "bestNo": 11,
-      "constBestNo": 11,
-      "bestNoCategory": "11food"
+      "id": 11
     },
     {
       "title": "음식 제목 5",
-      "member_id": "김민경12",
-      "img": "../img/best-test-img-food.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경12",
+      "photold": "../img/best-test-img-food.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "category": "food",
       "date": "2021.10.31 19:11",
-      "bestNo": 12,
-      "constBestNo": 12,
-      "bestNoCategory": "12food"
+      "id": 12
     },
     {
       "title": "학원 제목 4",
-      "member_id": "김민경13",
-      "img": "../img/best-test-img-academy.PNG",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경13",
+      "photold": "../img/best-test-img-academy.PNG",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "academy",
-      "bestNo": 13,
-      "constBestNo": 13,
-      "bestNoCategory": "13academy"
+      "id": 13
     },
     {
       "title": "학원 제목 5",
-      "member_id": "김민경14",
-      "img": "../img/best-test-img-academy.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경14",
+      "photold": "../img/best-test-img-academy.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "academy",
-      "bestNo": 14,
-      "constBestNo": 14,
-      "bestNoCategory": "14academy"
+      "id": 14
     },
     {
       "title": "카페 제목 4",
-      "member_id": "김민경15",
-      "img": "../img/best-test-img-cafe.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경15",
+      "photold": "../img/best-test-img-cafe.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "cafe",
-      "bestNo": 15,
-      "constBestNo": 15,
-      "bestNoCategory": "15cafe"
+      "id": 15
     },
     {
       "title": "운동 제목 2",
-      "member_id": "김민경16",
-      "img": "../img/best-test-img-sports.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경16",
+      "photold": "../img/best-test-img-sports.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "sports",
-      "bestNo": 16,
-      "constBestNo": 16,
-      "bestNoCategory": "16sports"
+      "id": 16
     },
     {
       "title": "카페 제목 5",
-      "member_id": "김민경17",
-      "img": "../img/best-test-img-cafe.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경17",
+      "photold": "../img/best-test-img-cafe.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "cafe",
-      "bestNo": 17,
-      "constBestNo": 17,
-      "bestNoCategory": "17cafe"
+      "id": 17
     },
     {
       "title": "학원 제목 6",
-      "member_id": "김민경18",
-      "img": "../img/best-test-img-academy.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경18",
+      "photold": "../img/best-test-img-academy.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "academy",
-      "bestNo": 18,
-      "constBestNo": 18,
-      "bestNoCategory": "18academy"
+      "id": 18
     },
     {
       "title": "음식 제목 6",
-      "member_id": "김민경19",
-      "img": "../img/best-test-img-food.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경19",
+      "photold": "../img/best-test-img-food.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "food",
-      "bestNo": 19,
-      "constBestNo": 19,
-      "bestNoCategory": "19food"
+      "id": 19
     },
     {
       "title": "카페 제목 6",
-      "member_id": "김민경20",
-      "img": "../img/best-test-img-cafe.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경20",
+      "photold": "../img/best-test-img-cafe.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "cafe",
-      "bestNo": 20,
-      "constBestNo": 20,
-      "bestNoCategory": "20cafe"
+      "id": 20
     },
     {
       "title": "카페 제목 7",
-      "member_id": "김민경21",
-      "img": "../img/best-test-img-cafe.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경21",
+      "photold": "../img/best-test-img-cafe.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "cafe",
-      "bestNo": 21,
-      "constBestNo": 21,
-      "bestNoCategory": "21cafe"
+      "id": 21
     },
     {
       "title": "학원 제목 7",
-      "member_id": "김민경22",
-      "img": "../img/best-test-img-academy.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경22",
+      "photold": "../img/best-test-img-academy.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "academy",
-      "bestNo": 22,
-      "constBestNo": 22,
-      "bestNoCategory": "22academy"
+      "id": 22
     },
     {
       "title": "음식 제목 7",
-      "member_id": "김민경23",
-      "img": "../img/best-test-img-food.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경23",
+      "photold": "../img/best-test-img-food.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "food",
-      "bestNo": 23,
-      "constBestNo": 23,
-      "bestNoCategory": "23food"
+      "id": 23
     },
     {
       "title": "카페 제목 8",
-      "member_id": "김민경24",
-      "img": "../img/best-test-img-cafe.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경24",
+      "photold": "../img/best-test-img-cafe.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "cafe",
-      "bestNo": 24,
-      "constBestNo": 24,
-      "bestNoCategory": "24cafe"
+      "id": 24
     },
     {
       "title": "음식 제목 8",
-      "member_id": "김민경25",
-      "img": "../img/best-test-img-food.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경25",
+      "photold": "../img/best-test-img-food.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "food",
-      "bestNo": 25,
-      "constBestNo": 25,
-      "bestNoCategory": "25food"
+      "id": 25
     },
     {
       "title": "음식 제목 9",
-      "member_id": "김민경26",
-      "img": "../img/best-test-img-food.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경26",
+      "photold": "../img/best-test-img-food.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "food",
-      "bestNo": 26,
-      "constBestNo": 26,
-      "bestNoCategory": "26food"
+      "id": 26
     },
     {
       "title": "음식 제목 10",
-      "member_id": "김민경27",
-      "img": "../img/best-test-img-food.png",
-      "cont": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
+      "author": "김민경27",
+      "photold": "../img/best-test-img-food.png",
+      "content": "오늘은 친구들과 함께 당고집을 갔어요!><\n가봤는데 당고가 비주얼이 너무 좋아서 1차 기쁨!!\n한 입 먹었는데 맛도 너무 좋아서\n한입에 다 먹어버렸지 뭐에요?",
       "date": "2021.10.31 19:11",
       "category": "food",
-      "bestNo": 27,
-      "constBestNo": 27,
-      "bestNoCategory": "27food"
+      "id": 27
     }
   ]
 }

@@ -12,10 +12,10 @@ import ParentComment from "./ParentComment";
 const BestPostView = (props) => {
   const bests = props.component;
   const num = bests.length;
-  const { bestNoCategory } = useParams();
+  const { id } = useParams();
 
   const matchItem = bests.find(function (element) {
-    if (element.bestNoCategory === bestNoCategory) return true;
+    if (parseInt(element.id) === parseInt(id)) return true;
   });
 
   const categoryName = () => {
@@ -70,30 +70,15 @@ const BestPostView = (props) => {
   });
 
   const postList =
-    parseInt(matchItem.constBestNo) === 1
-      ? bests.slice(
-          parseInt(matchItem.constBestNo) - 1,
-          parseInt(matchItem.constBestNo) + 4
-        )
-      : parseInt(matchItem.constBestNo) === 2
-      ? bests.slice(
-          parseInt(matchItem.constBestNo) - 2,
-          parseInt(matchItem.constBestNo) + 3
-        )
-      : parseInt(matchItem.constBestNo) === parseInt(num) - 1
-      ? bests.slice(
-          parseInt(matchItem.constBestNo) - 4,
-          parseInt(matchItem.constBestNo) + 1
-        )
-      : parseInt(matchItem.constBestNo) === parseInt(num)
-      ? bests.slice(
-          parseInt(matchItem.constBestNo) - 5,
-          parseInt(matchItem.constBestNo) + 0
-        )
-      : bests.slice(
-          parseInt(matchItem.constBestNo) - 3,
-          parseInt(matchItem.constBestNo) + 2
-        );
+    parseInt(matchItem.id) === 1
+      ? bests.slice(parseInt(matchItem.id) - 1, parseInt(matchItem.id) + 4)
+      : parseInt(matchItem.id) === 2
+      ? bests.slice(parseInt(matchItem.id) - 2, parseInt(matchItem.id) + 3)
+      : parseInt(matchItem.id) === parseInt(num) - 1
+      ? bests.slice(parseInt(matchItem.id) - 4, parseInt(matchItem.id) + 1)
+      : parseInt(matchItem.id) === parseInt(num)
+      ? bests.slice(parseInt(matchItem.id) - 5, parseInt(matchItem.id) + 0)
+      : bests.slice(parseInt(matchItem.id) - 3, parseInt(matchItem.id) + 2);
 
   return (
     <div className="App">
@@ -109,11 +94,11 @@ const BestPostView = (props) => {
           <div className="bestPostView-subtitle">
             <span>{matchItem.title}</span>
             <span>/</span>
-            <span>작성자: {matchItem.member_id}</span>
+            <span>작성자: {matchItem.author}</span>
           </div>
-          <img className="bestPostView-img" src={matchItem.img}></img>
+          <img className="bestPostView-img" src={matchItem.photold}></img>
           <div className="bestPostView-content">
-            {matchItem.cont.split("\n").map((line) => {
+            {matchItem.content.split("\n").map((line) => {
               return (
                 <span>
                   {line}
@@ -151,10 +136,9 @@ const BestPostView = (props) => {
           <div className="pagination-pages">
             {postList
               ? postList.map((item, index) => {
-                  return parseInt(item.bestNoCategory) ===
-                    parseInt(matchItem.bestNoCategory) ? (
+                  return parseInt(item.id) === parseInt(matchItem.id) ? (
                     <Link
-                      to={`/bestPostView/${item.bestNoCategory}`}
+                      to={`/bestPostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#ffa800" }}
                       onClick={window.scrollTo(0, 0)}
                     >
@@ -165,7 +149,7 @@ const BestPostView = (props) => {
                     </Link>
                   ) : (
                     <Link
-                      to={`/bestPostView/${item.bestNoCategory}`}
+                      to={`/bestPostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#443333" }}
                       onClick={window.scrollTo(0, 0)}
                     >

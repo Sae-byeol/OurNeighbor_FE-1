@@ -95,7 +95,7 @@ function App() {
         <Route path="/best" element={<Best component={bests}></Best>}></Route>
         <Route path="/bestAdd" element={<BestAdd></BestAdd>}></Route>
         <Route
-          path="/bestPostView/:bestNoCategory"
+          path="/bestPostView/:id"
           element={<BestPostView component={bests}></BestPostView>}
         ></Route>
         <Route
@@ -107,7 +107,7 @@ function App() {
           element={<GatheringAdd></GatheringAdd>}
         ></Route>
         <Route
-          path="/gatheringPostView/:gatheringNoCategory"
+          path="/gatheringPostView/:id"
           element={
             <GatheringPostView component={gatherings}></GatheringPostView>
           }

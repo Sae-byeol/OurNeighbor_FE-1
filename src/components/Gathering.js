@@ -26,16 +26,25 @@ const Gathering = (props) => {
     if (search === null) return best;
     else if (
       best.title.toLowerCase().includes(search.toLowerCase()) ||
-      best.cont.toLowerCase().includes(search.toLowerCase())
+      best.content.toLowerCase().includes(search.toLowerCase())
     ) {
       return best;
     }
   });
 
+  let length = searchedGatherings.length;
+
+  const addedGatherings = gatherings.map((gathering) => {
+    for (let a = 1; a <= length; a = a + 1) {
+      searchedGatherings.gatheringNo = a;
+    }
+    return gathering;
+  });
+
   // 초기에는 unfocused 상태
   // focused 상태였다가 unfocused 상태가 다시 될 때 gatheringNo 값 다시 지정
   let a = 1;
-  const BeforeonClicksetPage = searchedGatherings.map((best) => {
+  const BeforeonClicksetPage = addedGatherings.map((best) => {
     best.gatheringNo = a;
     a++;
     return best;

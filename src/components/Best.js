@@ -28,16 +28,25 @@ const Best = (props) => {
     if (search === null) return best;
     else if (
       best.title.toLowerCase().includes(search.toLowerCase()) ||
-      best.cont.toLowerCase().includes(search.toLowerCase())
+      best.content.toLowerCase().includes(search.toLowerCase())
     ) {
       return best;
     }
   });
 
+  let length = searchedBests.length;
+
+  const addedBests = bests.map((best) => {
+    for (let a = 1; a <= length; a = a + 1) {
+      searchedBests.bestNo = a;
+    }
+    return best;
+  });
+
   // 초기에는 unfocused 상태
   // focused 상태였다가 unfocused 상태가 다시 될 때 bestNo 값 다시 지정
   let a = 1;
-  const BeforeonClicksetPage = searchedBests.map((best) => {
+  const BeforeonClicksetPage = addedBests.map((best) => {
     best.bestNo = a;
     a++;
     return best;

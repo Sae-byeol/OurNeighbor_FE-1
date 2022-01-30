@@ -5,7 +5,7 @@ import "../GatheringForm.css";
 const GatheringForm = (props) => {
   return (
     <Link
-      to={`/gatheringPostView/${props.gathering.gatheringNoCategory}`}
+      to={`/gatheringPostView/${props.gathering.id}`}
       style={{ textDecoration: "none", color: "#000" }}
     >
       <div className="gatheringForm">
@@ -13,7 +13,7 @@ const GatheringForm = (props) => {
           {props.gathering.title}
         </div>
         <div className="gatheringForm-cont" style={{ fontSize: "20px" }}>
-          {props.gathering.cont}
+          {props.gathering.content}
         </div>
         <div className="gatheringForm-date">{props.gathering.date}</div>
       </div>
