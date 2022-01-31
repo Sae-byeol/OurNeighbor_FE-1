@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../RegisterPage.css";
 import PopupDom from "./PopupDom";
 import PopupPostCode from "./PopupPostCode";
-import axios from 'axios'
+import axios from "axios";
 // 주소창 api
 // https://www.npmjs.com/package/react-daum-postcode
 
@@ -13,7 +13,7 @@ function RegisterPage(props) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole]=useState("");
+  const [role, setRole] = useState("");
 
   const onNameHandler = (event) => {
     setName(event.currentTarget.value);
@@ -27,6 +27,21 @@ function RegisterPage(props) {
     setId(event.currentTarget.value);
   };
 
+  const checkDuplication = () => {
+    axios
+      .get(`/member/${id}`)
+      .then((res) => {
+        if (res.data === "present") {
+          alert("중복되는 아이디입니다.");
+        } else if (res.data === "not present") {
+          alert("사용가능한 아이디입니다.");
+        }
+      })
+      .catch((Error) => {
+        console.log(Error);
+      });
+  };
+
   const onPasswordHandler = (event) => {
     setPassword(event.currentTarget.value);
   };
@@ -35,25 +50,44 @@ function RegisterPage(props) {
     setConfirmPassword(event.currentTarget.value);
   };
 
+  const confirmPasswordText =
+    password.length === 0
+      ? "입력해주세요!"
+      : password === confirmPassword
+      ? "비밀번호 일치"
+      : "비밀번호 불일치";
+
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value);
   };
 
   const onSubmit = (event) => {
     event.preventDefault();
-      axios.post('/signup',{
-
-        name:name,
-        email: email,
-        password: password,
-        loginId: id,
-        nickName: nickname,
-        apartName: isAddress,
-        roles: role
-
-    }).then(res=>{
-      console.log(res.data);
-    })
+    if (
+      name === "" ||
+      nickname === "" ||
+      id === "" ||
+      password === "" ||
+      confirmPassword === "" ||
+      email === "" ||
+      role === ""
+    ) {
+      alert("정보를 모두 입력해주세요");
+    } else {
+      axios
+        .post("/signup", {
+          name: name,
+          email: email,
+          password: password,
+          loginId: id,
+          nickName: nickname,
+          apartName: isAddress,
+          roles: role,
+        })
+        .then((res) => {
+          console.log(res.data);
+        });
+    }
   };
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -122,7 +156,7 @@ function RegisterPage(props) {
           <button
             className="registerpage-button-id"
             type="button"
-            onClick={null}
+            onClick={checkDuplication}
           >
             중복 확인
           </button>
@@ -148,6 +182,7 @@ function RegisterPage(props) {
             required
             className="registerpage-confirmPw"
           />
+          <span className="span-right">{confirmPasswordText}</span>
         </div>
         <div className="registerpage-emails">
           <span className="span">이메일&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -192,8 +227,8 @@ function RegisterPage(props) {
                 value="user"
                 name="member"
                 type="radio"
-                onClick={()=>{
-                  setRole("user")
+                onClick={() => {
+                  setRole("user");
                 }}
               />
               주민
@@ -205,11 +240,9 @@ function RegisterPage(props) {
                 value="admin"
                 name="member"
                 type="radio"
-                onClick={()=>{
-                  setRole("admin")
-                }
-
-                }
+                onClick={() => {
+                  setRole("admin");
+                }}
               />
               관리사무소
             </div>

@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import "../BestAdd.css";
+import axios from "axios";
+import qs from "qs";
+axios.default.paramsSerializer = (params) => {
+  return qs.stringify(params);
+};
 
 const BestAdd = () => {
   const [bestTitle, setBestTitle] = useState("");
@@ -30,6 +35,29 @@ const BestAdd = () => {
 
   const onClickNone = () => {
     setShowCategory("none");
+  };
+
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    //add함수 props로 받아오기
+    axios
+      .post(
+        "/recommend-posts",
+        `title=${bestTitle}&&content=${bestContent}&&category=${showCategory}`,
+
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      });
   };
 
   return (
@@ -171,7 +199,9 @@ const BestAdd = () => {
                 운동시설
               </button>
             </div>
-            <button className="bestAddCompleteBtn">작성 완료</button>
+            <button className="bestAddCompleteBtn" onClick={onSubmit}>
+              작성 완료
+            </button>
           </form>
         </div>
       </div>

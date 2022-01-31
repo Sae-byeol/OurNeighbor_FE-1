@@ -30,14 +30,8 @@ function LoginPage() {
         localStorage.setItem("accessToken", res.data.accessToken);
         //axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`
         console.log(res.data.accessToken);
-        if (res.data) {
-          setAccess("access");
-          console.log(access);
-        }
       });
   };
-
-  console.log(access);
 
   return (
     <div

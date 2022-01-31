@@ -7,11 +7,21 @@ import "../Best.css";
 import "../Paging.css";
 import Pagination from "react-js-pagination";
 import BestPostView from "./BestPostView";
+import axios from "axios";
 //* https://cotak.tistory.com/112 */
 //  npm i react-js-pagination
 
-const Best = (props) => {
-  const bests = props.component;
+const Best = () => {
+  const [getBests, setGetBests] = useState([]);
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
+  axios
+    .get("/apartments/recommend-posts")
+    .then((res) => setGetBests(res.data))
+    .catch((err) => console.log(err));
+
+  const bests = getBests;
   const [page, setPage] = useState(1);
   const [renderPage, setRenderPage] = useState("unfocused");
   const [buttonColor, setButtonColor] = useState("all");
