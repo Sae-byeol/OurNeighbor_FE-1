@@ -3,12 +3,30 @@ import {BrowserRouter, Route, Routes,Link} from 'react-router-dom';
 import Navbar from './Navbar';
 import Header from './Header';
 import '../MarketAdd.css';
+import axios from "axios";
+import qs from 'qs';
 
 const MarketAdd = () => {
     const [marketTitle, setMarketTitle]=useState('');
     const [marketContent, setMarketContent]=useState('');
-    
 
+    const onSubmit = (e) => {
+        e.preventDefault();
+        //add함수 props로 받아오기
+        axios.post(
+            "/used-goods", 
+            `title=${marketTitle}&&content=${marketContent}`
+        
+         , { 
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        ).then((res) => {
+            console.log(res.data);
+          });
+    };
+    
     const onImgChange=async(event)=>{
         const formData=new FormData();
         formData.append('file', event.target.files[0]);
@@ -50,7 +68,7 @@ const MarketAdd = () => {
                         name='file'
                         onChangeCapture={onImgChange}>
                         </input>
-                        <button className='marketAddCompleteBtn'>작성 완료</button>
+                        <button className='marketAddCompleteBtn' onClick={onSubmit}>작성 완료</button>
                     </form>
                 </div>
             </div> 
@@ -58,4 +76,4 @@ const MarketAdd = () => {
     )
 }
 
-export default MarketAdd
+export default MarketAdd;

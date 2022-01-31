@@ -14,8 +14,8 @@ const Add = (props) => {
     axios.post(
       "/schedules", 
       {
-        date: "2022-01-25",
-        content: "test1",
+        date: date,
+        title: title,
       },
       { 
         headers: {

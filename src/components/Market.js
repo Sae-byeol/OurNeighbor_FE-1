@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import "../Market.css";
@@ -6,9 +6,26 @@ import MarketForm from "./MarketForm";
 import { BrowserRouter, Route, Routes, Link, Outlet } from "react-router-dom";
 import "../Paging.css";
 import Pagination from "react-js-pagination";
+import axios from 'axios';
 
 const Market = (props) => {
-  const markets = props.component;
+  const [markets, setMarkets]=useState([]);
+  useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
+    axios
+      .get("/apartments/used-goods", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        //console.log("success");
+        setMarkets(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState(null);
   const [searchingText, setSearchingText] = useState(null);

@@ -36,7 +36,7 @@ function LoginPage() {
       });
   };
 
-  console.log(access);
+  //console.log(access);
 
   return (
     <div

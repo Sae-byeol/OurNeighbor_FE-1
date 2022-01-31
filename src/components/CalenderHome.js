@@ -16,7 +16,11 @@ const CalenderHome = () => {
   const [user, setUser] = useState([]);
   useEffect(() => {
     // "/user/info" 같은 로그인한 유저의 개인정보가 저장되어 있는 url에서 get해오기
-    axios.get("dummy/member.json").then((res) => {
+    axios.get("/member/info",
+    {headers: {
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    },
+  }).then((res) => {
       console.log(res.data);
       setUser(res.data);
     });
@@ -38,8 +42,8 @@ const CalenderHome = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const addVisible = () => {
-    if (user.role === "admin") {
+ const addVisible = () => {
+    if (user.role === "관리자") {
       //admin이면 visible=true;
       setVisible(!visible);
       console.log(events);
@@ -82,6 +86,7 @@ const CalenderHome = () => {
             ) : (
               <Calender events={events}></Calender>
             )}
+            
           </div>
         </div>
       </div>
