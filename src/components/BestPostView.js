@@ -14,20 +14,19 @@ const BestPostView = () => {
   const { id } = useParams();
   const [getBest, setGetBest] = useState([]);
 
-  axios.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${localStorage.accessToken}`;
   axios
-    .get("/recommend-posts/" + id)
+    .get("/recommend-posts/" + id, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
     .then((res) => {
-      const a = [res.data];
-      setGetBest(a);
-      console.log(a);
+      setGetBest(res.data);
+      console.log(res.data);
       console.log(getBest);
     })
     .catch((err) => console.log(err));
 
-  console.log(getBest);
   const bests = getBest;
   const num = bests.length;
 

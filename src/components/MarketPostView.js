@@ -7,27 +7,45 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { useHistory, useParams, Outlet } from "react-router-dom";
 import markets from "./Market";
 import ParentComment from "./ParentComment";
+import axios from "axios";
+import { asRoughMinutes } from "@fullcalendar/react";
 
 const MarketPostView = (props) => {
-  const { usedGoods_id } = useParams();
+  const { id } = useParams();
   const [user, setUser] = useState([]);
-
+  const [market, setMarket] = useState({});
   const markets = props.component;
   const num = markets.length;
 
+  useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
+    axios
+      .get("/used-goods/" + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setMarket(res.data);
+        console.log(res.data);
+        console.log(markets);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const postList =
-    parseInt(usedGoods_id) === 1
-      ? markets.slice(parseInt(usedGoods_id) - 1, parseInt(usedGoods_id) + 4)
-      : parseInt(usedGoods_id) === 2
-      ? markets.slice(parseInt(usedGoods_id) - 2, parseInt(usedGoods_id) + 3)
-      : parseInt(usedGoods_id) === parseInt(num) - 1
-      ? markets.slice(parseInt(usedGoods_id) - 4, parseInt(usedGoods_id) + 1)
-      : parseInt(usedGoods_id) === parseInt(num)
-      ? markets.slice(parseInt(usedGoods_id) - 5, parseInt(usedGoods_id) + 0)
-      : markets.slice(parseInt(usedGoods_id) - 3, parseInt(usedGoods_id) + 2);
+    parseInt(id) === 1
+      ? markets.slice(parseInt(id) - 1, parseInt(id) + 4)
+      : parseInt(id) === 2
+      ? markets.slice(parseInt(id) - 2, parseInt(id) + 3)
+      : parseInt(id) === parseInt(num) - 1
+      ? markets.slice(parseInt(id) - 4, parseInt(id) + 1)
+      : parseInt(id) === parseInt(num)
+      ? markets.slice(parseInt(id) - 5, parseInt(id) + 0)
+      : markets.slice(parseInt(id) - 3, parseInt(id) + 2);
 
   const matchItem = props.component.find(function (element) {
-    if (element.usedGoods_id === Number(usedGoods_id)) return true;
+    if (element.id === Number(id)) return true;
   });
 
   //대댓글 구현
@@ -83,31 +101,22 @@ const MarketPostView = (props) => {
         <div className="line"></div>
 
         <div className="marketPostView-section1">
-          <span className="marketPostView-title">{matchItem.title}</span>
+          <span className="marketPostView-title">{market.title}</span>
           <span>
             <button className="market-complete-btn">판매 완료</button>
           </span>
           <div className="marketPostView-subtitle">
-            <span>{matchItem.date}</span>
+            <span>{market.date}</span>
             {/* 글 작성자의 아이디*/}
-            <span>작성자:{matchItem.member_id}</span>
+            <span>작성자:{market.author}</span>
           </div>
           <img className="marketPostView-img" src="../img/test.png"></img>
-          <div className="marketPostView-content">
-            {matchItem.content.split("\n").map((line) => {
-              return (
-                <span>
-                  {line}
-                  <br />
-                </span>
-              );
-            })}
-          </div>
+          <div className="marketPostView-content"></div>
         </div>
         <div className="relpy-line"></div>
         <div className="marketPostView-section2">
           <div className="reply-title">댓글</div>
-          <div className="reply-id">{matchItem.member_id}</div>
+          <div className="reply-id">{market.author}</div>
           <textarea
             className="reply-input"
             onChange={(e) => getValue(e)}
@@ -128,10 +137,9 @@ const MarketPostView = (props) => {
           <div className="pagination-pages">
             {postList
               ? postList.map((item, index) => {
-                  return parseInt(item.usedGoods_id) ===
-                    parseInt(matchItem.usedGoods_id) ? (
+                  return parseInt(item.id) === parseInt(market.id) ? (
                     <Link
-                      to={`/PostView/${item.usedGoods_id}`}
+                      to={`/PostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#ffa800" }}
                       onClick={window.scrollTo(0, 0)}
                     >
@@ -142,7 +150,7 @@ const MarketPostView = (props) => {
                     </Link>
                   ) : (
                     <Link
-                      to={`/PostView/${item.usedGoods_id}`}
+                      to={`/PostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#443333" }}
                       onClick={window.scrollTo(0, 0)}
                     >
