@@ -13,14 +13,14 @@ import { asRoughMinutes } from "@fullcalendar/react";
 const MarketPostView = (props) => {
   const { id } = useParams();
   const [user, setUser] = useState([]);
-  const [market, setMarket]=useState({});
+  const [market, setMarket] = useState({});
   const markets = props.component;
   const num = markets.length;
- 
+
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
-      .get("/used-goods/"+id, {
+      .get("/used-goods/" + id, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -28,11 +28,10 @@ const MarketPostView = (props) => {
       .then((res) => {
         setMarket(res.data);
         console.log(res.data);
-        console.log(markets);
+        console.log(market);
       })
       .catch((err) => console.log(err));
   }, []);
-
 
   const postList =
     parseInt(id) === 1
@@ -112,9 +111,7 @@ const MarketPostView = (props) => {
             <span>작성자:{market.author}</span>
           </div>
           <img className="marketPostView-img" src="../img/test.png"></img>
-          <div className="marketPostView-content">
-            
-          </div>
+          <div className="marketPostView-content"></div>
         </div>
         <div className="relpy-line"></div>
         <div className="marketPostView-section2">
@@ -140,8 +137,7 @@ const MarketPostView = (props) => {
           <div className="pagination-pages">
             {postList
               ? postList.map((item, index) => {
-                  return parseInt(item.id) ===
-                    parseInt(market.id) ? (
+                  return parseInt(item.id) === parseInt(market.id) ? (
                     <Link
                       to={`/PostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#ffa800" }}
