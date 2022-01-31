@@ -28,58 +28,60 @@ import NoticePostView from "./components/NoticePostView";
 import NoticeAdd from "./components/NoticeAdd";
 
 function App() {
-  /*const [todayTitle, setTodayTitle]=useState('일정1');
-  const [date, setDate]=useState('날짜');*/
-  const [visible, setVisible] = useState(false);
-  /*const renderTitles=todayTitle.map((val)=>{
-    return(
-      <div>{val.todayTitle}</div>
-    );
-  })*/
-  //console.log(todayTitle);
-
   const [bests, setBests] = useState([]);
-  useEffect(() => {
+ /* useEffect(() => {
     axios
       .get("dummy/best_list.json")
       .then((res) => setBests(res.data.bestList))
       .catch((err) => console.log(err));
-  }, []);
+  }, []);*/
 
   const [gatherings, setGatherings] = useState([]);
-  useEffect(() => {
+  /*useEffect(() => {
     axios
       .get("dummy/gathering_list.json")
       .then((res) => setGatherings(res.data.gatheringList))
       .catch((err) => console.log(err));
-  }, []);
+  }, []);*/
 
   const [notice, setNotice] = useState([]);
   const [markets, setMarkets] = useState([]);
   useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
     axios
-      .get("dummy/market_list.json")
-      .then((res) => setMarkets(res.data.marketList))
+      .get("/apartments/used-goods", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        //console.log("success");
+        setMarkets(res.data);
+        console.log(res.data);
+      })
       .catch((err) => console.log(err));
+  }, []);
 
+  /*useEffect(() => {
     axios
       .get("dummy/notice_list.json")
       .then((res) => setNotice(res.data.noticeList))
       .catch((err) => console.log(err));
-  }, []);
+  }, []);*/
   //console.log(markets);
 
+  
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/mypage" element={<MyPage></MyPage>}></Route>
         <Route path="/editMypage" element={<EditUser></EditUser>}></Route>
-        <Route path="/market" element={<Market component={markets}></Market>} />
+        <Route path="/market" element={<Market></Market>} />
         <Route path="/calender" element={<CalenderHome></CalenderHome>}></Route>
         <Route path="/notice" element={<Notice></Notice>}></Route>
         <Route
-          path="/postView/:usedGoods_id"
+          path="/postView/:id"
           element={<MarketPostView component={markets}></MarketPostView>}
         ></Route>
         <Route

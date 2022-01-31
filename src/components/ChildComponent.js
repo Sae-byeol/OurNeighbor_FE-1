@@ -78,7 +78,7 @@ const ChildComponent = (props) => {
           : childComments.map((comment) => {
               return (
                 <div>
-                  {comment.comment.length > 50 ? (
+                  {comment.comment.length > 62 ? (
                     <div>
                       <div className="reply-comment">
                         <div className="reply-polygon">
