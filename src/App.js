@@ -40,9 +40,18 @@ function App() {
 
   const [bests, setBests] = useState([]);
   useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
     axios
-      .get("dummy/best_list.json")
-      .then((res) => setBests(res.data.bestList))
+      .get("/apartments/recommend-posts", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        //console.log("success");
+        setBests(res.data);
+        console.log(res.data);
+      })
       .catch((err) => console.log(err));
   }, []);
 

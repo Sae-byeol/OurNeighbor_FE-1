@@ -13,12 +13,15 @@ import axios from "axios";
 
 const Best = () => {
   const [getBests, setGetBests] = useState([]);
+
   axios.defaults.headers.common[
     "Authorization"
   ] = `Bearer ${localStorage.accessToken}`;
   axios
     .get("/apartments/recommend-posts")
-    .then((res) => setGetBests(res.data))
+    .then((res) => {
+      setGetBests(res.data);
+    })
     .catch((err) => console.log(err));
 
   const bests = getBests;

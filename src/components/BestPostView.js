@@ -10,27 +10,25 @@ import "../PostList.css";
 import ParentComment from "./ParentComment";
 import axios from "axios";
 
-const BestPostView = (props) => {
+const BestPostView = () => {
   const { id } = useParams();
-  const { bests, setBests } = useState(null);
+  const [getBest, setGetBest] = useState([]);
 
-  //console.log(localStorage.getItem("accessToken"));
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
   axios
-    .get("/recommend-posts/" + id, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    .get("/recommend-posts/" + id)
     .then((res) => {
-      console.log(res.data);
-      console.log(bests);
-      setBests(bests.push(res.data));
-      console.log(bests.concat(res.data));
+      const a = [res.data];
+      setGetBest(a);
+      console.log(a);
+      console.log(getBest);
     })
     .catch((err) => console.log(err));
 
-  console.log(bests);
-
+  console.log(getBest);
+  const bests = getBest;
   const num = bests.length;
 
   const categoryName = () => {
