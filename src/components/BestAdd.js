@@ -3,10 +3,6 @@ import Navbar from "./Navbar";
 import Header from "./Header";
 import "../BestAdd.css";
 import axios from "axios";
-import qs from "qs";
-axios.default.paramsSerializer = (params) => {
-  return qs.stringify(params);
-};
 
 const BestAdd = () => {
   const [bestTitle, setBestTitle] = useState("");

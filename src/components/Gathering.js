@@ -7,9 +7,23 @@ import { BrowserRouter, Route, Routes, Link, Outlet } from "react-router-dom";
 import "../Gathering.css";
 import "../Paging.css";
 import Pagination from "react-js-pagination";
+import axios from "axios";
 
-const Gathering = (props) => {
-  const gatherings = props.component;
+const Gathering = () => {
+  const [getGatherings, setGetGatherings] = useState([]);
+
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
+  axios
+    .get("/apartments/gatherings")
+    .then((res) => {
+      setGetGatherings(res.data);
+    })
+    .catch((err) => console.log(err));
+
+  const gatherings = getGatherings;
+
   const [page, setPage] = useState(1);
   const [renderPage, setRenderPage] = useState("unfocused");
   const [buttonColor, setButtonColor] = useState("all");
@@ -70,12 +84,12 @@ const Gathering = (props) => {
         ></GatheringForm>
       </div>
     ) : (
-      <GatheringFormComplete
+      <GatheringForm
         gathering={gathering}
         key={gathering.gatheringNo}
         title={gathering.title}
         id={gathering.id}
-      ></GatheringFormComplete>
+      ></GatheringForm>
     );
   });
 
@@ -134,12 +148,12 @@ const Gathering = (props) => {
         ></GatheringForm>
       </div>
     ) : (
-      <GatheringFormComplete
+      <GatheringForm
         gathering={gathering}
         key={gathering.gatheringNo}
         title={gathering.title}
         id={gathering.id}
-      ></GatheringFormComplete>
+      ></GatheringForm>
     );
   });
 

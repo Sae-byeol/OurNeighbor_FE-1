@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import "../BestPostView.css";
-
 import { useHistory, useParams, Outlet } from "react-router-dom";
 import bests from "./Best";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
@@ -10,46 +9,46 @@ import "../PostList.css";
 import ParentComment from "./ParentComment";
 import axios from "axios";
 
-const BestPostView = () => {
+const BestPostView = (props) => {
   const { id } = useParams();
-  const [getBest, setGetBest] = useState([]);
-
-  axios
-    .get("/recommend-posts/" + id, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-    .then((res) => {
-      setGetBest(res.data);
-      console.log(res.data);
-      console.log(getBest);
-    })
-    .catch((err) => console.log(err));
-
-  const bests = getBest;
+  const [best, setBest] = useState([]);
+  const bests = props.component;
   const num = bests.length;
 
-  const categoryName = () => {
-    if (bests.category === "food") return "맛집";
-
-    if (bests.category === "academy") return "학원";
-
-    if (bests.category === "cafe") return "카페";
-
-    if (bests.category === "sports") return "운동시설";
-  };
+  useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
+    axios
+      .get("/recommend-posts/" + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setBest(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const postList =
-    parseInt(bests.id) === 1
-      ? bests.slice(parseInt(bests.id) - 1, parseInt(bests.id) + 4)
-      : parseInt(bests.id) === 2
-      ? bests.slice(parseInt(bests.id) - 2, parseInt(bests.id) + 3)
-      : parseInt(bests.id) === parseInt(num) - 1
-      ? bests.slice(parseInt(bests.id) - 4, parseInt(bests.id) + 1)
-      : parseInt(bests.id) === parseInt(num)
-      ? bests.slice(parseInt(bests.id) - 5, parseInt(bests.id) + 0)
-      : bests.slice(parseInt(bests.id) - 3, parseInt(bests.id) + 2);
+    parseInt(best.id) === 1
+      ? bests.slice(parseInt(best.id) - 1, parseInt(best.id) + 4)
+      : parseInt(best.id) === 2
+      ? bests.slice(parseInt(best.id) - 2, parseInt(best.id) + 3)
+      : parseInt(best.id) === parseInt(num) - 1
+      ? bests.slice(parseInt(best.id) - 4, parseInt(best.id) + 1)
+      : parseInt(best.id) === parseInt(num)
+      ? bests.slice(parseInt(best.id) - 5, parseInt(best.id) + 0)
+      : bests.slice(parseInt(best.id) - 3, parseInt(best.id) + 2);
+
+  const categoryName = () => {
+    if (best.category === "food") return "맛집";
+
+    if (best.category === "academy") return "학원";
+
+    if (best.category === "cafe") return "카페";
+
+    if (best.category === "sports") return "운동시설";
+  };
 
   // 대댓글 구현
   const [commentContents, setCommentContents] = useState("");
@@ -103,22 +102,24 @@ const BestPostView = () => {
         </div>
         <div className="line"></div>
         <div className="bestPostView-section1">
-          <span className="bestPostView-title">{bests.title}</span>
+          <span className="bestPostView-title">{best.title}</span>
           <div className="bestPostView-subtitle">
             <span>{bests.title}</span>
             <span>/</span>
-            <span>작성자: {bests.author}</span>
+            <span>작성자: {best.author}</span>
           </div>
-          <img className="bestPostView-img" src={bests.photold}></img>
+          <img className="bestPostView-img" src={best.photold}></img>
           <div className="bestPostView-content">
-            {bests.content.split("\n").map((line) => {
-              return (
-                <span>
-                  {line}
-                  <br />
-                </span>
-              );
-            })}
+            {String(best.content)
+              .split("\n")
+              .map((line) => {
+                return (
+                  <span>
+                    {line}
+                    <br />
+                  </span>
+                );
+              })}
           </div>
         </div>
         <div className="category-line"></div>
@@ -129,7 +130,7 @@ const BestPostView = () => {
         <div className="relpy-line"></div>
         <div className="bestPostView-section2">
           <div className="reply-title">댓글</div>
-          <div className="reply-id">오새별</div>
+          <div className="reply-id">{best.author}</div>
           <textarea
             className="reply-input"
             onChange={(e) => getValue(e)}
@@ -149,7 +150,7 @@ const BestPostView = () => {
           <div className="pagination-pages">
             {postList
               ? postList.map((item, index) => {
-                  return parseInt(item.id) === parseInt(bests.id) ? (
+                  return parseInt(item.id) === parseInt(best.id) ? (
                     <Link
                       to={`/bestPostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#ffa800" }}

@@ -7,54 +7,98 @@ import { useHistory, useParams, Outlet } from "react-router-dom";
 import gatherings from "./Gathering";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import "../PostList.css";
+import ParentComment from "./ParentComment";
+import axios from "axios";
 
 const GatheringPostView = (props, { history }) => {
+  const { id } = useParams();
+  const [gathering, setGathering] = useState([]);
   const gatherings = props.component;
   const num = gatherings.length;
-  const { id } = useParams();
 
-  const matchItem = props.component.find(function (element) {
-    if (parseInt(element.id) === parseInt(id)) return true;
-  });
-
-  const categoryName = () => {
-    if (matchItem.category === "exercise") return "운동";
-
-    if (matchItem.category === "parents") return "학부모";
-
-    if (matchItem.category === "hobby") return "취미";
-
-    if (matchItem.category === "foodplace") return "맛집탐방";
-
-    if (matchItem.category === "animal") return "반려동물";
-  };
+  useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
+    axios
+      .get("/gathering/" + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setGathering(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const postList =
-    parseInt(matchItem.id) === 1
-      ? gatherings.slice(parseInt(matchItem.id) - 1, parseInt(matchItem.id) + 4)
-      : parseInt(matchItem.id) === 2
-      ? gatherings.slice(parseInt(matchItem.id) - 2, parseInt(matchItem.id) + 3)
-      : parseInt(matchItem.id) === parseInt(num) - 1
-      ? gatherings.slice(parseInt(matchItem.id) - 4, parseInt(matchItem.id) + 1)
-      : parseInt(matchItem.id) === parseInt(num)
-      ? gatherings.slice(parseInt(matchItem.id) - 5, parseInt(matchItem.id) + 0)
+    parseInt(gathering.id) === 1
+      ? gatherings.slice(parseInt(gathering.id) - 1, parseInt(gathering.id) + 4)
+      : parseInt(gathering.id) === 2
+      ? gatherings.slice(parseInt(gathering.id) - 2, parseInt(gathering.id) + 3)
+      : parseInt(gathering.id) === parseInt(num) - 1
+      ? gatherings.slice(parseInt(gathering.id) - 4, parseInt(gathering.id) + 1)
+      : parseInt(gathering.id) === parseInt(num)
+      ? gatherings.slice(parseInt(gathering.id) - 5, parseInt(gathering.id) + 0)
       : gatherings.slice(
-          parseInt(matchItem.id) - 3,
-          parseInt(matchItem.id) + 2
+          parseInt(gathering.id) - 3,
+          parseInt(gathering.id) + 2
         );
 
-  const [value, setValue] = useState("");
+  console.log(gatherings);
+
+  const categoryName = () => {
+    if (gathering.category === "exercise") return "운동";
+
+    if (gathering.category === "parents") return "학부모";
+
+    if (gathering.category === "hobby") return "취미";
+
+    if (gathering.category === "foodplace") return "맛집탐방";
+
+    if (gathering.category === "animal") return "반려동물";
+  };
+
+  // 대댓글 구현
+  const [commentContents, setCommentContents] = useState("");
   const [commentList, setCommentList] = useState([]);
+  const [count, setCount] = useState(0);
 
   const getValue = (e) => {
-    setValue(e);
+    setCommentContents(e.target.value);
   };
 
-  const addComment = () => {
-    console.log("AddComment");
-    setCommentList(commentList.concat([value]));
-    setValue("");
+  let body = {
+    comment: commentContents,
+    index: count,
+    responseTo: null,
   };
+
+  const addComment = (e) => {
+    if (commentContents === "") {
+      alert("내용을 입력해주세요");
+      return;
+    }
+    e.preventDefault();
+
+    setCount(count + 1);
+    setCommentList(commentList.concat(body));
+    setCommentContents("");
+  };
+
+  const beforeShowComments = commentList.filter((comment) => {
+    return comment.responseTo === null;
+  });
+
+  const showComments = beforeShowComments.map((parentComment, index) => {
+    return (
+      <ParentComment
+        parentComment={parentComment}
+        index={index}
+        commentList={commentList}
+        setCommentList={setCommentList}
+      ></ParentComment>
+    );
+  });
 
   return (
     <div className="App">
@@ -66,21 +110,23 @@ const GatheringPostView = (props, { history }) => {
         </div>
         <div className="line"></div>
         <div className="gatheringPostView-section1">
-          <span className="gatheringPostView-title">{matchItem.title}</span>
+          <span className="gatheringPostView-title">{gathering.title}</span>
           <div className="gatheringPostView-subtitle">
-            <span>{matchItem.title}</span>
+            <span>{gathering.title}</span>
             <span>/</span>
-            <span>작성자: {matchItem.author}</span>
+            <span>작성자: {gathering.author}</span>
           </div>
           <div className="gatheringPostView-content">
-            {matchItem.content.split("\n").map((line) => {
-              return (
-                <span>
-                  {line}
-                  <br />
-                </span>
-              );
-            })}
+            {String(gathering.content)
+              .split("\n")
+              .map((line) => {
+                return (
+                  <span>
+                    {line}
+                    <br />
+                  </span>
+                );
+              })}
           </div>
         </div>
         <div className="category-line"></div>
@@ -91,45 +137,19 @@ const GatheringPostView = (props, { history }) => {
         <div className="relpy-line"></div>
         <div className="gatheringPostView-section2">
           <div className="reply-title">댓글</div>
-          <div className="reply-id">오새별</div>
+          <div className="reply-id">{gathering.author}</div>
           <textarea
             className="reply-input"
             onChange={(e) => getValue(e.target.value)}
             type="text"
-            value={value}
+            value={commentContents}
           ></textarea>
           <div className="outreplybtn">
-            <button className="replybtn" onClick={addComment}>
+            <button className="replybtn" onClick={(e) => addComment(e)}>
               댓글 달기
             </button>
           </div>
-          <div>
-            {commentList.map((comment) =>
-              comment.length > 50 ? (
-                <div>
-                  <div className="reply-comment">
-                    <div className="reply-polygon">
-                      <img src={"../img/polygon.png"} alt="polygon"></img>
-                    </div>
-                    <div className="reply-eachcomment">
-                      <span>{comment}</span>
-                    </div>
-                  </div>
-                  <span className="reply-id">&nbsp;&nbsp;reply-id</span>
-                </div>
-              ) : (
-                <div className="reply-comment">
-                  <div className="reply-polygon">
-                    <img src={"../img/polygon.png"} alt="polygon"></img>
-                  </div>
-                  <span className="reply-eachcomment">
-                    <span>{comment}</span>
-                  </span>
-                  <span className="reply-id">&nbsp;&nbsp;reply-id</span>
-                </div>
-              )
-            )}
-          </div>
+          <div>{showComments}</div>
         </div>
         <div className="pagination-line"></div>
         <div className="pagination">
@@ -147,7 +167,7 @@ const GatheringPostView = (props, { history }) => {
                       <div className="postlist-complete">모집완료</div>
                       <div className="postlist-date">{item.date}</div>
                     </div>
-                  ) : parseInt(item.id) === parseInt(matchItem.id) ? (
+                  ) : parseInt(item.id) === parseInt(gathering.id) ? (
                     <Link
                       to={`/gatheringPostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#ffa800" }}

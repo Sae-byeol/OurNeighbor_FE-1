@@ -57,9 +57,18 @@ function App() {
 
   const [gatherings, setGatherings] = useState([]);
   useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
     axios
-      .get("dummy/gathering_list.json")
-      .then((res) => setGatherings(res.data.gatheringList))
+      .get("/apartments/gatherings", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        //console.log("success");
+        setGatherings(res.data);
+        console.log(res.data);
+      })
       .catch((err) => console.log(err));
   }, []);
 

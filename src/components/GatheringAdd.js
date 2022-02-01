@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import "../GatheringAdd.css";
+import axios from "axios";
 
 const BestAdd = () => {
   const [gatheringTitle, setGathering] = useState("");
-  const [bestContent, setGatheringContent] = useState("");
+  const [gatheringContent, setGatheringContent] = useState("");
 
   // 카테고리 뜨기
   const [showCategory, setShowCategory] = useState("none");
@@ -37,6 +38,29 @@ const BestAdd = () => {
     setShowCategory("none");
   };
 
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    //add함수 props로 받아오기
+    axios
+      .post(
+        "/gathering",
+        `title=${gatheringTitle}&&content=${gatheringContent}&&category=${showCategory}`,
+
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      });
+  };
+
   return (
     <div className="App">
       <div className="content">
@@ -59,7 +83,7 @@ const BestAdd = () => {
             <textarea
               className="gatheringAddTextarea"
               type="text"
-              value={bestContent}
+              value={gatheringContent}
               onChange={(e) => setGatheringContent(e.target.value)}
             />
             <div className="gatheringAddImg">사진 첨부</div>
@@ -201,7 +225,9 @@ const BestAdd = () => {
                 반려동물
               </button>
             </div>
-            <button className="gatheringAddCompleteBtn">작성 완료</button>
+            <button className="gatheringAddCompleteBtn" onClick={onSubmit}>
+              작성 완료
+            </button>
           </form>
         </div>
       </div>
