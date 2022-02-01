@@ -1,7 +1,16 @@
-import React from 'react'
+import React,{useState} from 'react'
 import '../Header.css' 
 import {BrowserRouter, Route, Routes,Link,Outlet} from 'react-router-dom';
-const Header = (props) => {
+import axios from 'axios';
+const Header = () => {
+  const [user, setUser]=useState({});
+  if(localStorage.getItem("accessToken")){
+    axios.get("/member/info", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+    }).then((res) => {setUser(res.data);})
+}
     return (
         <div className='header'>
           <Link to="/">
@@ -13,7 +22,7 @@ const Header = (props) => {
           <div className='header-right'>
             <div className='header-right-left'>
               <div>나의 쪽지함</div>
-              <div>{props.user.name}</div>
+              <div>{user.name}</div>
             </div>
             <div className='header-right-right'>
             <Link to="/mypage">
