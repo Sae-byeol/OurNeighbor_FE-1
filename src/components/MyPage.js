@@ -6,15 +6,21 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 
 const MyPage = () => {
-    const [user, setUser]=useState([]);
+    const [user, setUser]=useState({});
 
-    useEffect(()=>{
-        axios.get("dummy/member.json")
-        .then(res=>{
-            console.log(res.data)
-            setUser(res.data)
-        })
-    },[])
+    useEffect(() => {
+        axios
+          .get("/member/info", {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          })
+          .then((res) => {
+            setUser(res.data);
+            console.log(res.data);
+          })
+          .catch((err) => console.log(err));
+      }, []);
   return (
     <div className='App'>
     <div className='content'>
@@ -40,8 +46,12 @@ const MyPage = () => {
                     <span className='mypage-content-content'>{user.loginId}</span>
                 </div>
                 <div className='mypage-content'>
+                    <span className='mypage-content-title'>이메일</span>
+                    <span className='mypage-content-content'>{user.email}</span>
+                </div>
+                <div className='mypage-content'>
                     <span className='mypage-content-title'>아파트</span>
-                    <span className='mypage-content-content'>{user.apart_id}</span>
+                    <span className='mypage-content-content'>{user.apartName}</span>
                 </div>
                 <div className='mypage-content'>
                     <span className='mypage-content-title'>회원 유형</span>
