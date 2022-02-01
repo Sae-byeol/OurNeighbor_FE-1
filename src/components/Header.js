@@ -1,7 +1,7 @@
 import React from 'react'
 import '../Header.css' 
 import {BrowserRouter, Route, Routes,Link,Outlet} from 'react-router-dom';
-const Header = () => {
+const Header = (props) => {
     return (
         <div className='header'>
           <Link to="/">
@@ -13,7 +13,7 @@ const Header = () => {
           <div className='header-right'>
             <div className='header-right-left'>
               <div>나의 쪽지함</div>
-              <div>오새별님</div>
+              <div>{props.user.name}</div>
             </div>
             <div className='header-right-right'>
             <Link to="/mypage">
