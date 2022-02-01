@@ -7,7 +7,6 @@ import axios from "axios";
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [access, setAccess] = useState("noAccess");
   const navigate = useNavigate();
 
   const onEmailHandler = (event) => {
@@ -30,6 +29,12 @@ function LoginPage() {
         localStorage.setItem("accessToken", res.data.accessToken);
         //axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`
         console.log(res.data.accessToken);
+        if (res.data.accessToken) {
+          navigate("/");
+        }
+      })
+      .catch((Error) => {
+        alert("일치하는 회원 정보가 없습니다.");
       });
   };
 

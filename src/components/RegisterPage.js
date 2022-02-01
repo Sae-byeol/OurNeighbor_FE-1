@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../RegisterPage.css";
 import PopupDom from "./PopupDom";
 import PopupPostCode from "./PopupPostCode";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 // 주소창 api
 // https://www.npmjs.com/package/react-daum-postcode
@@ -14,6 +15,7 @@ function RegisterPage(props) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
+  const navigate = useNavigate();
 
   const onNameHandler = (event) => {
     setName(event.currentTarget.value);
@@ -87,6 +89,8 @@ function RegisterPage(props) {
         .then((res) => {
           console.log(res.data);
         });
+      alert("정상적으로 회원가입이 되었습니다.");
+      navigate("/signin");
     }
   };
 
