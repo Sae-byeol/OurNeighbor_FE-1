@@ -7,7 +7,6 @@ import axios from "axios";
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [access, setAccess] = useState("noAccess");
   const navigate = useNavigate();
 
   const onEmailHandler = (event) => {
@@ -17,6 +16,7 @@ function LoginPage() {
   const onPasswordHandler = (event) => {
     setPassword(event.currentTarget.value);
   };
+  
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -28,16 +28,20 @@ function LoginPage() {
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("accessToken", res.data.accessToken);
+        localStorage.setItem("refreshToken", res.data.refreshToken);
         //axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`
         console.log(res.data.accessToken);
-        if (res.data) {
-          setAccess("access");
+        if (res.data.accessToken) {
+          navigate("/");
         }
+      })
+      .catch((Error) => {
+        alert("일치하는 회원 정보가 없습니다.");
       });
   };
-  
+ 
 
-  //console.log(access);
+ 
 
   return (
     <div
@@ -74,9 +78,11 @@ function LoginPage() {
           />
         </div>
         <div>
+        
           <button type="submit" onClick={onSubmit} className="loginpage-button">
             | 로그인 |
-          </button>
+          </button> 
+   
           <span class="loginpage-q">아직 회원가입을 안 하셨나요?</span>
           <Link
             to={"/signup"}
