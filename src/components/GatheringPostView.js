@@ -98,7 +98,7 @@ const GatheringPostView = (props, { history }) => {
   };
 
   const postList =
-    parseInt(gathering.id) <= 5
+    parseInt(gatherings.length) <= 5
       ? gatherings
       : parseInt(gathering.id) === 1
       ? gatherings.slice(parseInt(gathering.id) - 1, parseInt(gathering.id) + 4)

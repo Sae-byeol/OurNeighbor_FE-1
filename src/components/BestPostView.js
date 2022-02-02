@@ -45,7 +45,7 @@ const BestPostView = (props) => {
   }, [useParams()]);
 
   const postList =
-    parseInt(best.id) <= 5
+    parseInt(bests.length) <= 5
       ? bests
       : parseInt(best.id) === 1
       ? bests.slice(parseInt(best.id) - 1, parseInt(best.id) + 4)
@@ -56,6 +56,8 @@ const BestPostView = (props) => {
       : parseInt(best.id) === parseInt(num)
       ? bests.slice(parseInt(best.id) - 5, parseInt(best.id) + 0)
       : bests.slice(parseInt(best.id) - 3, parseInt(best.id) + 2);
+
+  console.log(best.id);
 
   const categoryName = () => {
     if (best.category === "food") return "맛집";

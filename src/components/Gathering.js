@@ -50,16 +50,16 @@ const Gathering = () => {
 
   const addedGatherings = gatherings.map((gathering) => {
     for (let a = 1; a <= length; a = a + 1) {
-      searchedGatherings.id = a;
+      searchedGatherings.gatheringNo = a;
     }
     return gathering;
   });
 
   // 초기에는 unfocused 상태
-  // focused 상태였다가 unfocused 상태가 다시 될 때 id 값 다시 지정
+  // focused 상태였다가 unfocused 상태가 다시 될 때 gatheringNo 값 다시 지정
   let a = 1;
   const BeforeonClicksetPage = addedGatherings.map((best) => {
-    best.id = a;
+    best.gatheringNo = a;
     a++;
     return best;
   });
@@ -67,7 +67,8 @@ const Gathering = () => {
   // unfocused 상태일 때 각 페이지에 보여줄 객체들 필터
   const onClicksetPage = BeforeonClicksetPage.filter((gathering) => {
     return (
-      (page - 1) * 7 + 1 <= gathering.id && gathering.id <= (page - 1) * 7 + 7
+      (page - 1) * 7 + 1 <= gathering.gatheringNo &&
+      gathering.gatheringNo <= (page - 1) * 7 + 7
     );
   });
 
@@ -77,7 +78,7 @@ const Gathering = () => {
       <div className="gathering-flex">
         <GatheringForm
           gathering={gathering}
-          key={gathering.id}
+          key={gathering.gatheringNo}
           title={gathering.title}
           id={gathering.id}
         ></GatheringForm>
@@ -85,7 +86,7 @@ const Gathering = () => {
     ) : (
       <GatheringFormComplete
         gathering={gathering}
-        key={gathering.id}
+        key={gathering.gatheringNo}
         title={gathering.title}
         id={gathering.id}
       ></GatheringFormComplete>
@@ -119,17 +120,20 @@ const Gathering = () => {
     return best.category === getName;
   });
 
-  // id 값 재지정
+  // gatheringNo 값 재지정
   let i = 1;
   const onClickButtonSetForm = onClickButtonClassify.map((best) => {
-    best.id = i;
+    best.gatheringNo = i;
     i++;
     return best;
   });
 
-  // id 값에 따라 페이지별로 보여줄 객체들 필터링
+  // gatheringNo 값에 따라 페이지별로 보여줄 객체들 필터링
   const onClickButtonsetPage = onClickButtonSetForm.filter((best) => {
-    return (page - 1) * 7 + 1 <= best.id && best.id <= (page - 1) * 7 + 7;
+    return (
+      (page - 1) * 7 + 1 <= best.gatheringNo &&
+      best.gatheringNo <= (page - 1) * 7 + 7
+    );
   });
 
   // focused 상태일 때 보여줄 객체들 BestForm 형태로 나타내기
@@ -138,7 +142,7 @@ const Gathering = () => {
       <div className="gathering-flex">
         <GatheringForm
           gathering={gathering}
-          key={gathering.id}
+          key={gathering.gatheringNo}
           title={gathering.title}
           id={gathering.id}
         ></GatheringForm>
@@ -146,7 +150,7 @@ const Gathering = () => {
     ) : (
       <GatheringForm
         gathering={gathering}
-        key={gathering.id}
+        key={gathering.gatheringNo}
         title={gathering.title}
         id={gathering.id}
       ></GatheringForm>
