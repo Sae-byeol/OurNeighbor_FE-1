@@ -14,9 +14,26 @@ const MarketPostView = (props) => {
   const { id } = useParams();
   const [user, setUser] = useState([]);
   const [market, setMarket]=useState({});
-  const markets = props.component;
-  const num = markets.length;
+  const [markets,setMarkets]=useState([]);
+  //const markets=props.component;
+    const num = markets.length;
  
+    useEffect(() => {
+      //console.log(localStorage.getItem("accessToken"));
+      axios
+        .get("/apartments/used-goods", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          //console.log("success");
+          setMarkets(res.data);
+          console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+    }, []);
+
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
@@ -27,11 +44,12 @@ const MarketPostView = (props) => {
       })
       .then((res) => {
         setMarket(res.data);
-        console.log(res.data);
-        console.log(markets);
+        //console.log(res.data);
+        //console.log(markets);
+        console.log("render"); 
       })
       .catch((err) => console.log(err));
-  }, []);
+  },[useParams()]);
 
 
   const postList =
@@ -45,6 +63,7 @@ const MarketPostView = (props) => {
       ? markets.slice(parseInt(id) - 5, parseInt(id) + 0)
       : markets.slice(parseInt(id) - 3, parseInt(id) + 2);
 
+      //console.log(postList);
   const matchItem = props.component.find(function (element) {
     if (element.id === Number(id)) return true;
   });
@@ -143,7 +162,7 @@ const MarketPostView = (props) => {
                   return parseInt(item.id) ===
                     parseInt(market.id) ? (
                     <Link
-                      to={`/PostView/${item.id}`}
+                      to={`/marketPostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#ffa800" }}
                       onClick={window.scrollTo(0, 0)}
                     >
@@ -154,7 +173,7 @@ const MarketPostView = (props) => {
                     </Link>
                   ) : (
                     <Link
-                      to={`/PostView/${item.id}`}
+                      to={`/marketPostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#443333" }}
                       onClick={window.scrollTo(0, 0)}
                     >
