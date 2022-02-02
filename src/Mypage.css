@@ -1,110 +1,107 @@
-.mypage-section2{
-    width: 100%;
-    text-align: center;
-    padding-bottom: 103px;
+.mypage-section2 {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 103px;
 }
-.mypageForm{
-    width: 540px;
-    height: 670px;
-    margin-top: 70px;
-    display: inline-block;
-    width: 50%;
-    padding: 22px 23px 23px 22px;
-    border-radius: 20px;
-    border: solid 1px #b2b2b2;
-    background-color: rgba(255, 255, 255, 0.7);
+.mypageForm {
+  width: 540px;
+  height: 700px;
+  margin-top: 70px;
+  display: inline-block;
+  width: 50%;
+  padding: 22px 23px 23px 22px;
+  border-radius: 20px;
+  border: solid 1px #b2b2b2;
+  background-color: rgba(255, 255, 255, 0.7);
 }
-.editForm{
-    width: 540px;
-    height: 870px;
-    margin-top: 70px;
-    display: inline-block;
-    width: 50%;
-    padding: 22px 23px 23px 22px;
-    border-radius: 20px;
-    border: solid 1px #b2b2b2;
-    background-color: rgba(255, 255, 255, 0.7);
+.editForm {
+  width: 540px;
+  height: 870px;
+  margin-top: 70px;
+  display: inline-block;
+  width: 50%;
+  padding: 22px 23px 23px 22px;
+  border-radius: 20px;
+  border: solid 1px #b2b2b2;
+  background-color: rgba(255, 255, 255, 0.7);
 }
-.mypage-img{
-    width: 150px;
+.mypage-img {
+  width: 150px;
   height: 150px;
   margin-top: 44px;
   margin-bottom: 75px;
 }
-.mypage-content{
-    width: 100%;
-    margin-bottom: 30px;
-    text-align: left;
-    margin-left: 25px;
+.mypage-content {
+  width: 100%;
+  margin-bottom: 30px;
+  text-align: left;
+  margin-left: 25px;
 }
-.mypage-content-title{
-    display: inline-block;
-    width: 80px;
-    font-family: HSGaeulSenggak2;
-    font-size: 15px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #9a9a9a;
-    
+.mypage-content-title {
+  display: inline-block;
+  width: 80px;
+  font-family: HSGaeulSenggak2;
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #9a9a9a;
 }
-.mypage-content-content{
-    display: inline-block;
-    margin-left: 200px;
-    font-family: HSGaeulSenggak2;
-    font-size: 15px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #433;
- 
+.mypage-content-content {
+  display: inline-block;
+  margin-left: 200px;
+  font-family: HSGaeulSenggak2;
+  font-size: 15px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #433;
 }
-.mypage-edit{
-    width: 100%;
-    text-align: center;
+.mypage-edit {
+  width: 100%;
+  text-align: center;
 }
-.mypage-editBtn{
-    width: 225px;
-    height: 34px;
-    display: inline-block;
-    width: 50%;
-    margin-top: 60px;
-    margin-bottom: 23px;
-    font-family: HSGaeulSenggak2;
-    font-size: 25px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #433;
+.mypage-editBtn {
+  width: 225px;
+  height: 34px;
+  display: inline-block;
+  width: 50%;
+  margin-top: 60px;
+  margin-bottom: 23px;
+  font-family: HSGaeulSenggak2;
+  font-size: 25px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #433;
 }
-.edit-user{
-    display: inline-block;
-    margin-left: 150px;
-   
+.edit-user {
+  display: inline-block;
+  margin-left: 150px;
 }
-.editpage-editBtn{
-    width: 225px;
-    height: 34px;
-    display: inline-block;
-    width: 50%;
-    margin-top: 30px;
-    margin-bottom: 23px;
-    font-family: HSGaeulSenggak2;
-    font-size: 25px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #433;
+.editpage-editBtn {
+  width: 225px;
+  height: 34px;
+  display: inline-block;
+  width: 50%;
+  margin-top: 30px;
+  margin-bottom: 23px;
+  font-family: HSGaeulSenggak2;
+  font-size: 25px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #433;
 }

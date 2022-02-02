@@ -4,7 +4,7 @@ import Header from "./Header";
 import "../GatheringAdd.css";
 import axios from "axios";
 
-const BestAdd = () => {
+const GatheringAdd = () => {
   const [gatheringTitle, setGathering] = useState("");
   const [gatheringContent, setGatheringContent] = useState("");
 
@@ -235,4 +235,4 @@ const BestAdd = () => {
   );
 };
 
-export default BestAdd;
+export default GatheringAdd;

@@ -51,25 +51,23 @@ const Best = () => {
 
   const addedBests = bests.map((best) => {
     for (let a = 1; a <= length; a = a + 1) {
-      searchedBests.bestNo = a;
+      searchedBests.id = a;
     }
     return best;
   });
 
   // 초기에는 unfocused 상태
-  // focused 상태였다가 unfocused 상태가 다시 될 때 bestNo 값 다시 지정
+  // focused 상태였다가 unfocused 상태가 다시 될 때 id 값 다시 지정
   let a = 1;
   const BeforeonClicksetPage = addedBests.map((best) => {
-    best.bestNo = a;
+    best.id = a;
     a++;
     return best;
   });
 
   // unfocused 상태일 때 각 페이지에 보여줄 객체들 필터
   const onClicksetPage = BeforeonClicksetPage.filter((best) => {
-    return (
-      (page - 1) * 9 + 1 <= best.bestNo && best.bestNo <= (page - 1) * 9 + 9
-    );
+    return (page - 1) * 9 + 1 <= best.id && best.id <= (page - 1) * 9 + 9;
   });
 
   // unfocused 상태일 때 보여줄 객체들 BestForm 형태로 나타내기
@@ -78,7 +76,7 @@ const Best = () => {
       <div className="best-flex">
         <BestForm
           best={best}
-          key={best.bestNo}
+          key={best.id}
           title={best.title}
           id={best.id}
         ></BestForm>
@@ -113,19 +111,17 @@ const Best = () => {
     return best.category === getName;
   });
 
-  // bestNo 값 재지정
+  // id 값 재지정
   let i = 1;
   const onClickButtonSetForm = onClickButtonClassify.map((best) => {
-    best.bestNo = i;
+    best.id = i;
     i++;
     return best;
   });
 
-  // bestNo 값에 따라 페이지별로 보여줄 객체들 필터링
+  // id 값에 따라 페이지별로 보여줄 객체들 필터링
   const onClickButtonsetPage = onClickButtonSetForm.filter((best) => {
-    return (
-      (page - 1) * 9 + 1 <= best.bestNo && best.bestNo <= (page - 1) * 9 + 9
-    );
+    return (page - 1) * 9 + 1 <= best.id && best.id <= (page - 1) * 9 + 9;
   });
 
   // focused 상태일 때 보여줄 객체들 BestForm 형태로 나타내기
@@ -134,7 +130,7 @@ const Best = () => {
       <div className="best-flex">
         <BestForm
           best={best}
-          key={best.bestNo}
+          key={best.id}
           title={best.title}
           id={best.id}
         ></BestForm>

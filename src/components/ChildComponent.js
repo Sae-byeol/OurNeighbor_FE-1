@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const ChildComponent = (props) => {
-  const { childComments, index, commentList, setCommentList } = props;
+  const { childComments, commentList, setCommentList, id, index } = props;
   const [commentContents, setCommentContents] = useState("");
   const [showReply, setShowReply] = useState(false);
 
@@ -17,17 +18,33 @@ const ChildComponent = (props) => {
       alert("내용을 입력해주세요");
       return;
     }
-
-    e.preventDefault();
-
     let body = {
-      comment: commentContents,
-      index: index,
+      content: commentContents,
       responseTo: index,
     };
+    console.log(index);
+
     setCommentList(commentList.concat(body));
     setCommentContents("");
     letShowReply();
+    axios
+      .post(
+        "/comment/" + id,
+        {
+          postCategory: "recommend",
+          content: commentContents,
+          responseTo: index,
+          commentType: "child",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      });
   };
 
   const style = {
@@ -78,14 +95,14 @@ const ChildComponent = (props) => {
           : childComments.map((comment) => {
               return (
                 <div>
-                  {comment.comment.length > 62 ? (
+                  {comment.content.length > 62 ? (
                     <div>
                       <div className="reply-comment">
                         <div className="reply-polygon">
                           <img src={"../img/polygon.png"} alt="polygon"></img>
                         </div>
                         <div className="reply-eachcomment">
-                          <span>{comment.comment}</span>
+                          <span>{comment.content}</span>
                         </div>
                       </div>
                       <span className="reply-id">&nbsp;&nbsp;reply-id</span>
@@ -97,7 +114,7 @@ const ChildComponent = (props) => {
                           <img src={"../img/polygon.png"} alt="polygon"></img>
                         </div>
                         <span className="reply-eachcomment">
-                          <span>{comment.comment}</span>
+                          <span>{comment.content}</span>
                         </span>
                         <span className="reply-id">&nbsp;&nbsp;reply-id</span>
                       </div>

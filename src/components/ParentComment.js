@@ -2,22 +2,29 @@ import React from "react";
 import ChildComponent from "./ChildComponent";
 
 const ParentComment = (props) => {
-  const { parentComment, index, commentList, setCommentList } = props;
+  const { parentComment, commentList, setCommentList, id, index } = props;
 
   const childComments = commentList.filter((comment) => {
-    return parentComment.index === comment.index && parentComment !== comment;
+    return (
+      Number(index) === Number(comment.responseTo) &&
+      comment.commentType === "child"
+    );
   });
+
+  console.log(commentList);
+  console.log(parentComment);
+  console.log(childComments);
 
   return (
     <div>
-      {parentComment.comment.length > 50 ? (
+      {String(parentComment.content).length > 50 ? (
         <div>
           <div className="reply-comment">
             <div className="reply-polygon">
               <img src={"../img/polygon.png"} alt="polygon"></img>
             </div>
             <div className="reply-eachcomment">
-              <span>{parentComment.comment}</span>
+              <span>{parentComment.contentt}</span>
             </div>
           </div>
           <span className="reply-id">&nbsp;&nbsp;reply-id</span>
@@ -29,18 +36,19 @@ const ParentComment = (props) => {
               <img src={"../img/polygon.png"} alt="polygon"></img>
             </div>
             <span className="reply-eachcomment">
-              <span>{parentComment.comment}</span>
+              <span>{parentComment.content}</span>
             </span>
             <span className="reply-id">&nbsp;&nbsp;reply-id</span>
           </div>
         </div>
       )}
-      <ChildComponent
+      {/* <ChildComponent
         childComments={childComments}
-        index={index}
         commentList={commentList}
         setCommentList={setCommentList}
-      ></ChildComponent>
+        id={id}
+        index={index}
+      ></ChildComponent> */}
     </div>
   );
 };

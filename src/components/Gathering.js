@@ -84,12 +84,12 @@ const Gathering = () => {
         ></GatheringForm>
       </div>
     ) : (
-      <GatheringForm
+      <GatheringFormComplete
         gathering={gathering}
         key={gathering.gatheringNo}
         title={gathering.title}
         id={gathering.id}
-      ></GatheringForm>
+      ></GatheringFormComplete>
     );
   });
 

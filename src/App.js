@@ -50,10 +50,10 @@ function App() {
       .then((res) => {
         //console.log("success");
         setBests(res.data);
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
+  console.log(bests);
 
   const [gatherings, setGatherings] = useState([]);
   useEffect(() => {
@@ -67,24 +67,24 @@ function App() {
       .then((res) => {
         //console.log("success");
         setGatherings(res.data);
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
+  console.log(gatherings);
 
   const [notice, setNotice] = useState([]);
   const [markets, setMarkets] = useState([]);
-  useEffect(() => {
-    axios
-      .get("dummy/market_list.json")
-      .then((res) => setMarkets(res.data.marketList))
-      .catch((err) => console.log(err));
+  // useEffect(() => {
+  //   axios
+  //     .get("dummy/market_list.json")
+  //     .then((res) => setMarkets(res.data.marketList))
+  //     .catch((err) => console.log(err));
 
-    axios
-      .get("dummy/notice_list.json")
-      .then((res) => setNotice(res.data.noticeList))
-      .catch((err) => console.log(err));
-  }, []);
+  //   axios
+  //     .get("dummy/notice_list.json")
+  //     .then((res) => setNotice(res.data.noticeList))
+  //     .catch((err) => console.log(err));
+  // }, []);
   //console.log(markets);
 
   return (
