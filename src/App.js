@@ -38,39 +38,39 @@ function App() {
   })*/
   //console.log(todayTitle);
 
-  const [bests, setBests] = useState([]);
-  useEffect(() => {
-    //console.log(localStorage.getItem("accessToken"));
-    axios
-      .get("/apartments/recommend-posts", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        //console.log("success");
-        setBests(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-  console.log(bests);
+  // const [bests, setBests] = useState([]);
+  // useEffect(() => {
+  //   //console.log(localStorage.getItem("accessToken"));
+  //   axios
+  //     .get("/apartments/recommend-posts", {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       //console.log("success");
+  //       setBests(res.data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
+  // console.log(bests);
 
-  const [gatherings, setGatherings] = useState([]);
-  useEffect(() => {
-    //console.log(localStorage.getItem("accessToken"));
-    axios
-      .get("/apartments/gatherings", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        //console.log("success");
-        setGatherings(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-  console.log(gatherings);
+  // const [gatherings, setGatherings] = useState([]);
+  // useEffect(() => {
+  //   //console.log(localStorage.getItem("accessToken"));
+  //   axios
+  //     .get("/apartments/gatherings", {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       //console.log("success");
+  //       setGatherings(res.data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
+  // console.log(gatherings);
 
   const [notice, setNotice] = useState([]);
   const [markets, setMarkets] = useState([]);
@@ -110,25 +110,20 @@ function App() {
         <Route path="/noticeAdd" element={<NoticeAdd></NoticeAdd>}></Route>
         <Route path="/signin" element={<LoginPage></LoginPage>}></Route>
         <Route path="/signup" element={<RegisterPage></RegisterPage>}></Route>
-        <Route path="/best" element={<Best component={bests}></Best>}></Route>
+        <Route path="/best" element={<Best></Best>}></Route>
         <Route path="/bestAdd" element={<BestAdd></BestAdd>}></Route>
         <Route
           path="/bestPostView/:id"
-          element={<BestPostView component={bests}></BestPostView>}
+          element={<BestPostView></BestPostView>}
         ></Route>
-        <Route
-          path="/gathering"
-          element={<Gathering component={gatherings}></Gathering>}
-        ></Route>
+        <Route path="/gathering" element={<Gathering></Gathering>}></Route>
         <Route
           path="/gatheringAdd"
           element={<GatheringAdd></GatheringAdd>}
         ></Route>
         <Route
           path="/gatheringPostView/:id"
-          element={
-            <GatheringPostView component={gatherings}></GatheringPostView>
-          }
+          element={<GatheringPostView></GatheringPostView>}
         ></Route>
       </Routes>
     </div>

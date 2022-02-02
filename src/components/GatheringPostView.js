@@ -9,12 +9,31 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import "../PostList.css";
 import ParentComment from "./ParentComment";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const GatheringPostView = (props, { history }) => {
   const { id } = useParams();
   const [gathering, setGathering] = useState([]);
-  const gatherings = props.component;
+  const [gatherings, setGatherings] = useState([]);
   const num = gatherings.length;
+  const [nickname, setNickname] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
+    axios
+      .get("/apartments/gatherings", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        //console.log("success");
+        setGatherings(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
@@ -28,10 +47,60 @@ const GatheringPostView = (props, { history }) => {
         setGathering(res.data);
       })
       .catch((err) => console.log(err));
+  }, [useParams()]);
+
+  useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
+    axios
+      .get("/member/info", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.nickName);
+        setNickname(res.data.nickName);
+        console.log(nickname);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
+  const showNickName = (e) => {
+    if (String(nickname) === String(gathering.author)) {
+      console.log(String(nickname) === String(gathering.author));
+      return (
+        <button
+          className="gatheringPostView-button"
+          onClick={(e) => onClickButton(e)}
+        >
+          모집완료
+        </button>
+      );
+    }
+  };
+
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
+
+  const onClickButton = (e) => {
+    e.preventDefault();
+    alert("모집완료 처리가 되었습니다");
+    axios
+      .put("/gathering/" + id, { complete: true })
+      .then(function (res) {
+        console.log(res.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    navigate("/gathering");
+  };
+
   const postList =
-    parseInt(gathering.id) === 1
+    parseInt(gathering.id) <= 5
+      ? gatherings
+      : parseInt(gathering.id) === 1
       ? gatherings.slice(parseInt(gathering.id) - 1, parseInt(gathering.id) + 4)
       : parseInt(gathering.id) === 2
       ? gatherings.slice(parseInt(gathering.id) - 2, parseInt(gathering.id) + 3)
@@ -43,8 +112,6 @@ const GatheringPostView = (props, { history }) => {
           parseInt(gathering.id) - 3,
           parseInt(gathering.id) + 2
         );
-
-  console.log(gatherings);
 
   const categoryName = () => {
     if (gathering.category === "exercise") return "운동";
@@ -116,6 +183,7 @@ const GatheringPostView = (props, { history }) => {
             <span>/</span>
             <span>작성자: {gathering.author}</span>
           </div>
+          <div>{showNickName()}</div>
           <div className="gatheringPostView-content">
             {String(gathering.content)
               .split("\n")
@@ -157,7 +225,7 @@ const GatheringPostView = (props, { history }) => {
           <div className="pagination-pages">
             {postList
               ? postList.map((item, index) => {
-                  return item.complete === "false" ? (
+                  return item.complete === true ? (
                     <div
                       className="postlist"
                       key={index}

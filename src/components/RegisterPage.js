@@ -29,7 +29,22 @@ function RegisterPage(props) {
     setId(event.currentTarget.value);
   };
 
-  const checkDuplication = () => {
+  const checkNicknameDuplication = () => {
+    axios
+      .get(`/member/nick-name/${nickname}`)
+      .then((res) => {
+        if (res.data === "present") {
+          alert("중복되는 닉네임입니다.");
+        } else if (res.data === "not present") {
+          alert("사용가능한 닉네임입니다.");
+        }
+      })
+      .catch((Error) => {
+        console.log(Error);
+      });
+  };
+
+  const checkIdDuplication = () => {
     axios
       .get(`/member/${id}`)
       .then((res) => {
@@ -146,6 +161,13 @@ function RegisterPage(props) {
             required
             className="registerpage-nickname"
           />
+          <button
+            className="registerpage-button-id"
+            type="button"
+            onClick={checkNicknameDuplication}
+          >
+            중복 확인
+          </button>
         </div>
         <div className="registerpage-ids">
           <span className="span">아이디&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -160,7 +182,7 @@ function RegisterPage(props) {
           <button
             className="registerpage-button-id"
             type="button"
-            onClick={checkDuplication}
+            onClick={checkIdDuplication}
           >
             중복 확인
           </button>

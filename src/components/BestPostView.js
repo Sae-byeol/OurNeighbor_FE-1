@@ -26,7 +26,6 @@ const BestPostView = (props) => {
       .then((res) => {
         //console.log("success");
         setBests(res.data);
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -46,7 +45,9 @@ const BestPostView = (props) => {
   }, [useParams()]);
 
   const postList =
-    parseInt(best.id) === 1
+    parseInt(best.id) <= 5
+      ? bests
+      : parseInt(best.id) === 1
       ? bests.slice(parseInt(best.id) - 1, parseInt(best.id) + 4)
       : parseInt(best.id) === 2
       ? bests.slice(parseInt(best.id) - 2, parseInt(best.id) + 3)
@@ -154,7 +155,6 @@ const BestPostView = (props) => {
 
   useEffect((e) => {
     renumberResponseTo();
-    console.log(responseTo);
     //console.log(localStorage.getItem("accessToken"));
     axios
       .get("/recommend-posts/comments/" + id, {
