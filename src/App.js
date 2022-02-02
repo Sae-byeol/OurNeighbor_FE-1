@@ -59,7 +59,7 @@ function App() {
         <Route path="/calender" element={<CalenderHome></CalenderHome>}></Route>
         <Route path="/notice" element={<Notice></Notice>}></Route>
         <Route
-          path="/postView/:id"
+          path="/marketPostView/:id"
           element={<MarketPostView component={markets}></MarketPostView>}
         ></Route>
         <Route
