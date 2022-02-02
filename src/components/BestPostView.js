@@ -12,9 +12,25 @@ import axios from "axios";
 const BestPostView = (props) => {
   const { id } = useParams();
   const [best, setBest] = useState([]);
-  const bests = props.component;
+  //const bests = props.component;
+  
+  const [bests, setBests]=useState([]);
   const num = bests.length;
-
+  useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
+    axios
+      .get("/apartments/recommend-posts", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        //console.log("success");
+        setBests(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
@@ -27,7 +43,7 @@ const BestPostView = (props) => {
         setBest(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [useParams()]);
 
   const postList =
     parseInt(best.id) === 1
