@@ -11,7 +11,7 @@ import ParentComment from "./ParentComment";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const GatheringPostView = (props, { history }) => {
+const GatheringPostView = () => {
   const { id } = useParams();
   const [gathering, setGathering] = useState([]);
   const [gatherings, setGatherings] = useState([]);
@@ -19,6 +19,7 @@ const GatheringPostView = (props, { history }) => {
   const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
 
+  // 전체 게시글 정보를 불러와서 gatherings에 저장
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
@@ -35,6 +36,8 @@ const GatheringPostView = (props, { history }) => {
       .catch((err) => console.log(err));
   }, []);
 
+  // 해당 게시글 정보를 불러와서 gathering에 저장
+  // 여기서 useParams()는 무슨 역할?
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
@@ -49,6 +52,8 @@ const GatheringPostView = (props, { history }) => {
       .catch((err) => console.log(err));
   }, [useParams()]);
 
+  // complete 버튼을 구현하기 위해
+  // 현재 접속되어있는 유저의 닉네임을 불러온다
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
@@ -65,9 +70,9 @@ const GatheringPostView = (props, { history }) => {
       .catch((err) => console.log(err));
   }, []);
 
+  // complete 버튼 보여주기 여부 결정 관련 함수
   const showNickName = (e) => {
     if (String(nickname) === String(gathering.author)) {
-      console.log(String(nickname) === String(gathering.author));
       return (
         <button
           className="gatheringPostView-button"
@@ -83,6 +88,7 @@ const GatheringPostView = (props, { history }) => {
     "Authorization"
   ] = `Bearer ${localStorage.accessToken}`;
 
+  // 모집 완료 버튼 누르면 실행되는 함수
   const onClickButton = (e) => {
     e.preventDefault();
     alert("모집완료 처리가 되었습니다");
@@ -97,6 +103,7 @@ const GatheringPostView = (props, { history }) => {
     navigate("/gathering");
   };
 
+  // 이전글/다음글
   const postList =
     parseInt(gatherings.length) <= 5
       ? gatherings
@@ -113,6 +120,7 @@ const GatheringPostView = (props, { history }) => {
           parseInt(gathering.id) + 2
         );
 
+  // 카테고리 이름 보여주는 함수
   const categoryName = () => {
     if (gathering.category === "exercise") return "운동";
 

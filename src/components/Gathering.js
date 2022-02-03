@@ -46,9 +46,13 @@ const Gathering = () => {
     }
   });
 
+  // 새로운 객체 변수 추가(bestNo)
+  // 카테고리 지정할 때마다 바뀌는 변수
+  // pagination 기능 구현하기 위해 집어넣음
+  // id값은 gatheringNo와 구별되어 BestForm으로 넘겨주는 역할
   let length = searchedGatherings.length;
 
-  const addedGatherings = gatherings.map((gathering) => {
+  const addedGatherings = searchedGatherings.map((gathering) => {
     for (let a = 1; a <= length; a = a + 1) {
       searchedGatherings.gatheringNo = a;
     }

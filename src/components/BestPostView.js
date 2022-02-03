@@ -9,14 +9,14 @@ import "../PostList.css";
 import ParentComment from "./ParentComment";
 import axios from "axios";
 
-const BestPostView = (props) => {
+const BestPostView = () => {
   const { id } = useParams();
   const [best, setBest] = useState([]);
   const [bests, setBests] = useState([]);
   const num = bests.length;
 
+  // 전체 게시글 정보를 불러와서 bests에 저장
   useEffect(() => {
-    //console.log(localStorage.getItem("accessToken"));
     axios
       .get("/apartments/recommend-posts", {
         headers: {
@@ -24,14 +24,14 @@ const BestPostView = (props) => {
         },
       })
       .then((res) => {
-        //console.log("success");
         setBests(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
+  // 해당 게시글 정보를 불러와서 best에 저장
+  // 여기서 useParams()는 무슨 역할?
   useEffect(() => {
-    //console.log(localStorage.getItem("accessToken"));
     axios
       .get("/recommend-posts/" + id, {
         headers: {
@@ -44,6 +44,7 @@ const BestPostView = (props) => {
       .catch((err) => console.log(err));
   }, [useParams()]);
 
+  // 이전글/다음글
   const postList =
     parseInt(bests.length) <= 5
       ? bests
@@ -57,8 +58,7 @@ const BestPostView = (props) => {
       ? bests.slice(parseInt(best.id) - 5, parseInt(best.id) + 0)
       : bests.slice(parseInt(best.id) - 3, parseInt(best.id) + 2);
 
-  console.log(best.id);
-
+  // 카테고리 이름 보여주는 함수
   const categoryName = () => {
     if (best.category === "food") return "맛집";
 
@@ -69,39 +69,87 @@ const BestPostView = (props) => {
     if (best.category === "sports") return "운동시설";
   };
 
-  // 대댓글 구현
+  // <대댓글 구현>
   const [commentContents, setCommentContents] = useState("");
   const [commentList, setCommentList] = useState([]);
-  const [commentId, setCommentId] = useState(0);
   const [responseTo, setResponseTo] = useState(0);
 
+  // 댓글, 대댓글 get 해오기
+  useEffect((e) => {
+    axios
+      .get("/recommend-posts/comments/" + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        // commentList 초기화 및 get 해온 댓글, 대댓글 추가
+        setCommentList([]);
+        if (commentList.length === 0) {
+          setCommentList(commentList.concat(res.data));
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const [author, setAuthor] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("/member/info", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setAuthor(res.data.nickName);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // 댓글들 보여주기
+  const beforeShowComments = commentList.filter((comment) => {
+    return comment.commentType === "parent";
+  });
+
+  const showComments =
+    commentList === []
+      ? null
+      : beforeShowComments.map((parentComment, index) => {
+          return (
+            <ParentComment
+              parentComment={parentComment}
+              commentList={commentList}
+              setCommentList={setCommentList}
+              id={id}
+              index={index}
+              author={author}
+            ></ParentComment>
+          );
+        });
+
+  // 댓글 작성 => commentContents에 저장
   const getValue = (e) => {
     setCommentContents(e.target.value);
-    console.log(responseTo);
   };
 
-  const forAddComment = () => {
-    setCommentId(commentId + 1);
-    setResponseTo(responseTo + 1);
-  };
-
+  // 댓글 작성 버튼 누를 때
   const addComment = (e) => {
-    renumberResponseTo();
+    e.preventDefault();
+    // 댓글 없으면 alert 띄우기
     if (commentContents === "") {
       alert("내용을 입력해주세요");
       return;
     }
 
-    setCommentId(commentId + 1);
+    // responseTo +1
     setResponseTo(responseTo + 1);
     let body = {
       content: commentContents,
-      commentId: commentId,
-      responseTo: responseTo,
+      commentType: "parent",
+      userNickName: author,
     };
-
     setCommentList(commentList.concat(body));
-
     setCommentContents("");
     axios
       .post(
@@ -122,58 +170,6 @@ const BestPostView = (props) => {
         console.log(res.data);
       });
   };
-
-  const renumberResponseTo = () => {
-    let commentListLength = commentList.length;
-    if (commentList.length !== 0) {
-      console.log(Number(commentList[commentListLength - 1].responseTo) + 1);
-      setResponseTo(Number(commentList[commentListLength - 1].responseTo) + 1);
-      console.log(responseTo);
-    }
-  };
-
-  const beforeShowComments = commentList.filter((comment) => {
-    return comment.commentType === "parent";
-  });
-
-  const showComments =
-    commentList === []
-      ? null
-      : commentList.map((parentComment, index) => {
-          return (
-            <ParentComment
-              parentComment={parentComment}
-              commentList={commentList}
-              setCommentList={setCommentList}
-              id={id}
-              index={index}
-            ></ParentComment>
-          );
-        });
-
-  const deleteList = () => {
-    setCommentList([]);
-  };
-
-  useEffect((e) => {
-    renumberResponseTo();
-    //console.log(localStorage.getItem("accessToken"));
-    axios
-      .get("/recommend-posts/comments/" + id, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        deleteList();
-        console.log(commentList);
-        if (commentList.length === 0) {
-          setCommentList(commentList.concat(res.data));
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   return (
     <div className="App">

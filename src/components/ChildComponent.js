@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const ChildComponent = (props) => {
-  const { childComments, commentList, setCommentList, id, index } = props;
+  const { childComments, commentList, setCommentList, id, index, author } =
+    props;
   const [commentContents, setCommentContents] = useState("");
   const [showReply, setShowReply] = useState(false);
 
@@ -21,8 +22,9 @@ const ChildComponent = (props) => {
     let body = {
       content: commentContents,
       responseTo: index,
+      commentType: "child",
+      userNickName: author,
     };
-    console.log(index);
 
     setCommentList(commentList.concat(body));
     setCommentContents("");
@@ -102,10 +104,21 @@ const ChildComponent = (props) => {
                           <img src={"../img/polygon.png"} alt="polygon"></img>
                         </div>
                         <div className="reply-eachcomment">
-                          <span>{comment.content}</span>
+                          <span>
+                            {comment.content.split("\n").map((line) => {
+                              return (
+                                <span>
+                                  {line}
+                                  <br />
+                                </span>
+                              );
+                            })}
+                          </span>
                         </div>
                       </div>
-                      <span className="reply-id">&nbsp;&nbsp;reply-id</span>
+                      <span className="reply-id">
+                        &nbsp;&nbsp;{comment.userNickName}
+                      </span>
                     </div>
                   ) : (
                     <div>
@@ -116,7 +129,9 @@ const ChildComponent = (props) => {
                         <span className="reply-eachcomment">
                           <span>{comment.content}</span>
                         </span>
-                        <span className="reply-id">&nbsp;&nbsp;reply-id</span>
+                        <span className="reply-id">
+                          &nbsp;&nbsp;{comment.userNickName}
+                        </span>
                       </div>
                     </div>
                   )}

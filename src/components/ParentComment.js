@@ -2,18 +2,15 @@ import React from "react";
 import ChildComponent from "./ChildComponent";
 
 const ParentComment = (props) => {
-  const { parentComment, commentList, setCommentList, id, index } = props;
+  const { parentComment, commentList, setCommentList, id, index, author } =
+    props;
 
   const childComments = commentList.filter((comment) => {
     return (
-      Number(index) === Number(comment.responseTo) &&
-      comment.commentType === "child"
+      comment.commentType === "child" &&
+      Number(index) === Number(comment.responseTo)
     );
   });
-
-  console.log(commentList);
-  console.log(parentComment);
-  console.log(childComments);
 
   return (
     <div>
@@ -24,10 +21,21 @@ const ParentComment = (props) => {
               <img src={"../img/polygon.png"} alt="polygon"></img>
             </div>
             <div className="reply-eachcomment">
-              <span>{parentComment.contentt}</span>
+              <span>
+                {parentComment.content.split("\n").map((line) => {
+                  return (
+                    <span>
+                      {line}
+                      <br />
+                    </span>
+                  );
+                })}
+              </span>
             </div>
           </div>
-          <span className="reply-id">&nbsp;&nbsp;reply-id</span>
+          <span className="reply-id">
+            &nbsp;&nbsp;{parentComment.userNickName}
+          </span>
         </div>
       ) : (
         <div>
@@ -38,17 +46,20 @@ const ParentComment = (props) => {
             <span className="reply-eachcomment">
               <span>{parentComment.content}</span>
             </span>
-            <span className="reply-id">&nbsp;&nbsp;reply-id</span>
+            <span className="reply-id">
+              &nbsp;&nbsp;{parentComment.userNickName}
+            </span>
           </div>
         </div>
       )}
-      {/* <ChildComponent
+      <ChildComponent
         childComments={childComments}
         commentList={commentList}
         setCommentList={setCommentList}
         id={id}
         index={index}
-      ></ChildComponent> */}
+        author={author}
+      ></ChildComponent>
     </div>
   );
 };

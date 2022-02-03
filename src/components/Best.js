@@ -47,9 +47,13 @@ const Best = () => {
     }
   });
 
+  // 새로운 객체 변수 추가(bestNo)
+  // 카테고리 지정할 때마다 바뀌는 변수
+  // pagination 기능 구현하기 위해 집어넣음
+  // id값은 bestNo와 구별되어 BestForm으로 넘겨주는 역할
   let length = searchedBests.length;
 
-  const addedBests = bests.map((best) => {
+  const addedBests = searchedBests.map((best) => {
     for (let a = 1; a <= length; a = a + 1) {
       searchedBests.bestNo = a;
     }
