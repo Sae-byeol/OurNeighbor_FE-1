@@ -12,10 +12,9 @@ import axios from "axios";
 const BestPostView = (props) => {
   const { id } = useParams();
   const [best, setBest] = useState([]);
-  //const bests = props.component;
-  
-  const [bests, setBests]=useState([]);
+  const [bests, setBests] = useState([]);
   const num = bests.length;
+
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
@@ -27,10 +26,10 @@ const BestPostView = (props) => {
       .then((res) => {
         //console.log("success");
         setBests(res.data);
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
+
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
@@ -46,7 +45,9 @@ const BestPostView = (props) => {
   }, [useParams()]);
 
   const postList =
-    parseInt(best.id) === 1
+    parseInt(bests.length) <= 5
+      ? bests
+      : parseInt(best.id) === 1
       ? bests.slice(parseInt(best.id) - 1, parseInt(best.id) + 4)
       : parseInt(best.id) === 2
       ? bests.slice(parseInt(best.id) - 2, parseInt(best.id) + 3)
@@ -55,6 +56,8 @@ const BestPostView = (props) => {
       : parseInt(best.id) === parseInt(num)
       ? bests.slice(parseInt(best.id) - 5, parseInt(best.id) + 0)
       : bests.slice(parseInt(best.id) - 3, parseInt(best.id) + 2);
+
+  console.log(best.id);
 
   const categoryName = () => {
     if (best.category === "food") return "맛집";
@@ -69,44 +72,108 @@ const BestPostView = (props) => {
   // 대댓글 구현
   const [commentContents, setCommentContents] = useState("");
   const [commentList, setCommentList] = useState([]);
-  const [count, setCount] = useState(0);
+  const [commentId, setCommentId] = useState(0);
+  const [responseTo, setResponseTo] = useState(0);
 
   const getValue = (e) => {
     setCommentContents(e.target.value);
+    console.log(responseTo);
   };
 
-  let body = {
-    comment: commentContents,
-    index: count,
-    responseTo: null,
+  const forAddComment = () => {
+    setCommentId(commentId + 1);
+    setResponseTo(responseTo + 1);
   };
 
   const addComment = (e) => {
+    renumberResponseTo();
     if (commentContents === "") {
       alert("내용을 입력해주세요");
       return;
     }
-    e.preventDefault();
 
-    setCount(count + 1);
+    setCommentId(commentId + 1);
+    setResponseTo(responseTo + 1);
+    let body = {
+      content: commentContents,
+      commentId: commentId,
+      responseTo: responseTo,
+    };
+
     setCommentList(commentList.concat(body));
+
     setCommentContents("");
+    axios
+      .post(
+        "/comment/" + id,
+        {
+          postCategory: "recommend",
+          content: commentContents,
+          responseTo: responseTo,
+          commentType: "parent",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      });
+  };
+
+  const renumberResponseTo = () => {
+    let commentListLength = commentList.length;
+    if (commentList.length !== 0) {
+      console.log(Number(commentList[commentListLength - 1].responseTo) + 1);
+      setResponseTo(Number(commentList[commentListLength - 1].responseTo) + 1);
+      console.log(responseTo);
+    }
   };
 
   const beforeShowComments = commentList.filter((comment) => {
-    return comment.responseTo === null;
+    return comment.commentType === "parent";
   });
 
-  const showComments = beforeShowComments.map((parentComment, index) => {
-    return (
-      <ParentComment
-        parentComment={parentComment}
-        index={index}
-        commentList={commentList}
-        setCommentList={setCommentList}
-      ></ParentComment>
-    );
-  });
+  const showComments =
+    commentList === []
+      ? null
+      : commentList.map((parentComment, index) => {
+          return (
+            <ParentComment
+              parentComment={parentComment}
+              commentList={commentList}
+              setCommentList={setCommentList}
+              id={id}
+              index={index}
+            ></ParentComment>
+          );
+        });
+
+  const deleteList = () => {
+    setCommentList([]);
+  };
+
+  useEffect((e) => {
+    renumberResponseTo();
+    //console.log(localStorage.getItem("accessToken"));
+    axios
+      .get("/recommend-posts/comments/" + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        deleteList();
+        console.log(commentList);
+        if (commentList.length === 0) {
+          setCommentList(commentList.concat(res.data));
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className="App">

@@ -29,6 +29,21 @@
   color: #433;
 }
 
+.gatheringPostView-button {
+  font-family: "HSGaeulSenggak2";
+  font-size: 20px;
+  width: 127px;
+  height: 30px;
+  flex-grow: 0;
+  margin: 10px 0px 10px 15px;
+  padding: 5px 4px 0 8px;
+  border-radius: 10px;
+  border-color: white;
+  color: #433;
+  outline: 0;
+  border: 0;
+  background-color: #efb33f;
+}
 .gatheringPostView-subtitle {
   height: 18px;
   margin: 19px 0 4px 5px;

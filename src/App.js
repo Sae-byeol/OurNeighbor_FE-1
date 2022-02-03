@@ -72,15 +72,15 @@ function App() {
         <Route path="/noticeAdd" element={<NoticeAdd></NoticeAdd>}></Route>
         <Route path="/signin" element={<LoginPage></LoginPage>}></Route>
         <Route path="/signup" element={<RegisterPage></RegisterPage>}></Route>
-        <Route path="/best" element={<Best component={bests}></Best>}></Route>
+        <Route path="/best" element={<Best></Best>}></Route>
         <Route path="/bestAdd" element={<BestAdd></BestAdd>}></Route>
         <Route
           path="/bestPostView/:id"
-          element={<BestPostView component={bests}></BestPostView>}
+          element={<BestPostView></BestPostView>}
         ></Route>
         <Route
           path="/gathering"
-          element={<Gathering component={gatherings}></Gathering>}
+          element={<Gathering></Gathering>}
         ></Route>
         <Route
           path="/gatheringAdd"
@@ -89,7 +89,7 @@ function App() {
         <Route
           path="/gatheringPostView/:id"
           element={
-            <GatheringPostView component={gatherings}></GatheringPostView>
+            <GatheringPostView></GatheringPostView>
           }
         ></Route>
       </Routes>
