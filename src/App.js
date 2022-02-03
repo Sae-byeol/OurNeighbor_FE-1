@@ -34,19 +34,6 @@ function App() {
   const [gatherings, setGatherings] = useState([]);
   const [notice, setNotice] = useState([]);
   const [markets, setMarkets] = useState([]);
-  useEffect(() => {
-    axios
-      .get("/apartments/used-goods", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        setMarkets(res.data);
-        //console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
  
 
   return (
@@ -60,7 +47,7 @@ function App() {
         <Route path="/notice" element={<Notice></Notice>}></Route>
         <Route
           path="/marketPostView/:id"
-          element={<MarketPostView component={markets}></MarketPostView>}
+          element={<MarketPostView></MarketPostView>}
         ></Route>
         <Route
           path="/noticePostView/:id"

@@ -77,7 +77,7 @@ const Home = () => {
     return (
         <div className='App'>
             <div className='content'>
-                <Header user={user}></Header>
+                <Header></Header>
                 <Navbar></Navbar>
             <div className="home-section1">
                 <div className='welcomeImgBox'>
