@@ -27,11 +27,12 @@ const MarketPostView = (props) => {
       })
       .then((res) => {
         setMarket(res.data);
-        console.log(res.data);
-        console.log(market);
+        //console.log(res.data);
+        //console.log(markets);
+        console.log("render");
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [useParams()]);
 
   const postList =
     parseInt(id) === 1
@@ -44,6 +45,7 @@ const MarketPostView = (props) => {
       ? markets.slice(parseInt(id) - 5, parseInt(id) + 0)
       : markets.slice(parseInt(id) - 3, parseInt(id) + 2);
 
+  //console.log(postList);
   const matchItem = props.component.find(function (element) {
     if (element.id === Number(id)) return true;
   });
@@ -139,7 +141,7 @@ const MarketPostView = (props) => {
               ? postList.map((item, index) => {
                   return parseInt(item.id) === parseInt(market.id) ? (
                     <Link
-                      to={`/PostView/${item.id}`}
+                      to={`/marketPostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#ffa800" }}
                       onClick={window.scrollTo(0, 0)}
                     >
@@ -150,7 +152,7 @@ const MarketPostView = (props) => {
                     </Link>
                   ) : (
                     <Link
-                      to={`/PostView/${item.id}`}
+                      to={`/marketPostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#443333" }}
                       onClick={window.scrollTo(0, 0)}
                     >

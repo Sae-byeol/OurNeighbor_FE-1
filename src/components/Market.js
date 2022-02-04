@@ -72,9 +72,9 @@ const Market = (props) => {
       <div className="market-flex">
         <MarketForm
           market={market}
-          key={market.usedGoods_id}
+          key={market.id}
           title={market.title}
-          id={market.usedGoods_id}
+          id={market.id}
         ></MarketForm>
       </div>
     );

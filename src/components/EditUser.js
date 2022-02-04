@@ -2,45 +2,40 @@ import React,{useState,useCallback} from 'react';
 import Navbar from './Navbar';
 import Header from './Header';
 import { useParams ,Outlet, useLocation} from 'react-router-dom';
+import axios from 'axios';
 
 const EditUser = () => {
     const user=useLocation().state.user;
-    console.log(user);
 
     const id=user.loginId;
     const name=user.name;
     const nickname=user.nickName;
     const pw=user.password;
     const email=user.email;
-    const apart=user.apart_id;
+    const apart=user.apartName;
     const role=user.role;
 
-    const [newId, setNewId]=useState(id);
-    const [newName, setNewName]=useState(name);
     const [newNickName, setNewNickName]=useState(nickname);
     const [newPw, setNewPw]=useState(pw);
-    const [newEmail, setNewEmail]=useState(email);
-    const [newApart, setNewApart]=useState(apart);
-
-    const newUser={
-        id:newId,
-        name:newName,
-        nickName:newNickName,
-        password:newPw,
-        email:newEmail,
-        apart_id:newApart
-    }
-
-    const changeId=useCallback(
-        (e)=>{
-            setNewId(e.target.value);
-        },[]
-    );
-    const changeName=useCallback(
-        (e)=>{
-            setNewName(e.target.value);
-        },[]
-    );
+    
+    const editUser = () => {
+        axios.put(
+          "/member", 
+          {
+            nickName: newNickName,
+            password: newPw,
+          },
+          { 
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        ) .then((res) => {
+            alert("회원정보가 수정되었습니다.");
+            console.log(res.data);
+            
+          });
+      };
     const changeNickName=useCallback(
         (e)=>{
             setNewNickName(e.target.value);
@@ -49,11 +44,6 @@ const EditUser = () => {
     const changePw=useCallback(
         (e)=>{
             setNewPw(e.target.value);
-        },[]
-    );
-    const changeApart=useCallback(
-        (e)=>{
-            setNewApart(e.target.value);
         },[]
     );
 
@@ -71,27 +61,27 @@ const EditUser = () => {
                     <img className="mypage-img" src='../img/profile.png'></img>
                     <div className='mypage-content'>
                         <span className='mypage-content-title'>이름</span>
-                        <input className='edit-user' placeholder={name} onChange={changeName}></input>
+                        <span className="edit-mypage-content">{name}</span>
                     </div>
                     <div className='mypage-content'>
                         <span className='mypage-content-title'>닉네임</span>
-                        <input className='edit-user' placeholder={nickname} onChange={changeNickName}></input>
+                        <input className='edit-user' placeholder="원하는 닉네임을 입력하세요" onChange={changeNickName}></input>
                     </div>
                     <div className='mypage-content'>
                         <span className='mypage-content-title'>아이디</span>
-                        <input className='edit-user' placeholder={id} onChange={changeId}></input>
+                        <span className="edit-mypage-content">{id}</span>
                     </div>
                     <div className='mypage-content'>
                         <span className='mypage-content-title'>비밀번호</span>
-                        <input className='edit-user' placeholder={pw} onChange={changePw}></input>
+                        <input className='edit-user' placeholder="원하는 비밀번호를 입력하세요" onChange={changePw}></input>
                     </div>
                     <div className='mypage-content'>
                         <span className='mypage-content-title'>아파트</span>
-                        <input className='edit-user' placeholder={apart} onChange={changeApart}></input>
+                        <span className="edit-mypage-content">{apart}</span>
                     </div>
                     
                     <div className='mypage-edit'>
-                        <div className='editpage-editBtn'>ㅣ수정 내용 저장하기ㅣ</div>
+                        <div className='editpage-editBtn' onClick={editUser}>ㅣ수정 내용 저장하기ㅣ</div>
                     </div>
                     
                 </div>

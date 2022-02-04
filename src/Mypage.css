@@ -5,7 +5,7 @@
 }
 .mypageForm{
     width: 540px;
-    height: 670px;
+    height: 700px;
     margin-top: 70px;
     display: inline-block;
     width: 50%;
@@ -16,7 +16,7 @@
 }
 .editForm{
     width: 540px;
-    height: 870px;
+    height: 670px;
     margin-top: 70px;
     display: inline-block;
     width: 50%;
@@ -88,8 +88,20 @@
 }
 .edit-user{
     display: inline-block;
-    margin-left: 150px;
+    margin-left: 100px;
+    width: 300px;
+    height: 15px;
    
+    padding: 13px 0px 7px 10px;
+    border-radius: 7px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    border: solid 2px #b7b7b7;
+    background-color: #fff;
+   
+}
+.edit-mypage-content{
+    margin-left: 100px;
+    font-family: HSGaeulSenggak2;
 }
 .editpage-editBtn{
     width: 225px;

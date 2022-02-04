@@ -26,51 +26,16 @@ import MyPage from "./components/MyPage";
 import EditUser from "./components/EditUser";
 import NoticePostView from "./components/NoticePostView";
 import NoticeAdd from "./components/NoticeAdd";
+import { Component } from "@fullcalendar/core";
 
 function App() {
+  
   const [bests, setBests] = useState([]);
- /* useEffect(() => {
-    axios
-      .get("dummy/best_list.json")
-      .then((res) => setBests(res.data.bestList))
-      .catch((err) => console.log(err));
-  }, []);*/
-
   const [gatherings, setGatherings] = useState([]);
-  /*useEffect(() => {
-    axios
-      .get("dummy/gathering_list.json")
-      .then((res) => setGatherings(res.data.gatheringList))
-      .catch((err) => console.log(err));
-  }, []);*/
-
   const [notice, setNotice] = useState([]);
   const [markets, setMarkets] = useState([]);
-  useEffect(() => {
-    //console.log(localStorage.getItem("accessToken"));
-    axios
-      .get("/apartments/used-goods", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        //console.log("success");
-        setMarkets(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+ 
 
-  /*useEffect(() => {
-    axios
-      .get("dummy/notice_list.json")
-      .then((res) => setNotice(res.data.noticeList))
-      .catch((err) => console.log(err));
-  }, []);*/
-  //console.log(markets);
-
-  
   return (
     <div className="App">
       <Routes>
@@ -81,11 +46,11 @@ function App() {
         <Route path="/calender" element={<CalenderHome></CalenderHome>}></Route>
         <Route path="/notice" element={<Notice></Notice>}></Route>
         <Route
-          path="/postView/:id"
-          element={<MarketPostView component={markets}></MarketPostView>}
+          path="/marketPostView/:id"
+          element={<MarketPostView></MarketPostView>}
         ></Route>
         <Route
-          path="/noticePostView/:notice_id"
+          path="/noticePostView/:id"
           element={<NoticePostView component={notice}> </NoticePostView>}
         ></Route>
         <Route path="/marketAdd" element={<MarketAdd></MarketAdd>}></Route>
@@ -94,24 +59,24 @@ function App() {
         <Route path="/noticeAdd" element={<NoticeAdd></NoticeAdd>}></Route>
         <Route path="/signin" element={<LoginPage></LoginPage>}></Route>
         <Route path="/signup" element={<RegisterPage></RegisterPage>}></Route>
-        <Route path="/best" element={<Best component={bests}></Best>}></Route>
+        <Route path="/best" element={<Best></Best>}></Route>
         <Route path="/bestAdd" element={<BestAdd></BestAdd>}></Route>
         <Route
-          path="/bestPostView/:bestNoCategory"
-          element={<BestPostView component={bests}></BestPostView>}
+          path="/bestPostView/:id"
+          element={<BestPostView></BestPostView>}
         ></Route>
         <Route
           path="/gathering"
-          element={<Gathering component={gatherings}></Gathering>}
+          element={<Gathering></Gathering>}
         ></Route>
         <Route
           path="/gatheringAdd"
           element={<GatheringAdd></GatheringAdd>}
         ></Route>
         <Route
-          path="/gatheringPostView/:gatheringNoCategory"
+          path="/gatheringPostView/:id"
           element={
-            <GatheringPostView component={gatherings}></GatheringPostView>
+            <GatheringPostView></GatheringPostView>
           }
         ></Route>
       </Routes>

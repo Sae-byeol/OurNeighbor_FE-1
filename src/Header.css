@@ -25,3 +25,16 @@
   .logo{
     margin-bottom: 15px;
   }
+
+.header-logout{
+
+  font-family: 'HSGaeulSenggak2';
+  width: 65px;
+  height: 30px;
+  flex-grow: 0;
+  border-radius: 10px;
+  color: #433;
+  outline: 0;
+  border:0; 
+  background-color: #efb33f;
+}
