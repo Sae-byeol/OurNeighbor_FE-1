@@ -1,59 +1,78 @@
-import React , {useState}from 'react'
-import {BrowserRouter, Route, Routes,Link} from 'react-router-dom';
-import Navbar from './Navbar';
-import Header from './Header';
-import '../MarketAdd.css';
+import React, { useState } from "react";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import Navbar from "./Navbar";
+import Header from "./Header";
+import "../MarketAdd.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const NoticeAdd = () => {
-    const [noticeTitle, setNoticeTitle]=useState('');
-    const [noticeContent, setNoticeContent]=useState('');
-    
+  const [noticeTitle, setNoticeTitle] = useState("");
+  const [noticeContent, setNoticeContent] = useState("");
+  const navigate = useNavigate();
 
-    const onImgChange=async(event)=>{
-        const formData=new FormData();
-        formData.append('file', event.target.files[0]);
-        //서버 통신 필요
-    }
+  const onSubmit = (e) => {
+    e.preventDefault();
+    //add함수 props로 받아오기
+    axios
+      .post(
+        "/notices",
+        {
+          title: noticeTitle,
+          content: noticeContent,
+        },
+
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        alert("글이 정상적으로 작성되었습니다.");
+        if (res.data) {
+          navigate("/notice");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <div className='App'>
-    <div className='content'>
+    <div className="App">
+      <div className="content">
         <Header></Header>
         <Navbar></Navbar>
-        <div className='section1'>
-        <Link to="/notice" style={{ textDecoration: 'none' }}>
-            <span className='sub-title1'>공지사항</span>
-        </Link>
+        <div className="section1">
+          <Link to="/notice" style={{ textDecoration: "none" }}>
+            <span className="sub-title1">공지사항</span>
+          </Link>
         </div>
-        <div className='line'></div>
-        <div className='marketAdd-section2'>
-            <form>
-                <span className='marketAddTitle'>제목</span>
-                <input
-                    className='marketAddTitleInput'
-                    type="text"
-                    value={noticeTitle}
-                    onChange={e=>setNoticeTitle(e.target.value)}
-                />
-                <div className='marketAddContent'>내용</div>
-                <textarea
-                    className='marketAddTextarea'
-                    type="text"
-                    placeholder=' 내용'
-                    value={noticeContent}
-                    onChange={e=>setNoticeContent(e.target.value)}
-                />
-                <input type='file'
-                className='imgInput'
-                id='marketImg'
-                accept='image/*'
-                name='file'
-                onChangeCapture={onImgChange}>
-                </input>
-                <button className='marketAddCompleteBtn'>작성 완료</button>
-            </form>
+        <div className="line"></div>
+        <div className="marketAdd-section2">
+          <form>
+            <span className="marketAddTitle">제목</span>
+            <input
+              className="marketAddTitleInput"
+              type="text"
+              value={noticeTitle}
+              onChange={(e) => setNoticeTitle(e.target.value)}
+            />
+            <div className="marketAddContent">내용</div>
+            <textarea
+              className="marketAddTextarea"
+              type="text"
+              placeholder=" 내용"
+              value={noticeContent}
+              onChange={(e) => setNoticeContent(e.target.value)}
+            />
+            <button className="marketAddCompleteBtn" onClick={onSubmit}>
+              작성 완료
+            </button>
+          </form>
         </div>
-    </div> 
-</div>
+      </div>
+    </div>
   );
 };
 
