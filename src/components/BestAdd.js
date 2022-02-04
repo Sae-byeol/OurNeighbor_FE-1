@@ -34,53 +34,56 @@ const BestAdd = () => {
   const onClickNone = () => {
     setShowCategory("none");
   };
-
-  const [image, setImage] = useState([]);
-  console.log(image);
+  const FileElement = document.querySelector('#File');
 
   const onSubmit = (e) => {
     e.preventDefault();
-    //add함수 props로 받아오기
-    axios
-      .post(
-        "/recommend-posts",
-        `title=${bestTitle}&&content=${bestContent}&&category=${showCategory}`,
-
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        alert("글이 정상적으로 작성되었습니다.");
-        if (res.data) {
-          navigate("/best");
-        }
-      });
     const formData = new FormData();
-    // for (let i = 0; i < FileElement.files.length; i++) {
-    //   formData.append("files", FileElement.files[i]);
-    // }
+    formData.append("file", files.length && files[0].uploadedFile);
+    console.log(formData);
+
+    for (var key of formData.keys()) {
+      console.log(key);
+    }
+
+    for (var value of formData.values()) {
+      console.log(value);
+    }
+    
+
+    formData.append("title",bestTitle);
+    formData.append("content", bestTitle);
+    formData.append("category",showCategory);
+    for(let i = 0; i < FileElement.files.length; i++){
+      formData.append("file", FileElement.files[i]);
+  }
     axios
       .post(
         "/recommend-posts",
-        `title=${bestTitle}&&content=${bestContent}&&category=${showCategory}`,
-
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
+        formData,
+        {headers: {
+          
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        }}
       )
       .then((res) => {
-        console.log(res.data);
         alert("글이 정상적으로 작성되었습니다.");
+        console.log(res.data);
         if (res.data) {
           navigate("/best");
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
+  };
+
+  const [files, setFiles] = useState([]);
+
+  const handleUpload = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    setFiles([...files, { uploadedFile: file }]);
   };
 
   return (
@@ -112,13 +115,12 @@ const BestAdd = () => {
             <input
               type="file"
               className="imgInput"
-              id="bestImg"
-              accept="image/*"
+              id="File"
+              
               name="file"
-              value={image}
-              onChange={(e) => {
-                setImage(image.concat(e.target.value));
-              }}
+              multiple
+              encType="multipart/form-data"
+              onChange={handleUpload}
             ></input>
             <div className="best-categoryText">카테고리</div>
             <div className="best-selectedCategories">

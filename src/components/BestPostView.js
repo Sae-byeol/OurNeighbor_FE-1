@@ -15,7 +15,7 @@ const BestPostView = () => {
   const [best, setBest] = useState([]);
   const [bests, setBests] = useState([]);
   const num = bests.length;
-
+const [photo, setPhoto]=useState("");
   // 전체 게시글 정보를 불러와서 bests에 저장
   useEffect(() => {
     axios
@@ -41,9 +41,19 @@ const BestPostView = () => {
       })
       .then((res) => {
         setBest(res.data);
+        /*axios.get("/photo/"+best.photoIds[0],{
+        
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }).then((res)=>{
+          console.log("suc");
+            setPhoto(toString(res.data));
+          })*/
       })
       .catch((err) => console.log(err));
-  }, [useParams()]);
+     
+  }, []);
 
   // 이전글/다음글
   const postList =
@@ -94,7 +104,7 @@ const BestPostView = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log("bodycommentList: ", commentList);
+  //console.log("bodycommentList: ", commentList);
 
   const [author, setAuthor] = useState("");
 
@@ -240,7 +250,7 @@ const BestPostView = () => {
             <span>/</span>
             <span>작성자: {best.author}</span>
           </div>
-          <img className="bestPostView-img" src={best.photold}></img>
+          <img className="bestPostView-img" src="/photo/1"></img>
           <div className="bestPostView-content">
             {String(best.content)
               .split("\n")
