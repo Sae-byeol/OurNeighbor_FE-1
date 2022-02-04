@@ -8,44 +8,53 @@ import "../Gathering.css";
 import "../GatheringForm.css";
 import "../Notice.css";
 const Notice = () => {
-  const [user, setUser] = useState([]);
-  const [notice, setNotice] = useState([]);
+  const [page, setPage] = useState(1);
+  const [notices, setNotices] = useState([]);
+  const [role, setRole] = useState("");
+
   useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
     axios
-      .get("dummy/notice_list.json")
-      .then((res) => setNotice(res.data.noticeList))
+      .get("/member/info", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setRole(res.data.role);
+      })
       .catch((err) => console.log(err));
-    // "/user/info" 같은 로그인한 유저의 개인정보가 저장되어 있는 url에서 get해오기
+
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${localStorage.accessToken}`;
+    axios
+      .get("/apartments/notices")
+      .then((res) => {
+        console.log(res.data);
+        setNotices(res.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
+
   const addNoticeVisible = () => {
-    if (user.role === "관리자") {
+    if (role === "관리자") {
       window.location.href = "/noticeAdd";
     } else {
       alert("관리자만 공지사항 추가가 가능합니다.");
     }
   };
-  const [page, setPage] = useState(1);
 
-  let a = 1;
-  const BeforeonClicksetPage = notice.map((notice) => {
-    notice.notice_id = a;
-    a++;
-    return notice;
+  const getNotice = notices.reverse();
+  const onClicksetPage = getNotice.filter((notice) => {
+    return (page - 1) * 7 + 1 <= notice.id && notice.id <= (page - 1) * 7 + 7;
   });
 
-  const onClicksetPage = BeforeonClicksetPage.filter((notice) => {
-    return (
-      (page - 1) * 7 + 1 <= notice.notice_id &&
-      notice.notice_id <= (page - 1) * 7 + 7
-    );
-  });
-
-  // unfocused 상태일 때 보여줄 객체들 BestForm 형태로 나타내기
   const renderNotices = onClicksetPage.map((notice) => {
     return (
       <div className="gathering-flex">
         <Link
-          to={`/noticePostView/${notice.notice_id}`}
+          to={`/noticePostView/${notice.id}`}
           style={{ textDecoration: "none", color: "#000" }}
         >
           <div className="gatheringForm">
@@ -94,9 +103,9 @@ const Notice = () => {
           activePage={page}
           itemsCountPerPage={5}
           totalItemsCount={
-            parseInt(BeforeonClicksetPage.length % 7) === 0
-              ? parseInt(BeforeonClicksetPage.length / 7) * 5
-              : (parseInt(BeforeonClicksetPage.length / 7) + 1) * 5
+            parseInt(notices.length % 7) === 0
+              ? parseInt(notices.length / 7) * 5
+              : (parseInt(notices.length / 7) + 1) * 5
           }
           pageRangeDisplayed={5}
           prevPageText={"<"}

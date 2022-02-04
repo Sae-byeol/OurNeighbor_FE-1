@@ -5,28 +5,57 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { useHistory, useParams, Outlet } from "react-router-dom";
 import "../GatheringPostView.css";
 import ParentComment from "./ParentComment";
+import axios from "axios";
 
-const NoticePostView = (props) => {
-  const { notice_id } = useParams();
-
-  const notices = props.component;
+const NoticePostView = () => {
+  const { id } = useParams();
+  const [notice, setNotice] = useState([]);
+  const [notices, setNotices] = useState([]);
   const num = notices.length;
 
+  // 전체 게시글 정보를 불러와서 notices에 저장
+  useEffect(() => {
+    axios
+      .get("/apartments/notices", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setNotices(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // 해당 게시글 정보를 불러와서 notice에 저장
+  // 여기서 useParams()는 무슨 역할?
+  useEffect(() => {
+    axios
+      .get("/notices/" + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setNotice(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [useParams()]);
+
   const postList =
-    parseInt(notice_id) === 1
-      ? notices.slice(parseInt(notice_id) - 1, parseInt(notice_id) + 4)
-      : parseInt(notice_id) === 2
-      ? notices.slice(parseInt(notice_id) - 2, parseInt(notice_id) + 3)
-      : parseInt(notice_id) === parseInt(num) - 1
-      ? notices.slice(parseInt(notice_id) - 4, parseInt(notice_id) + 1)
-      : parseInt(notice_id) === parseInt(num)
-      ? notices.slice(parseInt(notice_id) - 5, parseInt(notice_id) + 0)
-      : notices.slice(parseInt(notice_id) - 3, parseInt(notice_id) + 2);
+    parseInt(notices.length) <= 5
+      ? notices
+      : parseInt(id) === 1
+      ? notices.slice(parseInt(notice.id) - 1, parseInt(notice.id) + 4)
+      : parseInt(notice.id) === 2
+      ? notices.slice(parseInt(notice.id) - 2, parseInt(notice.id) + 3)
+      : parseInt(notice.id) === parseInt(num) - 1
+      ? notices.slice(parseInt(notice.id) - 4, parseInt(notice.id) + 1)
+      : parseInt(notice.id) === parseInt(num)
+      ? notices.slice(parseInt(notice.id) - 5, parseInt(notice.id) + 0)
+      : notices.slice(parseInt(notice.id) - 3, parseInt(notice.id) + 2);
 
-  const matchItem = props.component.find(function (element) {
-    if (element.notice_id === Number(notice_id)) return true;
-  });
-
+  // <대댓글 구현>
   const [commentContents, setCommentContents] = useState("");
   const [commentList, setCommentList] = useState([]);
   const [count, setCount] = useState(0);
@@ -81,26 +110,27 @@ const NoticePostView = (props) => {
         <div className="line"></div>
 
         <div className="marketPostView-section1">
-          <span className="marketPostView-title">{matchItem.title}</span>
+          <span className="marketPostView-title">{notice.title}</span>
           <div className="marketPostView-subtitle">
-            <span>{matchItem.date}</span>
+            <span>{notice.date}</span>
           </div>
-          <img className="marketPostView-img" src="../img/test.png"></img>
           <div className="marketPostView-content">
-            {matchItem.content.split("\n").map((line) => {
-              return (
-                <span>
-                  {line}
-                  <br />
-                </span>
-              );
-            })}
+            {String(notice.content)
+              .split("\n")
+              .map((line) => {
+                return (
+                  <span>
+                    {line}
+                    <br />
+                  </span>
+                );
+              })}
           </div>
         </div>
         <div className="relpy-line"></div>
         <div className="marketPostView-section2">
           <div className="reply-title">댓글</div>
-          <div className="reply-id">{matchItem.member_id}</div>
+          <div className="reply-id">{notice.member_id}</div>
           <textarea
             className="reply-input"
             onChange={(e) => getValue(e)}
@@ -121,10 +151,9 @@ const NoticePostView = (props) => {
           <div className="pagination-pages">
             {postList
               ? postList.map((item, index) => {
-                  return parseInt(item.notice_id) ===
-                    parseInt(matchItem.notice_id) ? (
+                  return parseInt(item.id) === parseInt(notice.id) ? (
                     <Link
-                      to={`/noticePostView/${item.notice_id}`}
+                      to={`/noticePostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#ffa800" }}
                       onClick={window.scrollTo(0, 0)}
                     >
@@ -135,7 +164,7 @@ const NoticePostView = (props) => {
                     </Link>
                   ) : (
                     <Link
-                      to={`/noticePostView/${item.notice_id}`}
+                      to={`/noticePostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#443333" }}
                       onClick={window.scrollTo(0, 0)}
                     >
