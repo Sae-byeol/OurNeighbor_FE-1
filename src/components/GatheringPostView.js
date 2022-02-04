@@ -11,7 +11,11 @@ import ParentComment from "./ParentComment";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+<<<<<<< HEAD
 const GatheringPostView = () => {
+=======
+const GatheringPostView = (props, { history }) => {
+>>>>>>> saebyeol
   const { id } = useParams();
   const [gathering, setGathering] = useState([]);
   const [gatherings, setGatherings] = useState([]);
@@ -19,7 +23,10 @@ const GatheringPostView = () => {
   const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
 
+<<<<<<< HEAD
   // 전체 게시글 정보를 불러와서 gatherings에 저장
+=======
+>>>>>>> saebyeol
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
@@ -36,8 +43,11 @@ const GatheringPostView = () => {
       .catch((err) => console.log(err));
   }, []);
 
+<<<<<<< HEAD
   // 해당 게시글 정보를 불러와서 gathering에 저장
   // 여기서 useParams()는 무슨 역할?
+=======
+>>>>>>> saebyeol
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
@@ -52,8 +62,11 @@ const GatheringPostView = () => {
       .catch((err) => console.log(err));
   }, [useParams()]);
 
+<<<<<<< HEAD
   // complete 버튼을 구현하기 위해
   // 현재 접속되어있는 유저의 닉네임을 불러온다
+=======
+>>>>>>> saebyeol
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
@@ -70,9 +83,15 @@ const GatheringPostView = () => {
       .catch((err) => console.log(err));
   }, []);
 
+<<<<<<< HEAD
   // complete 버튼 보여주기 여부 결정 관련 함수
   const showNickName = (e) => {
     if (String(nickname) === String(gathering.author)) {
+=======
+  const showNickName = (e) => {
+    if (String(nickname) === String(gathering.author)) {
+      console.log(String(nickname) === String(gathering.author));
+>>>>>>> saebyeol
       return (
         <button
           className="gatheringPostView-button"
@@ -88,7 +107,10 @@ const GatheringPostView = () => {
     "Authorization"
   ] = `Bearer ${localStorage.accessToken}`;
 
+<<<<<<< HEAD
   // 모집 완료 버튼 누르면 실행되는 함수
+=======
+>>>>>>> saebyeol
   const onClickButton = (e) => {
     e.preventDefault();
     alert("모집완료 처리가 되었습니다");
@@ -120,7 +142,10 @@ const GatheringPostView = () => {
           parseInt(gathering.id) + 2
         );
 
+<<<<<<< HEAD
   // 카테고리 이름 보여주는 함수
+=======
+>>>>>>> saebyeol
   const categoryName = () => {
     if (gathering.category === "exercise") return "운동";
 
@@ -133,6 +158,7 @@ const GatheringPostView = () => {
     if (gathering.category === "animal") return "반려동물";
   };
 
+<<<<<<< HEAD
   // <대댓글 구현>
   const [commentContents, setCommentContents] = useState("");
   const [commentList, setCommentList] = useState([]);
@@ -158,6 +184,12 @@ const GatheringPostView = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+=======
+  // 대댓글 구현
+  const [commentContents, setCommentContents] = useState("");
+  const [commentList, setCommentList] = useState([]);
+  const [count, setCount] = useState(0);
+>>>>>>> saebyeol
 
   const [author, setAuthor] = useState("");
 
@@ -199,16 +231,29 @@ const GatheringPostView = () => {
   // 댓글 작성 => commentContents에 저장
   const getValue = (e) => {
     setCommentContents(e.target.value);
+<<<<<<< HEAD
   };
 
   // 댓글 작성 버튼 누를 때
   const addComment = (e) => {
     e.preventDefault();
     // 댓글 없으면 alert 띄우기
+=======
+  };
+
+  let body = {
+    comment: commentContents,
+    index: count,
+    responseTo: null,
+  };
+
+  const addComment = (e) => {
+>>>>>>> saebyeol
     if (commentContents === "") {
       alert("내용을 입력해주세요");
       return;
     }
+<<<<<<< HEAD
 
     // responseTo +1
     setResponseTo(responseTo + 1);
@@ -237,7 +282,29 @@ const GatheringPostView = () => {
       .then((res) => {
         console.log(res.data);
       });
+=======
+    e.preventDefault();
+
+    setCount(count + 1);
+    setCommentList(commentList.concat(body));
+    setCommentContents("");
+>>>>>>> saebyeol
   };
+
+  const beforeShowComments = commentList.filter((comment) => {
+    return comment.responseTo === null;
+  });
+
+  const showComments = beforeShowComments.map((parentComment, index) => {
+    return (
+      <ParentComment
+        parentComment={parentComment}
+        index={index}
+        commentList={commentList}
+        setCommentList={setCommentList}
+      ></ParentComment>
+    );
+  });
 
   return (
     <div className="App">

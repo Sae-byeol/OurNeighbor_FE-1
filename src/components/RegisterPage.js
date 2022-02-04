@@ -29,6 +29,7 @@ function RegisterPage(props) {
     setId(event.currentTarget.value);
   };
 
+<<<<<<< HEAD
   const checkNicknameDuplication = () => {
     axios
       .get(`/member/nick-name/${nickname}`)
@@ -45,6 +46,9 @@ function RegisterPage(props) {
   };
 
   const checkIdDuplication = () => {
+=======
+  const checkDuplication = () => {
+>>>>>>> saebyeol
     axios
       .get(`/member/${id}`)
       .then((res) => {
@@ -182,7 +186,11 @@ function RegisterPage(props) {
           <button
             className="registerpage-button-id"
             type="button"
+<<<<<<< HEAD
             onClick={checkIdDuplication}
+=======
+            onClick={checkDuplication}
+>>>>>>> saebyeol
           >
             중복 확인
           </button>

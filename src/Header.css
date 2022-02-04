@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .header {
   height: 100px;
   margin-top: 10px;
@@ -35,3 +36,45 @@
 .logo {
   margin-bottom: 15px;
 }
+=======
+.header{
+    height: 100px;
+    margin-top: 10px;
+  }
+  .header-left{
+    float: left;
+  }
+  .header-right{
+    float: right;
+    padding-top: 25px;
+   
+  }
+  .header-right-right{
+    float: right;
+    
+  }
+  .header-right-left{
+    float: left;
+    margin-top: 20px;
+    margin-right: 15px;
+    text-align: right;
+  }
+  .imagelogo{
+  }
+  .logo{
+    margin-bottom: 15px;
+  }
+
+.header-logout{
+
+  font-family: 'HSGaeulSenggak2';
+  width: 65px;
+  height: 30px;
+  flex-grow: 0;
+  border-radius: 10px;
+  color: #433;
+  outline: 0;
+  border:0; 
+  background-color: #efb33f;
+}
+>>>>>>> saebyeol

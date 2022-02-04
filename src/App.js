@@ -26,8 +26,10 @@ import MyPage from "./components/MyPage";
 import EditUser from "./components/EditUser";
 import NoticePostView from "./components/NoticePostView";
 import NoticeAdd from "./components/NoticeAdd";
+import { Component } from "@fullcalendar/core";
 
 function App() {
+<<<<<<< HEAD
   /*const [todayTitle, setTodayTitle]=useState('일정1');
   const [date, setDate]=useState('날짜');*/
   const [visible, setVisible] = useState(false);
@@ -86,6 +88,14 @@ function App() {
   //     .catch((err) => console.log(err));
   // }, []);
   //console.log(markets);
+=======
+  
+  const [bests, setBests] = useState([]);
+  const [gatherings, setGatherings] = useState([]);
+  const [notice, setNotice] = useState([]);
+  const [markets, setMarkets] = useState([]);
+ 
+>>>>>>> saebyeol
 
   return (
     <div className="App">
@@ -93,15 +103,15 @@ function App() {
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/mypage" element={<MyPage></MyPage>}></Route>
         <Route path="/editMypage" element={<EditUser></EditUser>}></Route>
-        <Route path="/market" element={<Market component={markets}></Market>} />
+        <Route path="/market" element={<Market></Market>} />
         <Route path="/calender" element={<CalenderHome></CalenderHome>}></Route>
         <Route path="/notice" element={<Notice></Notice>}></Route>
         <Route
-          path="/postView/:usedGoods_id"
-          element={<MarketPostView component={markets}></MarketPostView>}
+          path="/marketPostView/:id"
+          element={<MarketPostView></MarketPostView>}
         ></Route>
         <Route
-          path="/noticePostView/:notice_id"
+          path="/noticePostView/:id"
           element={<NoticePostView component={notice}> </NoticePostView>}
         ></Route>
         <Route path="/marketAdd" element={<MarketAdd></MarketAdd>}></Route>
@@ -115,6 +125,13 @@ function App() {
         <Route
           path="/bestPostView/:id"
           element={<BestPostView></BestPostView>}
+<<<<<<< HEAD
+=======
+        ></Route>
+        <Route
+          path="/gathering"
+          element={<Gathering></Gathering>}
+>>>>>>> saebyeol
         ></Route>
         <Route path="/gathering" element={<Gathering></Gathering>}></Route>
         <Route
@@ -123,7 +140,13 @@ function App() {
         ></Route>
         <Route
           path="/gatheringPostView/:id"
+<<<<<<< HEAD
           element={<GatheringPostView></GatheringPostView>}
+=======
+          element={
+            <GatheringPostView></GatheringPostView>
+          }
+>>>>>>> saebyeol
         ></Route>
       </Routes>
     </div>

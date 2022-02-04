@@ -6,16 +6,18 @@ const Add = (props) => {
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
 
+  console.log(date);
+
   const onSubmit = (e) => {
     e.preventDefault();
     //add함수 props로 받아오기
     axios.post(
-      "/schedules",
+      "/schedules", 
       {
-        date: "2022-01-25",
-        content: "test1",
+        date: date,
+        title: title,
       },
-      {
+      { 
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },

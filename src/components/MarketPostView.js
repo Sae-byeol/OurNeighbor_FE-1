@@ -27,11 +27,20 @@ const MarketPostView = (props) => {
       })
       .then((res) => {
         setMarket(res.data);
+<<<<<<< HEAD
         console.log(res.data);
         console.log(markets);
       })
       .catch((err) => console.log(err));
   }, []);
+=======
+        //console.log(res.data);
+        //console.log(markets);
+        console.log("render");
+      })
+      .catch((err) => console.log(err));
+  }, [useParams()]);
+>>>>>>> saebyeol
 
   const postList =
     parseInt(id) === 1
@@ -44,6 +53,10 @@ const MarketPostView = (props) => {
       ? markets.slice(parseInt(id) - 5, parseInt(id) + 0)
       : markets.slice(parseInt(id) - 3, parseInt(id) + 2);
 
+<<<<<<< HEAD
+=======
+  //console.log(postList);
+>>>>>>> saebyeol
   const matchItem = props.component.find(function (element) {
     if (element.id === Number(id)) return true;
   });
@@ -139,7 +152,11 @@ const MarketPostView = (props) => {
               ? postList.map((item, index) => {
                   return parseInt(item.id) === parseInt(market.id) ? (
                     <Link
+<<<<<<< HEAD
                       to={`/PostView/${item.id}`}
+=======
+                      to={`/marketPostView/${item.id}`}
+>>>>>>> saebyeol
                       style={{ textDecoration: "none", color: "#ffa800" }}
                       onClick={window.scrollTo(0, 0)}
                     >
@@ -150,7 +167,11 @@ const MarketPostView = (props) => {
                     </Link>
                   ) : (
                     <Link
+<<<<<<< HEAD
                       to={`/PostView/${item.id}`}
+=======
+                      to={`/marketPostView/${item.id}`}
+>>>>>>> saebyeol
                       style={{ textDecoration: "none", color: "#443333" }}
                       onClick={window.scrollTo(0, 0)}
                     >

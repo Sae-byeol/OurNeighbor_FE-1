@@ -12,12 +12,36 @@ import {BrowserRouter, Route, Routes,Link,Outlet} from 'react-router-dom';
 
 const Home = () => {
     const [isLoggedIn,setIsLoggedIn]=useState(false);
+    const [user, setUser]=useState({});
     const [notice, setNotice]=useState([
     ]); 
     const [newPost, setNewPost]=useState([
     ])
     const [events, setEvents]=useState([]);
+   /*const onSilentRefresh=()=>{
+        axios.post('/reissue',{
+            accessToken : localStorage.getItem("accessToken"),
+            refreshToken: localStorage.getItem("refreshToken")
+        })
+        .then((res)=>{
+          localStorage.setItem("accessToken", res.data.accessToken);
+          console.log("suc");
+        })
+        .catch((err)=>console.log(err));
+    }*/
+    
     useEffect(() => {
+        if(localStorage.getItem("accessToken")){
+            setIsLoggedIn(true);
+            //setTimeout(onSilentRefresh,  1800000-1740000 );
+            axios.get("/member/info", {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                },
+            }).then((res) => {setUser(res.data);})
+        }
+        
+         
         axios.get('dummy/calendar_list.json')
         .then(res=>setEvents(res.data.calendarList))
        .catch(err=>console.log(err));
@@ -60,7 +84,7 @@ const Home = () => {
                     <img className="homeImg1" src="../img/home1.png"></img>
                     { isLoggedIn 
                     ? <div className="home-welcomeText">
-                        미림아파트<br/>김민경님<br/>우리 이웃들을 만나보세요!
+                        {user.apartName}<br/>{user.name}<br/>우리 이웃들을 만나보세요!
                       </div>
                     : 
                    

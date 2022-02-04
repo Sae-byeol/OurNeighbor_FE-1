@@ -24,7 +24,11 @@ const Best = () => {
     })
     .catch((err) => console.log(err));
 
+<<<<<<< HEAD
   const bests = getBests.reverse();
+=======
+  const bests = getBests;
+>>>>>>> saebyeol
   const [page, setPage] = useState(1);
   const [renderPage, setRenderPage] = useState("unfocused");
   const [buttonColor, setButtonColor] = useState("all");
@@ -47,6 +51,7 @@ const Best = () => {
     }
   });
 
+<<<<<<< HEAD
   // 새로운 객체 변수 추가(bestNo)
   // 카테고리 지정할 때마다 바뀌는 변수
   // pagination 기능 구현하기 위해 집어넣음
@@ -54,6 +59,11 @@ const Best = () => {
   let length = searchedBests.length;
 
   const addedBests = searchedBests.map((best) => {
+=======
+  let length = searchedBests.length;
+
+  const addedBests = bests.map((best) => {
+>>>>>>> saebyeol
     for (let a = 1; a <= length; a = a + 1) {
       searchedBests.bestNo = a;
     }

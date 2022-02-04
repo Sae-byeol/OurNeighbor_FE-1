@@ -8,16 +8,26 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import "../PostList.css";
 import ParentComment from "./ParentComment";
 import axios from "axios";
+<<<<<<< HEAD
 import ChildComponent from "./ChildComponent";
 
 const BestPostView = () => {
+=======
+
+const BestPostView = (props) => {
+>>>>>>> saebyeol
   const { id } = useParams();
   const [best, setBest] = useState([]);
   const [bests, setBests] = useState([]);
   const num = bests.length;
 
+<<<<<<< HEAD
   // 전체 게시글 정보를 불러와서 bests에 저장
   useEffect(() => {
+=======
+  useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
+>>>>>>> saebyeol
     axios
       .get("/apartments/recommend-posts", {
         headers: {
@@ -25,14 +35,23 @@ const BestPostView = () => {
         },
       })
       .then((res) => {
+<<<<<<< HEAD
+=======
+        //console.log("success");
+>>>>>>> saebyeol
         setBests(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
+<<<<<<< HEAD
   // 해당 게시글 정보를 불러와서 best에 저장
   // 여기서 useParams()는 무슨 역할?
   useEffect(() => {
+=======
+  useEffect(() => {
+    //console.log(localStorage.getItem("accessToken"));
+>>>>>>> saebyeol
     axios
       .get("/recommend-posts/" + id, {
         headers: {
@@ -44,6 +63,24 @@ const BestPostView = () => {
       })
       .catch((err) => console.log(err));
   }, [useParams()]);
+<<<<<<< HEAD
+=======
+
+  const postList =
+    parseInt(bests.length) <= 5
+      ? bests
+      : parseInt(best.id) === 1
+      ? bests.slice(parseInt(best.id) - 1, parseInt(best.id) + 4)
+      : parseInt(best.id) === 2
+      ? bests.slice(parseInt(best.id) - 2, parseInt(best.id) + 3)
+      : parseInt(best.id) === parseInt(num) - 1
+      ? bests.slice(parseInt(best.id) - 4, parseInt(best.id) + 1)
+      : parseInt(best.id) === parseInt(num)
+      ? bests.slice(parseInt(best.id) - 5, parseInt(best.id) + 0)
+      : bests.slice(parseInt(best.id) - 3, parseInt(best.id) + 2);
+
+  console.log(best.id);
+>>>>>>> saebyeol
 
   // 이전글/다음글
   const postList =
@@ -70,6 +107,7 @@ const BestPostView = () => {
     if (best.category === "sports") return "운동시설";
   };
 
+<<<<<<< HEAD
   // <대댓글 구현>
   const [commentContents, setCommentContents] = useState("");
   const [commentList, setCommentList] = useState([]);
@@ -177,31 +215,66 @@ const BestPostView = () => {
   });
 
   // 댓글 작성 => commentContents에 저장
+=======
+  // 대댓글 구현
+  const [commentContents, setCommentContents] = useState("");
+  const [commentList, setCommentList] = useState([]);
+  const [commentId, setCommentId] = useState(0);
+  const [responseTo, setResponseTo] = useState(0);
+>>>>>>> saebyeol
 
   const getValue = (e) => {
     setCommentContents(e.target.value);
+    console.log(responseTo);
   };
 
+<<<<<<< HEAD
   // 댓글 작성 버튼 누를 때
   const addComment = (e) => {
     e.preventDefault();
     // 댓글 없으면 alert 띄우기
+=======
+  const forAddComment = () => {
+    setCommentId(commentId + 1);
+    setResponseTo(responseTo + 1);
+  };
+
+  const addComment = (e) => {
+    renumberResponseTo();
+>>>>>>> saebyeol
     if (commentContents === "") {
       alert("내용을 입력해주세요");
       return;
     }
+<<<<<<< HEAD
     let body = {
       content: commentContents,
       commentType: "parent",
       userNickName: author,
     };
+=======
+
+    setCommentId(commentId + 1);
+    setResponseTo(responseTo + 1);
+    let body = {
+      content: commentContents,
+      commentId: commentId,
+      responseTo: responseTo,
+    };
+
+>>>>>>> saebyeol
     setCommentList(commentList.concat(body));
+
     setCommentContents("");
     axios
       .post(
         "/comment/" + id,
         {
+<<<<<<< HEAD
           postCategory: commentPageType,
+=======
+          postCategory: "recommend",
+>>>>>>> saebyeol
           content: commentContents,
           responseTo: responseTo,
           commentType: "parent",
@@ -215,12 +288,68 @@ const BestPostView = () => {
       .then((res) => {
         console.log(res.data);
       });
+<<<<<<< HEAD
   };
 
   function refreshPage(e) {
     e.preventDefault();
     window.location.reload();
   }
+=======
+  };
+
+  const renumberResponseTo = () => {
+    let commentListLength = commentList.length;
+    if (commentList.length !== 0) {
+      console.log(Number(commentList[commentListLength - 1].responseTo) + 1);
+      setResponseTo(Number(commentList[commentListLength - 1].responseTo) + 1);
+      console.log(responseTo);
+    }
+  };
+
+  const beforeShowComments = commentList.filter((comment) => {
+    return comment.commentType === "parent";
+  });
+
+  const showComments =
+    commentList === []
+      ? null
+      : commentList.map((parentComment, index) => {
+          return (
+            <ParentComment
+              parentComment={parentComment}
+              commentList={commentList}
+              setCommentList={setCommentList}
+              id={id}
+              index={index}
+            ></ParentComment>
+          );
+        });
+
+  const deleteList = () => {
+    setCommentList([]);
+  };
+
+  useEffect((e) => {
+    renumberResponseTo();
+    //console.log(localStorage.getItem("accessToken"));
+    axios
+      .get("/recommend-posts/comments/" + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        deleteList();
+        console.log(commentList);
+        if (commentList.length === 0) {
+          setCommentList(commentList.concat(res.data));
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+>>>>>>> saebyeol
 
   return (
     <div className="App">

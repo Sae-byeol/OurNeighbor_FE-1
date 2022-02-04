@@ -38,6 +38,15 @@
   height: 49px;
   color: #433;
 }
+.span-right {
+  position: absolute;
+  right: -85px;
+  top: 20px;
+  font-family: "HSGaeulSenggak2";
+  font-size: 13px;
+  height: 49px;
+  color: #433;
+}
 
 .span-right {
   position: absolute;
