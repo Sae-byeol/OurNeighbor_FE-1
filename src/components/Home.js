@@ -18,17 +18,6 @@ const Home = () => {
     const [newPost, setNewPost]=useState([
     ])
     const [events, setEvents]=useState([]);
-   /*const onSilentRefresh=()=>{
-        axios.post('/reissue',{
-            accessToken : localStorage.getItem("accessToken"),
-            refreshToken: localStorage.getItem("refreshToken")
-        })
-        .then((res)=>{
-          localStorage.setItem("accessToken", res.data.accessToken);
-          console.log("suc");
-        })
-        .catch((err)=>console.log(err));
-    }*/
     
     useEffect(() => {
         if(localStorage.getItem("accessToken")){
@@ -40,35 +29,27 @@ const Home = () => {
                 },
             }).then((res) => {setUser(res.data);})
         }
-        
-         
-        axios.get('dummy/calendar_list.json')
-        .then(res=>setEvents(res.data.calendarList))
-       .catch(err=>console.log(err));
-
-       axios.get('dummy/notice_list.json')
-        .then(res=>{
-        setNotice(res.data.noticeList)
+        axios
+        .get("/apartment/schedules", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
         })
-         .catch(err=>console.log(err));
-         
-       axios.get('dummy/market_list.json')
-       .then(res=>{
-           setNewPost(res.data.marketList)
-            const sorted=[...newPost]
-            sorted.sort((a,b)=>
-            parseInt(a.usedGoods_id)-parseInt(b.usedGoods_id));
-            setNewPost(sorted);
-       })
-        .catch(err=>console.log(err));
-
-        /*axios.get("dummy/best_list.json")
-        .then(res=>{
-            setNewPost(res.data.bestList)
-            //sortNewPost(newPost)
+        .then((res) => {
+          setEvents(res.data);
         })
-         .catch(err=>console.log(err));
- */
+        .catch((err) => console.log(err));
+        axios.get("/apartments/notices", {
+            headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+        }).then((res) => {setNotice(res.data);})
+        axios.get("/apartments/latest-post",{
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+        }).then((res) => {console.log(res.data); setNewPost(res.data.reverse());})
+     
     },[]);    
     
    
@@ -131,13 +112,25 @@ const Home = () => {
                 <div className='home-best-title'>최신 추천글</div>
                 <div className='home-best'>
                     {newPost.map((val)=>{
+                        if (val.postType==="usedGoods"){
+                            val.postType="중고거래"
+                        }
+                        if (val.postType==="recommendPost"){
+                            val.postType="추천게시판"
+                        }
+                        if (val.postType==="gathering"){
+                            val.postType="모임모집게시판"
+                        }
+                        var date=val.createdDate.substr(0,10);
+                        var time=val.createdDate.substr(11,12).split(":")
                         return(
-                            <div key={val.index} className='box'>
+                            <div key={val.id} className='box'>
                             <div className='home-best-map'>
-                                <div className='home-best-map-from'>{val.from}</div>
+                               
+                                <div className='home-best-map-from'>{val.postType}</div>
                                 <div className='home-best-map-title'>{val.title}</div>
                                 {/* date는 toLocaleString() 사용하기*/}
-                                <div className='home-notice-map-date'>{val.date}</div>
+                                <div className='home-notice-map-date'>{date+" "+time[0]+":"+time[1]}</div>
                             </div>
                         </div>
                         )
