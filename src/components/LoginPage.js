@@ -28,7 +28,7 @@ function LoginPage() {
         console.log(res.data);
         localStorage.setItem("accessToken", res.data.accessToken);
         localStorage.setItem("refreshToken", res.data.refreshToken);
-        //axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.accessToken}`
+        setTimeout(onSilentRefresh, 1800000-60000);
         console.log(res.data.accessToken);
         if (res.data.accessToken) {
           navigate("/");
@@ -38,6 +38,27 @@ function LoginPage() {
         alert("일치하는 회원 정보가 없습니다.");
       });
   };
+  
+ 
+  const onSilentRefresh = () => {
+    axios.post('/reissue', {
+      accessToken: localStorage.getItem("accessToken"),
+      refreshToken: localStorage.getItem("refreshToken")
+    })
+        .then((response)=>{
+          localStorage.setItem("accessToken",response.data.accessToken);
+          localStorage.setItem("refreshToken",response.data.refreshToken);
+          console.log(response.data);
+          console.log("refresh");
+          // accessToken 만료하기 1분 전에 로그인 연장
+          setTimeout(onSilentRefresh,  1800000-60000);
+        })
+        .catch(error => {
+            // ... 로그인 실패 처리
+        });
+}
+
+
 
   return (
     <div
