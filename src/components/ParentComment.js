@@ -2,8 +2,15 @@ import React from "react";
 import ChildComponent from "./ChildComponent";
 
 const ParentComment = (props) => {
-  const { parentComment, commentList, setCommentList, id, index, author } =
-    props;
+  const {
+    parentComment,
+    commentList,
+    setCommentList,
+    id,
+    index,
+    author,
+    commentPageType,
+  } = props;
 
   const childComments = commentList.filter((comment) => {
     return (
@@ -59,6 +66,7 @@ const ParentComment = (props) => {
         id={id}
         index={index}
         author={author}
+        commentPageType={commentPageType}
       ></ChildComponent>
     </div>
   );

@@ -22,7 +22,7 @@ const Gathering = () => {
     })
     .catch((err) => console.log(err));
 
-  const gatherings = getGatherings;
+  const gatherings = getGatherings.reverse();
 
   const [page, setPage] = useState(1);
   const [renderPage, setRenderPage] = useState("unfocused");
@@ -35,14 +35,14 @@ const Gathering = () => {
     setSearch(e);
   };
 
-  const searchedGatherings = gatherings.filter((best) => {
-    if (search === "") return best;
-    if (search === null) return best;
+  const searchedGatherings = gatherings.filter((gathering) => {
+    if (search === "") return gathering;
+    if (search === null) return gathering;
     else if (
-      best.title.toLowerCase().includes(search.toLowerCase()) ||
-      best.content.toLowerCase().includes(search.toLowerCase())
+      gathering.title.toLowerCase().includes(search.toLowerCase()) ||
+      gathering.content.toLowerCase().includes(search.toLowerCase())
     ) {
-      return best;
+      return gathering;
     }
   });
 

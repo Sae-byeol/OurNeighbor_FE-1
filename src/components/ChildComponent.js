@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const ChildComponent = (props) => {
-  const { childComments, commentList, setCommentList, id, index, author } =
-    props;
+  const {
+    childComments,
+    commentList,
+    setCommentList,
+    id,
+    index,
+    author,
+    commentPageType,
+  } = props;
   const [commentContents, setCommentContents] = useState("");
   const [showReply, setShowReply] = useState(false);
 
@@ -33,7 +40,7 @@ const ChildComponent = (props) => {
       .post(
         "/comment/" + id,
         {
-          postCategory: "recommend",
+          postCategory: commentPageType,
           content: commentContents,
           responseTo: index,
           commentType: "child",

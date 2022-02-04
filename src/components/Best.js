@@ -24,7 +24,7 @@ const Best = () => {
     })
     .catch((err) => console.log(err));
 
-  const bests = getBests;
+  const bests = getBests.reverse();
   const [page, setPage] = useState(1);
   const [renderPage, setRenderPage] = useState("unfocused");
   const [buttonColor, setButtonColor] = useState("all");

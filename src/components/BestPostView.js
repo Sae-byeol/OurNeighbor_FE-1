@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import "../PostList.css";
 import ParentComment from "./ParentComment";
 import axios from "axios";
+import ChildComponent from "./ChildComponent";
 
 const BestPostView = () => {
   const { id } = useParams();
@@ -73,6 +74,7 @@ const BestPostView = () => {
   const [commentContents, setCommentContents] = useState("");
   const [commentList, setCommentList] = useState([]);
   const [responseTo, setResponseTo] = useState(0);
+  const commentPageType = "recommend";
 
   // 댓글, 대댓글 get 해오기
   useEffect((e) => {
@@ -83,14 +85,16 @@ const BestPostView = () => {
         },
       })
       .then((res) => {
-        // commentList 초기화 및 get 해온 댓글, 대댓글 추가
         setCommentList([]);
         if (commentList.length === 0) {
           setCommentList(commentList.concat(res.data));
+          console.log("then commentList: ", commentList);
         }
       })
       .catch((err) => console.log(err));
   }, []);
+
+  console.log("bodycommentList: ", commentList);
 
   const [author, setAuthor] = useState("");
 
@@ -112,23 +116,68 @@ const BestPostView = () => {
     return comment.commentType === "parent";
   });
 
-  const showComments =
-    commentList === []
-      ? null
-      : beforeShowComments.map((parentComment, index) => {
-          return (
-            <ParentComment
-              parentComment={parentComment}
-              commentList={commentList}
-              setCommentList={setCommentList}
-              id={id}
-              index={index}
-              author={author}
-            ></ParentComment>
-          );
-        });
+  const showComments = beforeShowComments.map((parentComment, index) => {
+    const childComments = commentList.filter((comment) => {
+      return (
+        comment.commentType === "child" &&
+        Number(index) === Number(comment.responseTo)
+      );
+    });
+    return (
+      <div>
+        {String(parentComment.content).length > 50 ? (
+          <div>
+            <div className="reply-comment">
+              <div className="reply-polygon">
+                <img src={"../img/polygon.png"} alt="polygon"></img>
+              </div>
+              <div className="reply-eachcomment">
+                <span>
+                  {parentComment.content.split("\n").map((line) => {
+                    return (
+                      <span>
+                        {line}
+                        <br />
+                      </span>
+                    );
+                  })}
+                </span>
+              </div>
+            </div>
+            <span className="reply-id">
+              &nbsp;&nbsp;{parentComment.userNickName}
+            </span>
+          </div>
+        ) : (
+          <div>
+            <div className="reply-comment">
+              <div className="reply-polygon">
+                <img src={"../img/polygon.png"} alt="polygon"></img>
+              </div>
+              <span className="reply-eachcomment">
+                <span>{parentComment.content}</span>
+              </span>
+              <span className="reply-id">
+                &nbsp;&nbsp;{parentComment.userNickName}
+              </span>
+            </div>
+          </div>
+        )}
+        <ChildComponent
+          childComments={childComments}
+          commentList={commentList}
+          setCommentList={setCommentList}
+          id={id}
+          index={index}
+          author={author}
+          commentPageType={commentPageType}
+        ></ChildComponent>
+      </div>
+    );
+  });
 
   // 댓글 작성 => commentContents에 저장
+
   const getValue = (e) => {
     setCommentContents(e.target.value);
   };
@@ -141,9 +190,6 @@ const BestPostView = () => {
       alert("내용을 입력해주세요");
       return;
     }
-
-    // responseTo +1
-    setResponseTo(responseTo + 1);
     let body = {
       content: commentContents,
       commentType: "parent",
@@ -155,7 +201,7 @@ const BestPostView = () => {
       .post(
         "/comment/" + id,
         {
-          postCategory: "recommend",
+          postCategory: commentPageType,
           content: commentContents,
           responseTo: responseTo,
           commentType: "parent",
@@ -170,6 +216,11 @@ const BestPostView = () => {
         console.log(res.data);
       });
   };
+
+  function refreshPage(e) {
+    e.preventDefault();
+    window.location.reload();
+  }
 
   return (
     <div className="App">
@@ -221,6 +272,7 @@ const BestPostView = () => {
               댓글 달기
             </button>
           </div>
+          <div onClick={(e) => refreshPage(e)}>새로고침하기</div>
           <div>{showComments}</div>
         </div>
         <div className="pagination-line"></div>

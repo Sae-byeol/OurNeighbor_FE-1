@@ -133,47 +133,111 @@ const GatheringPostView = () => {
     if (gathering.category === "animal") return "반려동물";
   };
 
-  // 대댓글 구현
+  // <대댓글 구현>
   const [commentContents, setCommentContents] = useState("");
   const [commentList, setCommentList] = useState([]);
-  const [count, setCount] = useState(0);
+  const [responseTo, setResponseTo] = useState(0);
+  const commentPageType = "gathering";
 
+  // 댓글, 대댓글 get 해오기
+  useEffect((e) => {
+    axios
+      .get("/gathering/comment/" + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        // commentList 초기화 및 get 해온 댓글, 대댓글 추가
+        console.log(res.data);
+        console.log("getSuccess");
+        setCommentList([]);
+        if (commentList.length === 0) {
+          setCommentList(commentList.concat(res.data));
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const [author, setAuthor] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("/member/info", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setAuthor(res.data.nickName);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // 댓글들 보여주기
+  const beforeShowComments = commentList.filter((comment) => {
+    return comment.commentType === "parent";
+  });
+
+  const showComments =
+    commentList === []
+      ? null
+      : beforeShowComments.map((parentComment, index) => {
+          return (
+            <ParentComment
+              parentComment={parentComment}
+              commentList={commentList}
+              setCommentList={setCommentList}
+              id={id}
+              index={index}
+              author={author}
+              commentPageType={commentPageType}
+            ></ParentComment>
+          );
+        });
+
+  // 댓글 작성 => commentContents에 저장
   const getValue = (e) => {
     setCommentContents(e.target.value);
   };
 
-  let body = {
-    comment: commentContents,
-    index: count,
-    responseTo: null,
-  };
-
+  // 댓글 작성 버튼 누를 때
   const addComment = (e) => {
+    e.preventDefault();
+    // 댓글 없으면 alert 띄우기
     if (commentContents === "") {
       alert("내용을 입력해주세요");
       return;
     }
-    e.preventDefault();
 
-    setCount(count + 1);
+    // responseTo +1
+    setResponseTo(responseTo + 1);
+    let body = {
+      content: commentContents,
+      commentType: "parent",
+      userNickName: author,
+    };
     setCommentList(commentList.concat(body));
     setCommentContents("");
+    axios
+      .post(
+        "/comment/" + id,
+        {
+          postCategory: commentPageType,
+          content: commentContents,
+          responseTo: responseTo,
+          commentType: "parent",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      });
   };
-
-  const beforeShowComments = commentList.filter((comment) => {
-    return comment.responseTo === null;
-  });
-
-  const showComments = beforeShowComments.map((parentComment, index) => {
-    return (
-      <ParentComment
-        parentComment={parentComment}
-        index={index}
-        commentList={commentList}
-        setCommentList={setCommentList}
-      ></ParentComment>
-    );
-  });
 
   return (
     <div className="App">
@@ -216,7 +280,7 @@ const GatheringPostView = () => {
           <div className="reply-id">{gathering.author}</div>
           <textarea
             className="reply-input"
-            onChange={(e) => getValue(e.target.value)}
+            onChange={(e) => getValue(e)}
             type="text"
             value={commentContents}
           ></textarea>
