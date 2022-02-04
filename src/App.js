@@ -29,73 +29,10 @@ import NoticeAdd from "./components/NoticeAdd";
 import { Component } from "@fullcalendar/core";
 
 function App() {
-<<<<<<< HEAD
-  /*const [todayTitle, setTodayTitle]=useState('일정1');
-  const [date, setDate]=useState('날짜');*/
-  const [visible, setVisible] = useState(false);
-  /*const renderTitles=todayTitle.map((val)=>{
-    return(
-      <div>{val.todayTitle}</div>
-    );
-  })*/
-  //console.log(todayTitle);
-
-  // const [bests, setBests] = useState([]);
-  // useEffect(() => {
-  //   //console.log(localStorage.getItem("accessToken"));
-  //   axios
-  //     .get("/apartments/recommend-posts", {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       //console.log("success");
-  //       setBests(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-  // console.log(bests);
-
-  // const [gatherings, setGatherings] = useState([]);
-  // useEffect(() => {
-  //   //console.log(localStorage.getItem("accessToken"));
-  //   axios
-  //     .get("/apartments/gatherings", {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       //console.log("success");
-  //       setGatherings(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-  // console.log(gatherings);
-
-  const [notice, setNotice] = useState([]);
-  const [markets, setMarkets] = useState([]);
-  // useEffect(() => {
-  //   axios
-  //     .get("dummy/market_list.json")
-  //     .then((res) => setMarkets(res.data.marketList))
-  //     .catch((err) => console.log(err));
-
-  //   axios
-  //     .get("dummy/notice_list.json")
-  //     .then((res) => setNotice(res.data.noticeList))
-  //     .catch((err) => console.log(err));
-  // }, []);
-  //console.log(markets);
-=======
-  
   const [bests, setBests] = useState([]);
   const [gatherings, setGatherings] = useState([]);
   const [notice, setNotice] = useState([]);
   const [markets, setMarkets] = useState([]);
- 
->>>>>>> saebyeol
 
   return (
     <div className="App">
@@ -125,13 +62,6 @@ function App() {
         <Route
           path="/bestPostView/:id"
           element={<BestPostView></BestPostView>}
-<<<<<<< HEAD
-=======
-        ></Route>
-        <Route
-          path="/gathering"
-          element={<Gathering></Gathering>}
->>>>>>> saebyeol
         ></Route>
         <Route path="/gathering" element={<Gathering></Gathering>}></Route>
         <Route
@@ -140,13 +70,7 @@ function App() {
         ></Route>
         <Route
           path="/gatheringPostView/:id"
-<<<<<<< HEAD
           element={<GatheringPostView></GatheringPostView>}
-=======
-          element={
-            <GatheringPostView></GatheringPostView>
-          }
->>>>>>> saebyeol
         ></Route>
       </Routes>
     </div>

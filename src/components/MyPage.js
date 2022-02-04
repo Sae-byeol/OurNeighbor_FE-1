@@ -6,23 +6,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const MyPage = () => {
-<<<<<<< HEAD
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
-    axios
-      .get("/member/info", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        setUser(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-=======
     const [user, setUser]=useState({});
 
     useEffect(() => {
@@ -38,7 +21,6 @@ const MyPage = () => {
           })
           .catch((err) => console.log(err));
       }, []);
->>>>>>> saebyeol
   return (
     <div className="App">
       <div className="content">
@@ -47,15 +29,6 @@ const MyPage = () => {
         <div className="section1">
           <span className="sub-title1">마이페이지</span>
         </div>
-<<<<<<< HEAD
-        <div className="line"></div>
-        <div className="mypage-section2">
-          <div className="mypageForm">
-            <img className="mypage-img" src="../img/profile.png"></img>
-            <div className="mypage-content">
-              <span className="mypage-content-title">이름</span>
-              <span className="mypage-content-content">{user.name}</span>
-=======
         <div className='line'></div>
         <div className='mypage-section2'>
             <div className='mypageForm'>
@@ -91,7 +64,6 @@ const MyPage = () => {
                     
                 </div>
                 
->>>>>>> saebyeol
             </div>
             <div className="mypage-content">
               <span className="mypage-content-title">닉네임</span>

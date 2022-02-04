@@ -22,11 +22,7 @@ const Gathering = () => {
     })
     .catch((err) => console.log(err));
 
-<<<<<<< HEAD
   const gatherings = getGatherings.reverse();
-=======
-  const gatherings = getGatherings;
->>>>>>> saebyeol
 
   const [page, setPage] = useState(1);
   const [renderPage, setRenderPage] = useState("unfocused");
@@ -43,13 +39,8 @@ const Gathering = () => {
     if (search === "") return gathering;
     if (search === null) return gathering;
     else if (
-<<<<<<< HEAD
       gathering.title.toLowerCase().includes(search.toLowerCase()) ||
       gathering.content.toLowerCase().includes(search.toLowerCase())
-=======
-      best.title.toLowerCase().includes(search.toLowerCase()) ||
-      best.content.toLowerCase().includes(search.toLowerCase())
->>>>>>> saebyeol
     ) {
       return gathering;
     }

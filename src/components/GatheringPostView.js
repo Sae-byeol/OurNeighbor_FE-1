@@ -158,7 +158,6 @@ const GatheringPostView = (props, { history }) => {
     if (gathering.category === "animal") return "반려동물";
   };
 
-<<<<<<< HEAD
   // <대댓글 구현>
   const [commentContents, setCommentContents] = useState("");
   const [commentList, setCommentList] = useState([]);
@@ -184,12 +183,6 @@ const GatheringPostView = (props, { history }) => {
       })
       .catch((err) => console.log(err));
   }, []);
-=======
-  // 대댓글 구현
-  const [commentContents, setCommentContents] = useState("");
-  const [commentList, setCommentList] = useState([]);
-  const [count, setCount] = useState(0);
->>>>>>> saebyeol
 
   const [author, setAuthor] = useState("");
 
@@ -231,29 +224,16 @@ const GatheringPostView = (props, { history }) => {
   // 댓글 작성 => commentContents에 저장
   const getValue = (e) => {
     setCommentContents(e.target.value);
-<<<<<<< HEAD
   };
 
   // 댓글 작성 버튼 누를 때
   const addComment = (e) => {
     e.preventDefault();
     // 댓글 없으면 alert 띄우기
-=======
-  };
-
-  let body = {
-    comment: commentContents,
-    index: count,
-    responseTo: null,
-  };
-
-  const addComment = (e) => {
->>>>>>> saebyeol
     if (commentContents === "") {
       alert("내용을 입력해주세요");
       return;
     }
-<<<<<<< HEAD
 
     // responseTo +1
     setResponseTo(responseTo + 1);
@@ -282,13 +262,6 @@ const GatheringPostView = (props, { history }) => {
       .then((res) => {
         console.log(res.data);
       });
-=======
-    e.preventDefault();
-
-    setCount(count + 1);
-    setCommentList(commentList.concat(body));
-    setCommentContents("");
->>>>>>> saebyeol
   };
 
   const beforeShowComments = commentList.filter((comment) => {

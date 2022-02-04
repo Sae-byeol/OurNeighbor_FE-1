@@ -16,7 +16,6 @@ function LoginPage() {
   const onPasswordHandler = (event) => {
     setPassword(event.currentTarget.value);
   };
-  
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -39,13 +38,7 @@ function LoginPage() {
         alert("일치하는 회원 정보가 없습니다.");
       });
   };
- 
 
-<<<<<<< HEAD
-=======
- 
-
->>>>>>> saebyeol
   return (
     <div
       className="loginPage"
@@ -81,11 +74,10 @@ function LoginPage() {
           />
         </div>
         <div>
-        
           <button type="submit" onClick={onSubmit} className="loginpage-button">
             | 로그인 |
-          </button> 
-   
+          </button>
+
           <span class="loginpage-q">아직 회원가입을 안 하셨나요?</span>
           <Link
             to={"/signup"}

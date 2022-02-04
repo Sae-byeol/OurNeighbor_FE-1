@@ -235,8 +235,4 @@ const GatheringAdd = () => {
   );
 };
 
-<<<<<<< HEAD
 export default GatheringAdd;
-=======
-export default GatheringAdd;
->>>>>>> saebyeol
