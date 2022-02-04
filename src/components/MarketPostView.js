@@ -27,7 +27,11 @@ const MarketPostView = (props) => {
         setMarkets(res.data);
       })
       .catch((err) => console.log(err));
-    //console.log(localStorage.getItem("accessToken"));
+  }, [useParams()]);
+
+  const [image, setImage] = useState();
+
+  useEffect(() => {
     axios
       .get("/used-goods/" + id, {
         headers: {
@@ -35,10 +39,27 @@ const MarketPostView = (props) => {
         },
       })
       .then((res) => {
+        console.log(res.data);
         setMarket(res.data);
-        //console.log(res.data);
-        //console.log(markets);
-        console.log("render");
+        axios({
+          method: "GET",
+          url: "/photo/" + res.data.photoId[0],
+          responseType: "blob",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+          .then((res) => {
+            console.log(res.data);
+            setImage(
+              window.URL.createObjectURL(
+                new Blob([res.data], { type: res.headers["content-type"] })
+              )
+            );
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => console.log(err));
   }, [useParams()]);
@@ -118,7 +139,7 @@ const MarketPostView = (props) => {
             {/* 글 작성자의 아이디*/}
             <span>작성자:{market.author}</span>
           </div>
-          <img className="marketPostView-img" src="../img/test.png"></img>
+          <img src={image}></img>
           <div className="marketPostView-content"></div>
         </div>
         <div className="relpy-line"></div>

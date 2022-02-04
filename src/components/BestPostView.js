@@ -28,8 +28,9 @@ const BestPostView = () => {
         setBests(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [useParams()]);
 
+  const [image, setImage] = useState();
   // 해당 게시글 정보를 불러와서 best에 저장
   // 여기서 useParams()는 무슨 역할?
   useEffect(() => {
@@ -40,25 +41,30 @@ const BestPostView = () => {
         },
       })
       .then((res) => {
+        console.log(res.data);
         setBest(res.data);
+        axios({
+          method: "GET",
+          url: "/photo/" + res.data.photoIds[0],
+          responseType: "blob",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+          .then((res) => {
+            console.log(res.data);
+            setImage(
+              window.URL.createObjectURL(
+                new Blob([res.data], { type: res.headers["content-type"] })
+              )
+            );
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => console.log(err));
   }, [useParams()]);
-
-  console.log(best);
-
-  // useEffect(() => {
-  //   axios
-  //     .get("/photo/" + String(best.photoId[0]), {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log("image get");
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [useParams()]);
 
   // 이전글/다음글
   const postList =
@@ -103,13 +109,10 @@ const BestPostView = () => {
         setCommentList([]);
         if (commentList.length === 0) {
           setCommentList(commentList.concat(res.data));
-          console.log("then commentList: ", commentList);
         }
       })
       .catch((err) => console.log(err));
   }, []);
-
-  console.log("bodycommentList: ", commentList);
 
   const [author, setAuthor] = useState("");
 
@@ -255,7 +258,7 @@ const BestPostView = () => {
             <span>/</span>
             <span>작성자: {best.author}</span>
           </div>
-          <img className="bestPostView-img" src={best.photold}></img>
+          <img src={image}></img>
           <div className="bestPostView-content">
             {String(best.content)
               .split("\n")

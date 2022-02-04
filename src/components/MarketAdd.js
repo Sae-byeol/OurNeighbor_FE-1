@@ -11,34 +11,52 @@ const MarketAdd = () => {
   const [marketContent, setMarketContent] = useState("");
   const navigate = useNavigate();
 
+  const FileElement = document.querySelector("#File");
   const onSubmit = (e) => {
     e.preventDefault();
-    //add함수 props로 받아오기
-    axios
-      .post(
-        "/used-goods",
-        `title=${marketTitle}&&content=${marketContent}`,
+    const formData = new FormData();
+    formData.append("file", files.length && files[0].uploadedFile);
+    console.log(formData);
 
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
+    for (var key of formData.keys()) {
+      console.log(key);
+    }
+
+    for (var value of formData.values()) {
+      console.log(value);
+    }
+
+    formData.append("title", marketTitle);
+    formData.append("content", marketContent);
+    for (let i = 0; i < FileElement.files.length; i++) {
+      formData.append("file", FileElement.files[i]);
+    }
+    axios
+      .post("/used-goods", formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
       .then((res) => {
-        console.log(res.data);
         alert("글이 정상적으로 작성되었습니다.");
+        console.log(res.data);
         if (res.data) {
           navigate("/market");
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
-  const onImgChange = async (event) => {
-    const formData = new FormData();
-    formData.append("file", event.target.files[0]);
-    //서버 통신 필요
+  const [files, setFiles] = useState([]);
+
+  const handleUpload = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    setFiles([...files, { uploadedFile: file }]);
   };
+
   return (
     <div className="App">
       <div className="content">
@@ -71,10 +89,11 @@ const MarketAdd = () => {
             <input
               type="file"
               className="imgInput"
-              id="marketImg"
-              accept="image/*"
+              id="File"
               name="file"
-              onChangeCapture={onImgChange}
+              multiple
+              encType="multipart/form-data"
+              onChange={handleUpload}
             ></input>
             <button className="marketAddCompleteBtn" onClick={onSubmit}>
               작성 완료
