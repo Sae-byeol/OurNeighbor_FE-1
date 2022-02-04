@@ -22,6 +22,7 @@ const Header = () => {
         setUser(res.data);
       });
   }
+
   const Logout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");

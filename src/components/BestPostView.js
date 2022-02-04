@@ -45,6 +45,21 @@ const BestPostView = () => {
       .catch((err) => console.log(err));
   }, [useParams()]);
 
+  console.log(best);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("/photo/" + String(best.photoId[0]), {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log("image get");
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [useParams()]);
+
   // 이전글/다음글
   const postList =
     parseInt(bests.length) <= 5
