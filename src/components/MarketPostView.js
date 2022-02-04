@@ -12,12 +12,21 @@ import { asRoughMinutes } from "@fullcalendar/react";
 
 const MarketPostView = (props) => {
   const { id } = useParams();
-  const [user, setUser] = useState([]);
   const [market, setMarket] = useState({});
-  const markets = props.component;
+  const [markets, setMarkets] = useState([]);
   const num = markets.length;
 
   useEffect(() => {
+    axios
+      .get("/apartments/used-goods", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setMarkets(res.data);
+      })
+      .catch((err) => console.log(err));
     //console.log(localStorage.getItem("accessToken"));
     axios
       .get("/used-goods/" + id, {
@@ -35,7 +44,9 @@ const MarketPostView = (props) => {
   }, [useParams()]);
 
   const postList =
-    parseInt(id) === 1
+    parseInt(markets.length) <= 5
+      ? markets
+      : parseInt(id) === 1
       ? markets.slice(parseInt(id) - 1, parseInt(id) + 4)
       : parseInt(id) === 2
       ? markets.slice(parseInt(id) - 2, parseInt(id) + 3)
@@ -44,11 +55,6 @@ const MarketPostView = (props) => {
       : parseInt(id) === parseInt(num)
       ? markets.slice(parseInt(id) - 5, parseInt(id) + 0)
       : markets.slice(parseInt(id) - 3, parseInt(id) + 2);
-
-  //console.log(postList);
-  const matchItem = props.component.find(function (element) {
-    if (element.id === Number(id)) return true;
-  });
 
   //대댓글 구현
   const [commentContents, setCommentContents] = useState("");

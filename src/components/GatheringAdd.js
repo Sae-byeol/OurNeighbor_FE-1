@@ -3,10 +3,12 @@ import Navbar from "./Navbar";
 import Header from "./Header";
 import "../GatheringAdd.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const GatheringAdd = () => {
   const [gatheringTitle, setGathering] = useState("");
   const [gatheringContent, setGatheringContent] = useState("");
+  const navigate = useNavigate();
 
   // 카테고리 뜨기
   const [showCategory, setShowCategory] = useState("none");
@@ -58,6 +60,10 @@ const GatheringAdd = () => {
       )
       .then((res) => {
         console.log(res.data);
+        alert("글이 정상적으로 작성되었습니다.");
+        if (res.data) {
+          navigate("/gathering");
+        }
       });
   };
 

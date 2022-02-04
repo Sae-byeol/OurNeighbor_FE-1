@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import "../Market.css";
@@ -6,10 +6,10 @@ import MarketForm from "./MarketForm";
 import { BrowserRouter, Route, Routes, Link, Outlet } from "react-router-dom";
 import "../Paging.css";
 import Pagination from "react-js-pagination";
-import axios from 'axios';
+import axios from "axios";
 
 const Market = (props) => {
-  const [markets, setMarkets]=useState([]);
+  const [markets, setMarkets] = useState([]);
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
@@ -34,7 +34,8 @@ const Market = (props) => {
     setSearch(e);
   };
 
-  const searchedMarkets = markets.filter((market) => {
+  const getMarkets = markets.reverse();
+  const searchedMarkets = getMarkets.filter((market) => {
     if (search === "") return market;
     if (search === null) return market;
     else if (

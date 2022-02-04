@@ -4,11 +4,12 @@ import Navbar from "./Navbar";
 import Header from "./Header";
 import "../MarketAdd.css";
 import axios from "axios";
-import qs from "qs";
+import { useNavigate } from "react-router-dom";
 
 const MarketAdd = () => {
   const [marketTitle, setMarketTitle] = useState("");
   const [marketContent, setMarketContent] = useState("");
+  const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -26,6 +27,10 @@ const MarketAdd = () => {
       )
       .then((res) => {
         console.log(res.data);
+        alert("글이 정상적으로 작성되었습니다.");
+        if (res.data) {
+          navigate("/market");
+        }
       });
   };
 

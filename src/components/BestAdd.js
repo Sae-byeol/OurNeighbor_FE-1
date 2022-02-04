@@ -3,12 +3,14 @@ import Navbar from "./Navbar";
 import Header from "./Header";
 import "../BestAdd.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const BestAdd = () => {
   const [bestTitle, setBestTitle] = useState("");
   const [bestContent, setBestContent] = useState("");
   // 카테고리 뜨기
   const [showCategory, setShowCategory] = useState("none");
+  const navigate = useNavigate();
 
   const onShowCategory = (e) => {
     if (e.target.name === "food") {
@@ -33,9 +35,8 @@ const BestAdd = () => {
     setShowCategory("none");
   };
 
-  axios.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${localStorage.accessToken}`;
+  const [image, setImage] = useState([]);
+  console.log(image);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -53,6 +54,32 @@ const BestAdd = () => {
       )
       .then((res) => {
         console.log(res.data);
+        alert("글이 정상적으로 작성되었습니다.");
+        if (res.data) {
+          navigate("/best");
+        }
+      });
+    const formData = new FormData();
+    // for (let i = 0; i < FileElement.files.length; i++) {
+    //   formData.append("files", FileElement.files[i]);
+    // }
+    axios
+      .post(
+        "/recommend-posts",
+        `title=${bestTitle}&&content=${bestContent}&&category=${showCategory}`,
+
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        alert("글이 정상적으로 작성되었습니다.");
+        if (res.data) {
+          navigate("/best");
+        }
       });
   };
 
@@ -88,6 +115,10 @@ const BestAdd = () => {
               id="bestImg"
               accept="image/*"
               name="file"
+              value={image}
+              onChange={(e) => {
+                setImage(image.concat(e.target.value));
+              }}
             ></input>
             <div className="best-categoryText">카테고리</div>
             <div className="best-selectedCategories">

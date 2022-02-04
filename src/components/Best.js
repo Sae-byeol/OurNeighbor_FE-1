@@ -13,8 +13,6 @@ import axios from "axios";
 
 const Best = () => {
   const [getBests, setGetBests] = useState([]);
-  console.log("test merge");
-
   axios.defaults.headers.common[
     "Authorization"
   ] = `Bearer ${localStorage.accessToken}`;
