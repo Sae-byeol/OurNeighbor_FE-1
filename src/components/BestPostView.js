@@ -9,13 +9,19 @@ import "../PostList.css";
 import ParentComment from "./ParentComment";
 import axios from "axios";
 import ChildComponent from "./ChildComponent";
+import { useNavigate } from "react-router-dom";
 
 const BestPostView = () => {
   const { id } = useParams();
   const [best, setBest] = useState([]);
   const [bests, setBests] = useState([]);
   const num = bests.length;
-const [photo, setPhoto]=useState("");
+  const navigate = useNavigate();
+
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
+
   // 전체 게시글 정보를 불러와서 bests에 저장
   useEffect(() => {
     axios
@@ -28,10 +34,10 @@ const [photo, setPhoto]=useState("");
         setBests(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [useParams()]);
 
   // 해당 게시글 정보를 불러와서 best에 저장
-  // 여기서 useParams()는 무슨 역할?
+  const [image, setImage] = useState();
   useEffect(() => {
     axios
       .get("/recommend-posts/" + id, {
@@ -40,34 +46,95 @@ const [photo, setPhoto]=useState("");
         },
       })
       .then((res) => {
+        console.log(res.data);
         setBest(res.data);
-        /*axios.get("/photo/"+best.photoIds[0],{
-        
+        axios({
+          method: "GET",
+          url: "/photo/" + res.data.photoIds[0],
+          responseType: "blob",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
-        }).then((res)=>{
-          console.log("suc");
-            setPhoto(toString(res.data));
-          })*/
+        })
+          .then((res) => {
+            console.log(res.data);
+            setImage(
+              window.URL.createObjectURL(
+                new Blob([res.data], { type: res.headers["content-type"] })
+              )
+            );
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => console.log(err));
-     
-  }, []);
+  }, [useParams()]);
+
+  // 현재 로그인된 유저 정보 - 닉네임을 author에 저장
+  const [author, setAuthor] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("/member/info", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setAuthor(res.data.nickName);
+        console.log(author);
+      })
+      .catch((err) => console.log(err));
+  }, [useParams()]);
+
+  // 삭제 버튼 누를 때 실행
+  const onClickDeleteButton = (e) => {
+    e.preventDefault();
+    if (window.confirm("게시글을 삭제하시겠습니까?")) {
+      axios
+        .delete("/recommend-posts/" + id, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          alert("삭제되었습니다.");
+          navigate("/best");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      alert("취소합니다.");
+    }
+  };
+
+  // 게시글 삭제 버튼 보여주는 코드
+  const showDeleteButton = (e) => {
+    if (String(author) === String(best.author)) {
+      return (
+        <button
+          className="best-deleteButton"
+          onClick={(e) => onClickDeleteButton(e)}
+        >
+          | 게시글 삭제 |
+        </button>
+      );
+    }
+  };
 
   // 이전글/다음글
   const postList =
     parseInt(bests.length) <= 5
       ? bests
-      : parseInt(best.id) === 1
-      ? bests.slice(parseInt(best.id) - 1, parseInt(best.id) + 4)
-      : parseInt(best.id) === 2
-      ? bests.slice(parseInt(best.id) - 2, parseInt(best.id) + 3)
-      : parseInt(best.id) === parseInt(num) - 1
-      ? bests.slice(parseInt(best.id) - 4, parseInt(best.id) + 1)
-      : parseInt(best.id) === parseInt(num)
-      ? bests.slice(parseInt(best.id) - 5, parseInt(best.id) + 0)
-      : bests.slice(parseInt(best.id) - 3, parseInt(best.id) + 2);
+      : parseInt(best.bestNo) === 1
+      ? bests.slice(parseInt(best.bestNo) - 1, parseInt(best.bestNo) + 4)
+      : parseInt(best.bestNo) === 2
+      ? bests.slice(parseInt(best.bestNo) - 2, parseInt(best.bestNo) + 3)
+      : parseInt(best.bestNo) === parseInt(num) - 1
+      ? bests.slice(parseInt(best.bestNo) - 4, parseInt(best.bestNo) + 1)
+      : parseInt(best.bestNo) === parseInt(num)
+      ? bests.slice(parseInt(best.bestNo) - 5, parseInt(best.bestNo) + 0)
+      : bests.slice(parseInt(best.bestNo) - 3, parseInt(best.bestNo) + 2);
 
   // 카테고리 이름 보여주는 함수
   const categoryName = () => {
@@ -87,110 +154,51 @@ const [photo, setPhoto]=useState("");
   const commentPageType = "recommend";
 
   // 댓글, 대댓글 get 해오기
-  useEffect((e) => {
-    axios
-      .get("/recommend-posts/comments/" + id, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        setCommentList([]);
-        if (commentList.length === 0) {
-          setCommentList(commentList.concat(res.data));
-          console.log("then commentList: ", commentList);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  //console.log("bodycommentList: ", commentList);
-
-  const [author, setAuthor] = useState("");
-
-  useEffect(() => {
-    axios
-      .get("/member/info", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        setAuthor(res.data.nickName);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  useEffect(
+    (e) => {
+      axios
+        .get("/recommend-posts/comments/" + id, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          // commentList 초기화 및 get 해온 댓글, 대댓글 추가
+          setCommentList([]);
+          if (commentList.length === 0) {
+            setCommentList(commentList.concat(res.data));
+          }
+        })
+        .catch((err) => console.log(err));
+    },
+    [useParams()]
+  );
 
   // 댓글들 보여주기
   const beforeShowComments = commentList.filter((comment) => {
     return comment.commentType === "parent";
   });
 
-  const showComments = beforeShowComments.map((parentComment, index) => {
-    const childComments = commentList.filter((comment) => {
-      return (
-        comment.commentType === "child" &&
-        Number(index) === Number(comment.responseTo)
-      );
-    });
-    return (
-      <div>
-        {String(parentComment.content).length > 50 ? (
-          <div>
-            <div className="reply-comment">
-              <div className="reply-polygon">
-                <img src={"../img/polygon.png"} alt="polygon"></img>
-              </div>
-              <div className="reply-eachcomment">
-                <span>
-                  {parentComment.content.split("\n").map((line) => {
-                    return (
-                      <span>
-                        {line}
-                        <br />
-                      </span>
-                    );
-                  })}
-                </span>
-              </div>
-            </div>
-            <span className="reply-id">
-              &nbsp;&nbsp;{parentComment.userNickName}
-            </span>
-          </div>
-        ) : (
-          <div>
-            <div className="reply-comment">
-              <div className="reply-polygon">
-                <img src={"../img/polygon.png"} alt="polygon"></img>
-              </div>
-              <span className="reply-eachcomment">
-                <span>{parentComment.content}</span>
-              </span>
-              <span className="reply-id">
-                &nbsp;&nbsp;{parentComment.userNickName}
-              </span>
-            </div>
-          </div>
-        )}
-        <ChildComponent
-          childComments={childComments}
-          commentList={commentList}
-          setCommentList={setCommentList}
-          id={id}
-          index={index}
-          author={author}
-          commentPageType={commentPageType}
-        ></ChildComponent>
-      </div>
-    );
-  });
+  const showComments =
+    commentList === []
+      ? null
+      : beforeShowComments.map((parentComment, index) => {
+          return (
+            <ParentComment
+              parentComment={parentComment}
+              commentList={commentList}
+              setCommentList={setCommentList}
+              id={id}
+              index={index}
+              author={author}
+              commentPageType={commentPageType}
+            ></ParentComment>
+          );
+        });
 
   // 댓글 작성 => commentContents에 저장
-
   const getValue = (e) => {
     setCommentContents(e.target.value);
-    console.log(responseTo);
   };
 
   // 댓글 작성 버튼 누를 때
@@ -201,13 +209,13 @@ const [photo, setPhoto]=useState("");
       alert("내용을 입력해주세요");
       return;
     }
+
     let body = {
       content: commentContents,
       commentType: "parent",
       userNickName: author,
     };
     setCommentList(commentList.concat(body));
-
     setCommentContents("");
     axios
       .post(
@@ -244,13 +252,14 @@ const [photo, setPhoto]=useState("");
         </div>
         <div className="line"></div>
         <div className="bestPostView-section1">
+          <div>{showDeleteButton()}</div>
           <span className="bestPostView-title">{best.title}</span>
           <div className="bestPostView-subtitle">
             <span>{bests.title}</span>
             <span>/</span>
             <span>작성자: {best.author}</span>
           </div>
-          <img className="bestPostView-img" src="/photo/1"></img>
+          <img src={image}></img>
           <div className="bestPostView-content">
             {String(best.content)
               .split("\n")
