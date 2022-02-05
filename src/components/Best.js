@@ -54,7 +54,7 @@ const Best = () => {
 
   const addedBests = searchedBests.map((best) => {
     for (let a = 1; a <= length; a = a + 1) {
-      searchedBests.bestNo = a;
+      best.bestNo = a;
     }
     return best;
   });

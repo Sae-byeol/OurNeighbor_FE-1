@@ -96,18 +96,43 @@ const NoticePostView = () => {
     );
   };
 
+  // 이전글/다음글
+  let a = 1;
+  notices.map((noticeE) => {
+    noticeE.noticeNo = a;
+    if (notice.id === noticeE.id) {
+      notice.noticeNo = a;
+    }
+    a = a + 1;
+  });
+
   const postList =
     parseInt(notices.length) <= 5
       ? notices
-      : parseInt(id) === 1
-      ? notices.slice(parseInt(notice.id) - 1, parseInt(notice.id) + 4)
-      : parseInt(notice.id) === 2
-      ? notices.slice(parseInt(notice.id) - 2, parseInt(notice.id) + 3)
-      : parseInt(notice.id) === parseInt(num) - 1
-      ? notices.slice(parseInt(notice.id) - 4, parseInt(notice.id) + 1)
-      : parseInt(notice.id) === parseInt(num)
-      ? notices.slice(parseInt(notice.id) - 5, parseInt(notice.id) + 0)
-      : notices.slice(parseInt(notice.id) - 3, parseInt(notice.id) + 2);
+      : parseInt(notice.noticeNo) === 1
+      ? notices.slice(
+          parseInt(notice.noticeNo) - 1,
+          parseInt(notice.noticeNo) + 4
+        )
+      : parseInt(notice.noticeNo) === 2
+      ? notices.slice(
+          parseInt(notice.noticeNo) - 2,
+          parseInt(notice.noticeNo) + 3
+        )
+      : parseInt(notice.noticeNo) === parseInt(num) - 1
+      ? notices.slice(
+          parseInt(notice.noticeNo) - 4,
+          parseInt(notice.noticeNo) + 1
+        )
+      : parseInt(notice.noticeNo) === parseInt(num)
+      ? notices.slice(
+          parseInt(notice.noticeNo) - 5,
+          parseInt(notice.noticeNo) + 0
+        )
+      : notices.slice(
+          parseInt(notice.noticeNo) - 3,
+          parseInt(notice.noticeNo) + 2
+        );
 
   return (
     <div className="App">
@@ -153,7 +178,7 @@ const NoticePostView = () => {
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>
-                        <div className="postlist-date">{item.date}</div>
+                        <div className="postlist-date"></div>
                       </div>
                     </Link>
                   ) : (
@@ -164,7 +189,7 @@ const NoticePostView = () => {
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>
-                        <div className="postlist-date">{item.date}</div>
+                        <div className="postlist-date"></div>
                       </div>
                     </Link>
                   );
