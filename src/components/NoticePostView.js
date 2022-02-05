@@ -15,6 +15,10 @@ const NoticePostView = () => {
   const num = notices.length;
   const navigate = useNavigate();
 
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
+
   // 전체 게시글 정보를 불러와서 notices에 저장
   useEffect(() => {
     axios
@@ -30,7 +34,6 @@ const NoticePostView = () => {
   }, [useParams()]);
 
   // 해당 게시글 정보를 불러와서 notice에 저장
-  // 여기서 useParams()는 무슨 역할?
   useEffect(() => {
     axios
       .get("/notices/" + id, {
@@ -44,9 +47,22 @@ const NoticePostView = () => {
       .catch((err) => console.log(err));
   }, [useParams()]);
 
-  axios.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${localStorage.accessToken}`;
+  // 현재 로그인된 유저 정보 - 닉네임을 author에 저장
+  const [author, setAuthor] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("/member/info", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setAuthor(res.data.nickName);
+        console.log(author);
+      })
+      .catch((err) => console.log(err));
+  }, [useParams()]);
 
   // 삭제 버튼 누를 때 실행
   const onClickDeleteButton = (e) => {
@@ -72,7 +88,7 @@ const NoticePostView = () => {
   const showDeleteButton = (e) => {
     return (
       <button
-        className="market-deleteButton"
+        className="notice-deleteButton"
         onClick={(e) => onClickDeleteButton(e)}
       >
         | 게시글 삭제 |
@@ -92,48 +108,6 @@ const NoticePostView = () => {
       : parseInt(notice.id) === parseInt(num)
       ? notices.slice(parseInt(notice.id) - 5, parseInt(notice.id) + 0)
       : notices.slice(parseInt(notice.id) - 3, parseInt(notice.id) + 2);
-
-  // <대댓글 구현>
-  const [commentContents, setCommentContents] = useState("");
-  const [commentList, setCommentList] = useState([]);
-  const [count, setCount] = useState(0);
-
-  const getValue = (e) => {
-    setCommentContents(e.target.value);
-  };
-
-  let body = {
-    comment: commentContents,
-    index: count,
-    responseTo: null,
-  };
-
-  const addComment = (e) => {
-    if (commentContents === "") {
-      alert("내용을 입력해주세요");
-      return;
-    }
-    e.preventDefault();
-
-    setCount(count + 1);
-    setCommentList(commentList.concat(body));
-    setCommentContents("");
-  };
-
-  const beforeShowComments = commentList.filter((comment) => {
-    return comment.responseTo === null;
-  });
-
-  const showComments = beforeShowComments.map((parentComment, index) => {
-    return (
-      <ParentComment
-        parentComment={parentComment}
-        index={index}
-        commentList={commentList}
-        setCommentList={setCommentList}
-      ></ParentComment>
-    );
-  });
 
   return (
     <div className="App">
@@ -164,23 +138,6 @@ const NoticePostView = () => {
                 );
               })}
           </div>
-        </div>
-        <div className="relpy-line"></div>
-        <div className="noticePostView-section2">
-          <div className="reply-title">댓글</div>
-          <div className="reply-id">{notice.member_id}</div>
-          <textarea
-            className="reply-input"
-            onChange={(e) => getValue(e)}
-            type="text"
-            value={commentContents}
-          ></textarea>
-          <div className="outreplybtn">
-            <button className="replybtn" onClick={(e) => addComment(e)}>
-              댓글 달기
-            </button>
-          </div>
-          <div>{showComments}</div>
         </div>
         <div className="pagination-line"></div>
         <div className="pagination-section">

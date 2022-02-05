@@ -16,12 +16,14 @@ const GatheringPostView = () => {
   const [gathering, setGathering] = useState([]);
   const [gatherings, setGatherings] = useState([]);
   const num = gatherings.length;
-  const [nickname, setNickname] = useState("");
   const navigate = useNavigate();
+
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
 
   // 전체 게시글 정보를 불러와서 gatherings에 저장
   useEffect(() => {
-    //console.log(localStorage.getItem("accessToken"));
     axios
       .get("/apartments/gatherings", {
         headers: {
@@ -37,9 +39,7 @@ const GatheringPostView = () => {
   }, [useParams()]);
 
   // 해당 게시글 정보를 불러와서 gathering에 저장
-  // 여기서 useParams()는 무슨 역할?
   useEffect(() => {
-    //console.log(localStorage.getItem("accessToken"));
     axios
       .get("/gathering/" + id, {
         headers: {
@@ -52,8 +52,10 @@ const GatheringPostView = () => {
       .catch((err) => console.log(err));
   }, [useParams()]);
 
-  // complete 버튼을 구현하기 위해
-  // 현재 접속되어있는 유저의 닉네임을 불러온다
+  // 현재 로그인된 유저 정보 - 닉네임을 author, nickname에 저장
+  const [author, setAuthor] = useState("");
+  const [nickname, setNickname] = useState("");
+
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
@@ -63,9 +65,8 @@ const GatheringPostView = () => {
         },
       })
       .then((res) => {
-        console.log(res.data.nickName);
         setNickname(res.data.nickName);
-        console.log(nickname);
+        setAuthor(res.data.nickName);
       })
       .catch((err) => console.log(err));
   }, [useParams()]);
@@ -188,8 +189,6 @@ const GatheringPostView = () => {
         })
         .then((res) => {
           // commentList 초기화 및 get 해온 댓글, 대댓글 추가
-          console.log(res.data);
-          console.log("getSuccess");
           setCommentList([]);
           if (commentList.length === 0) {
             setCommentList(commentList.concat(res.data));
@@ -199,21 +198,6 @@ const GatheringPostView = () => {
     },
     [useParams()]
   );
-
-  const [author, setAuthor] = useState("");
-
-  useEffect(() => {
-    axios
-      .get("/member/info", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        setAuthor(res.data.nickName);
-      })
-      .catch((err) => console.log(err));
-  }, [useParams()]);
 
   // 댓글들 보여주기
   const beforeShowComments = commentList.filter((comment) => {
@@ -251,8 +235,6 @@ const GatheringPostView = () => {
       return;
     }
 
-    // responseTo +1
-    setResponseTo(responseTo + 1);
     let body = {
       content: commentContents,
       commentType: "parent",
@@ -279,6 +261,11 @@ const GatheringPostView = () => {
         console.log(res.data);
       });
   };
+
+  function refreshPage(e) {
+    e.preventDefault();
+    window.location.reload();
+  }
 
   return (
     <div className="App">
@@ -331,6 +318,7 @@ const GatheringPostView = () => {
               댓글 달기
             </button>
           </div>
+          <div onClick={(e) => refreshPage(e)}>새로고침하기</div>
           <div>{showComments}</div>
         </div>
         <div className="pagination-line"></div>

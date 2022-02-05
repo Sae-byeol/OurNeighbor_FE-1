@@ -18,6 +18,11 @@ const MarketPostView = (props) => {
   const num = markets.length;
   const navigate = useNavigate();
 
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
+
+  // 전체 게시글 정보를 불러와서 markets에 저장
   useEffect(() => {
     axios
       .get("/apartments/used-goods", {
@@ -31,8 +36,8 @@ const MarketPostView = (props) => {
       .catch((err) => console.log(err));
   }, [useParams()]);
 
+  // 해당 게시글 정보를 불러와서 market에 저장
   const [image, setImage] = useState();
-
   useEffect(() => {
     axios
       .get("/used-goods/" + id, {
@@ -66,6 +71,7 @@ const MarketPostView = (props) => {
       .catch((err) => console.log(err));
   }, [useParams()]);
 
+  // 현재 로그인된 유저 정보 - 닉네임을 author에 저장
   const [author, setAuthor] = useState("");
 
   useEffect(() => {
@@ -133,47 +139,100 @@ const MarketPostView = (props) => {
       ? markets.slice(parseInt(id) - 5, parseInt(id) + 0)
       : markets.slice(parseInt(id) - 3, parseInt(id) + 2);
 
-  //대댓글 구현
+  // <대댓글 구현>
   const [commentContents, setCommentContents] = useState("");
   const [commentList, setCommentList] = useState([]);
-  const [count, setCount] = useState(0);
+  const [responseTo, setResponseTo] = useState(0);
+  const commentPageType = "usedGoods";
 
+  // 댓글, 대댓글 get 해오기
+  useEffect(
+    (e) => {
+      axios
+        .get("/used-goods/comments/" + id, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          // commentList 초기화 및 get 해온 댓글, 대댓글 추가
+          setCommentList([]);
+          if (commentList.length === 0) {
+            setCommentList(commentList.concat(res.data));
+          }
+        })
+        .catch((err) => console.log(err));
+    },
+    [useParams()]
+  );
+
+  // 댓글들 보여주기
+  const beforeShowComments = commentList.filter((comment) => {
+    return comment.commentType === "parent";
+  });
+
+  const showComments =
+    commentList === []
+      ? null
+      : beforeShowComments.map((parentComment, index) => {
+          return (
+            <ParentComment
+              parentComment={parentComment}
+              commentList={commentList}
+              setCommentList={setCommentList}
+              id={id}
+              index={index}
+              author={author}
+              commentPageType={commentPageType}
+            ></ParentComment>
+          );
+        });
+
+  // 댓글 작성 => commentContents에 저장
   const getValue = (e) => {
     setCommentContents(e.target.value);
   };
 
-  let body = {
-    comment: commentContents,
-    index: count,
-    responseTo: null,
-  };
-
+  // 댓글 작성 버튼 누를 때
   const addComment = (e) => {
+    e.preventDefault();
+    // 댓글 없으면 alert 띄우기
     if (commentContents === "") {
       alert("내용을 입력해주세요");
       return;
     }
-    e.preventDefault();
 
-    setCount(count + 1);
+    let body = {
+      content: commentContents,
+      commentType: "parent",
+      userNickName: author,
+    };
     setCommentList(commentList.concat(body));
     setCommentContents("");
+    axios
+      .post(
+        "/comment/" + id,
+        {
+          postCategory: commentPageType,
+          content: commentContents,
+          responseTo: responseTo,
+          commentType: "parent",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      });
   };
 
-  const beforeShowComments = commentList.filter((comment) => {
-    return comment.responseTo === null;
-  });
-
-  const showComments = beforeShowComments.map((parentComment, index) => {
-    return (
-      <ParentComment
-        parentComment={parentComment}
-        index={index}
-        commentList={commentList}
-        setCommentList={setCommentList}
-      ></ParentComment>
-    );
-  });
+  function refreshPage(e) {
+    e.preventDefault();
+    window.location.reload();
+  }
 
   return (
     <div className="App">
