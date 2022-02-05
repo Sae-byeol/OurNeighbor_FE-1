@@ -92,14 +92,6 @@ const GatheringAdd = () => {
               value={gatheringContent}
               onChange={(e) => setGatheringContent(e.target.value)}
             />
-            <div className="gatheringAddImg">사진 첨부</div>
-            <input
-              type="file"
-              className="imgInput"
-              id="gatheringImg"
-              accept="image/*"
-              name="file"
-            ></input>
             <div className="gathering-categoryText">카테고리</div>
             <div className="gathering-selectedCategories">
               {showCategory === "exercise" && (

@@ -9,12 +9,14 @@ import markets from "./Market";
 import ParentComment from "./ParentComment";
 import axios from "axios";
 import { asRoughMinutes } from "@fullcalendar/react";
+import { useNavigate } from "react-router-dom";
 
 const MarketPostView = (props) => {
   const { id } = useParams();
   const [market, setMarket] = useState({});
   const [markets, setMarkets] = useState([]);
   const num = markets.length;
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -63,6 +65,60 @@ const MarketPostView = (props) => {
       })
       .catch((err) => console.log(err));
   }, [useParams()]);
+
+  const [author, setAuthor] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("/member/info", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        setAuthor(res.data.nickName);
+        console.log(author);
+      })
+      .catch((err) => console.log(err));
+  }, [useParams()]);
+
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
+
+  // 삭제 버튼 누를 때 실행
+  const onClickDeleteButton = (e) => {
+    e.preventDefault();
+    if (window.confirm("게시글을 삭제하시겠습니까?")) {
+      axios
+        .delete("/used-goods/" + id, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          alert("삭제되었습니다.");
+          navigate("/market");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      alert("취소합니다.");
+    }
+  };
+
+  // 게시글 삭제 버튼 보여주는 코드
+  const showDeleteButton = (e) => {
+    if (String(author) === String(market.author)) {
+      return (
+        <button
+          className="market-deleteButton"
+          onClick={(e) => onClickDeleteButton(e)}
+        >
+          | 게시글 삭제 |
+        </button>
+      );
+    }
+  };
 
   const postList =
     parseInt(markets.length) <= 5
@@ -128,8 +184,8 @@ const MarketPostView = (props) => {
           <span className="sub-title1">중고거래</span>
         </div>
         <div className="line"></div>
-
         <div className="marketPostView-section1">
+          <div>{showDeleteButton()}</div>
           <span className="marketPostView-title">{market.title}</span>
           <span>
             <button className="market-complete-btn">판매 완료</button>

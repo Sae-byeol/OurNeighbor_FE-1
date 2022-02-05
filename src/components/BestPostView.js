@@ -9,12 +9,14 @@ import "../PostList.css";
 import ParentComment from "./ParentComment";
 import axios from "axios";
 import ChildComponent from "./ChildComponent";
+import { useNavigate } from "react-router-dom";
 
 const BestPostView = () => {
   const { id } = useParams();
   const [best, setBest] = useState([]);
   const [bests, setBests] = useState([]);
   const num = bests.length;
+  const navigate = useNavigate();
 
   // 전체 게시글 정보를 불러와서 bests에 저장
   useEffect(() => {
@@ -98,21 +100,24 @@ const BestPostView = () => {
   const commentPageType = "recommend";
 
   // 댓글, 대댓글 get 해오기
-  useEffect((e) => {
-    axios
-      .get("/recommend-posts/comments/" + id, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        setCommentList([]);
-        if (commentList.length === 0) {
-          setCommentList(commentList.concat(res.data));
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  useEffect(
+    (e) => {
+      axios
+        .get("/recommend-posts/comments/" + id, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          setCommentList([]);
+          if (commentList.length === 0) {
+            setCommentList(commentList.concat(res.data));
+          }
+        })
+        .catch((err) => console.log(err));
+    },
+    [useParams()]
+  );
 
   const [author, setAuthor] = useState("");
 
@@ -125,9 +130,48 @@ const BestPostView = () => {
       })
       .then((res) => {
         setAuthor(res.data.nickName);
+        console.log(author);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [useParams()]);
+
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
+
+  // 삭제 버튼 누를 때 실행
+  const onClickDeleteButton = (e) => {
+    e.preventDefault();
+    if (window.confirm("게시글을 삭제하시겠습니까?")) {
+      axios
+        .delete("/recommend-posts/" + id, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          alert("삭제되었습니다.");
+          navigate("/best");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      alert("취소합니다.");
+    }
+  };
+
+  // 게시글 삭제 버튼 보여주는 코드
+  const showDeleteButton = (e) => {
+    if (String(author) === String(best.author)) {
+      return (
+        <button
+          className="best-deleteButton"
+          onClick={(e) => onClickDeleteButton(e)}
+        >
+          | 게시글 삭제 |
+        </button>
+      );
+    }
+  };
 
   // 댓글들 보여주기
   const beforeShowComments = commentList.filter((comment) => {
@@ -252,6 +296,7 @@ const BestPostView = () => {
         </div>
         <div className="line"></div>
         <div className="bestPostView-section1">
+          <div>{showDeleteButton()}</div>
           <span className="bestPostView-title">{best.title}</span>
           <div className="bestPostView-subtitle">
             <span>{bests.title}</span>

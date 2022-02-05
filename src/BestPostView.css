@@ -16,6 +16,25 @@
 .bestPostView-section1 {
   margin-top: 30px;
 }
+
+.best-deleteButton {
+  font-family: "HSGaeulSenggak2";
+  font-size: 20px;
+  width: 135px;
+  height: 30px;
+  flex-grow: 0;
+  margin: 10px 0px 10px 15px;
+  padding: 5px 4px 0 8px;
+  border-radius: 10px;
+  border-color: white;
+  color: #433;
+  outline: 0;
+  border: 0;
+  background-color: white;
+  position: relative;
+  left: 1100px;
+}
+
 .bestPostView-title {
   height: 25px;
   margin-left: 5px;

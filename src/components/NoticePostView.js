@@ -3,15 +3,17 @@ import Navbar from "./Navbar";
 import Header from "./Header";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { useHistory, useParams, Outlet } from "react-router-dom";
-import "../GatheringPostView.css";
+import "../NoticePostView.css";
 import ParentComment from "./ParentComment";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const NoticePostView = () => {
   const { id } = useParams();
   const [notice, setNotice] = useState([]);
   const [notices, setNotices] = useState([]);
   const num = notices.length;
+  const navigate = useNavigate();
 
   // 전체 게시글 정보를 불러와서 notices에 저장
   useEffect(() => {
@@ -25,7 +27,7 @@ const NoticePostView = () => {
         setNotices(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [useParams()]);
 
   // 해당 게시글 정보를 불러와서 notice에 저장
   // 여기서 useParams()는 무슨 역할?
@@ -41,6 +43,42 @@ const NoticePostView = () => {
       })
       .catch((err) => console.log(err));
   }, [useParams()]);
+
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
+
+  // 삭제 버튼 누를 때 실행
+  const onClickDeleteButton = (e) => {
+    e.preventDefault();
+    if (window.confirm("게시글을 삭제하시겠습니까?")) {
+      axios
+        .delete("/notices/" + id, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          alert("삭제되었습니다.");
+          navigate("/notice");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      alert("취소합니다.");
+    }
+  };
+
+  // 게시글 삭제 버튼 보여주는 코드
+  const showDeleteButton = (e) => {
+    return (
+      <button
+        className="market-deleteButton"
+        onClick={(e) => onClickDeleteButton(e)}
+      >
+        | 게시글 삭제 |
+      </button>
+    );
+  };
 
   const postList =
     parseInt(notices.length) <= 5
@@ -108,13 +146,13 @@ const NoticePostView = () => {
           </Link>
         </div>
         <div className="line"></div>
-
-        <div className="marketPostView-section1">
-          <span className="marketPostView-title">{notice.title}</span>
-          <div className="marketPostView-subtitle">
+        <div className="noticePostView-section1">
+          <div>{showDeleteButton()}</div>
+          <span className="noticePostView-title">{notice.title}</span>
+          <div className="noticePostView-subtitle">
             <span>{notice.date}</span>
           </div>
-          <div className="marketPostView-content">
+          <div className="noticePostView-content">
             {String(notice.content)
               .split("\n")
               .map((line) => {
@@ -128,7 +166,7 @@ const NoticePostView = () => {
           </div>
         </div>
         <div className="relpy-line"></div>
-        <div className="marketPostView-section2">
+        <div className="noticePostView-section2">
           <div className="reply-title">댓글</div>
           <div className="reply-id">{notice.member_id}</div>
           <textarea
@@ -147,7 +185,6 @@ const NoticePostView = () => {
         <div className="pagination-line"></div>
         <div className="pagination-section">
           <div className="pagination-title">이전 글 / 다음 글</div>
-
           <div className="pagination-pages">
             {postList
               ? postList.map((item, index) => {

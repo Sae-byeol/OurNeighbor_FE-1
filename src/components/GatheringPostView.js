@@ -34,7 +34,7 @@ const GatheringPostView = () => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [useParams()]);
 
   // 해당 게시글 정보를 불러와서 gathering에 저장
   // 여기서 useParams()는 무슨 역할?
@@ -68,7 +68,7 @@ const GatheringPostView = () => {
         console.log(nickname);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [useParams()]);
 
   // complete 버튼 보여주기 여부 결정 관련 함수
   const showNickName = (e) => {
@@ -101,6 +101,44 @@ const GatheringPostView = () => {
         console.log(error);
       });
     navigate("/gathering");
+  };
+
+  axios.defaults.headers.common[
+    "Authorization"
+  ] = `Bearer ${localStorage.accessToken}`;
+
+  // 삭제 버튼 누를 때 실행
+  const onClickDeleteButton = (e) => {
+    e.preventDefault();
+    if (window.confirm("게시글을 삭제하시겠습니까?")) {
+      axios
+        .delete("/gathering/" + id, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          alert("삭제되었습니다.");
+          navigate("/best");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      alert("취소합니다.");
+    }
+  };
+
+  // 게시글 삭제 버튼 보여주는 코드
+  const showDeleteButton = (e) => {
+    if (String(nickname) === String(gathering.author)) {
+      return (
+        <button
+          className="gathering-deleteButton"
+          onClick={(e) => onClickDeleteButton(e)}
+        >
+          | 게시글 삭제 |
+        </button>
+      );
+    }
   };
 
   // 이전글/다음글
@@ -140,24 +178,27 @@ const GatheringPostView = () => {
   const commentPageType = "gathering";
 
   // 댓글, 대댓글 get 해오기
-  useEffect((e) => {
-    axios
-      .get("/gathering/comment/" + id, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        // commentList 초기화 및 get 해온 댓글, 대댓글 추가
-        console.log(res.data);
-        console.log("getSuccess");
-        setCommentList([]);
-        if (commentList.length === 0) {
-          setCommentList(commentList.concat(res.data));
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  useEffect(
+    (e) => {
+      axios
+        .get("/gathering/comment/" + id, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          // commentList 초기화 및 get 해온 댓글, 대댓글 추가
+          console.log(res.data);
+          console.log("getSuccess");
+          setCommentList([]);
+          if (commentList.length === 0) {
+            setCommentList(commentList.concat(res.data));
+          }
+        })
+        .catch((err) => console.log(err));
+    },
+    [useParams()]
+  );
 
   const [author, setAuthor] = useState("");
 
@@ -172,7 +213,7 @@ const GatheringPostView = () => {
         setAuthor(res.data.nickName);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [useParams()]);
 
   // 댓글들 보여주기
   const beforeShowComments = commentList.filter((comment) => {
@@ -249,6 +290,7 @@ const GatheringPostView = () => {
         </div>
         <div className="line"></div>
         <div className="gatheringPostView-section1">
+          <div>{showDeleteButton()}</div>
           <span className="gatheringPostView-title">{gathering.title}</span>
           <div className="gatheringPostView-subtitle">
             <span>{gathering.title}</span>
