@@ -17,7 +17,6 @@ const MarketPostView = (props) => {
   const [markets, setMarkets] = useState([]);
   const num = markets.length;
   const navigate = useNavigate();
-
   axios.defaults.headers.common[
     "Authorization"
   ] = `Bearer ${localStorage.accessToken}`;
@@ -48,6 +47,7 @@ const MarketPostView = (props) => {
       .then((res) => {
         console.log(res.data);
         setMarket(res.data);
+        //setTime(formatDate.substr(11,12).split(":"));
         axios({
           method: "GET",
           url: "/photo/" + res.data.photoId[0],
@@ -111,6 +111,7 @@ const MarketPostView = (props) => {
       alert("취소합니다.");
     }
   };
+
 
   // 게시글 삭제 버튼 보여주는 코드
   const showDeleteButton = (e) => {
@@ -260,6 +261,7 @@ const MarketPostView = (props) => {
   }
 
   return (
+   
     <div className="App">
       <div className="content">
         <Header></Header>
@@ -275,7 +277,13 @@ const MarketPostView = (props) => {
             <button className="market-complete-btn">판매 완료</button>
           </span>
           <div className="marketPostView-subtitle">
-            <span>{market.date}</span>
+            <span>
+            {String(market.createdDate).substr(0, 10)+"  "}
+            </span>
+            
+            <span>
+            {String(market.createdDate).substr(11, 12).split(":")[0]+":"+String(market.createdDate).substr(11, 12).split(":")[1]+" / "}
+            </span>
             {/* 글 작성자의 아이디*/}
             <span>작성자:{market.author}</span>
           </div>

@@ -264,8 +264,13 @@ const BestPostView = () => {
           <div>{showDeleteButton()}</div>
           <span className="bestPostView-title">{best.title}</span>
           <div className="bestPostView-subtitle">
-            <span>{bests.title}</span>
-            <span>/</span>
+            <span>
+            {String(best.createdDate).substr(0, 10)+"  "}
+            </span>
+            
+            <span>
+            {String(best.createdDate).substr(11, 12).split(":")[0]+":"+String(best.createdDate).substr(11, 12).split(":")[1]+" / "}
+            </span>
             <span>작성자: {best.author}</span>
           </div>
           <img src={image}></img>
