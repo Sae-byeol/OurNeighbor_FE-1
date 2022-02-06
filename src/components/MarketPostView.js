@@ -17,6 +17,7 @@ const MarketPostView = (props) => {
   const [markets, setMarkets] = useState([]);
   const num = markets.length;
   const navigate = useNavigate();
+
   axios.defaults.headers.common[
     "Authorization"
   ] = `Bearer ${localStorage.accessToken}`;
@@ -45,28 +46,29 @@ const MarketPostView = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setMarket(res.data);
-        //setTime(formatDate.substr(11,12).split(":"));
-        axios({
-          method: "GET",
-          url: "/photo/" + res.data.photoId[0],
-          responseType: "blob",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
-          .then((res) => {
-            console.log(res.data);
-            setImage(
-              window.URL.createObjectURL(
-                new Blob([res.data], { type: res.headers["content-type"] })
-              )
-            );
+        setImage("");
+        if (res.data.photoIds.length !== 0) {
+          axios({
+            method: "GET",
+            url: "/photo/" + res.data.photoId[0],
+            responseType: "blob",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
           })
-          .catch((err) => {
-            console.log(err);
-          });
+            .then((res) => {
+              setImage(
+                window.URL.createObjectURL(
+                  new Blob([res.data], { type: res.headers["content-type"] })
+                )
+              );
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
       })
       .catch((err) => console.log(err));
   }, [useParams()]);
@@ -111,7 +113,6 @@ const MarketPostView = (props) => {
       alert("취소합니다.");
     }
   };
-
 
   // 게시글 삭제 버튼 보여주는 코드
   const showDeleteButton = (e) => {
@@ -172,25 +173,21 @@ const MarketPostView = (props) => {
   const commentPageType = "usedGoods";
 
   // 댓글, 대댓글 get 해오기
-  useEffect(
-    (e) => {
-      axios
-        .get("/used-goods/comments/" + id, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
-        .then((res) => {
-          // commentList 초기화 및 get 해온 댓글, 대댓글 추가
-          setCommentList([]);
-          if (commentList.length === 0) {
-            setCommentList(commentList.concat(res.data));
-          }
-        })
-        .catch((err) => console.log(err));
-    },
-    [useParams()]
-  );
+  useEffect(() => {
+    axios
+      .get("/used-goods/comments/" + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        // commentList 초기화 및 get 해온 댓글, 대댓글 추가
+        if (commentList.length === 0) {
+          setCommentList(commentList.concat(res.data));
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [useParams()]);
 
   // 댓글들 보여주기
   const beforeShowComments = commentList.filter((comment) => {
@@ -227,7 +224,6 @@ const MarketPostView = (props) => {
       alert("내용을 입력해주세요");
       return;
     }
-
     let body = {
       content: commentContents,
       commentType: "parent",
@@ -255,13 +251,26 @@ const MarketPostView = (props) => {
       });
   };
 
-  function refreshPage(e) {
-    e.preventDefault();
-    window.location.reload();
-  }
+  const onPaginationClick = (e) => {
+    window.scrollTo(0, 0);
+    setCommentList([]);
+    axios
+      .get("/recommend-posts/comments/" + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        // commentList 초기화 및 get 해온 댓글, 대댓글 추가
+        if (commentList.length === 0) {
+          setCommentList(commentList.concat(res.data));
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
-   
     <div className="App">
       <div className="content">
         <Header></Header>
@@ -277,17 +286,20 @@ const MarketPostView = (props) => {
             <button className="market-complete-btn">판매 완료</button>
           </span>
           <div className="marketPostView-subtitle">
+            <span>{String(market.createdDate).substr(0, 10) + "  "}</span>
+
             <span>
-            {String(market.createdDate).substr(0, 10)+"  "}
-            </span>
-            
-            <span>
-            {String(market.createdDate).substr(11, 12).split(":")[0]+":"+String(market.createdDate).substr(11, 12).split(":")[1]+" / "}
+              {String(market.createdDate).substr(11, 12).split(":")[0] +
+                ":" +
+                String(market.createdDate).substr(11, 12).split(":")[1] +
+                " / "}
             </span>
             {/* 글 작성자의 아이디*/}
             <span>작성자:{market.author}</span>
           </div>
+          <div style={{ width: "30px", height: "20px" }}></div>
           <img src={image}></img>
+          <div style={{ width: "30px", height: "20px" }}></div>
           <div className="marketPostView-content"></div>
         </div>
         <div className="relpy-line"></div>
@@ -318,12 +330,22 @@ const MarketPostView = (props) => {
                     <Link
                       to={`/marketPostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#ffa800" }}
-                      onClick={window.scrollTo(0, 0)}
+                      onClick={(e) => onPaginationClick(e)}
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>
                         <div className="postlist-date">
                           {String(item.createdDate).substr(0, 10)}
+                          <span>
+                            &nbsp;
+                            {String(market.createdDate)
+                              .substr(11, 12)
+                              .split(":")[0] +
+                              ":" +
+                              String(market.createdDate)
+                                .substr(11, 12)
+                                .split(":")[1]}
+                          </span>
                         </div>
                       </div>
                     </Link>
@@ -331,12 +353,22 @@ const MarketPostView = (props) => {
                     <Link
                       to={`/marketPostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#443333" }}
-                      onClick={window.scrollTo(0, 0)}
+                      onClick={(e) => onPaginationClick(e)}
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>
                         <div className="postlist-date">
                           {String(item.createdDate).substr(0, 10)}
+                          <span>
+                            &nbsp;
+                            {String(market.createdDate)
+                              .substr(11, 12)
+                              .split(":")[0] +
+                              ":" +
+                              String(market.createdDate)
+                                .substr(11, 12)
+                                .split(":")[1]}
+                          </span>
                         </div>
                       </div>
                     </Link>
