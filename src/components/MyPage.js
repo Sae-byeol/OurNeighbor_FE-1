@@ -51,7 +51,7 @@ const MyPage = () => {
             </div>
             <div className="mypage-content">
               <span className="mypage-content-title">아파트</span>
-              <span className="mypage-content-content">{user.apartName}</span>
+              <span className="mypage-content-content-apart">{user.apartName}</span>
             </div>
             <div className="mypage-content">
               <span className="mypage-content-title">회원 유형</span>
