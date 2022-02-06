@@ -36,6 +36,7 @@ const ChildComponent = (props) => {
     setCommentList(commentList.concat(body));
     setCommentContents("");
     letShowReply();
+
     axios
       .post(
         "/comment/" + id,
@@ -55,6 +56,13 @@ const ChildComponent = (props) => {
         console.log(res.data);
       });
   };
+
+  // const onClickDeleteReplyButton = (e, comment) => {
+  //   e.preventDefault();
+  //   if (window.confirm("댓글을 삭제하시겠습니까?")) {
+  //     comment.content = "삭제된 댓글입니다.";
+  //   }
+  // };
 
   const style = {
     position: "relative",
@@ -125,6 +133,17 @@ const ChildComponent = (props) => {
                       </div>
                       <span className="reply-id">
                         &nbsp;&nbsp;{comment.userNickName}
+                        {/* 댓글 삭제 버튼 보여주는 코드
+                        {String(comment.userNickName) === String(author) ? (
+                          <button
+                            className="best-replyDeleteButton"
+                            onClick={(e) =>
+                              onClickDeleteReplyButton(e, comment)
+                            }
+                          >
+                            | 댓글 삭제
+                          </button>
+                        ) : null} */}
                       </span>
                     </div>
                   ) : (
@@ -138,6 +157,17 @@ const ChildComponent = (props) => {
                         </span>
                         <span className="reply-id">
                           &nbsp;&nbsp;{comment.userNickName}
+                          {/* 댓글 삭제 버튼 보여주는 코드
+                          {String(comment.userNickName) === String(author) ? (
+                            <button
+                              className="best-replyDeleteButton"
+                              onClick={(e) =>
+                                onClickDeleteReplyButton(e, comment)
+                              }
+                            >
+                              | 댓글 삭제
+                            </button>
+                          ) : null} */}
                         </span>
                       </div>
                     </div>
