@@ -200,25 +200,21 @@ const GatheringPostView = () => {
   const commentPageType = "gathering";
 
   // 댓글, 대댓글 get 해오기
-  useEffect(
-    (e) => {
-      axios
-        .get("/gathering/comment/" + id, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
-        .then((res) => {
-          // commentList 초기화 및 get 해온 댓글, 대댓글 추가
-          setCommentList([]);
-          if (commentList.length === 0) {
-            setCommentList(commentList.concat(res.data));
-          }
-        })
-        .catch((err) => console.log(err));
-    },
-    [useParams()]
-  );
+  useEffect(() => {
+    axios
+      .get("/gathering/comment/" + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        // commentList 초기화 및 get 해온 댓글, 대댓글 추가
+        if (commentList.length === 0) {
+          setCommentList(commentList.concat(res.data));
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [useParams()]);
 
   // 댓글들 보여주기
   const beforeShowComments = commentList.filter((comment) => {
@@ -255,7 +251,6 @@ const GatheringPostView = () => {
       alert("내용을 입력해주세요");
       return;
     }
-
     let body = {
       content: commentContents,
       commentType: "parent",
@@ -283,10 +278,24 @@ const GatheringPostView = () => {
       });
   };
 
-  function refreshPage(e) {
-    e.preventDefault();
-    window.location.reload();
-  }
+  const onPaginationClick = (e) => {
+    window.scrollTo(0, 0);
+    setCommentList([]);
+    axios
+      .get("/recommend-posts/comments/" + id, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        // commentList 초기화 및 get 해온 댓글, 대댓글 추가
+        if (commentList.length === 0) {
+          setCommentList(commentList.concat(res.data));
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="App">
@@ -345,7 +354,6 @@ const GatheringPostView = () => {
               댓글 달기
             </button>
           </div>
-          <div onClick={(e) => refreshPage(e)}>새로고침하기</div>
           <div>{showComments}</div>
         </div>
         <div className="pagination-line"></div>
@@ -368,7 +376,7 @@ const GatheringPostView = () => {
                     <Link
                       to={`/gatheringPostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#ffa800" }}
-                      onClick={window.scrollTo(0, 0)}
+                      onClick={(e) => onPaginationClick(e)}
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>
@@ -391,7 +399,7 @@ const GatheringPostView = () => {
                     <Link
                       to={`/gatheringPostView/${item.id}`}
                       style={{ textDecoration: "none", color: "#443333" }}
-                      onClick={window.scrollTo(0, 0)}
+                      onClick={(e) => onPaginationClick(e)}
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>

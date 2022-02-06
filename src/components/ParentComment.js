@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import ChildComponent from "./ChildComponent";
+import axios from "axios";
+import "../BestPostView.css";
 
 const ParentComment = (props) => {
   const {
@@ -18,6 +20,32 @@ const ParentComment = (props) => {
       Number(index) === Number(comment.responseTo)
     );
   });
+
+  // console.log(parentComment);
+  // console.log(childComments);
+
+  // // 댓글 삭제 버튼 누를 때 실행
+  // const onClickDeleteReplyButton = (e) => {
+  //   e.preventDefault();
+  //   if (window.confirm("댓글을 삭제하시겠습니까?")) {
+  //     parentComment.content = "삭제된 댓글입니다.";
+  //     console.log(parentComment.content);
+  //   }
+  // };
+
+  // // 댓글 삭제 버튼 보여주는 코드
+  // const showDeleteReplyButton = (e) => {
+  //   if (String(parentComment.userNickName) === String(author)) {
+  //     return (
+  //       <button
+  //         className="best-replyDeleteButton"
+  //         onClick={(e) => onClickDeleteReplyButton(e)}
+  //       >
+  //         | 댓글 삭제
+  //       </button>
+  //     );
+  //   }
+  // };
 
   return (
     <div>
@@ -42,6 +70,7 @@ const ParentComment = (props) => {
           </div>
           <span className="reply-id">
             &nbsp;&nbsp;{parentComment.userNickName}
+            {/* {showDeleteReplyButton()} */}
           </span>
         </div>
       ) : (
@@ -55,6 +84,7 @@ const ParentComment = (props) => {
             </span>
             <span className="reply-id">
               &nbsp;&nbsp;{parentComment.userNickName}
+              {/* {showDeleteReplyButton()} */}
             </span>
           </div>
         </div>
