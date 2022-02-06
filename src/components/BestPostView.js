@@ -123,6 +123,15 @@ const BestPostView = () => {
   };
 
   // 이전글/다음글
+  let a = 1;
+  bests.map((bestE) => {
+    bestE.bestNo = a;
+    if (best.id === bestE.id) {
+      best.bestNo = a;
+    }
+    a = a + 1;
+  });
+
   const postList =
     parseInt(bests.length) <= 5
       ? bests
@@ -310,7 +319,9 @@ const BestPostView = () => {
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>
-                        <div className="postlist-date">{item.date}</div>
+                        <div className="postlist-date">
+                          {String(item.createdDate).substr(0, 10)}
+                        </div>
                       </div>
                     </Link>
                   ) : (
@@ -321,7 +332,9 @@ const BestPostView = () => {
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>
-                        <div className="postlist-date">{item.date}</div>
+                        <div className="postlist-date">
+                          {String(item.createdDate).substr(0, 10)}
+                        </div>
                       </div>
                     </Link>
                   );

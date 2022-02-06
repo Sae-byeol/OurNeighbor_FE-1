@@ -143,20 +143,41 @@ const GatheringPostView = () => {
   };
 
   // 이전글/다음글
+  let a = 1;
+  gatherings.map((gatheringE) => {
+    gatheringE.gatheringNo = a;
+    if (gathering.id === gatheringE.id) {
+      gathering.gatheringNo = a;
+    }
+    a = a + 1;
+  });
+
   const postList =
     parseInt(gatherings.length) <= 5
       ? gatherings
-      : parseInt(gathering.id) === 1
-      ? gatherings.slice(parseInt(gathering.id) - 1, parseInt(gathering.id) + 4)
-      : parseInt(gathering.id) === 2
-      ? gatherings.slice(parseInt(gathering.id) - 2, parseInt(gathering.id) + 3)
-      : parseInt(gathering.id) === parseInt(num) - 1
-      ? gatherings.slice(parseInt(gathering.id) - 4, parseInt(gathering.id) + 1)
-      : parseInt(gathering.id) === parseInt(num)
-      ? gatherings.slice(parseInt(gathering.id) - 5, parseInt(gathering.id) + 0)
+      : parseInt(gathering.gatheringNo) === 1
+      ? gatherings.slice(
+          parseInt(gathering.gatheringNo) - 1,
+          parseInt(gathering.gatheringNo) + 4
+        )
+      : parseInt(gathering.gatheringNo) === 2
+      ? gatherings.slice(
+          parseInt(gathering.gatheringNo) - 2,
+          parseInt(gathering.gatheringNo) + 3
+        )
+      : parseInt(gathering.gatheringNo) === parseInt(num) - 1
+      ? gatherings.slice(
+          parseInt(gathering.gatheringNo) - 4,
+          parseInt(gathering.gatheringNo) + 1
+        )
+      : parseInt(gathering.gatheringNo) === parseInt(num)
+      ? gatherings.slice(
+          parseInt(gathering.gatheringNo) - 5,
+          parseInt(gathering.gatheringNo) + 0
+        )
       : gatherings.slice(
-          parseInt(gathering.id) - 3,
-          parseInt(gathering.id) + 2
+          parseInt(gathering.gatheringNo) - 3,
+          parseInt(gathering.gatheringNo) + 2
         );
 
   // 카테고리 이름 보여주는 함수
@@ -345,7 +366,9 @@ const GatheringPostView = () => {
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>
-                        <div className="postlist-date">{item.date}</div>
+                        <div className="postlist-date">
+                          {String(item.createdDate).substr(0, 10)}
+                        </div>
                       </div>
                     </Link>
                   ) : (
@@ -356,7 +379,9 @@ const GatheringPostView = () => {
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>
-                        <div className="postlist-date">{item.date}</div>
+                        <div className="postlist-date">
+                          {String(item.createdDate).substr(0, 10)}
+                        </div>
                       </div>
                     </Link>
                   );

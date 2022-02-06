@@ -54,7 +54,7 @@ const Gathering = () => {
 
   const addedGatherings = searchedGatherings.map((gathering) => {
     for (let a = 1; a <= length; a = a + 1) {
-      searchedGatherings.gatheringNo = a;
+      gathering.gatheringNo = a;
     }
     return gathering;
   });

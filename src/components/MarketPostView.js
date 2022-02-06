@@ -126,18 +126,43 @@ const MarketPostView = (props) => {
     }
   };
 
+  // 이전글/다음글
+  let a = 1;
+  markets.map((marketE) => {
+    marketE.marketNo = a;
+    if (market.id === marketE.id) {
+      market.marketNo = a;
+    }
+    a = a + 1;
+  });
+
   const postList =
     parseInt(markets.length) <= 5
       ? markets
-      : parseInt(id) === 1
-      ? markets.slice(parseInt(id) - 1, parseInt(id) + 4)
-      : parseInt(id) === 2
-      ? markets.slice(parseInt(id) - 2, parseInt(id) + 3)
-      : parseInt(id) === parseInt(num) - 1
-      ? markets.slice(parseInt(id) - 4, parseInt(id) + 1)
-      : parseInt(id) === parseInt(num)
-      ? markets.slice(parseInt(id) - 5, parseInt(id) + 0)
-      : markets.slice(parseInt(id) - 3, parseInt(id) + 2);
+      : parseInt(market.marketNo) === 1
+      ? markets.slice(
+          parseInt(market.marketNo) - 1,
+          parseInt(market.marketNo) + 4
+        )
+      : parseInt(market.marketNo) === 2
+      ? markets.slice(
+          parseInt(market.marketNo) - 2,
+          parseInt(market.marketNo) + 3
+        )
+      : parseInt(market.marketNo) === parseInt(num) - 1
+      ? markets.slice(
+          parseInt(market.marketNo) - 4,
+          parseInt(market.marketNo) + 1
+        )
+      : parseInt(market.marketNo) === parseInt(num)
+      ? markets.slice(
+          parseInt(market.marketNo) - 5,
+          parseInt(market.marketNo) + 0
+        )
+      : markets.slice(
+          parseInt(market.marketNo) - 3,
+          parseInt(market.marketNo) + 2
+        );
 
   // <대댓글 구현>
   const [commentContents, setCommentContents] = useState("");
@@ -289,7 +314,9 @@ const MarketPostView = (props) => {
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>
-                        <div className="postlist-date">{item.date}</div>
+                        <div className="postlist-date">
+                          {String(item.createdDate).substr(0, 10)}
+                        </div>
                       </div>
                     </Link>
                   ) : (
@@ -300,7 +327,9 @@ const MarketPostView = (props) => {
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>
-                        <div className="postlist-date">{item.date}</div>
+                        <div className="postlist-date">
+                          {String(item.createdDate).substr(0, 10)}
+                        </div>
                       </div>
                     </Link>
                   );
