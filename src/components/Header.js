@@ -2,26 +2,28 @@ import React, { useState, useEffect } from "react";
 import "../Header.css";
 import { BrowserRouter, Route, Routes, Link, Outlet } from "react-router-dom";
 import axios from "axios";
-const Header = () => {
-  const [user, setUser] = useState({});
+const Header = (props) => {
+  const [user, setUser]=useState([]);
   const [isLogin, setIsLogin] = useState(false);
-  useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      setIsLogin(true);
-    }
-  }, []);
-
+  
+  
+useEffect(()=>{
   if (localStorage.getItem("accessToken")) {
-    axios
-      .get("/member/info", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        setUser(res.data);
-      });
-  }
+    setIsLogin(true);
+}
+},[])
+useEffect(()=>{
+  axios
+  .get("/member/info", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    },
+  })
+  .then((res) => {
+    setUser(res.data);
+  });
+},[])
+
   const Logout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");

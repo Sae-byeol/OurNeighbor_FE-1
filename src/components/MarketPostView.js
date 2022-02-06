@@ -46,10 +46,10 @@ const MarketPostView = (props) => {
         },
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setMarket(res.data);
         setImage("");
-        if (res.data.photoIds.length !== 0) {
+        if (res.data.photoId.length !== 0) {
           axios({
             method: "GET",
             url: "/photo/" + res.data.photoId[0],
