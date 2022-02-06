@@ -46,27 +46,29 @@ const BestPostView = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setBest(res.data);
-        axios({
-          method: "GET",
-          url: "/photo/" + res.data.photoIds[0],
-          responseType: "blob",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
-          .then((res) => {
-            console.log(res.data);
-            setImage(
-              window.URL.createObjectURL(
-                new Blob([res.data], { type: res.headers["content-type"] })
-              )
-            );
+        setImage("");
+        if (res.data.photoIds.length !== 0) {
+          axios({
+            method: "GET",
+            url: "/photo/" + res.data.photoIds[0],
+            responseType: "blob",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
           })
-          .catch((err) => {
-            console.log(err);
-          });
+            .then((res) => {
+              setImage(
+                window.URL.createObjectURL(
+                  new Blob([res.data], { type: res.headers["content-type"] })
+                )
+              );
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
       })
       .catch((err) => console.log(err));
   }, [useParams()]);
@@ -83,12 +85,11 @@ const BestPostView = () => {
       })
       .then((res) => {
         setAuthor(res.data.nickName);
-        console.log(author);
       })
       .catch((err) => console.log(err));
   }, [useParams()]);
 
-  // 삭제 버튼 누를 때 실행
+  // 게시글 삭제 버튼 누를 때 실행
   const onClickDeleteButton = (e) => {
     e.preventDefault();
     if (window.confirm("게시글을 삭제하시겠습니까?")) {
@@ -165,20 +166,21 @@ const BestPostView = () => {
   // 댓글, 대댓글 get 해오기
   useEffect(
     (e) => {
-      axios
-        .get("/recommend-posts/comments/" + id, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
-        .then((res) => {
-          // commentList 초기화 및 get 해온 댓글, 대댓글 추가
-          setCommentList([]);
-          if (commentList.length === 0) {
+      setCommentList([]);
+      if (commentList.length === 0) {
+        axios
+          .get("/recommend-posts/comments/" + id, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          })
+          .then((res) => {
+            // commentList 초기화 및 get 해온 댓글, 대댓글 추가
             setCommentList(commentList.concat(res.data));
-          }
-        })
-        .catch((err) => console.log(err));
+            console.log(commentList);
+          })
+          .catch((err) => console.log(err));
+      }
     },
     [useParams()]
   );
@@ -218,7 +220,6 @@ const BestPostView = () => {
       alert("내용을 입력해주세요");
       return;
     }
-
     let body = {
       content: commentContents,
       commentType: "parent",
@@ -264,11 +265,19 @@ const BestPostView = () => {
           <div>{showDeleteButton()}</div>
           <span className="bestPostView-title">{best.title}</span>
           <div className="bestPostView-subtitle">
-            <span>{bests.title}</span>
-            <span>/</span>
+            <span>{String(best.createdDate).substr(0, 10) + "  "}</span>
+
+            <span>
+              {String(best.createdDate).substr(11, 12).split(":")[0] +
+                ":" +
+                String(best.createdDate).substr(11, 12).split(":")[1] +
+                " / "}
+            </span>
             <span>작성자: {best.author}</span>
           </div>
+          <div style={{ width: "30px", height: "20px" }}></div>
           <img src={image}></img>
+          <div style={{ width: "30px", height: "20px" }}></div>
           <div className="bestPostView-content">
             {String(best.content)
               .split("\n")
@@ -321,6 +330,16 @@ const BestPostView = () => {
                         <div className="postlist-title">{item.title}</div>
                         <div className="postlist-date">
                           {String(item.createdDate).substr(0, 10)}
+                          <span>
+                            &nbsp;
+                            {String(best.createdDate)
+                              .substr(11, 12)
+                              .split(":")[0] +
+                              ":" +
+                              String(best.createdDate)
+                                .substr(11, 12)
+                                .split(":")[1]}
+                          </span>
                         </div>
                       </div>
                     </Link>
@@ -334,6 +353,16 @@ const BestPostView = () => {
                         <div className="postlist-title">{item.title}</div>
                         <div className="postlist-date">
                           {String(item.createdDate).substr(0, 10)}
+                          <span>
+                            &nbsp;
+                            {String(best.createdDate)
+                              .substr(11, 12)
+                              .split(":")[0] +
+                              ":" +
+                              String(best.createdDate)
+                                .substr(11, 12)
+                                .split(":")[1]}
+                          </span>
                         </div>
                       </div>
                     </Link>

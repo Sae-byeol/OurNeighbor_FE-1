@@ -50,9 +50,8 @@ const BestAdd = () => {
     for (var value of formData.values()) {
       console.log(value);
     }
-
     formData.append("title", bestTitle);
-    formData.append("content", bestTitle);
+    formData.append("content", bestContent);
     formData.append("category", showCategory);
     for (let i = 0; i < FileElement.files.length; i++) {
       formData.append("file", FileElement.files[i]);

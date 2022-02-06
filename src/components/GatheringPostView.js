@@ -301,8 +301,14 @@ const GatheringPostView = () => {
           <div>{showDeleteButton()}</div>
           <span className="gatheringPostView-title">{gathering.title}</span>
           <div className="gatheringPostView-subtitle">
-            <span>{gathering.title}</span>
-            <span>/</span>
+            <span>{String(gathering.createdDate).substr(0, 10) + "  "}</span>
+
+            <span>
+              {String(gathering.createdDate).substr(11, 12).split(":")[0] +
+                ":" +
+                String(gathering.createdDate).substr(11, 12).split(":")[1] +
+                " / "}
+            </span>
             <span>작성자: {gathering.author}</span>
           </div>
           <div>{showNickName()}</div>
@@ -368,6 +374,16 @@ const GatheringPostView = () => {
                         <div className="postlist-title">{item.title}</div>
                         <div className="postlist-date">
                           {String(item.createdDate).substr(0, 10)}
+                          <span>
+                            &nbsp;
+                            {String(gathering.createdDate)
+                              .substr(11, 12)
+                              .split(":")[0] +
+                              ":" +
+                              String(gathering.createdDate)
+                                .substr(11, 12)
+                                .split(":")[1]}
+                          </span>
                         </div>
                       </div>
                     </Link>
@@ -381,6 +397,16 @@ const GatheringPostView = () => {
                         <div className="postlist-title">{item.title}</div>
                         <div className="postlist-date">
                           {String(item.createdDate).substr(0, 10)}
+                          <span>
+                            &nbsp;
+                            {String(gathering.createdDate)
+                              .substr(11, 12)
+                              .split(":")[0] +
+                              ":" +
+                              String(gathering.createdDate)
+                                .substr(11, 12)
+                                .split(":")[1]}
+                          </span>
                         </div>
                       </div>
                     </Link>

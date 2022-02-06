@@ -46,27 +46,29 @@ const MarketPostView = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setMarket(res.data);
-        axios({
-          method: "GET",
-          url: "/photo/" + res.data.photoId[0],
-          responseType: "blob",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
-          .then((res) => {
-            console.log(res.data);
-            setImage(
-              window.URL.createObjectURL(
-                new Blob([res.data], { type: res.headers["content-type"] })
-              )
-            );
+        setImage("");
+        if (res.data.photoIds.length !== 0) {
+          axios({
+            method: "GET",
+            url: "/photo/" + res.data.photoId[0],
+            responseType: "blob",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
           })
-          .catch((err) => {
-            console.log(err);
-          });
+            .then((res) => {
+              setImage(
+                window.URL.createObjectURL(
+                  new Blob([res.data], { type: res.headers["content-type"] })
+                )
+              );
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
       })
       .catch((err) => console.log(err));
   }, [useParams()]);
@@ -275,11 +277,20 @@ const MarketPostView = (props) => {
             <button className="market-complete-btn">판매 완료</button>
           </span>
           <div className="marketPostView-subtitle">
-            <span>{market.date}</span>
+            <span>{String(market.createdDate).substr(0, 10) + "  "}</span>
+
+            <span>
+              {String(market.createdDate).substr(11, 12).split(":")[0] +
+                ":" +
+                String(market.createdDate).substr(11, 12).split(":")[1] +
+                " / "}
+            </span>
             {/* 글 작성자의 아이디*/}
             <span>작성자:{market.author}</span>
           </div>
+          <div style={{ width: "30px", height: "20px" }}></div>
           <img src={image}></img>
+          <div style={{ width: "30px", height: "20px" }}></div>
           <div className="marketPostView-content"></div>
         </div>
         <div className="relpy-line"></div>
@@ -316,6 +327,16 @@ const MarketPostView = (props) => {
                         <div className="postlist-title">{item.title}</div>
                         <div className="postlist-date">
                           {String(item.createdDate).substr(0, 10)}
+                          <span>
+                            &nbsp;
+                            {String(market.createdDate)
+                              .substr(11, 12)
+                              .split(":")[0] +
+                              ":" +
+                              String(market.createdDate)
+                                .substr(11, 12)
+                                .split(":")[1]}
+                          </span>
                         </div>
                       </div>
                     </Link>
@@ -329,6 +350,16 @@ const MarketPostView = (props) => {
                         <div className="postlist-title">{item.title}</div>
                         <div className="postlist-date">
                           {String(item.createdDate).substr(0, 10)}
+                          <span>
+                            &nbsp;
+                            {String(market.createdDate)
+                              .substr(11, 12)
+                              .split(":")[0] +
+                              ":" +
+                              String(market.createdDate)
+                                .substr(11, 12)
+                                .split(":")[1]}
+                          </span>
                         </div>
                       </div>
                     </Link>
