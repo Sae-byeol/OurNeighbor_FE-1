@@ -29,11 +29,10 @@ import NoticeAdd from "./components/NoticeAdd";
 import { Component } from "@fullcalendar/core";
 
 function App() {
-  const [bests, setBests] = useState([]);
-  const [gatherings, setGatherings] = useState([]);
+ 
   const [notice, setNotice] = useState([]);
-  const [markets, setMarkets] = useState([]);
 
+  
   return (
     <div className="App">
       <Routes>
