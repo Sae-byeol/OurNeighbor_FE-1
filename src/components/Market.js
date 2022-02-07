@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Header from "./Header";
 import "../Market.css";
 import MarketForm from "./MarketForm";
+import MarketFormComplete from "./MarketFormComplete";
 import { BrowserRouter, Route, Routes, Link, Outlet } from "react-router-dom";
 import "../Paging.css";
 import Pagination from "react-js-pagination";
@@ -66,11 +67,10 @@ const Market = (props) => {
     setPage(page);
     window.scrollTo(0, 0);
   };
-
   const renderMarkets = onClicksetPage.map((market) => {
     window.scrollTo(0, 0);
-    return (
-      <div className="market-flex" key={market.id}>
+    return market.complete === false ? (
+      <div className="market-flex">
         <MarketForm
           market={market}
           key={market.id}
@@ -78,6 +78,13 @@ const Market = (props) => {
           id={market.id}
         ></MarketForm>
       </div>
+    ) : (
+      <MarketFormComplete
+        market={market}
+        key={market.id}
+        title={market.title}
+        id={market.id}
+      ></MarketFormComplete>
     );
   });
   /* const handlePageChange = (page) => {
