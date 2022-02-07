@@ -3,10 +3,12 @@ import Navbar from "./Navbar";
 import Header from "./Header";
 import "../Mypage.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MyPage = () => {
   const [user, setUser] = useState({});
+  const [id, setId] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -20,7 +22,41 @@ const MyPage = () => {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
+    axios
+      .get("/member", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
+
+  console.log(user);
+
+  const onClickResign = (e) => {
+    e.preventDefault();
+    if (window.confirm("회원 탈퇴하시겠습니까?\n모든 정보가 삭제됩니다.")) {
+      axios
+        .delete("/member/" + user.id, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          alert("탈퇴되었습니다.");
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          navigate("/");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      alert("취소합니다.");
+    }
+  };
+
   return (
     <div className="App">
       <div className="content">
@@ -51,7 +87,9 @@ const MyPage = () => {
             </div>
             <div className="mypage-content">
               <span className="mypage-content-title">아파트</span>
-              <span className="mypage-content-content-apart">{user.apartName}</span>
+              <span className="mypage-content-content-apart">
+                {user.apartName}
+              </span>
             </div>
             <div className="mypage-content">
               <span className="mypage-content-title">회원 유형</span>
@@ -61,6 +99,9 @@ const MyPage = () => {
               <Link to={"/editMyPage"} state={{ user: user }}>
                 <div className="mypage-editBtn">ㅣ회원정보 수정하기ㅣ</div>
               </Link>
+            </div>
+            <div className="mypage-resignBtn" onClick={(e) => onClickResign(e)}>
+              ㅣ탈퇴하기ㅣ
             </div>
           </div>
         </div>
