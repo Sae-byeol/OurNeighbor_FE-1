@@ -27,7 +27,7 @@
     "url-search-params-polyfill": "^8.1.1",
     "web-vitals": "^2.1.0"
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "http://ec2-13-209-91-56.ap-northeast-2.compute.amazonaws.com:8080 ",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
