@@ -113,6 +113,9 @@ const MarketPostView = () => {
   ] = `Bearer ${localStorage.accessToken}`;
 
   // 판매 완료 버튼 보여주기 여부 결정 관련 함수
+  console.log(String(author));
+  console.log(String(market.author));
+  console.log(String(author) === String(market.author));
   const showNickName = (e) => {
     if (String(author) === String(market.author)) {
       return (
@@ -134,14 +137,14 @@ const MarketPostView = () => {
   const onClickButton = (e) => {
     e.preventDefault();
     alert("판매 완료 처리가 되었습니다");
-    // axios
-    //   .put("/market/" + id, { complete: true })
-    //   .then(function (res) {
-    //     console.log(res.data);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    axios
+      .put("/used-goods/complete/" + id, { complete: true })
+      .then(function (res) {
+        console.log(res.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     navigate("/market");
   };
 
@@ -370,7 +373,7 @@ const MarketPostView = () => {
                 String(market.createdDate).substr(11, 12).split(":")[1] +
                 " / "}
             </span>
-            <span>작성자: {author}</span>
+            <span>작성자: {market.author}</span>
           </div>
           <div>{showNickName()}</div>
           <div style={{ width: "30px", height: "20px" }}></div>
