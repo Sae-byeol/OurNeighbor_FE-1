@@ -29,7 +29,8 @@ const BestForm = (props) => {
     }
   });
 
- 
+  console.log(props.best);
+
   return (
     <Link
       to={`/bestPostView/${props.best.id}`}

@@ -70,7 +70,7 @@ const Market = (props) => {
   const renderMarkets = onClicksetPage.map((market) => {
     window.scrollTo(0, 0);
     return (
-      <div className="market-flex">
+      <div className="market-flex" key={market.id}>
         <MarketForm
           market={market}
           key={market.id}

@@ -342,7 +342,7 @@ const GatheringPostView = () => {
         <div className="relpy-line"></div>
         <div className="gatheringPostView-section2">
           <div className="reply-title">댓글</div>
-          <div className="reply-id">{gathering.author}</div>
+          <div className="reply-id">{author}</div>
           <textarea
             className="reply-input"
             onChange={(e) => getValue(e)}

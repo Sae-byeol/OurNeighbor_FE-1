@@ -34,7 +34,8 @@ const BestAdd = () => {
   const onClickNone = () => {
     setShowCategory("none");
   };
-  const FileElement = document.querySelector('#File');
+
+  const FileElement = document.querySelector("#File");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -49,23 +50,18 @@ const BestAdd = () => {
     for (var value of formData.values()) {
       console.log(value);
     }
-    
-
-    formData.append("title",bestTitle);
-    formData.append("content", bestTitle);
-    formData.append("category",showCategory);
-    for(let i = 0; i < FileElement.files.length; i++){
+    formData.append("title", bestTitle);
+    formData.append("content", bestContent);
+    formData.append("category", showCategory);
+    for (let i = 0; i < FileElement.files.length; i++) {
       formData.append("file", FileElement.files[i]);
-  }
+    }
     axios
-      .post(
-        "/recommend-posts",
-        formData,
-        {headers: {
-          
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-        }}
-      )
+      .post("/recommend-posts", formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
       .then((res) => {
         alert("글이 정상적으로 작성되었습니다.");
         console.log(res.data);
@@ -116,7 +112,6 @@ const BestAdd = () => {
               type="file"
               className="imgInput"
               id="File"
-              
               name="file"
               multiple
               encType="multipart/form-data"
