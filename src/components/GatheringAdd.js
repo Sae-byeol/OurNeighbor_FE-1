@@ -47,24 +47,32 @@ const GatheringAdd = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     //add함수 props로 받아오기
-    axios
-      .post(
-        "/gathering",
-        `title=${gatheringTitle}&&content=${gatheringContent}&&category=${showCategory}`,
+    if (
+      gatheringTitle === "" ||
+      gatheringContent === "" ||
+      showCategory === "none"
+    ) {
+      alert("제목, 내용을 모두 입력해주세요.");
+    } else {
+      axios
+        .post(
+          "/gathering",
+          `title=${gatheringTitle}&&content=${gatheringContent}&&category=${showCategory}`,
 
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        alert("글이 정상적으로 작성되었습니다.");
-        if (res.data) {
-          navigate("/gathering");
-        }
-      });
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data);
+          alert("글이 정상적으로 작성되었습니다.");
+          if (res.data) {
+            navigate("/gathering");
+          }
+        });
+    }
   };
 
   return (
@@ -92,14 +100,6 @@ const GatheringAdd = () => {
               value={gatheringContent}
               onChange={(e) => setGatheringContent(e.target.value)}
             />
-            <div className="gatheringAddImg">사진 첨부</div>
-            <input
-              type="file"
-              className="imgInput"
-              id="gatheringImg"
-              accept="image/*"
-              name="file"
-            ></input>
             <div className="gathering-categoryText">카테고리</div>
             <div className="gathering-selectedCategories">
               {showCategory === "exercise" && (
