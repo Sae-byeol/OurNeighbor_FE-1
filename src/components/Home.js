@@ -124,7 +124,7 @@ const Home = () => {
                             {val.title}
                           </div>
                           <div className="home-notice-map-date">
-                            {new Date(val.date).toLocaleDateString()}
+                            <span>{String(val.createdDate).substr(0, 10)}</span>
                           </div>
                         </div>
                       </div>

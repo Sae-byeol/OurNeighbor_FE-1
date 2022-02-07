@@ -83,10 +83,10 @@
     overflow-x: hidden;
 }
 .home-notice-map{
-    width: 200px;
+    width: 500px;
     height: 50px;
     margin: 21px 0 10px;
-    padding: 15px 357px 31px 25px;
+    padding: 15px 50px 31px 25px;
     border-radius: 30px;
     box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.25);
     border: solid 1.5px #bdbdbd;
@@ -104,7 +104,7 @@
     line-height: normal;
     letter-spacing: normal;
     color: #433;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 .home-notice-map-date{
     font-family: HSGaeulSenggak2;
