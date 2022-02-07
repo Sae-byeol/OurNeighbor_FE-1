@@ -29,8 +29,6 @@ const BestForm = (props) => {
     }
   });
 
-  console.log(props.best);
-
   return (
     <Link
       to={`/bestPostView/${props.best.id}`}
@@ -48,18 +46,8 @@ const BestForm = (props) => {
         {image ? (
           <div className="bestForm-cont">
             <div style={{ width: "30px", height: "10px" }}></div>
-            {props.best.content.length >= 71
-              ? props.best.content
-                  .substring(0, 70)
-                  .split("\n")
-                  .map((line) => {
-                    return (
-                      <span>
-                        {line}
-                        <br />
-                      </span>
-                    );
-                  }) + "..."
+            {props.best.content.length >= 91
+              ? props.best.content.substring(0, 90) + "..."
               : props.best.content.split("\n").map((line) => {
                   return (
                     <span>

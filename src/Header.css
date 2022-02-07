@@ -1,6 +1,7 @@
 .header {
   height: 100px;
   margin-top: 10px;
+  font-family: HSGaeulSenggak2;
 }
 .header-left {
   float: left;
@@ -34,4 +35,10 @@
   outline: 0;
   border: 0;
   background-color: #efb33f;
+}
+
+.profile {
+  position: relative;
+  right: 0px;
+  top: 20px;
 }
