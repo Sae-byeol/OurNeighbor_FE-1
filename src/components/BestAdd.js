@@ -40,8 +40,6 @@ const BestAdd = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("file", files.length && files[0].uploadedFile);
-    console.log(formData);
 
     for (var key of formData.keys()) {
       console.log(key);
@@ -56,22 +54,27 @@ const BestAdd = () => {
     for (let i = 0; i < FileElement.files.length; i++) {
       formData.append("file", FileElement.files[i]);
     }
-    axios
-      .post("/recommend-posts", formData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-        alert("글이 정상적으로 작성되었습니다.");
-        console.log(res.data);
-        if (res.data) {
-          navigate("/best");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    if (bestTitle === "" || bestContent === "" || showCategory === "none") {
+      alert("제목, 내용, 카테고리를 모두 입력해주세요.");
+    } else {
+      axios
+        .post("/recommend-posts", formData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((res) => {
+          alert("글이 정상적으로 작성되었습니다.");
+          console.log(res.data);
+          if (res.data) {
+            navigate("/best");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const [files, setFiles] = useState([]);
