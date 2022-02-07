@@ -29,9 +29,30 @@ import NoticeAdd from "./components/NoticeAdd";
 import { Component } from "@fullcalendar/core";
 
 function App() {
- 
-  const [notice, setNotice] = useState([]);
+  const onSilentRefresh = () => {
+    console.log("refresh start")
+    axios.post('/reissue', {
+      accessToken: localStorage.getItem("accessToken"),
+      refreshToken: localStorage.getItem("refreshToken")
+    })
+        .then((response)=>{
+          localStorage.setItem("accessToken",response.data.accessToken);
+          localStorage.setItem("refreshToken",response.data.refreshToken);
+          console.log(response.data);
+          console.log("refresh");
+          //로그인 연장 후 20분 뒤
+          setInterval(onSilentRefresh, 1200000);
+        })
+        .catch(error => {
+            // ... 로그인 실패 처리
+        });
+}
 
+  const [notice, setNotice] = useState([]);
+  if (performance.navigation.type===1){
+    //새로고침하면 바로 로그인 연장(토큰 갱신)
+    onSilentRefresh();
+  }
   
   return (
     <div className="App">
