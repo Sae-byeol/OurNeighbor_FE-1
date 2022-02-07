@@ -85,7 +85,7 @@ const MarketPostView = () => {
   const showImages = (images !== undefined ? images : [1]).map((element) => {
     return (
       <div>
-        <img src={element}></img>
+        <img className="postView-img" src={element}></img>
       </div>
     );
   });

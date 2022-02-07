@@ -254,3 +254,7 @@
   border-top: rgb(138, 132, 132);
   border-bottom: rgb(138, 132, 132);
 }
+.postView-img{
+  width:400px;
+  height: 400px;
+}
