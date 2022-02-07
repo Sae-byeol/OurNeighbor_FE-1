@@ -15,6 +15,8 @@ const NoticePostView = () => {
   const num = notices.length;
   const navigate = useNavigate();
 
+  console.log(notice);
+
   axios.defaults.headers.common[
     "Authorization"
   ] = `Bearer ${localStorage.accessToken}`;

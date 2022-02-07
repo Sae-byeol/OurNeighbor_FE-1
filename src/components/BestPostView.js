@@ -3,7 +3,6 @@ import Navbar from "./Navbar";
 import Header from "./Header";
 import "../BestPostView.css";
 import { useHistory, useParams, Outlet } from "react-router-dom";
-import bests from "./Best";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import "../PostList.css";
 import ParentComment from "./ParentComment";
@@ -37,7 +36,8 @@ const BestPostView = () => {
   }, [useParams()]);
 
   // 해당 게시글 정보를 불러와서 best에 저장
-  const [image, setImage] = useState();
+  const [images, setImages] = useState([]);
+
   useEffect(() => {
     axios
       .get("/recommend-posts/" + id, {
@@ -45,33 +45,51 @@ const BestPostView = () => {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       })
-      .then((res) => {
-        // console.log(res.data);
+      .then(async (res) => {
+        console.log(res.data);
         setBest(res.data);
-        setImage("");
-        if (res.data.photoIds.length !== 0) {
-          axios({
-            method: "GET",
-            url: "/photo/" + res.data.photoIds[0],
-            responseType: "blob",
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            },
-          })
-            .then((res) => {
-              setImage(
-                window.URL.createObjectURL(
-                  new Blob([res.data], { type: res.headers["content-type"] })
-                )
-              );
+        let s = [];
+        if (res.data && res.data.photoIds.length !== 0) {
+          let w = res.data.photoIds.length;
+          for (let i = 0; i < res.data.photoIds.length; i++) {
+            axios({
+              method: "GET",
+              url: "/photo/" + String(res.data.photoIds[i]),
+              responseType: "blob",
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              },
             })
-            .catch((err) => {
-              console.log(err);
-            });
+              .then((res) => {
+                s.push(
+                  window.URL.createObjectURL(
+                    new Blob([res.data], {
+                      type: res.headers["content-type"],
+                    })
+                  )
+                );
+                if (w === s.length) {
+                  setImages(s);
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
         }
       })
       .catch((err) => console.log(err));
   }, [useParams()]);
+
+  // 이미지 보여주는 코드
+
+  const showImages = (images !== undefined ? images : [1]).map((element) => {
+    return (
+      <div>
+        <img src={element} alt="fail"></img>
+      </div>
+    );
+  });
 
   // 현재 로그인된 유저 정보 - 닉네임을 author에 저장
   const [author, setAuthor] = useState("");
@@ -104,6 +122,22 @@ const BestPostView = () => {
           navigate("/best");
         })
         .catch((err) => console.log(err));
+      // < 이미지 삭제 >
+      // console.log(parseInt(best.photoIds[0]));
+      // for (let i = parseInt(best.photoIds[0]); i < best.photoIds.length; i++) {
+      //   console.log(i);
+      //   axios
+      //     .delete("/photo/" + String(i), {
+      //       headers: {
+      //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      //       },
+      //     })
+      //     .then((res) => {
+      //       alert("사진도 삭제되었습니다.");
+      //       navigate("/best");
+      //     })
+      //     .catch((err) => console.log(err));
+      // }
     } else {
       alert("취소합니다.");
     }
@@ -244,6 +278,7 @@ const BestPostView = () => {
 
   const onPaginationClick = (e) => {
     window.scrollTo(0, 0);
+    setImages([]);
     setCommentList([]);
     axios
       .get("/recommend-posts/comments/" + id, {
@@ -252,7 +287,7 @@ const BestPostView = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         // commentList 초기화 및 get 해온 댓글, 대댓글 추가
         if (commentList.length === 0) {
           setCommentList(commentList.concat(res.data));
@@ -285,7 +320,7 @@ const BestPostView = () => {
             <span>작성자: {best.author}</span>
           </div>
           <div style={{ width: "30px", height: "20px" }}></div>
-          <img src={image}></img>
+          {images !== undefined ? showImages : null}
           <div style={{ width: "30px", height: "20px" }}></div>
           <div className="bestPostView-content">
             {String(best.content)
@@ -308,7 +343,7 @@ const BestPostView = () => {
         <div className="relpy-line"></div>
         <div className="bestPostView-section2">
           <div className="reply-title">댓글</div>
-          <div className="reply-id">{best.author}</div>
+          <div className="reply-id">{author}</div>
           <textarea
             className="reply-input"
             onChange={(e) => getValue(e)}
