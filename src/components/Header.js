@@ -2,16 +2,11 @@ import React, { useState, useEffect } from "react";
 import "../Header.css";
 import { BrowserRouter, Route, Routes, Link, Outlet } from "react-router-dom";
 import axios from "axios";
-const Header = () => {
-  const [user, setUser] = useState({});
+const Header = (props) => {
+  const [user, setUser] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
-  useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      setIsLogin(true);
-    }
-  }, []);
 
-  if (localStorage.getItem("accessToken")) {
+  useEffect(() => {
     axios
       .get("/member/info", {
         headers: {
@@ -21,7 +16,16 @@ const Header = () => {
       .then((res) => {
         setUser(res.data);
       });
-  }
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+      localStorage.removeItem("accessToken");
+    }
+  }, []);
 
   const Logout = () => {
     localStorage.removeItem("accessToken");
