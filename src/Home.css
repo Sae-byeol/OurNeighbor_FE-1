@@ -72,51 +72,54 @@
   text-align: right;
   color: #433;
 }
-.home-NoticeImg {
-  margin-right: 100px;
-  vertical-align: bottom;
+.home-NoticeImg{
+    margin-right: 100px;
+    vertical-align: bottom;
 }
-.home-notice {
-  width: 800px;
-  height: 500px;
-  overflow: scroll;
-  overflow-x: hidden;
+.home-notice{
+    width: 800px;
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
-.home-notice-map {
-  width: 200px;
-  width: 500px;
-  margin: 21px 0 10px;
-  padding: 15px 50px 31px 25px;
-  border-radius: 30px;
-  box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.25);
-  border: solid 1.5px #bdbdbd;
-  background-color: #fffefe;
+.home-notice-map{
+    width: 500px;
+    height: 50px;
+    margin: 21px 0 10px;
+    padding: 15px 50px 31px 25px;
+    border-radius: 30px;
+    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border: solid 1.5px #bdbdbd;
+    background-color: #fffefe;
 }
-.home-notice-map:hover {
-  background-color: #f2f2f2;
+.home-notice-map:hover{
+    background-color: #f2f2f2;
 }
-.home-notice-map-title {
-  font-family: HSGaeulSenggak2;
-  font-size: 18px;
-  width: 500px;
-  height: 25px;
-  color: #433;
-  margin-bottom: 15px;
+.home-notice-map-title{
+    font-family: HSGaeulSenggak2;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #433;
+    margin-bottom: 15px;
 }
-.home-notice-map-date {
-  font-family: HSGaeulSenggak2;
-  font-size: 13px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #433;
+.home-notice-map-date{
+    font-family: HSGaeulSenggak2;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #433;
 }
-.home-section3 {
-  padding: 0 100px 45px;
+.home-section3{
+    padding: 0 100px 45px;
 }
-.home-best-title {
+.home-best-title{
   margin: 0 837px 20px 0;
   font-family: HSGaeulSenggak2;
   font-size: 36px;

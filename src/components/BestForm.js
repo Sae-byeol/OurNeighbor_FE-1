@@ -39,10 +39,12 @@ const BestForm = (props) => {
   }, [props.best]);
 
   return (
+    
     <Link
       to={`/bestPostView/${props.best.id}`}
       style={{ textDecoration: "none" }}
     >
+    
       <div className="bestForm">
         <div className="bestForm-title" style={{ fontSize: "25px" }}>
           {props.best.title}
@@ -75,6 +77,7 @@ const BestForm = (props) => {
           </div>
         )}
       </div>
+  
     </Link>
   );
 };

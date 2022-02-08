@@ -93,6 +93,27 @@ function LoginPage() {
         // ... 로그인 실패 처리
       });
   };
+        const onSilentRefresh = () => {
+          console.log("refresh start");
+          axios.post('/reissue', {
+            accessToken: localStorage.getItem("accessToken"),
+            refreshToken: localStorage.getItem("refreshToken")
+          })
+              .then((response)=>{
+                localStorage.setItem("accessToken",response.data.accessToken);
+                localStorage.setItem("refreshToken",response.data.refreshToken);
+                console.log(response.data);
+                console.log("refresh");
+                //로그인 정상 연장 후 다시 20분 뒤 연장
+                setTimeout(onSilentRefresh,1200000);
+              })
+              .catch(error => {
+                  // ... 로그인 실패 처리
+              });
+      }
+
+
+
 
   return (
     <div

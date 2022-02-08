@@ -1,6 +1,10 @@
 .header {
   height: 100px;
+<<<<<<< HEAD
   margin-top: 10px;
+=======
+  margin-top: 10px; 
+>>>>>>> saebyeol
   font-family: HSGaeulSenggak2;
 }
 .header-left {
@@ -36,7 +40,6 @@
   border: 0;
   background-color: #efb33f;
 }
-
 .profile {
   position: relative;
   right: 0px;

@@ -57,6 +57,14 @@ function App() {
     onSilentRefresh();
   }
 
+  const [notice, setNotice] = useState([]);
+  if (performance.navigation.type===1){
+    //새로고침하면 바로 로그인 연장(토큰 갱신)
+    onSilentRefresh();
+  }
+  
+  
+  
   return (
     <div className="App">
       <Routes>

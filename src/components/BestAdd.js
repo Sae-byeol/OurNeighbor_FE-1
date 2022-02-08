@@ -38,8 +38,6 @@ const BestAdd = () => {
 
   const FileElement = document.querySelector("#File");
 
-  console.log("?");
-
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();

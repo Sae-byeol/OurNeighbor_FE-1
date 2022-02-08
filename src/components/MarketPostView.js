@@ -413,7 +413,6 @@ const MarketPostView = () => {
           </div>
         </div>
         <div className="category-line"></div>
-
         <div className="relpy-line"></div>
         <div className="marketPostView-section2">
           <div className="reply-title">댓글</div>

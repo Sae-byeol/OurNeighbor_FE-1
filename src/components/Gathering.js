@@ -28,8 +28,8 @@ const Gathering = () => {
   const [renderPage, setRenderPage] = useState("unfocused");
   const [buttonColor, setButtonColor] = useState("all");
   const [getName, setGetName] = useState("");
-  const [search, setSearch] = useState(null);
-  const [searchingText, setSearchingText] = useState(null);
+  const [search, setSearch] = useState("");
+  const [searchingText, setSearchingText] = useState("");
 
   const searchSpace = (e) => {
     setSearch(e);
@@ -79,7 +79,7 @@ const Gathering = () => {
   // unfocused 상태일 때 보여줄 객체들 BestForm 형태로 나타내기
   const renderGatherings = onClicksetPage.map((gathering) => {
     return gathering.complete === false ? (
-      <div className="gathering-flex">
+      <div className="gathering-flex" key={gathering.id}>
         <GatheringForm
           gathering={gathering}
           key={gathering.gatheringNo}
@@ -143,7 +143,7 @@ const Gathering = () => {
   // focused 상태일 때 보여줄 객체들 BestForm 형태로 나타내기
   const onClickrenderGatherings = onClickButtonsetPage.map((gathering) => {
     return gathering.complete === "true" ? (
-      <div className="gathering-flex">
+      <div className="gathering-flex" key={gathering.id}>
         <GatheringForm
           gathering={gathering}
           key={gathering.gatheringNo}

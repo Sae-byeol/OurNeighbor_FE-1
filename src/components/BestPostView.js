@@ -9,7 +9,10 @@ import ParentComment from "./ParentComment";
 import axios from "axios";
 import ChildComponent from "./ChildComponent";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import Swal from "sweetalert2";
+=======
+>>>>>>> saebyeol
 
 const BestPostView = () => {
   const { id } = useParams();
@@ -175,7 +178,10 @@ const BestPostView = () => {
         <button
           className="best-deleteButton"
           onClick={(e) => onClickDeleteButton(e)}
+<<<<<<< HEAD
           data-swal-template="#my-template"
+=======
+>>>>>>> saebyeol
         >
           | 게시글 삭제 |
         </button>
@@ -233,7 +239,10 @@ const BestPostView = () => {
       })
       .then((res) => {
         // commentList 초기화 및 get 해온 댓글, 대댓글 추가
+<<<<<<< HEAD
         console.log(res.data);
+=======
+>>>>>>> saebyeol
         if (commentList.length === 0) {
           setCommentList(commentList.concat(res.data));
         }
@@ -429,11 +438,19 @@ const BestPostView = () => {
                           {String(item.createdDate).substr(0, 10)}
                           <span>
                             &nbsp;
+<<<<<<< HEAD
                             {String(item.createdDate)
                               .substr(11, 12)
                               .split(":")[0] +
                               ":" +
                               String(item.createdDate)
+=======
+                            {String(best.createdDate)
+                              .substr(11, 12)
+                              .split(":")[0] +
+                              ":" +
+                              String(best.createdDate)
+>>>>>>> saebyeol
                                 .substr(11, 12)
                                 .split(":")[1]}
                           </span>
