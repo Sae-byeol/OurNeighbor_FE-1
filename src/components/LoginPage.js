@@ -41,30 +41,6 @@ function LoginPage() {
         alert("일치하는 회원 정보가 없습니다.");
       });
   };
-  /*const onLoginSuccess = (response) => {
-    localStorage.setItem("accessToken", response.data.accessToken);
-    localStorage.setItem("refreshToken", response.data.refreshToken);
-    // accessToken 설정
-    //axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-    console.log("onLoginSuccess");
-    // 1분 뒤 로그인 연장
-    setTimeout(onSilentRefresh, 60000);
-}
- 
-  const onSilentRefresh = () => {
-    console.log("리프레시 시도");
-    axios.post('/reissue', {
-      accessToken: localStorage.getItem("accessToken"),
-      refreshToken: localStorage.getItem("refreshToken")
-    })
-        .then((response)=>{
-          console.log("refresh");
-          //토큰 재 설정하러 
-          onLoginSuccess(response);
-        })
-        .catch(error => {
-            console.log("fail")
-        });*/
         const onSilentRefresh = () => {
           console.log("refresh start");
           axios.post('/reissue', {

@@ -13,15 +13,18 @@ import axios from "axios";
 
 const Best = () => {
   const [getBests, setGetBests] = useState([]);
-  axios.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${localStorage.accessToken}`;
-  axios
-    .get("/apartments/recommend-posts")
-    .then((res) => {
-      setGetBests(res.data);
-    })
-    .catch((err) => console.log(err));
+
+  useEffect(() => {
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${localStorage.accessToken}`;
+    axios
+      .get("/apartments/recommend-posts")
+      .then((res) => {
+        setGetBests(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const bests = getBests.reverse();
   const [page, setPage] = useState(1);
@@ -31,9 +34,12 @@ const Best = () => {
   const [search, setSearch] = useState(null);
   const [searchingText, setSearchingText] = useState(null);
 
-  const searchSpace = (e) => {
-    setSearch(e);
-  };
+  console.log(1);
+
+  const searchSpace = useCallback((e) => {
+    const value = e.target.value;
+    setSearch(value);
+  }, []);
 
   const searchedBests = bests.filter((best) => {
     if (search === "") return best;
@@ -84,6 +90,7 @@ const Best = () => {
           key={best.bestNo}
           title={best.title}
           id={best.id}
+          length={onClicksetPage.length}
         ></BestForm>
       </div>
     );
@@ -140,6 +147,7 @@ const Best = () => {
           key={best.bestNo}
           title={best.title}
           id={best.id}
+          length={onClickButtonsetPage.length}
         ></BestForm>
       </div>
     );
@@ -273,13 +281,9 @@ const Best = () => {
               <input
                 className="best-input"
                 placeholder="제목 / 내용 검색"
-                value={searchingText}
-                onChange={(e) => {
-                  setSearchingText(e.target.value);
-                }}
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
-                    searchSpace(e.target.value);
+                    searchSpace(e);
                   }
                 }}
               ></input>

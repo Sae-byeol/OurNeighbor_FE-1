@@ -6,7 +6,12 @@ import axios from "axios";
 
 const BestForm = (props) => {
   const [image, setImage] = useState();
+  const [visible, setVisible]=useState(false);
   useEffect(() => {
+
+    setImage(); 
+    console.log(props);
+    console.log(2);
     if (props.best.photoIds.length !== 0) {
       axios({
         method: "GET",
@@ -27,13 +32,15 @@ const BestForm = (props) => {
           console.log(err);
         });
     }
-  });
+  }, [props.best]);
 
   return (
+    
     <Link
       to={`/bestPostView/${props.best.id}`}
       style={{ textDecoration: "none" }}
     >
+    
       <div className="bestForm">
         <div className="bestForm-title" style={{ fontSize: "25px" }}>
           {props.best.title}
@@ -66,6 +73,7 @@ const BestForm = (props) => {
           </div>
         )}
       </div>
+  
     </Link>
   );
 };

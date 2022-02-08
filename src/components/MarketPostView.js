@@ -163,22 +163,6 @@ const MarketPostView = () => {
           navigate("/market");
         })
         .catch((err) => console.log(err));
-      // < 이미지 삭제 >
-      // console.log(parseInt(market.photoId[0]));
-      // for (let i = parseInt(market.photoId[0]); i < market.photoId.length; i++) {
-      //   console.log(i);
-      //   axios
-      //     .delete("/photo/" + String(i), {
-      //       headers: {
-      //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      //       },
-      //     })
-      //     .then((res) => {
-      //       alert("사진도 삭제되었습니다.");
-      //       navigate("/market");
-      //     })
-      //     .catch((err) => console.log(err));
-      // }
     } else {
       alert("취소합니다.");
     }

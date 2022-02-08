@@ -29,6 +29,8 @@ import NoticeAdd from "./components/NoticeAdd";
 import { Component } from "@fullcalendar/core";
 
 function App() {
+  
+  
   const onSilentRefresh = () => {
     console.log("refresh start")
     axios.post('/reissue', {
@@ -54,6 +56,8 @@ function App() {
     onSilentRefresh();
   }
   
+  
+  
   return (
     <div className="App">
       <Routes>
@@ -69,7 +73,7 @@ function App() {
         ></Route>
         <Route
           path="/noticePostView/:id"
-          element={<NoticePostView component={notice}> </NoticePostView>}
+          element={<NoticePostView> </NoticePostView>}
         ></Route>
         <Route path="/marketAdd" element={<MarketAdd></MarketAdd>}></Route>
         <Route path="/signin" element={<LoginPage></LoginPage>}></Route>
