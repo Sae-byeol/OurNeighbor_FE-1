@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import "../Gathering.css";
 import "../GatheringForm.css";
 import "../Notice.css";
+import Swal from "sweetalert2";
+
 const Notice = () => {
   const [page, setPage] = useState(1);
   const [notices, setNotices] = useState([]);
@@ -41,7 +43,10 @@ const Notice = () => {
     if (role === "관리자") {
       window.location.href = "/noticeAdd";
     } else {
-      alert("관리자만 공지사항 추가가 가능합니다.");
+      Swal.fire({
+        icon: "warning",
+        title: "관리자만 공지사항 추가가 가능합니다.",
+      });
     }
   };
 
@@ -62,7 +67,7 @@ const Notice = () => {
               {notice.title}
             </div>
             <div className="gatheringForm-cont" style={{ fontSize: "20px" }}>
-              {notice.content}
+              {notice.content.slice(0, 30) + "..."}
             </div>
             <div className="gatheringForm-date">{notice.date}</div>
           </div>

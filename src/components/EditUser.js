@@ -4,6 +4,7 @@ import Header from "./Header";
 import { useParams, Outlet, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const EditUser = () => {
   const user = useLocation().state.user;
@@ -35,7 +36,11 @@ const EditUser = () => {
         }
       )
       .then((res) => {
-        alert("회원정보가 수정되었습니다.");
+        Swal.fire({
+          icon: "success",
+          title: "회원정보가 수정되었습니다.",
+        });
+
         console.log(res.data);
         navigate("/mypage");
       });

@@ -6,7 +6,10 @@ import axios from "axios";
 
 const BestForm = (props) => {
   const [image, setImage] = useState();
-  useEffect(() => {
+  const length = props.length;
+
+  function getImages() {
+    console.log("GetImages");
     if (props.best.photoIds.length !== 0) {
       axios({
         method: "GET",
@@ -27,7 +30,13 @@ const BestForm = (props) => {
           console.log(err);
         });
     }
-  });
+  }
+
+  useEffect(() => {
+    setImage();
+    console.log(2);
+    getImages();
+  }, [props.best]);
 
   return (
     <Link
@@ -70,4 +79,4 @@ const BestForm = (props) => {
   );
 };
 
-export default BestForm;
+export const MemoizedForm = React.memo(BestForm);

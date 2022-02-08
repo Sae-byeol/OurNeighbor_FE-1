@@ -9,6 +9,7 @@ import ParentComment from "./ParentComment";
 import axios from "axios";
 import ChildComponent from "./ChildComponent";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MarketPostView = () => {
   const { id } = useParams();
@@ -85,7 +86,7 @@ const MarketPostView = () => {
   const showImages = (images !== undefined ? images : [1]).map((element) => {
     return (
       <div>
-        <img src={element}></img>
+        <img className="postView-img" src={element}></img>
       </div>
     );
   });
@@ -136,7 +137,10 @@ const MarketPostView = () => {
   // 판매 완료 버튼 누르면 실행되는 함수
   const onClickButton = (e) => {
     e.preventDefault();
-    alert("판매 완료 처리가 되었습니다");
+    Swal.fire({
+      icon: "success",
+      title: "판매 완료 처리가 되었습니다.",
+    });
     axios
       .put("/used-goods/complete/" + id, { complete: true })
       .then(function (res) {
@@ -151,37 +155,61 @@ const MarketPostView = () => {
   // 게시글 삭제 버튼 누를 때 실행
   const onClickDeleteButton = (e) => {
     e.preventDefault();
-    if (window.confirm("게시글을 삭제하시겠습니까?")) {
-      axios
-        .delete("/used-goods/" + id, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
-        .then((res) => {
-          alert("삭제되었습니다.");
-          navigate("/market");
-        })
-        .catch((err) => console.log(err));
-      // < 이미지 삭제 >
-      // console.log(parseInt(market.photoId[0]));
-      // for (let i = parseInt(market.photoId[0]); i < market.photoId.length; i++) {
-      //   console.log(i);
-      //   axios
-      //     .delete("/photo/" + String(i), {
-      //       headers: {
-      //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      //       },
-      //     })
-      //     .then((res) => {
-      //       alert("사진도 삭제되었습니다.");
-      //       navigate("/market");
-      //     })
-      //     .catch((err) => console.log(err));
-      // }
-    } else {
-      alert("취소합니다.");
-    }
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: true,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "게시글을 삭제하시겠습니까?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니요",
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete("/used-goods/" + id, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              },
+            })
+            .then((res) => {
+              Swal.fire({
+                icon: "success",
+                title: "삭제되었습니다.",
+              });
+              navigate("/market");
+              // < 이미지 삭제 >
+              // console.log(parseInt(best.photoIds[0]));
+              // for (let i = parseInt(best.photoIds[0]); i < best.photoIds.length; i++) {
+              //   console.log(i);
+              //   axios
+              //     .delete("/photo/" + String(i), {
+              //       headers: {
+              //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              //       },
+              //     })
+              //     .then((res) => {
+              //       alert("사진도 삭제되었습니다.");
+              //       navigate("/best");
+              //     })
+              //     .catch((err) => console.log(err));
+              // }
+            })
+            .catch((err) => console.log(err));
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire({
+            title: "취소합니다.",
+          });
+        }
+      });
   };
 
   // 게시글 삭제 버튼 보여주는 코드
@@ -291,7 +319,10 @@ const MarketPostView = () => {
     e.preventDefault();
     // 댓글 없으면 alert 띄우기
     if (commentContents === "") {
-      alert("내용을 입력해주세요");
+      Swal.fire({
+        icon: "warning",
+        title: "내용을 입력해주세요",
+      });
       return;
     }
     let body = {

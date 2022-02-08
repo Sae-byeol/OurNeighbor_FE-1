@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const ChildComponent = (props) => {
   const {
@@ -23,7 +24,10 @@ const ChildComponent = (props) => {
 
   const commentSubmit = (e) => {
     if (commentContents === "") {
-      alert("내용을 입력해주세요");
+      Swal.fire({
+        icon: "warning",
+        title: "내용을 입력해주세요.",
+      });
       return;
     }
     let body = {
@@ -112,7 +116,7 @@ const ChildComponent = (props) => {
           : childComments.map((comment) => {
               return (
                 <div>
-                  {comment.content.length > 62 ? (
+                  {comment.content.length > 40 ? (
                     <div>
                       <div className="reply-comment">
                         <div className="reply-polygon">

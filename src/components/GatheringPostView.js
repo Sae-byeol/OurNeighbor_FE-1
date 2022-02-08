@@ -10,6 +10,7 @@ import "../PostList.css";
 import ParentComment from "./ParentComment";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const GatheringPostView = () => {
   const { id } = useParams();
@@ -92,7 +93,10 @@ const GatheringPostView = () => {
   // 모집 완료 버튼 누르면 실행되는 함수
   const onClickButton = (e) => {
     e.preventDefault();
-    alert("모집완료 처리가 되었습니다");
+    Swal.fire({
+      icon: "success",
+      title: "모집완료 처리가 되었습니다.",
+    });
     axios
       .put("/gathering/" + id, { complete: true })
       .then(function (res) {
@@ -108,24 +112,48 @@ const GatheringPostView = () => {
     "Authorization"
   ] = `Bearer ${localStorage.accessToken}`;
 
-  // 삭제 버튼 누를 때 실행
+  // 게시글 삭제 버튼 누를 때 실행
   const onClickDeleteButton = (e) => {
     e.preventDefault();
-    if (window.confirm("게시글을 삭제하시겠습니까?")) {
-      axios
-        .delete("/gathering/" + id, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
-        .then((res) => {
-          alert("삭제되었습니다.");
-          navigate("/best");
-        })
-        .catch((err) => console.log(err));
-    } else {
-      alert("취소합니다.");
-    }
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: true,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "게시글을 삭제하시겠습니까?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니요",
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete("/gathering/" + id, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              },
+            })
+            .then((res) => {
+              Swal.fire({
+                icon: "success",
+                title: "삭제되었습니다.",
+              });
+              navigate("/gathering");
+            })
+            .catch((err) => console.log(err));
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire({
+            title: "취소합니다.",
+          });
+        }
+      });
   };
 
   // 게시글 삭제 버튼 보여주는 코드
@@ -248,7 +276,10 @@ const GatheringPostView = () => {
     e.preventDefault();
     // 댓글 없으면 alert 띄우기
     if (commentContents === "") {
-      alert("내용을 입력해주세요");
+      Swal.fire({
+        icon: "warning",
+        title: "내용을 입력해주세요",
+      });
       return;
     }
     let body = {

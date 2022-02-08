@@ -26,8 +26,9 @@ const MarketForm = (props) => {
           console.log(err);
         });
     }
-  });
+  }, []);
 
+  console.log(1);
   return (
     <Link
       to={`/marketPostView/${props.market.id}`}

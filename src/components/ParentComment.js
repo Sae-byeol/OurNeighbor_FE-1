@@ -49,7 +49,7 @@ const ParentComment = (props) => {
 
   return (
     <div>
-      {String(parentComment.content).length > 50 ? (
+      {String(parentComment.content).length > 40 ? (
         <div>
           <div className="reply-comment">
             <div className="reply-polygon">

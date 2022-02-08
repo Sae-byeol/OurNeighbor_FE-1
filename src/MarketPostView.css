@@ -219,7 +219,7 @@
 }
 
 .reply-eachcomment {
-  max-width: 900px;
+  max-width: 650px;
   padding: 10px 20px 10px 20px;
   border-radius: 8px;
   background-color: #fff0bd;
@@ -270,4 +270,8 @@
   border-width: 2px;
   border-top: rgb(138, 132, 132);
   border-bottom: rgb(138, 132, 132);
+}
+.postView-img {
+  width: 400px;
+  height: 400px;
 }

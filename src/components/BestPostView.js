@@ -9,6 +9,7 @@ import ParentComment from "./ParentComment";
 import axios from "axios";
 import ChildComponent from "./ChildComponent";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const BestPostView = () => {
   const { id } = useParams();
@@ -86,7 +87,7 @@ const BestPostView = () => {
   const showImages = (images !== undefined ? images : [1]).map((element) => {
     return (
       <div>
-        <img src={element} alt="fail"></img>
+        <img className="postView-img" src={element} alt="fail"></img>
       </div>
     );
   });
@@ -110,37 +111,61 @@ const BestPostView = () => {
   // 게시글 삭제 버튼 누를 때 실행
   const onClickDeleteButton = (e) => {
     e.preventDefault();
-    if (window.confirm("게시글을 삭제하시겠습니까?")) {
-      axios
-        .delete("/recommend-posts/" + id, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
-        .then((res) => {
-          alert("삭제되었습니다.");
-          navigate("/best");
-        })
-        .catch((err) => console.log(err));
-      // < 이미지 삭제 >
-      // console.log(parseInt(best.photoIds[0]));
-      // for (let i = parseInt(best.photoIds[0]); i < best.photoIds.length; i++) {
-      //   console.log(i);
-      //   axios
-      //     .delete("/photo/" + String(i), {
-      //       headers: {
-      //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      //       },
-      //     })
-      //     .then((res) => {
-      //       alert("사진도 삭제되었습니다.");
-      //       navigate("/best");
-      //     })
-      //     .catch((err) => console.log(err));
-      // }
-    } else {
-      alert("취소합니다.");
-    }
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: true,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "게시글을 삭제하시겠습니까?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니요",
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete("/recommend-posts/" + id, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              },
+            })
+            .then((res) => {
+              Swal.fire({
+                icon: "success",
+                title: "삭제되었습니다.",
+              });
+              navigate("/best");
+              // < 이미지 삭제 >
+              // console.log(parseInt(best.photoIds[0]));
+              // for (let i = parseInt(best.photoIds[0]); i < best.photoIds.length; i++) {
+              //   console.log(i);
+              //   axios
+              //     .delete("/photo/" + String(i), {
+              //       headers: {
+              //         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              //       },
+              //     })
+              //     .then((res) => {
+              //       alert("사진도 삭제되었습니다.");
+              //       navigate("/best");
+              //     })
+              //     .catch((err) => console.log(err));
+              // }
+            })
+            .catch((err) => console.log(err));
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire({
+            title: "취소합니다.",
+          });
+        }
+      });
   };
 
   // 게시글 삭제 버튼 보여주는 코드
@@ -150,6 +175,7 @@ const BestPostView = () => {
         <button
           className="best-deleteButton"
           onClick={(e) => onClickDeleteButton(e)}
+          data-swal-template="#my-template"
         >
           | 게시글 삭제 |
         </button>
@@ -207,6 +233,7 @@ const BestPostView = () => {
       })
       .then((res) => {
         // commentList 초기화 및 get 해온 댓글, 대댓글 추가
+        console.log(res.data);
         if (commentList.length === 0) {
           setCommentList(commentList.concat(res.data));
         }
@@ -246,7 +273,11 @@ const BestPostView = () => {
     e.preventDefault();
     // 댓글 없으면 alert 띄우기
     if (commentContents === "") {
-      alert("내용을 입력해주세요");
+      Swal.fire({
+        icon: "warning",
+        title: "내용을 입력해주세요",
+      });
+
       return;
     }
     let body = {
@@ -398,11 +429,11 @@ const BestPostView = () => {
                           {String(item.createdDate).substr(0, 10)}
                           <span>
                             &nbsp;
-                            {String(best.createdDate)
+                            {String(item.createdDate)
                               .substr(11, 12)
                               .split(":")[0] +
                               ":" +
-                              String(best.createdDate)
+                              String(item.createdDate)
                                 .substr(11, 12)
                                 .split(":")[1]}
                           </span>

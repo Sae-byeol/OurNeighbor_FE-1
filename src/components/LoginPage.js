@@ -3,11 +3,14 @@ import "../LoginPage.css";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
 
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value);
@@ -19,27 +22,60 @@ function LoginPage() {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    setLoading(true);
     axios
       .post("/login", {
         loginId: email,
         password: password,
       })
       .then((res) => {
+        setLoading(false);
         console.log(res.data);
         localStorage.setItem("accessToken", res.data.accessToken);
         localStorage.setItem("refreshToken", res.data.refreshToken);
-        setTimeout(onSilentRefresh, 1800000 - 60000);
+        //20분뒤 로그인 연장
+        setInterval(onSilentRefresh, 1200000);
         console.log(res.data.accessToken);
         if (res.data.accessToken) {
           navigate("/");
         }
       })
       .catch((Error) => {
-        alert("일치하는 회원 정보가 없습니다.");
+        Swal.fire({
+          icon: "error",
+          title: "일치하는 회원 정보가 없습니다!",
+          text: "회원 가입을 해주세요!",
+        });
       });
   };
 
+  /*const onLoginSuccess = (response) => {
+    localStorage.setItem("accessToken", response.data.accessToken);
+    localStorage.setItem("refreshToken", response.data.refreshToken);
+    // accessToken 설정
+    //axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+    console.log("onLoginSuccess");
+    // 1분 뒤 로그인 연장
+    setTimeout(onSilentRefresh, 60000);
+}
+ 
   const onSilentRefresh = () => {
+    console.log("리프레시 시도");
+    axios.post('/reissue', {
+      accessToken: localStorage.getItem("accessToken"),
+      refreshToken: localStorage.getItem("refreshToken")
+    })
+        .then((response)=>{
+          console.log("refresh");
+          //토큰 재 설정하러 
+          onLoginSuccess(response);
+        })
+        .catch(error => {
+            console.log("fail")
+        });*/
+
+  const onSilentRefresh = () => {
+    console.log("refresh start");
     axios
       .post("/reissue", {
         accessToken: localStorage.getItem("accessToken"),
@@ -50,8 +86,8 @@ function LoginPage() {
         localStorage.setItem("refreshToken", response.data.refreshToken);
         console.log(response.data);
         console.log("refresh");
-        // accessToken 만료하기 1분 전에 로그인 연장
-        setTimeout(onSilentRefresh, 1800000 - 60000);
+        //로그인 정상 연장 후 다시 20분 뒤 연장
+        setTimeout(onSilentRefresh, 1200000);
       })
       .catch((error) => {
         // ... 로그인 실패 처리

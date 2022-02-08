@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import BestForm from "./BestForm";
+import { MemoizedForm } from "./BestForm";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import { BrowserRouter, Route, Routes, Link, Outlet } from "react-router-dom";
@@ -13,15 +13,18 @@ import axios from "axios";
 
 const Best = () => {
   const [getBests, setGetBests] = useState([]);
-  axios.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${localStorage.accessToken}`;
-  axios
-    .get("/apartments/recommend-posts")
-    .then((res) => {
-      setGetBests(res.data);
-    })
-    .catch((err) => console.log(err));
+
+  useEffect(() => {
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${localStorage.accessToken}`;
+    axios
+      .get("/apartments/recommend-posts")
+      .then((res) => {
+        setGetBests(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const bests = getBests.reverse();
   const [page, setPage] = useState(1);
@@ -31,9 +34,12 @@ const Best = () => {
   const [search, setSearch] = useState(null);
   const [searchingText, setSearchingText] = useState(null);
 
-  const searchSpace = (e) => {
-    setSearch(e);
-  };
+  console.log(1);
+
+  const searchSpace = useCallback((e) => {
+    const value = e.target.value;
+    setSearch(value);
+  }, []);
 
   const searchedBests = bests.filter((best) => {
     if (search === "") return best;
@@ -79,12 +85,13 @@ const Best = () => {
   const renderBests = onClicksetPage.map((best) => {
     return (
       <div className="best-flex">
-        <BestForm
+        <MemoizedForm
           best={best}
           key={best.bestNo}
           title={best.title}
           id={best.id}
-        ></BestForm>
+          length={onClicksetPage.length}
+        ></MemoizedForm>
       </div>
     );
   });
@@ -133,14 +140,17 @@ const Best = () => {
 
   // focused 상태일 때 보여줄 객체들 BestForm 형태로 나타내기
   const onClickButtonrenderBests = onClickButtonsetPage.map((best) => {
+    let a = [];
+    a.push(best);
     return (
       <div className="best-flex">
-        <BestForm
+        <MemoizedForm
           best={best}
           key={best.bestNo}
           title={best.title}
           id={best.id}
-        ></BestForm>
+          length={onClickButtonsetPage.length}
+        ></MemoizedForm>
       </div>
     );
   });
@@ -273,13 +283,9 @@ const Best = () => {
               <input
                 className="best-input"
                 placeholder="제목 / 내용 검색"
-                value={searchingText}
-                onChange={(e) => {
-                  setSearchingText(e.target.value);
-                }}
                 onKeyPress={(e) => {
                   if (e.key === "Enter") {
-                    searchSpace(e.target.value);
+                    searchSpace(e);
                   }
                 }}
               ></input>

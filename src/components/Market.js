@@ -79,12 +79,12 @@ const Market = (props) => {
         ></MarketForm>
       </div>
     ) : (
-      <MarketFormComplete
+      <MarketForm
         market={market}
         key={market.id}
         title={market.title}
         id={market.id}
-      ></MarketFormComplete>
+      ></MarketForm>
     );
   });
   /* const handlePageChange = (page) => {
