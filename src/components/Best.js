@@ -29,7 +29,7 @@ const Best = () => {
   const bests = getBests.reverse();
   const [page, setPage] = useState(1);
   const [renderPage, setRenderPage] = useState("unfocused");
-  const [buttonColor, setButtonColor] = useState("all");
+  const [buttonColor, setButtonColor] = useState("white");
   const [getName, setGetName] = useState("");
   const [search, setSearch] = useState(null);
   const [searchingText, setSearchingText] = useState(null);
@@ -103,6 +103,7 @@ const Best = () => {
   const onBlurButton = () => {
     setPage(1);
     setRenderPage("unfocused");
+    setButtonColor("#ffefb6")
     BeforeonClicksetPage();
     onClicksetPage();
     renderBests();
@@ -158,10 +159,12 @@ const Best = () => {
   // 처음에 보옂는 페이지는 1 페이지
   const onClickButton = (e) => {
     setPage(1);
+    defineColor(e);
     onClickButtonGetName(e);
     onClickButtonClassify();
     onClickButtonSetForm();
     onClickButtonsetPage();
+    
     return null;
   };
 
@@ -216,7 +219,7 @@ const Best = () => {
                 name="all"
                 className="best-keyword"
                 onFocus={(e) => {
-                  defineColor(e.target.name);
+                  //defineColor(e.target.name);
                 }}
                 onClick={onBlurButton}
                 style={{ backgroundColor: colorAll }}
@@ -227,12 +230,12 @@ const Best = () => {
                 name="food"
                 className="best-keyword"
                 onFocus={(e) => {
-                  defineColor(e.target.name);
+                  //defineColor(e.target.name);
                 }}
                 onClick={(e) => {
                   onClickButton(e.target.name);
                 }}
-                style={{ backgroundColor: colorFood }}
+                style={{ backgroundColor:  colorFood }}
               >
                 맛집
               </button>
@@ -240,12 +243,12 @@ const Best = () => {
                 name="academy"
                 className="best-keyword"
                 onFocus={(e) => {
-                  defineColor(e.target.name);
+                  //defineColor(e.target.name);
                 }}
                 onClick={(e) => {
                   onClickButton(e.target.name);
                 }}
-                style={{ backgroundColor: colorAcademy }}
+                style={{ backgroundColor:  colorAcademy }}
               >
                 학원
               </button>
@@ -253,7 +256,7 @@ const Best = () => {
                 name="cafe"
                 className="best-keyword"
                 onFocus={(e) => {
-                  defineColor(e.target.name);
+                  //defineColor(e.target.name);
                 }}
                 onClick={(e) => {
                   onClickButton(e.target.name);
@@ -266,12 +269,12 @@ const Best = () => {
                 name="sports"
                 className="best-keyword"
                 onFocus={(e) => {
-                  defineColor(e.target.name);
+                  //defineColor(e.target.name);
                 }}
                 onClick={(e) => {
                   onClickButton(e.target.name);
                 }}
-                style={{ backgroundColor: colorSports }}
+                style={{ backgroundColor:  colorSports }}
               >
                 운동시설
               </button>
@@ -297,14 +300,14 @@ const Best = () => {
       </div>
       <div>
         {/* https://cotak.tistory.com/112 */}
-        <Pagination
+       <Pagination
           activePage={page}
           itemsCountPerPage={5}
           totalItemsCount={
             renderPage === "unfocused"
               ? parseInt(BeforeonClicksetPage.length % 9) === 0
-                ? parseInt(BeforeonClicksetPage.length / 9) * 5
-                : (parseInt(BeforeonClicksetPage.length / 9) + 1) * 5
+                : parseInt(BeforeonClicksetPage.length / 9) * 5
+                ? (parseInt(BeforeonClicksetPage.length / 9) + 1) * 5
               : parseInt(onClickButtonSetForm.length % 9) === 0
               ? parseInt(onClickButtonSetForm.length / 9) * 5
               : (parseInt(onClickButtonSetForm.length / 9) + 1) * 5
@@ -320,7 +323,7 @@ const Best = () => {
               ? handlePageChange
               : FocusedHandlePageChange
           }
-        />
+        />*
       </div>
     </div>
   );

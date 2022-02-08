@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useCallback} from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import "../BestForm.css";
 import BestPostView from "./BestPostView";
@@ -6,11 +6,12 @@ import axios from "axios";
 
 const BestForm = (props) => {
   const [image, setImage] = useState();
-  const [visible, setVisible]=useState(false);
+  const [load, setLoad]=useState(false);
+  const [imgs, setImgs]=useState([]);
+  
   useEffect(() => {
-
     setImage(); 
-    console.log(props);
+    //console.log(props);
     console.log(2);
     if (props.best.photoIds.length !== 0) {
       axios({
@@ -27,20 +28,21 @@ const BestForm = (props) => {
               new Blob([res.data], { type: res.headers["content-type"] })
             )
           );
+          
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [props.best]);
-
+    //console.log(imgs);
+  }, [props.id]);
   return (
-    
+    <div>
     <Link
       to={`/bestPostView/${props.best.id}`}
       style={{ textDecoration: "none" }}
     >
-    
+  
       <div className="bestForm">
         <div className="bestForm-title" style={{ fontSize: "25px" }}>
           {props.best.title}
@@ -73,8 +75,9 @@ const BestForm = (props) => {
           </div>
         )}
       </div>
-  
+ 
     </Link>
+    </div>
   );
 };
 
