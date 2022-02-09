@@ -4,6 +4,7 @@ import PopupDom from "./PopupDom";
 import PopupPostCode from "./PopupPostCode";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 // 주소창 api
 // https://www.npmjs.com/package/react-daum-postcode
 
@@ -34,9 +35,16 @@ function RegisterPage(props) {
       .get(`/member/nick-name/${nickname}`)
       .then((res) => {
         if (res.data === "present") {
-          alert("중복되는 닉네임입니다.");
+          Swal.fire({
+            icon: "error",
+            title: "중복되는 닉네임입니다.",
+            text: "다른 닉네임으로 회원가입 해주세요!",
+          });
         } else if (res.data === "not present") {
-          alert("사용가능한 닉네임입니다.");
+          Swal.fire({
+            icon: "success",
+            title: "사용 가능한 닉네임입니다.",
+          });
         }
       })
       .catch((Error) => {
@@ -49,9 +57,16 @@ function RegisterPage(props) {
       .get(`/member/${id}`)
       .then((res) => {
         if (res.data === "present") {
-          alert("중복되는 아이디입니다.");
+          Swal.fire({
+            icon: "error",
+            title: "중복되는 아이디입니다.",
+            text: "다른 아이디로 회원가입 해주세요!",
+          });
         } else if (res.data === "not present") {
-          alert("사용가능한 아이디입니다.");
+          Swal.fire({
+            icon: "success",
+            title: "사용 가능한 아이디입니다.",
+          });
         }
       })
       .catch((Error) => {
@@ -89,7 +104,10 @@ function RegisterPage(props) {
       email === "" ||
       role === ""
     ) {
-      alert("정보를 모두 입력해주세요");
+      Swal.fire({
+        icon: "warning",
+        title: "정보를 모두 입력해주세요!",
+      });
     } else {
       axios
         .post("/signup", {
@@ -104,7 +122,10 @@ function RegisterPage(props) {
         .then((res) => {
           console.log(res.data);
         });
-      alert("정상적으로 회원가입이 되었습니다.");
+      Swal.fire({
+        icon: "success",
+        title: "정상적으로 회원가입이 되었습니다.",
+      });
       navigate("/signin");
     }
   };

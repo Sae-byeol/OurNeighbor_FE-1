@@ -4,6 +4,7 @@ import Header from "./Header";
 import "../GatheringAdd.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const GatheringAdd = () => {
   const [gatheringTitle, setGathering] = useState("");
@@ -52,7 +53,10 @@ const GatheringAdd = () => {
       gatheringContent === "" ||
       showCategory === "none"
     ) {
-      alert("제목, 내용을 모두 입력해주세요.");
+      Swal.fire({
+        icon: "warning",
+        title: "제목, 내용, 카테고리를 모두 입력해주세요.",
+      });
     } else {
       axios
         .post(
@@ -67,7 +71,10 @@ const GatheringAdd = () => {
         )
         .then((res) => {
           console.log(res.data);
-          alert("글이 정상적으로 작성되었습니다.");
+          Swal.fire({
+            icon: "success",
+            title: "글이 정상적으로 작성되었습니다.",
+          });
           if (res.data) {
             navigate("/gathering");
           }

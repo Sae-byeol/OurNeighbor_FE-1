@@ -7,6 +7,7 @@ import "../NoticePostView.css";
 import ParentComment from "./ParentComment";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const NoticePostView = () => {
   const { id } = useParams();
@@ -14,8 +15,6 @@ const NoticePostView = () => {
   const [notices, setNotices] = useState([]);
   const num = notices.length;
   const navigate = useNavigate();
-
-  console.log(notice);
 
   axios.defaults.headers.common[
     "Authorization"
@@ -49,6 +48,7 @@ const NoticePostView = () => {
       .catch((err) => console.log(err));
   }, [useParams()]);
 
+  console.log(notice);
   // 현재 로그인된 유저 정보 - 닉네임을 author에 저장
   const [author, setAuthor] = useState("");
 
@@ -66,24 +66,48 @@ const NoticePostView = () => {
       .catch((err) => console.log(err));
   }, [useParams()]);
 
-  // 삭제 버튼 누를 때 실행
+  // 게시글 삭제 버튼 누를 때 실행
   const onClickDeleteButton = (e) => {
     e.preventDefault();
-    if (window.confirm("게시글을 삭제하시겠습니까?")) {
-      axios
-        .delete("/notices/" + id, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        })
-        .then((res) => {
-          alert("삭제되었습니다.");
-          navigate("/notice");
-        })
-        .catch((err) => console.log(err));
-    } else {
-      alert("취소합니다.");
-    }
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: true,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "게시글을 삭제하시겠습니까?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니요",
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete("/notices/" + id, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              },
+            })
+            .then((res) => {
+              Swal.fire({
+                icon: "success",
+                title: "삭제되었습니다.",
+              });
+              navigate("/notice");
+            })
+            .catch((err) => console.log(err));
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire({
+            title: "취소합니다.",
+          });
+        }
+      });
   };
 
   // 게시글 삭제 버튼 보여주는 코드
@@ -151,7 +175,15 @@ const NoticePostView = () => {
           <div>{showDeleteButton()}</div>
           <span className="noticePostView-title">{notice.title}</span>
           <div className="noticePostView-subtitle">
-            <span>{notice.date}</span>
+            <span>{String(notice.createdDate).substr(0, 10) + "  "}</span>
+
+            <span>
+              {String(notice.createdDate).substr(11, 12).split(":")[0] +
+                ":" +
+                String(notice.createdDate).substr(11, 12).split(":")[1] +
+                " / "}
+            </span>
+            <span>작성자: 관리자</span>
           </div>
           <div className="noticePostView-content">
             {String(notice.content)
@@ -180,7 +212,19 @@ const NoticePostView = () => {
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>
-                        <div className="postlist-date"></div>
+                        <div className="postlist-date">
+                          {String(item.createdDate).substr(0, 10)}
+                          <span>
+                            &nbsp;
+                            {String(notice.createdDate)
+                              .substr(11, 12)
+                              .split(":")[0] +
+                              ":" +
+                              String(notice.createdDate)
+                                .substr(11, 12)
+                                .split(":")[1]}
+                          </span>
+                        </div>
                       </div>
                     </Link>
                   ) : (
@@ -191,7 +235,19 @@ const NoticePostView = () => {
                     >
                       <div className="postlist" key={index}>
                         <div className="postlist-title">{item.title}</div>
-                        <div className="postlist-date"></div>
+                        <div className="postlist-date">
+                          {String(item.createdDate).substr(0, 10)}
+                          <span>
+                            &nbsp;
+                            {String(notice.createdDate)
+                              .substr(11, 12)
+                              .split(":")[0] +
+                              ":" +
+                              String(notice.createdDate)
+                                .substr(11, 12)
+                                .split(":")[1]}
+                          </span>
+                        </div>
                       </div>
                     </Link>
                   );

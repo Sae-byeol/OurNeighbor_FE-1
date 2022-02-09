@@ -26,15 +26,45 @@ const Best = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const bests = getBests.reverse();
+  let sortedArray = [];
+  sortedArray.push(
+    getBests
+      .map((best) => {
+        return parseInt(best.id);
+      })
+      .sort(function (a, b) {
+        return a - b;
+      })
+  );
+
+  const lengthArray = sortedArray[0].length;
+
+  let bestArray = [];
+  let multipleNum = lengthArray * lengthArray;
+
+  if (getBests) {
+    const sorting = () => {
+      while (multipleNum > 0) {
+        for (let i = 0; i < lengthArray; i++) {
+          for (let s = 0; s < lengthArray; s++) {
+            multipleNum = multipleNum - 1;
+            if (getBests[s].id === sortedArray[0][i]) {
+              bestArray.push(getBests[i]);
+            }
+          }
+        }
+      }
+      return bestArray;
+    };
+    sorting();
+  }
+
+  const bests = bestArray.reverse();
   const [page, setPage] = useState(1);
   const [renderPage, setRenderPage] = useState("unfocused");
   const [buttonColor, setButtonColor] = useState("white");
   const [getName, setGetName] = useState("");
   const [search, setSearch] = useState(null);
-  const [searchingText, setSearchingText] = useState(null);
-
-  console.log(1);
 
   const searchSpace = useCallback((e) => {
     const value = e.target.value;
@@ -104,8 +134,8 @@ const Best = () => {
     setPage(1);
     setRenderPage("unfocused");
     setButtonColor("#ffefb6")
-    BeforeonClicksetPage();
-    onClicksetPage();
+    //BeforeonClicksetPage();
+    //onClicksetPage();
     renderBests();
     return null;
   };
@@ -219,7 +249,7 @@ const Best = () => {
                 name="all"
                 className="best-keyword"
                 onFocus={(e) => {
-                  //defineColor(e.target.name);
+                  defineColor(e.target.name);
                 }}
                 onClick={onBlurButton}
                 style={{ backgroundColor: colorAll }}
@@ -230,7 +260,7 @@ const Best = () => {
                 name="food"
                 className="best-keyword"
                 onFocus={(e) => {
-                  //defineColor(e.target.name);
+                  defineColor(e.target.name);
                 }}
                 onClick={(e) => {
                   onClickButton(e.target.name);
@@ -243,7 +273,7 @@ const Best = () => {
                 name="academy"
                 className="best-keyword"
                 onFocus={(e) => {
-                  //defineColor(e.target.name);
+                  defineColor(e.target.name);
                 }}
                 onClick={(e) => {
                   onClickButton(e.target.name);
@@ -256,7 +286,7 @@ const Best = () => {
                 name="cafe"
                 className="best-keyword"
                 onFocus={(e) => {
-                  //defineColor(e.target.name);
+                  defineColor(e.target.name);
                 }}
                 onClick={(e) => {
                   onClickButton(e.target.name);
@@ -269,7 +299,7 @@ const Best = () => {
                 name="sports"
                 className="best-keyword"
                 onFocus={(e) => {
-                  //defineColor(e.target.name);
+                  defineColor(e.target.name);
                 }}
                 onClick={(e) => {
                   onClickButton(e.target.name);
@@ -306,8 +336,8 @@ const Best = () => {
           totalItemsCount={
             renderPage === "unfocused"
               ? parseInt(BeforeonClicksetPage.length % 9) === 0
-                : parseInt(BeforeonClicksetPage.length / 9) * 5
-                ? (parseInt(BeforeonClicksetPage.length / 9) + 1) * 5
+              : parseInt(BeforeonClicksetPage.length / 9) * 5
+              ? (parseInt(BeforeonClicksetPage.length / 9) + 1) * 5
               : parseInt(onClickButtonSetForm.length % 9) === 0
               ? parseInt(onClickButtonSetForm.length / 9) * 5
               : (parseInt(onClickButtonSetForm.length / 9) + 1) * 5
@@ -323,9 +353,11 @@ const Best = () => {
               ? handlePageChange
               : FocusedHandlePageChange
           }
-        />*
+        />
+        
       </div>
     </div>
+    
   );
 };
 

@@ -3,6 +3,7 @@ import FullCalendar, { ElementDragging } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import "../calender.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 import styled from "@emotion/styled";
 export const StyleWrapper = styled.div`
@@ -33,26 +34,49 @@ function Calender(props) {
       .catch((err) => console.log(err));
   });
 
+  // 일정 삭제 버튼 누를 때 실행
   const removeEvent = (e) => {
-    if (window.confirm(e.event.title + " 이벤트를 삭제하시겠습니까?")) {
-     
-      axios
-      .delete("/schedules/" + e.event.id, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
-      .then((res) => {
-       setEvents(res.data);
-       alert("삭제되었습니다.");
-      })
-      .catch((err) => console.log(err));
+    console.log("success");
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: true,
+    });
 
-    }else{
-     alert("취소합니다.");
-    }
-
+    swalWithBootstrapButtons
+      .fire({
+        title: e.event.title + " 이벤트를 삭제하시겠습니까?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "예",
+        cancelButtonText: "아니요",
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete("/schedules/" + e.event.id, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              },
+            })
+            .then((res) => {
+              setEvents(res.data);
+              Swal.fire({
+                icon: "success",
+                title: "삭제되었습니다.",
+              });
+            })
+            .catch((err) => console.log(err));
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire({
+            title: "취소합니다.",
+          });
+        }
+      });
   };
+
   return (
     <div className="calender">
       <StyleWrapper>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import "../Market.css";
@@ -10,7 +10,7 @@ import Pagination from "react-js-pagination";
 import axios from "axios";
 
 const Market = (props) => {
-  const [markets, setMarkets] = useState([]);
+  const [getMarkets, setMarkets] = useState([]);
   useEffect(() => {
     //console.log(localStorage.getItem("accessToken"));
     axios
@@ -20,23 +20,54 @@ const Market = (props) => {
         },
       })
       .then((res) => {
-        //console.log("success");
         setMarkets(res.data);
-        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
+  let sortedArray = [];
+  sortedArray.push(
+    getMarkets
+      .map((best) => {
+        return parseInt(best.id);
+      })
+      .sort(function (a, b) {
+        return a - b;
+      })
+  );
+
+  const lengthArray = sortedArray[0].length;
+
+  let bestArray = [];
+  let multipleNum = lengthArray * lengthArray;
+
+  if (getMarkets) {
+    const sorting = () => {
+      while (multipleNum > 0) {
+        for (let i = 0; i < 3; i++) {
+          for (let s = 0; s < 3; s++) {
+            multipleNum = multipleNum - 1;
+            if (getMarkets[0].id === sortedArray[0][i]) {
+              bestArray.push(getMarkets[i]);
+            }
+          }
+        }
+      }
+      return bestArray;
+    };
+    sorting();
+  }
+
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState(null);
-  const [searchingText, setSearchingText] = useState(null);
 
-  const searchSpace = (e) => {
-    setSearch(e);
-  };
+  const searchSpace = useCallback((e) => {
+    const value = e.target.value;
+    setSearch(value);
+  }, []);
 
-  const getMarkets = markets.reverse();
-  const searchedMarkets = getMarkets.filter((market) => {
+  const markets = getMarkets.reverse();
+  const searchedMarkets = markets.filter((market) => {
     if (search === "") return market;
     if (search === null) return market;
     else if (
@@ -87,10 +118,6 @@ const Market = (props) => {
       ></MarketFormComplete>
     );
   });
-  /* const handlePageChange = (page) => {
-        setPage(page);
-        renderMarkets();
-      };*/
 
   return (
     <div className="App">
@@ -104,13 +131,9 @@ const Market = (props) => {
             <input
               className="market-input"
               placeholder="제목 / 내용 검색"
-              value={searchingText}
-              onChange={(e) => {
-                setSearchingText(e.target.value);
-              }}
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
-                  searchSpace(e.target.value);
+                  searchSpace(e);
                 }
               }}
             ></input>

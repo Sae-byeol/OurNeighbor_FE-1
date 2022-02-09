@@ -5,6 +5,7 @@ import Header from "./Header";
 import "../MarketAdd.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const NoticeAdd = () => {
   const [noticeTitle, setNoticeTitle] = useState("");
@@ -15,7 +16,10 @@ const NoticeAdd = () => {
     e.preventDefault();
     //add함수 props로 받아오기
     if (noticeTitle === "" || noticeContent === "") {
-      alert("제목, 내용을 모두 입력해주세요.");
+      Swal.fire({
+        icon: "warning",
+        title: "제목, 내용을 모두 입력해주세요.",
+      });
     } else {
       axios
         .post(
@@ -33,7 +37,10 @@ const NoticeAdd = () => {
         )
         .then((res) => {
           console.log(res.data);
-          alert("글이 정상적으로 작성되었습니다.");
+          Swal.fire({
+            icon: "success",
+            title: "글이 정상적으로 작성되었습니다.",
+          });
           if (res.data) {
             navigate("/notice");
           }

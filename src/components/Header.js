@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import "../Header.css";
 import { BrowserRouter, Route, Routes, Link, Outlet } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 const Header = (props) => {
   const [user, setUser] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -30,8 +33,11 @@ const Header = (props) => {
   const Logout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
-    alert("로그아웃 되었습니다.");
-    window.location.replace("/");
+    navigate("/");
+    Swal.fire({
+      icon: "success",
+      title: "로그아웃 되었습니다.",
+    });
   };
   return (
     <div className="header">

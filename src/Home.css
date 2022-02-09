@@ -1,45 +1,45 @@
-.home-section1{
-    text-align: center;
-    margin-top:50px;
+.home-section1 {
+  text-align: center;
+  margin-top: 50px;
 }
-.welcomeImgBox{
-    position: relative;
+.welcomeImgBox {
+  position: relative;
 }
-.home-welcomeText{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate( -50%, -50% );
-    font-family: HSGaeulSenggak2;
-    font-size: 36px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #433;
+.home-welcomeText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: HSGaeulSenggak2;
+  font-size: 36px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #433;
 }
-.home-welcomeLogin{
-    font-family: HSGaeulSenggak2;
-    margin-top:15px;
-    font-size: 20px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: center;
-    color: #433;
+.home-welcomeLogin {
+  font-family: HSGaeulSenggak2;
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #433;
 }
 
-.home-section2-1{
-    padding: 159px 0 79px;
-    float: left;
+.home-section2-1 {
+  padding: 159px 0 79px;
+  float: left;
 }
-.home-calendarText{
-    display: inline-block;
-    width: 479px;
+.home-calendarText {
+  display: inline-block;
+  width: 479px;
   margin: 0 14px 21px 0;
   font-family: HSGaeulSenggak2;
   font-size: 24px;
@@ -52,15 +52,15 @@
   color: #433;
 }
 
-.home-section2-2{
-    width: 600px;
-    height: 500px;
-    float: right;
-    padding: 120px 0 79px;
+.home-section2-2 {
+  width: 600px;
+  height: 500px;
+  float: right;
+  padding: 120px 0 79px;
 }
 
-.home-NoticeText{
-    display: inline-block;
+.home-NoticeText {
+  display: inline-block;
   margin: 0 0 21px 0;
   font-family: HSGaeulSenggak2;
   font-size: 24px;
@@ -131,8 +131,8 @@
   text-align: left;
   color: #433;
 }
-.home-best-map{
-    width: 400px;
+.home-best-map {
+  width: 400px;
   height: 100px;
   margin: 25px 0;
   padding: 20px 718px 16px 20px;
@@ -141,43 +141,42 @@
   border: solid 3px #ffc961;
   background-color: #fff;
 }
-.home-best-map:hover{
-    background-color:#fff2d8;
+.home-best-map:hover {
+  background-color: #fff2d8;
 }
-.home-best-map-from{
-    margin: 0 79px 11px 0;
-    font-family: HSGaeulSenggak2;
-    font-size: 18px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #433;
+.home-best-map-from {
+  margin: 0 79px 11px 0;
+  font-family: HSGaeulSenggak2;
+  font-size: 18px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #433;
 }
-.home-best-map-title{
-    margin: 11px 0 4px;
-    font-family: HSGaeulSenggak2;
-    font-size: 30px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #433;
+.home-best-map-title {
+  margin: 11px 0 4px;
+  font-family: HSGaeulSenggak2;
+  font-size: 30px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #433;
 }
-.home-best-map-date{
-    margin: 4px 59px 0 0;
-    font-family: HSGaeulSenggak2;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #433;
-  
+.home-best-map-date {
+  margin: 4px 59px 0 0;
+  font-family: HSGaeulSenggak2;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #433;
 }

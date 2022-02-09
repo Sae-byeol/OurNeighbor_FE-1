@@ -4,7 +4,9 @@ import "../MarketFormComplete.css";
 
 const MarketFormComplete = (props) => {
   const [image, setImage] = useState();
+
   useEffect(() => {
+    setImage();
     if (props.market.photoId.length !== 0) {
       axios({
         method: "GET",
@@ -25,9 +27,7 @@ const MarketFormComplete = (props) => {
           console.log(err);
         });
     }
-  });
-
-  console.log(props);
+  }, [props.id]);
 
   return (
     <div className="marketForm-complete">

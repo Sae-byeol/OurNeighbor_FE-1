@@ -4,6 +4,7 @@ import Header from "./Header";
 import "../BestAdd.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const BestAdd = () => {
   const [bestTitle, setBestTitle] = useState("");
@@ -56,7 +57,10 @@ const BestAdd = () => {
     }
 
     if (bestTitle === "" || bestContent === "" || showCategory === "none") {
-      alert("제목, 내용, 카테고리를 모두 입력해주세요.");
+      Swal.fire({
+        icon: "warning",
+        title: "제목, 내용, 카테고리를 모두 입력해주세요.",
+      });
     } else {
       axios
         .post("/recommend-posts", formData, {
@@ -65,7 +69,10 @@ const BestAdd = () => {
           },
         })
         .then((res) => {
-          alert("글이 정상적으로 작성되었습니다.");
+          Swal.fire({
+            icon: "success",
+            title: "글이 정상적으로 작성되었습니다.",
+          });
           console.log(res.data);
           if (res.data) {
             navigate("/best");

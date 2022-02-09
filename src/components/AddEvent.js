@@ -9,12 +9,12 @@ const Add = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     axios.post(
-      "/schedules", 
+      "/schedules",
       {
         date: date,
         title: title,
       },
-      { 
+      {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
