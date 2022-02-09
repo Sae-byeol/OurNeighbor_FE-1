@@ -5,7 +5,9 @@ import axios from "axios";
 
 const MarketForm = (props) => {
   const [image, setImage] = useState();
+
   useEffect(() => {
+    setImage();
     if (props.market.photoId.length !== 0) {
       axios({
         method: "GET",
@@ -26,7 +28,7 @@ const MarketForm = (props) => {
           console.log(err);
         });
     }
-  });
+  }, [props.id]);
 
   return (
     <Link

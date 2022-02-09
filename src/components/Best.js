@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { MemoizedForm } from "./BestForm";
+import BestForm from "./BestForm";
 import Navbar from "./Navbar";
 import Header from "./Header";
 import { BrowserRouter, Route, Routes, Link, Outlet } from "react-router-dom";
@@ -26,15 +26,45 @@ const Best = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const bests = getBests.reverse();
+  let sortedArray = [];
+  sortedArray.push(
+    getBests
+      .map((best) => {
+        return parseInt(best.id);
+      })
+      .sort(function (a, b) {
+        return a - b;
+      })
+  );
+
+  const lengthArray = sortedArray[0].length;
+
+  let bestArray = [];
+  let multipleNum = lengthArray * lengthArray;
+
+  if (getBests) {
+    const sorting = () => {
+      while (multipleNum > 0) {
+        for (let i = 0; i < 3; i++) {
+          for (let s = 0; s < 3; s++) {
+            multipleNum = multipleNum - 1;
+            if (getBests[s].id === sortedArray[0][i]) {
+              bestArray.push(getBests[i]);
+            }
+          }
+        }
+      }
+      return bestArray;
+    };
+    sorting();
+  }
+
+  const bests = bestArray.reverse();
   const [page, setPage] = useState(1);
   const [renderPage, setRenderPage] = useState("unfocused");
-  const [buttonColor, setButtonColor] = useState("all");
+  const [buttonColor, setButtonColor] = useState("white");
   const [getName, setGetName] = useState("");
   const [search, setSearch] = useState(null);
-  const [searchingText, setSearchingText] = useState(null);
-
-  console.log(1);
 
   const searchSpace = useCallback((e) => {
     const value = e.target.value;
@@ -85,13 +115,13 @@ const Best = () => {
   const renderBests = onClicksetPage.map((best) => {
     return (
       <div className="best-flex">
-        <MemoizedForm
+        <BestForm
           best={best}
           key={best.bestNo}
           title={best.title}
           id={best.id}
           length={onClicksetPage.length}
-        ></MemoizedForm>
+        ></BestForm>
       </div>
     );
   });
@@ -103,8 +133,7 @@ const Best = () => {
   const onBlurButton = () => {
     setPage(1);
     setRenderPage("unfocused");
-    BeforeonClicksetPage();
-    onClicksetPage();
+    setButtonColor("#ffefb6");
     renderBests();
     return null;
   };
@@ -140,17 +169,15 @@ const Best = () => {
 
   // focused 상태일 때 보여줄 객체들 BestForm 형태로 나타내기
   const onClickButtonrenderBests = onClickButtonsetPage.map((best) => {
-    let a = [];
-    a.push(best);
     return (
       <div className="best-flex">
-        <MemoizedForm
+        <BestForm
           best={best}
           key={best.bestNo}
           title={best.title}
           id={best.id}
           length={onClickButtonsetPage.length}
-        ></MemoizedForm>
+        ></BestForm>
       </div>
     );
   });
@@ -160,10 +187,12 @@ const Best = () => {
   // 처음에 보옂는 페이지는 1 페이지
   const onClickButton = (e) => {
     setPage(1);
+    defineColor(e);
     onClickButtonGetName(e);
     onClickButtonClassify();
     onClickButtonSetForm();
     onClickButtonsetPage();
+
     return null;
   };
 
@@ -305,8 +334,8 @@ const Best = () => {
           totalItemsCount={
             renderPage === "unfocused"
               ? parseInt(BeforeonClicksetPage.length % 9) === 0
-                ? parseInt(BeforeonClicksetPage.length / 9) * 5
-                : (parseInt(BeforeonClicksetPage.length / 9) + 1) * 5
+              : parseInt(BeforeonClicksetPage.length / 9) * 5
+              ? (parseInt(BeforeonClicksetPage.length / 9) + 1) * 5
               : parseInt(onClickButtonSetForm.length % 9) === 0
               ? parseInt(onClickButtonSetForm.length / 9) * 5
               : (parseInt(onClickButtonSetForm.length / 9) + 1) * 5
@@ -323,6 +352,7 @@ const Best = () => {
               : FocusedHandlePageChange
           }
         />
+        *
       </div>
     </div>
   );

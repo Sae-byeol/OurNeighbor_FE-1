@@ -9,9 +9,7 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
   const [loading, setLoading] = useState(false);
-
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value);
   };
@@ -42,38 +40,11 @@ function LoginPage() {
       })
       .catch((Error) => {
         Swal.fire({
-          icon: "error",
-          title: "일치하는 회원 정보가 없습니다!",
-          text: "회원 가입을 해주세요!",
+          icon: "warning",
+          title: "일치하는 회원 정보가 없습니다.",
         });
       });
   };
-
-  /*const onLoginSuccess = (response) => {
-    localStorage.setItem("accessToken", response.data.accessToken);
-    localStorage.setItem("refreshToken", response.data.refreshToken);
-    // accessToken 설정
-    //axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-    console.log("onLoginSuccess");
-    // 1분 뒤 로그인 연장
-    setTimeout(onSilentRefresh, 60000);
-}
- 
-  const onSilentRefresh = () => {
-    console.log("리프레시 시도");
-    axios.post('/reissue', {
-      accessToken: localStorage.getItem("accessToken"),
-      refreshToken: localStorage.getItem("refreshToken")
-    })
-        .then((response)=>{
-          console.log("refresh");
-          //토큰 재 설정하러 
-          onLoginSuccess(response);
-        })
-        .catch(error => {
-            console.log("fail")
-        });*/
-
   const onSilentRefresh = () => {
     console.log("refresh start");
     axios
@@ -93,27 +64,6 @@ function LoginPage() {
         // ... 로그인 실패 처리
       });
   };
-        const onSilentRefresh = () => {
-          console.log("refresh start");
-          axios.post('/reissue', {
-            accessToken: localStorage.getItem("accessToken"),
-            refreshToken: localStorage.getItem("refreshToken")
-          })
-              .then((response)=>{
-                localStorage.setItem("accessToken",response.data.accessToken);
-                localStorage.setItem("refreshToken",response.data.refreshToken);
-                console.log(response.data);
-                console.log("refresh");
-                //로그인 정상 연장 후 다시 20분 뒤 연장
-                setTimeout(onSilentRefresh,1200000);
-              })
-              .catch(error => {
-                  // ... 로그인 실패 처리
-              });
-      }
-
-
-
 
   return (
     <div
