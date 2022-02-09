@@ -332,15 +332,11 @@ const Best = () => {
         {/* https://cotak.tistory.com/112 */}
        <Pagination
           activePage={page}
-          itemsCountPerPage={5}
+          itemsCountPerPage={9}
           totalItemsCount={
             renderPage === "unfocused"
-              ? parseInt(BeforeonClicksetPage.length % 9) === 0
-              : parseInt(BeforeonClicksetPage.length / 9) * 5
-              ? (parseInt(BeforeonClicksetPage.length / 9) + 1) * 5
-              : parseInt(onClickButtonSetForm.length % 9) === 0
-              ? parseInt(onClickButtonSetForm.length / 9) * 5
-              : (parseInt(onClickButtonSetForm.length / 9) + 1) * 5
+            ? BeforeonClicksetPage.length
+            : onClickButtonClassify.length
           }
           pageRangeDisplayed={5}
           prevPageText={"<"}

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import axios from "axios";
 
 const MarketForm = (props) => {
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(undefined);
 
   useEffect(() => {
     setImage();
