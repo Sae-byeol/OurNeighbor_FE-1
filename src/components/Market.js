@@ -44,8 +44,8 @@ const Market = (props) => {
   if (getMarkets) {
     const sorting = () => {
       while (multipleNum > 0) {
-        for (let i = 0; i < 3; i++) {
-          for (let s = 0; s < 3; s++) {
+        for (let i = 0; i < lengthArray; i++) {
+          for (let s = 0; s < lengthArray; s++) {
             multipleNum = multipleNum - 1;
             if (getMarkets[0].id === sortedArray[0][i]) {
               bestArray.push(getMarkets[i]);
@@ -152,12 +152,8 @@ const Market = (props) => {
         <div>
           <Pagination
             activePage={page}
-            itemsCountPerPage={5}
-            totalItemsCount={
-              parseInt(markets.length % 9) === 0
-                ? parseInt(markets.length / 9) * 5
-                : (parseInt(markets.length / 9) + 1) * 5
-            }
+            itemsCountPerPage={9}
+            totalItemsCount={BeforeonClicksetPage.length}
             pageRangeDisplayed={5}
             prevPageText={"<"}
             nextPageText={">"}

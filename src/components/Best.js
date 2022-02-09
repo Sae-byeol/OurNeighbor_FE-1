@@ -45,8 +45,8 @@ const Best = () => {
   if (getBests) {
     const sorting = () => {
       while (multipleNum > 0) {
-        for (let i = 0; i < 3; i++) {
-          for (let s = 0; s < 3; s++) {
+        for (let i = 0; i < lengthArray; i++) {
+          for (let s = 0; s < lengthArray; s++) {
             multipleNum = multipleNum - 1;
             if (getBests[s].id === sortedArray[0][i]) {
               bestArray.push(getBests[i]);
@@ -134,6 +134,8 @@ const Best = () => {
     setPage(1);
     setRenderPage("unfocused");
     setButtonColor("#ffefb6");
+    //BeforeonClicksetPage();
+    //onClicksetPage();
     renderBests();
     return null;
   };
@@ -330,15 +332,11 @@ const Best = () => {
         {/* https://cotak.tistory.com/112 */}
         <Pagination
           activePage={page}
-          itemsCountPerPage={5}
+          itemsCountPerPage={9}
           totalItemsCount={
             renderPage === "unfocused"
-              ? parseInt(BeforeonClicksetPage.length % 9) === 0
-              : parseInt(BeforeonClicksetPage.length / 9) * 5
-              ? (parseInt(BeforeonClicksetPage.length / 9) + 1) * 5
-              : parseInt(onClickButtonSetForm.length % 9) === 0
-              ? parseInt(onClickButtonSetForm.length / 9) * 5
-              : (parseInt(onClickButtonSetForm.length / 9) + 1) * 5
+              ? BeforeonClicksetPage.length
+              : onClickButtonClassify.length
           }
           pageRangeDisplayed={5}
           prevPageText={"<"}
@@ -352,7 +350,6 @@ const Best = () => {
               : FocusedHandlePageChange
           }
         />
-        *
       </div>
     </div>
   );
