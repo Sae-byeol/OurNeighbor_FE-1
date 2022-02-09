@@ -29,8 +29,6 @@ import NoticeAdd from "./components/NoticeAdd";
 import { Component } from "@fullcalendar/core";
 
 function App() {
-  
-  
   const onSilentRefresh = () => {
     console.log("refresh start")
     axios.post('/reissue', {
