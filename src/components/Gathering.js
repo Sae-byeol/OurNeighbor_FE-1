@@ -142,14 +142,15 @@ const Gathering = () => {
 
   // focused 상태일 때 보여줄 객체들 BestForm 형태로 나타내기
   const onClickrenderGatherings = onClickButtonsetPage.map((gathering) => {
-    return gathering.complete === "true" ? (
+    //console.log(gathering);
+    return gathering.complete === true ? (
       <div className="gathering-flex" key={gathering.id}>
-        <GatheringForm
+        <GatheringFormComplete
           gathering={gathering}
           key={gathering.gatheringNo}
           title={gathering.title}
           id={gathering.id}
-        ></GatheringForm>
+        ></GatheringFormComplete>
       </div>
     ) : (
       <GatheringForm
