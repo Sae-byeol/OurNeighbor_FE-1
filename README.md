@@ -1,86 +1,57 @@
-# Getting Started with Create React App
+# ✨솔룩스 웹 프로젝트 '우리이웃'✨
+## 💻프론트엔드 코드
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+'우리 이웃'은 주민들 간의 소통을 위한 아파트 커뮤니티 입니다. 
 
-## Available Scripts
+## 1. 기술 스택
+- 프론트엔드: 리액트, html, js, css
+- 백엔드: Spring
 
-In the project directory, you can run:
-
-### `npm start`
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-<<<<<<< HEAD
-
-### `npm run build` fails to minify
-
-=======
-
-### `yarn build` fails to minify
-
-> > > > > > > test-minkyeong
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 2. 실행 화면
+<br/>
+ - 회원가입 및 로그인 화면
+<br/>
+<span>
+<img src="https://user-images.githubusercontent.com/70836275/152640801-59d61816-4ecc-4387-9066-25604e70e039.png" width="300px"></img>
+<img src="https://user-images.githubusercontent.com/70836275/152640788-f2d63cfc-0af8-4812-9f44-03223de0f376.png" width="300px"></img>
+<span/>
+<br/>
+ - 마이페이지 및 회원가입 수정
+<br/>
+<span>
+<img src="https://user-images.githubusercontent.com/70836275/152640305-70b2858e-ca72-4f42-b55b-05cf807ce132.png" width="300px"></img>
+<img src="https://user-images.githubusercontent.com/70836275/152640338-5004b933-fee6-440c-afc1-897243fab911.png" width="300px"></img>
+<span/>
+<br/>
+ - 홈화면
+<br/>
+<span>
+<img src="https://user-images.githubusercontent.com/70836275/152640293-29c9f2cd-08ca-4387-81b0-4b32c39da7c9.png" width="300px"></img>
+<span/>
+<br/>
+ - 중고거래 
+<br/>
+<span>
+<img src="https://user-images.githubusercontent.com/70836275/152640320-5c03be3b-0c13-4f53-8c8b-3a5eacfe0978.png" width="300px"></img>
+<img src="https://user-images.githubusercontent.com/70836275/152640321-5d357893-3356-423a-ad3b-52d48bb25cc3.png" width="300px"></img>
+<img src="https://user-images.githubusercontent.com/70836275/152640319-a72bdff9-0dd3-40ac-a2d1-127f48ac671d.png" width="300px"></img>
+<span/><br/>
+ - 추천게시판
+<br/>
+<span>
+<img src="https://user-images.githubusercontent.com/70836275/152640329-1fb72db2-ec2d-48e6-92f9-f9294738e462.png" width="300px"></img>
+<img src="https://user-images.githubusercontent.com/70836275/152640325-6147617f-e20e-41d7-88ce-284b252b5fe3.png" width="300px"></img>
+<img src="https://user-images.githubusercontent.com/70836275/152640328-17b04ca9-d153-4801-95b8-c9cbcd376a18.png" width="300px"></img>
+<span/><br/>
+ - 모임모집 게시판
+<br/>
+<span>
+<img src="https://user-images.githubusercontent.com/70836275/152640298-df0f9c2f-164f-4b4b-bebc-d1e1e6f4e1dd.png" width=300px"></img>
+<span/>
+<br/>
+ - 캘린더 및 공지사항
+<br/>
+<span>
+<img src="https://user-images.githubusercontent.com/70836275/152640379-c8c949e1-464d-4e97-a114-a9c22d719ea8.png" width="300px"></img>
+<img src="https://user-images.githubusercontent.com/70836275/152640748-df61bae2-74ec-4fc3-a912-91538ed94d60.png" width="300px"></img>
+<span/>
